@@ -12,34 +12,25 @@ namespace PointOfSales
 		//Default constructor.
 		public Customer()
 		{
-			iD = -1;
+			ID = -1;
 			name = "";
 			address = new CivicAddress();
 			phoneNumber = "";
 			birthday = new DateTime();
 		}
 
-		// Overloaded constructor for ID and name only.
-		public Customer (int ID, string Name)
-		{
-			iD = ID;
-			name = Name;
-			address = new CivicAddress();
-			phoneNumber = "";
-			birthday = new DateTime();
-		}
-
 		// Overloaded constructor for all parameters.
-		public Customer (int ID, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday)
+		public Customer (int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday)
 		{
+			ID = id;
 			name = Name;
 			address = Address;
-			PhoneNumber = phoneNumber;
+			phoneNumber = PhoneNumber;
 			birthday = Birthday;
 		}
 
 		// Property to hold customer ID number.
-		public int iD { get { return m_iD; } set { m_iD = value; } }
+		public int ID { get { return m_iD; } set { m_iD = value; } }
 		private int m_iD;
 
 
