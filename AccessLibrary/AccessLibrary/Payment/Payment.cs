@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSales.Payment
 {
-	abstract class Payment
+	public abstract class Payment
 	{
 		public Payment()
 		{
