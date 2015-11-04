@@ -7,16 +7,16 @@ using System.Device.Location;
 
 namespace PointOfSales
 {
-	// A customer is someone who is served at the store. Inherits from StoreUser.
-    public class Customer : StoreUser
-    {
-		public Customer()
+	// An employee is someone who works for the store. Inherits from StoreUser.
+	class Employee : StoreUser
+	{
+		public Employee()
 			: base()
-		{}
+		{ }
 
-		public Customer(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday)
 			: base(id, Name, Address, PhoneNumber, Birthday)
-		{}
+		{ }
 
 	}
 }
