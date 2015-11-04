@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PointOfSales.Payment
 {
-	class Payment
+	abstract class Payment
 	{
+
+
+		// property for the amount.
+
 	}
 }

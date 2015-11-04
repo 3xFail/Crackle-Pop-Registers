@@ -7,7 +7,7 @@ using System.Device.Location;
 
 namespace PointOfSales.Users
 {
-	public class StoreUser
+	public abstract class StoreUser
 	{
 		//Default constructor.
 		public StoreUser()
