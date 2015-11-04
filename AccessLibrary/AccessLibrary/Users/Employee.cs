@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
 
-namespace PointOfSales
+namespace PointOfSales.Users
 {
 	// An employee is someone who works for the store. Inherits from StoreUser.
 	class Employee : StoreUser

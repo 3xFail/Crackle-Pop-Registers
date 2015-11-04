@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
 
-namespace PointOfSales
+namespace PointOfSales.Users
 {
 	// A customer is someone who is served at the store. Inherits from StoreUser.
     public class Customer : StoreUser

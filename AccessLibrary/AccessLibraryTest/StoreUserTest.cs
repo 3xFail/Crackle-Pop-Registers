@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PointOfSales;
+using PointOfSales.Users;
 using System.Device.Location;
 namespace AccessLibraryTest
 {

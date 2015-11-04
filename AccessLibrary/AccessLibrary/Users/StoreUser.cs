@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
-namespace PointOfSales
+
+namespace PointOfSales.Users
 {
 	public class StoreUser
 	{
