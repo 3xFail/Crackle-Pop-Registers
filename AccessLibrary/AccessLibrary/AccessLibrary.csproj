@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Payment\CreditCardPayment.cs" />
     <Compile Include="Payment\Payment.cs" />
+    <Compile Include="Permissions\Permissions.cs" />
     <Compile Include="Users\Customer.cs" />
     <Compile Include="Users\Employee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
