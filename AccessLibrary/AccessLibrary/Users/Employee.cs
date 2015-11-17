@@ -8,7 +8,7 @@ using System.Device.Location;
 namespace PointOfSales.Users
 {
 	// An employee is someone who works for the store. Inherits from StoreUser.
-	class Employee : StoreUser
+	public class Employee : StoreUser
 	{
 		public Employee()
 			: base()
@@ -18,5 +18,6 @@ namespace PointOfSales.Users
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{ }
 
+		public int EmployeePermissions;
 	}
 }
