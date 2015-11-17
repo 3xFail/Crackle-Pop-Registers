@@ -58,7 +58,7 @@
     <Compile Include="MockConnections\MockLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CreditCardPaymentTest.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="EmployeeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccessLibrary\AccessLibrary.csproj">
