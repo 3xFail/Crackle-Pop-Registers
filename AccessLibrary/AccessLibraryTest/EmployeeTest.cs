@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using PointOfSales.Permissions;
 namespace AccessLibraryTest
 {
 	[TestClass]
@@ -19,6 +19,16 @@ namespace AccessLibraryTest
 		public void EmployeeIncorrectLoginTest()
 		{
 			PointOfSales.Users.Employee SallySue = MockConnections.MockLogin.Login("SallySue", "WRONG_PASSWORD");
+		}
+
+		[TestMethod]
+		public void ChangePermissionsTest()
+		{
+			PointOfSales.Users.Employee SallySue = MockConnections.MockLogin.Login("SallySue", "abc123");
+
+			Permissions.AddPermission(SallySue, SallySue, Permissions.PointOfSalesPermissions.UseRegister);
+
+			Assert.IsTrue(Permissions.CheckPermissions(SallySue, Permissions.PointOfSalesPermissions.UseRegister));
 		}
 	}
 }
