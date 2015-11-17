@@ -31,20 +31,28 @@ namespace PointOfSales.Permissions
 			ChangePermissions = 256
 		}
 
+		// Adds a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
 		public static void AddPermission(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, PointOfSalesPermissions PermissionToAdd)
 		{
-			if ((User.EmployeePermissions & (int)PointOfSalesPermissions.ChangePermissions) >= 1)
+			if (CheckPermissions(User, PointOfSalesPermissions.ChangePermissions))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions | (int)PermissionToAdd;
 		}
 
+		// Removes a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
 		public static void RemovePermissions(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, PointOfSalesPermissions PermissionToRemove)
 		{
-			if ((User.EmployeePermissions & (int)PointOfSalesPermissions.ChangePermissions) >= 1)
+			if (CheckPermissions(User, PointOfSalesPermissions.ChangePermissions))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions | ~(int)PermissionToRemove;
+		}
+
+		// Checks if the user EmployeeToCheck has the required permissions to perform a given operation.
+		public static bool CheckPermissions(PointOfSales.Users.Employee EmployeeToCheck, PointOfSalesPermissions PermissionToCheck)
+		{
+			return ((EmployeeToCheck.EmployeePermissions & (int)PermissionToCheck) != 0);
 		}
     }
 }

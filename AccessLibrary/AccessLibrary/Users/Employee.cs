@@ -18,6 +18,8 @@ namespace PointOfSales.Users
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{ }
 
-		public int EmployeePermissions;
+		// Employees by default are allowed to use the register.
+		// See PointOfSales.Permissions for details.
+		public int EmployeePermissions = 1;
 	}
 }
