@@ -46,7 +46,7 @@ namespace PointOfSales.Permissions
 			if (!CheckPermissions(User, PointOfSalesPermissions.ChangePermissions))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
-			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions | ~(int)PermissionToRemove;
+			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions & (~(int)PermissionToRemove);
 		}
 
 		// Checks if the user EmployeeToCheck has the required permissions to perform a given operation.

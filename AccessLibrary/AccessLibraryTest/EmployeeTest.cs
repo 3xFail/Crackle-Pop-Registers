@@ -30,5 +30,15 @@ namespace AccessLibraryTest
 
 			Assert.IsTrue(Permissions.CheckPermissions(SallySue, Permissions.PointOfSalesPermissions.UseRegister));
 		}
-	}
+
+		[TestMethod]
+		[ExpectedException(typeof(InvalidOperationException))]
+		public void EmployeeInvalidPermissionsTest()
+		{
+			PointOfSales.Users.Employee SallySue = MockConnections.MockLogin.Login("SallySue", "abc123");
+			//Removing permissions to change permissions before changing permissions.
+			Permissions.RemovePermissions(SallySue, SallySue, Permissions.PointOfSalesPermissions.ChangePermissions);
+			Permissions.AddPermission(SallySue, SallySue, Permissions.PointOfSalesPermissions.UseRegister);
+		}
+    }
 }
