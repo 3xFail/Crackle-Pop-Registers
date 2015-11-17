@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Device" />
   </ItemGroup>
   <Choose>
@@ -54,8 +55,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CustomerTest.cs" />
+    <Compile Include="MockConnections\MockLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CreditCardPaymentTest.cs" />
+    <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccessLibrary\AccessLibrary.csproj">
@@ -64,7 +67,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MockConnections\" />
+    <None Include="App.config" />
+    <None Include="FakeDataBase.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
