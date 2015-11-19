@@ -1,0 +1,391 @@
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapAppliedCoupons]    Script Date: 11/18/2015 10:20:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapAppliedCoupons](
+	[OrderItemsID] [int] NOT NULL,
+	[CouponID] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedCoupons]  WITH CHECK ADD  CONSTRAINT [FK_SnapAppliedCoupons_SnapCoupons] FOREIGN KEY([CouponID])
+REFERENCES [ryan_williams].[SnapCoupons] ([CouponID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedCoupons] CHECK CONSTRAINT [FK_SnapAppliedCoupons_SnapCoupons]
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedCoupons]  WITH CHECK ADD  CONSTRAINT [FK_SnapAppliedCoupons_SnapOrderItems] FOREIGN KEY([OrderItemsID])
+REFERENCES [ryan_williams].[SnapOrderItems] ([OrderItemsID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedCoupons] CHECK CONSTRAINT [FK_SnapAppliedCoupons_SnapOrderItems]
+GO
+
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapAppliedSales]    Script Date: 11/18/2015 10:21:05 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapAppliedSales](
+	[OrderItemID] [int] NOT NULL,
+	[SaleID] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedSales]  WITH CHECK ADD  CONSTRAINT [FK_SnapAppliedSales_SnapOrderItems] FOREIGN KEY([OrderItemID])
+REFERENCES [ryan_williams].[SnapOrderItems] ([OrderItemsID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedSales] CHECK CONSTRAINT [FK_SnapAppliedSales_SnapOrderItems]
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedSales]  WITH CHECK ADD  CONSTRAINT [FK_SnapAppliedSales_SnapSales] FOREIGN KEY([SaleID])
+REFERENCES [ryan_williams].[SnapSales] ([SaleID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapAppliedSales] CHECK CONSTRAINT [FK_SnapAppliedSales_SnapSales]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapCoupons]    Script Date: 11/18/2015 10:21:33 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapCoupons](
+	[CouponID] [int] NOT NULL,
+	[PriceModification] [money] NOT NULL,
+ CONSTRAINT [PK_SnapCoupons_1] PRIMARY KEY CLUSTERED 
+(
+	[CouponID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapCustomer]    Script Date: 11/18/2015 10:21:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapCustomer](
+	[CustID] [int] NOT NULL,
+	[OrderID] [int] NOT NULL,
+	[RewardsID] [int] NOT NULL,
+	[UserID] [int] NOT NULL,
+ CONSTRAINT [PK_SnapCustomer] PRIMARY KEY CLUSTERED 
+(
+	[CustID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapCustomer]  WITH CHECK ADD  CONSTRAINT [FK_SnapCustomer_SnapRewardsInfo] FOREIGN KEY([RewardsID])
+REFERENCES [ryan_williams].[SnapRewardsInfo] ([RewardsID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapCustomer] CHECK CONSTRAINT [FK_SnapCustomer_SnapRewardsInfo]
+GO
+
+ALTER TABLE [ryan_williams].[SnapCustomer]  WITH CHECK ADD  CONSTRAINT [FK_SnapCustomer_SnapUsers] FOREIGN KEY([UserID])
+REFERENCES [ryan_williams].[SnapUsers] ([UserID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapCustomer] CHECK CONSTRAINT [FK_SnapCustomer_SnapUsers]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapInventory]    Script Date: 11/18/2015 10:22:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapInventory](
+	[InventoryID] [int] NOT NULL,
+	[ProductID] [int] NOT NULL,
+	[DateRecieved] [smalldatetime] NULL,
+	[ExpirationDate] [smalldatetime] NULL,
+	[Quantity] [int] NULL,
+ CONSTRAINT [PK_SnapInventory] PRIMARY KEY CLUSTERED 
+(
+	[InventoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapInventory]  WITH CHECK ADD  CONSTRAINT [FK_SnapInventory_SnapProducts] FOREIGN KEY([ProductID])
+REFERENCES [ryan_williams].[SnapProducts] ([ProductID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapInventory] CHECK CONSTRAINT [FK_SnapInventory_SnapProducts]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapOrderItems]    Script Date: 11/18/2015 10:23:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapOrderItems](
+	[OrderID] [int] NOT NULL,
+	[OrderItemsID] [int] NOT NULL,
+	[AppliedSalesID] [int] NOT NULL,
+	[AppliedCouponsID] [int] NOT NULL,
+ CONSTRAINT [PK_SnapOrderItems] PRIMARY KEY CLUSTERED 
+(
+	[OrderItemsID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrderItems]  WITH CHECK ADD  CONSTRAINT [FK_SnapOrderItems_SnapOrders] FOREIGN KEY([OrderID])
+REFERENCES [ryan_williams].[SnapOrders] ([OrderID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrderItems] CHECK CONSTRAINT [FK_SnapOrderItems_SnapOrders]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapOrders]    Script Date: 11/18/2015 10:23:49 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapOrders](
+	[InventoryID] [int] NOT NULL,
+	[CustID] [int] NOT NULL,
+	[OrderPrice] [money] NULL,
+	[OrderID] [int] NOT NULL,
+ CONSTRAINT [PK_SnapOrders] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrders]  WITH CHECK ADD  CONSTRAINT [FK_SnapOrders_SnapCustomer] FOREIGN KEY([CustID])
+REFERENCES [ryan_williams].[SnapCustomer] ([CustID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrders] CHECK CONSTRAINT [FK_SnapOrders_SnapCustomer]
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrders]  WITH CHECK ADD  CONSTRAINT [FK_SnapOrders_SnapInventory] FOREIGN KEY([InventoryID])
+REFERENCES [ryan_williams].[SnapInventory] ([InventoryID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapOrders] CHECK CONSTRAINT [FK_SnapOrders_SnapInventory]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapPermissions]    Script Date: 11/18/2015 10:25:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapPermissions](
+	[CustID] [int] NOT NULL,
+	[PermissionID] [int] NOT NULL,
+	[PermissionName] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_SnapPermissions] PRIMARY KEY CLUSTERED 
+(
+	[PermissionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapProductLoses]    Script Date: 11/18/2015 10:26:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapProductLoses](
+	[InventoryID] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [ryan_williams].[SnapProductLoses]  WITH CHECK ADD  CONSTRAINT [FK_SnapProductLoses_SnapInventory] FOREIGN KEY([InventoryID])
+REFERENCES [ryan_williams].[SnapInventory] ([InventoryID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapProductLoses] CHECK CONSTRAINT [FK_SnapProductLoses_SnapInventory]
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapProducts]    Script Date: 11/18/2015 10:26:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapProducts](
+	[ProductID] [int] NOT NULL,
+	[Barcode] [int] NULL,
+	[Price] [money] NULL,
+	[Name] [varchar](50) NULL,
+ CONSTRAINT [PK_SnapProducts] PRIMARY KEY CLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapRewardsInfo]    Script Date: 11/18/2015 10:26:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapRewardsInfo](
+	[RewardsID] [int] NOT NULL,
+	[Points] [int] NOT NULL,
+ CONSTRAINT [PK_SnapRewardsInfo] PRIMARY KEY CLUSTERED 
+(
+	[RewardsID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapSales]    Script Date: 11/18/2015 10:27:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapSales](
+	[SaleID] [int] NOT NULL,
+	[SaleDiscount] [money] NOT NULL,
+ CONSTRAINT [PK_SnapSales_1] PRIMARY KEY CLUSTERED 
+(
+	[SaleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+USE [ryan_williams]
+GO
+
+/****** Object:  Table [ryan_williams].[SnapUsers]    Script Date: 11/18/2015 10:27:26 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [ryan_williams].[SnapUsers](
+	[Username] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NULL,
+	[PermissionsID] [int] NOT NULL,
+	[UserID] [int] NOT NULL,
+ CONSTRAINT [PK_SnapUsers] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [ryan_williams].[SnapUsers]  WITH CHECK ADD  CONSTRAINT [FK_SnapUsers_SnapPermissions] FOREIGN KEY([PermissionsID])
+REFERENCES [ryan_williams].[SnapPermissions] ([PermissionID])
+GO
+
+ALTER TABLE [ryan_williams].[SnapUsers] CHECK CONSTRAINT [FK_SnapUsers_SnapPermissions]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
