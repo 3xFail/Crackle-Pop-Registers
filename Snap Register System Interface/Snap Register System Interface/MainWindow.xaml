@@ -19,7 +19,7 @@ ResizeMode="NoResize"
         <!--Scanned Items-->
         <Border x:Name="Items_Scanned" Grid.Column="0" Background="{StaticResource FieldBackground}"
 				BorderThickness="{StaticResource FieldBorderThickness}" BorderBrush="{StaticResource FieldBorder}"
-				Margin="10,10,10,10" CornerRadius="{StaticResource FieldCornerRadius}">
+				Margin="{StaticResource FieldMargins}" CornerRadius="{StaticResource FieldCornerRadius}">
         </Border>
 
         <!--Left Half-->
@@ -38,11 +38,28 @@ ResizeMode="NoResize"
 
                 <!--Coupons Box-->
                 <Border x:Name="Coupons_Used" Background="{StaticResource FieldBackground}" 
-						   Margin="10,10,10,10" Grid.Column="0"
+						   Margin="{StaticResource FieldMargins}" Grid.Column="0"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
                 </Border>
+
+				<!--Turtle Button Design-->
+                <Ellipse Grid.Column="1" Fill="{StaticResource FieldBorder}"
+						 HorizontalAlignment="Stretch"
+						 VerticalAlignment="Top"
+						 Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}"
+						 Margin="{StaticResource FieldMargins}"/>
+                <Ellipse Grid.Column="1" Fill="{StaticResource BackgroundAccent}"
+						 HorizontalAlignment="Stretch"
+						 VerticalAlignment="Top"
+						 Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}"
+						 Margin="{StaticResource TurtleButtonBorder}"/>
+                <Image	Grid.Column="1"
+						HorizontalAlignment="Stretch"
+						VerticalAlignment="Top"
+						Source="Resources/Images/Emblem.png"/>
+					   
             </Grid>
 
             <!--Left Bottom Quadrant-->
@@ -54,19 +71,19 @@ ResizeMode="NoResize"
                 </Grid.ColumnDefinitions>
 				
                 <Border x:Name="Weight" Background="{StaticResource FieldBackground}"
-						Margin="10,10,10,10" Grid.Column="0"
+						Margin="{StaticResource FieldMargins}" Grid.Column="0"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
                 </Border>
                 <Border x:Name="Savings" Background="{StaticResource FieldBackground}" 
-						Margin="10,10,10,10" Grid.Column="1"
+						Margin="{StaticResource FieldMargins}" Grid.Column="1"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
                 </Border>
                 <Border x:Name="Total" Background="{StaticResource FieldBackground}"
-						Margin="10,10,10,10" Grid.Column="2"
+						Margin="{StaticResource FieldMargins}" Grid.Column="2"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">

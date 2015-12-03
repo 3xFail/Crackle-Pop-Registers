@@ -13,6 +13,8 @@
     <SolidColorBrush x:Key="FieldBorder" Color="Black"/>
 
     <Thickness x:Key="FieldBorderThickness">5</Thickness>
+    <Thickness x:Key="FieldMargins">10</Thickness>
+    <Thickness x:Key="TurtleButtonBorder">15</Thickness>
 
     <sys:Double x:Key="DropShadowDirection">225</sys:Double>
     
