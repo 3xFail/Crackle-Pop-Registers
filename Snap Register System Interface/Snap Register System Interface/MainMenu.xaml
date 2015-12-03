@@ -1,0 +1,73 @@
+﻿<Window x:Class="Snap_Register_System_Interface.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snap_Register_System_Interface"
+        mc:Ignorable="d"
+        Title="MainMenu" Height="1080" Width="1920"
+		WindowStyle="None"
+		WindowState="Maximized"
+		AllowsTransparency="True"
+		Background="Transparent" Deactivated="Window_Deactivated">
+	<!--Blank Space-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+		<!--Menu-->
+        <Border Grid.Column="1" Background="{StaticResource Background}"
+				HorizontalAlignment="Stretch" VerticalAlignment="Center"
+				Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}"
+				CornerRadius="{StaticResource FieldCornerRadius}"
+				BorderBrush="{StaticResource FieldBorder}"
+				BorderThickness="{StaticResource FieldBorderThickness}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="ManualEntryButton"
+						Margin="{StaticResource FieldMargins}"
+						Grid.Column="0"
+						Grid.Row="0">
+                    <Button.Content>
+						<TextBlock Text="Manual Entry" FontSize="{StaticResource ButtonFontSize}"/>
+					</Button.Content>
+                </Button>
+                <Button x:Name="Button2"
+						Margin="{StaticResource FieldMargins}"
+						Grid.Column="1"
+						Grid.Row="0">
+                    <Button.Content>
+                        <TextBlock Text="Ugly Button" FontSize="{StaticResource ButtonFontSize}"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="Button3"
+						Margin="{StaticResource FieldMargins}"
+						Grid.Column="2"
+						Grid.Row="0">
+                    <Button.Content>
+                        <TextBlock Text="Nother Button" FontSize="{StaticResource ButtonFontSize}"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="Button4"
+						Margin="{StaticResource FieldMargins}"
+						Grid.Column="0"
+						Grid.Row="1">
+                    <Button.Content>
+                        <TextBlock Text="Final Button" FontSize="{StaticResource ButtonFontSize}"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
