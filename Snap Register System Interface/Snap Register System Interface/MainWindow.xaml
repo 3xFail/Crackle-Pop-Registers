@@ -9,7 +9,41 @@
 		WindowState="Maximized"
 		ResizeMode="NoResize"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+    <Grid x:Name="Background" Background="{DynamicResource Background}">
+        <!--Background="{StaticResource Background}">-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="138*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>-->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="210*"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="210*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <!--<TextBlock Text="Items" Foreground="{StaticResource PrimaryText}" Margin="20,10,10,10.4" Grid.RowSpan="2"/>-->
+        <!--<TextBlock Foreground="{StaticResource PrimaryText}" Margin="10,10,23.8,10.4" Grid.Row="1" Grid.Column="1"><Run/><LineBreak/><Run Text="Weight:"/></TextBlock>
+        <TextBlock Foreground="{StaticResource PrimaryText}" Margin="0.2,10,120.8,10.4" Grid.Row="1" Grid.Column="2"><Run/><LineBreak/><Run Text="Savings:"/></TextBlock>
+        <TextBlock Foreground="{StaticResource PrimaryText}" Margin="111.2,10,9.8,10.4" Grid.Row="1" Grid.Column="2"><Run/><LineBreak/><Run Text="Total:"/></TextBlock>-->
+
+        <Grid x:Name="Items_Scanned" HorizontalAlignment="Left" Height="330" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="184" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Grid x:Name="Weight" Grid.Column="1" HorizontalAlignment="Left" Height="57" Margin="0,7,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" RenderTransformOrigin="-0.016,0.526"/>
+        <Grid x:Name="Savings" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="-10,7,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Grid x:Name="Total" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="95.2,7,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Grid x:Name="Coupons_Used" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="260" Margin="0,10,0,0" VerticalAlignment="Top" Width="130" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
+        <Image x:Name="Logo" Source="C:\Users\admi\Documents\College\CST 316\Snap4.png" Grid.Column="2" HorizontalAlignment="Left" Height="60" Margin="134.2,10,0,0" VerticalAlignment="Top" Width="60" OpacityMask="Black"/>
+        <!--<Rectangle HorizontalAlignment="Left" Height="330" Grid.RowSpan="2" Stroke="Black" VerticalAlignment="Top" Width="184" Margin="10,10,0,0"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="0,10,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="90"/>
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="110,10,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="54" Margin="100,10,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="90"/>-->
     </Grid>
 </Window>
