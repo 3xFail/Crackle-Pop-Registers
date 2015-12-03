@@ -10,36 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Snap_Register_System_Interface
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for MainMenu.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainMenu : Window
 	{
-		public MainWindow()
+		public MainMenu()
 		{
 			InitializeComponent();
 		}
 
-		private void MainMenuButtonClick(object sender, RoutedEventArgs e)
+		private void Window_Deactivated(object sender, EventArgs e)
 		{
-			if (m_mainMenu == null)
-			{
-				m_mainMenu = new MainMenu();
-				m_mainMenu.Show();
-			}
-			else
-			{
-				m_mainMenu.Hide();
-				m_mainMenu.Close();
-				m_mainMenu = null;
-			}
+			this.Topmost = true;
 		}
-
-		private Snap_Register_System_Interface.MainMenu m_mainMenu = null;
 	}
 }

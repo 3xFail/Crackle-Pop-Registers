@@ -49,13 +49,22 @@ ResizeMode="NoResize"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
+                    <Grid>
+                        <TextBlock Text="Savings:"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Foreground="{StaticResource PrimaryText}" FontSize="16"
+						   FontWeight="Bold"
+						   Margin="5,0,0,0"/>
+                    </Grid>
                 </Border>
 
                 <!--Turtle Button-->
                 <Button Grid.Column="1"
+						x:Name="MainMenuButton"
 						HorizontalAlignment="Stretch"
 						VerticalAlignment="Top"
-						Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}">
+						Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}" 
+						Click="MainMenuButtonClick">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid Grid.Column="1">
@@ -66,7 +75,7 @@ ResizeMode="NoResize"
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="TurtleBacking" Property="Fill" Value="{StaticResource ButtonHoverColor}"/>
+                                    <Setter TargetName="TurtleBacking" Property="Fill" Value="{StaticResource TurtleButtonHoverColor}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -92,18 +101,57 @@ ResizeMode="NoResize"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
+                    <Grid>
+                        <TextBlock Text="Weight:"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Foreground="{StaticResource PrimaryText}" FontSize="16"
+						   FontWeight="Bold"
+						   Margin="5,0,0,0"/>
+                        <TextBlock	x:Name="TotalWeight"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Foreground="{StaticResource PrimaryText}"
+									FontWeight="ExtraBold"
+									FontSize="{StaticResource TotalsFontSize}"
+									Text="13.1 lb"/>
+                    </Grid>
                 </Border>
                 <Border x:Name="Savings" Background="{StaticResource FieldBackground}" 
 						Margin="{StaticResource FieldMargins}" Grid.Column="1"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
+                    <Grid>
+                        <TextBlock Text="Total Savings:"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Foreground="{StaticResource PrimaryText}" FontSize="16"
+						   FontWeight="Bold"
+						   Margin="5,0,0,0"/>
+                        <TextBlock	x:Name="TotalSavings"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Foreground="{StaticResource PrimaryText}"
+									FontWeight="ExtraBold"
+									FontSize="{StaticResource TotalsFontSize}"
+									Text="49.23"/>
+                    </Grid>
                 </Border>
                 <Border x:Name="Total" Background="{StaticResource FieldBackground}"
 						Margin="{StaticResource FieldMargins}" Grid.Column="2"
 						CornerRadius="{StaticResource FieldCornerRadius}"
 						BorderThickness="{StaticResource FieldBorderThickness}"
 						BorderBrush="{StaticResource FieldBorder}">
+                    <Grid>
+                        <TextBlock Text="Total Cost:"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Foreground="{StaticResource PrimaryText}" FontSize="16"
+						   FontWeight="Bold"
+						   Margin="5,0,0,0"/>
+						<TextBlock	x:Name="TotalCost"
+									HorizontalAlignment="Center" VerticalAlignment="Center"
+									Foreground="{StaticResource PrimaryText}"
+									FontWeight="ExtraBold"
+									FontSize="{StaticResource TotalsFontSize}"
+									Text="150.47"/>
+                    </Grid>
                 </Border>
             </Grid>
 
