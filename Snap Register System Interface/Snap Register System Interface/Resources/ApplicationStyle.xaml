@@ -11,13 +11,13 @@
     <SolidColorBrush x:Key="SaleText" Color="#22B14C"/>
     <SolidColorBrush x:Key="FieldBackground" Color="White"/>
     <SolidColorBrush x:Key="FieldBorder" Color="Black"/>
-
+	<SolidColorBrush x:Key="ButtonHoverColor" Color="#40FFFF"/>
     <Thickness x:Key="FieldBorderThickness">5</Thickness>
     <Thickness x:Key="FieldMargins">10</Thickness>
     <Thickness x:Key="TurtleButtonBorder">15</Thickness>
 
     <sys:Double x:Key="DropShadowDirection">225</sys:Double>
-    
-	<CornerRadius x:Key="FieldCornerRadius">6</CornerRadius>
-
+    <sys:Double x:Key="CompanyNameFontSize">20</sys:Double>
+	
+    <CornerRadius x:Key="FieldCornerRadius">6</CornerRadius>
 </ResourceDictionary>
