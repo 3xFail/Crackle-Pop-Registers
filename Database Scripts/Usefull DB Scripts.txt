@@ -1,0 +1,38 @@
+--Inventory insert
+
+USE [snap]
+GO
+
+INSERT INTO [dbo].[SnapInventory]
+           ([ProductID]
+           ,[DateRecieved]
+           ,[ExpirationDate]
+           ,[Quantity])
+     VALUES
+           (4
+           ,CONVERT (smalldatetime, GETDATE())
+           ,Convert( smalldatetime, (Dateadd(day, 40,  GETDATE())))
+           ,45)
+GO
+
+
+select *
+from SnapInventory
+
+
+--Products Insert
+USE [snap]
+GO
+
+INSERT INTO [dbo].[SnapProducts]
+           ([Barcode]
+           ,[Price]
+           ,[Name])
+     VALUES
+           (442240
+           ,$2.50
+           ,'Vegetable Thins')
+GO
+
+select *
+from SnapProducts
