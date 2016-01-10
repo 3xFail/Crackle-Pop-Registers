@@ -10,151 +10,39 @@ WindowState="Maximized"
 ResizeMode="NoResize"
 		Title="MainWindow" Height="350" Width="525">
     <!--Everything-->
-    <Grid Background="{StaticResource Background}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
 
-        <!--Scanned Items-->
-        <Border x:Name="Items_Scanned" Grid.Column="0" Background="{StaticResource FieldBackground}"
-				BorderThickness="{StaticResource FieldBorderThickness}" BorderBrush="{StaticResource FieldBorder}"
-				Margin="{StaticResource FieldMargins}" CornerRadius="{StaticResource FieldCornerRadius}">
-            <Grid>
-				<TextBlock Text="Items:"
-						   HorizontalAlignment="Left" VerticalAlignment="Top"
-						   Foreground="{StaticResource PrimaryText}" FontSize="16"
-						   FontWeight="Bold"
-						   Margin="5,0,0,0"/>
-			</Grid>
-        </Border>
+            <!--Item Display Panel-->
+            <Border 
+				Grid.Column="0" Margin="0,0,3,0"
+				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
+                <DockPanel Name="ItemList">
 
-        <!--Left Half-->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <!--Left Top Quadrant-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <!--Coupons Box-->
-                <Border x:Name="Coupons_Used" Background="{StaticResource FieldBackground}" 
-						   Margin="{StaticResource FieldMargins}" Grid.Column="0"
-						CornerRadius="{StaticResource FieldCornerRadius}"
-						BorderThickness="{StaticResource FieldBorderThickness}"
-						BorderBrush="{StaticResource FieldBorder}">
-                    <Grid>
-                        <TextBlock Text="Savings:"
-						   HorizontalAlignment="Left" VerticalAlignment="Top"
-						   Foreground="{StaticResource PrimaryText}" FontSize="16"
-						   FontWeight="Bold"
-						   Margin="5,0,0,0"/>
-                    </Grid>
-                </Border>
-
-                <!--Turtle Button-->
-                <Button Grid.Column="1"
-						x:Name="MainMenuButton"
-						HorizontalAlignment="Stretch"
-						VerticalAlignment="Top"
-						Height="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}" 
-						Click="MainMenuButtonClick">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Grid Grid.Column="1">
-                                <Ellipse Fill="{StaticResource FieldBorder}"/>
-                                <Ellipse x:Name="TurtleBacking"	Fill="{StaticResource BackgroundAccent}"
-								Margin="{StaticResource FieldBorderThickness}"/>
-                                <Image		Source="Resources/Images/Emblem.png"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="TurtleBacking" Property="Fill" Value="{StaticResource TurtleButtonHoverColor}"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-
-                </Button>
-                <TextBlock	Grid.Column="1"
-								Text="Company Inc." HorizontalAlignment="Center" VerticalAlignment="Bottom"
-								Margin="{StaticResource FieldMargins}"
-								FontSize="{StaticResource CompanyNameFontSize}"/>
-            </Grid>
-
-            <!--Left Bottom Quadrant-->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border x:Name="Weight" Background="{StaticResource FieldBackground}"
-						Margin="{StaticResource FieldMargins}" Grid.Column="0"
-						CornerRadius="{StaticResource FieldCornerRadius}"
-						BorderThickness="{StaticResource FieldBorderThickness}"
-						BorderBrush="{StaticResource FieldBorder}">
-                    <Grid>
-                        <TextBlock Text="Weight:"
-						   HorizontalAlignment="Left" VerticalAlignment="Top"
-						   Foreground="{StaticResource PrimaryText}" FontSize="16"
-						   FontWeight="Bold"
-						   Margin="5,0,0,0"/>
-                        <TextBlock	x:Name="TotalWeight"
-									HorizontalAlignment="Center" VerticalAlignment="Center"
-									Foreground="{StaticResource PrimaryText}"
-									FontWeight="ExtraBold"
-									FontSize="{StaticResource TotalsFontSize}"
-									Text="13.1 lb"/>
-                    </Grid>
-                </Border>
-                <Border x:Name="Savings" Background="{StaticResource FieldBackground}" 
-						Margin="{StaticResource FieldMargins}" Grid.Column="1"
-						CornerRadius="{StaticResource FieldCornerRadius}"
-						BorderThickness="{StaticResource FieldBorderThickness}"
-						BorderBrush="{StaticResource FieldBorder}">
-                    <Grid>
-                        <TextBlock Text="Total Savings:"
-						   HorizontalAlignment="Left" VerticalAlignment="Top"
-						   Foreground="{StaticResource PrimaryText}" FontSize="16"
-						   FontWeight="Bold"
-						   Margin="5,0,0,0"/>
-                        <TextBlock	x:Name="TotalSavings"
-									HorizontalAlignment="Center" VerticalAlignment="Center"
-									Foreground="{StaticResource PrimaryText}"
-									FontWeight="ExtraBold"
-									FontSize="{StaticResource TotalsFontSize}"
-									Text="49.23"/>
-                    </Grid>
-                </Border>
-                <Border x:Name="Total" Background="{StaticResource FieldBackground}"
-						Margin="{StaticResource FieldMargins}" Grid.Column="2"
-						CornerRadius="{StaticResource FieldCornerRadius}"
-						BorderThickness="{StaticResource FieldBorderThickness}"
-						BorderBrush="{StaticResource FieldBorder}">
-                    <Grid>
-                        <TextBlock Text="Total Cost:"
-						   HorizontalAlignment="Left" VerticalAlignment="Top"
-						   Foreground="{StaticResource PrimaryText}" FontSize="16"
-						   FontWeight="Bold"
-						   Margin="5,0,0,0"/>
-						<TextBlock	x:Name="TotalCost"
-									HorizontalAlignment="Center" VerticalAlignment="Center"
-									Foreground="{StaticResource PrimaryText}"
-									FontWeight="ExtraBold"
-									FontSize="{StaticResource TotalsFontSize}"
-									Text="150.47"/>
-                    </Grid>
-                </Border>
-            </Grid>
-
+                </DockPanel>
+            </Border>
+            <!--Coupon Display Panel-->
+            <Border 
+				Grid.Column="1" Margin="3,0,0,0"
+				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.95*"/>
+                        <RowDefinition Height="0.05*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Name="CouponList"
+							   Grid.Row="0">
+                    </DockPanel>
+					<!--Coupon Roll-up-->
+					<TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
+							   Text="Savings:" FontSize="10"/>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>
