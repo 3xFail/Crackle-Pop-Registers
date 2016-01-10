@@ -18,6 +18,7 @@
     <!--Font Controls-->
     <sys:Double x:Key="CompanyNameFontSize">20</sys:Double>
     <sys:Double x:Key="TotalsFontSize">60</sys:Double>
+    <sys:Double x:Key="SubTotalsFontSize">20</sys:Double>
     <SolidColorBrush x:Key="PrimaryText" Color="Black"/>
     <SolidColorBrush x:Key="CouponText" Color="#021DD2"/>
     <SolidColorBrush x:Key="VoidedText" Color="#ED1C24"/>
