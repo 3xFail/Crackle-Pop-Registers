@@ -1,0 +1,28 @@
+Unlimited levels of management, customizable by admin.
+
+Admin Console Privileges
+-Log in
+-Employee logins: Change/View
+-Privileges: Change/View
+-Levels of Management: Change/View
+-Register layout: Change/View
+-Coupons: Change/View
+-Inventory: Change/View
+-Stock: Change/View
+
+
+Register Privileges
+-Log in
+-Management level -> allows managers to override things for cashiers
+-Item Voiding: Yes/No
+-Coupon Voiding: Yes/No
+-Sale Voiding: Yes/No
+-Discount Adding: Yes/No
+	-Discount amounts: customizable or set, if set then set to what.
+-Refund Processing: Yes/No
+-Invoice Generation: Yes/No
+-Program Close/System release: Yes/No
+-Restart System: Yes/No
+-Register access past certain time of day: Yes/No
+
+
