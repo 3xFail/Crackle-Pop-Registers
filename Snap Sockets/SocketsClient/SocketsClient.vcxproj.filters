@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Scrypt">
+      <UniqueIdentifier>{6748ffc4-f39f-4442-9aeb-6d7d737aa763}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cl_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SharedCode\message.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="connection_session.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SharedCode\scrypt-jane.c">
+      <Filter>Scrypt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SharedCode\message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connection_session.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\scrypt-jane.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-conf.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-chacha.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_blake256.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_blake512.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_keccak.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_sha256.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_sha512.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_skein512.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-avx.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-sse2.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-ssse3.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-xop.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-avx.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-avx2.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-sse2.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-ssse3.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-xop.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-avx.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-sse2.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-xop.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-pbkdf2.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-portable.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-portable-x86.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix-basic.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix-template.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-salsa.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-salsa64.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SharedCode\code\scrypt-jane-test-vectors.h">
+      <Filter>Scrypt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>
