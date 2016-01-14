@@ -68,7 +68,10 @@ namespace Snap_Register_System_Interface
 	//				"reason" is the reason the employee chose to override the price.
 	//			public void ApplyCoupon(int CouponID)
 	//				Applies a coupon to the sale.
-	//			public void Checkout
+	//			public void Checkout()
+	//				Finishes the transaction and begins processing payment.
+	//			private Item ConstructItem(int itemID)
+	//				Contacts the database and constructs an item from the given item ID.
 	//		PERMISSIONS:
 	//			AddItem						- UseRegister
 	//			RemoveItem					- UseRegister
@@ -89,6 +92,49 @@ namespace Snap_Register_System_Interface
 			m_Items = new List<Item>();
 		}
 
+		public void AddItem(int itemID)
+		{
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.UseRegister))
+				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+
+			// Checks to make sure the item was valid before adding it to the list.
+			try
+			{
+				// Construct a new item from the given itemID and add it to the list.
+				m_Items.Add(new Item(ConstructItem(itemID)));
+
+			}
+			catch (InvalidOperationException e)
+			{
+				throw e;
+			}
+		}
+		public void RemoveItem(int itemID)
+		{
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.UseRegister))
+				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+
+			// Checks to make sure the item was valid before adding it to the list.
+			try
+			{
+				// Construct a new item from the given itemID and add it to the list.
+				m_Items.Remove(new Item(ConstructItem(itemID)));
+
+			}
+			catch (InvalidOperationException e)
+			{
+				throw e;
+			}
+		}
+
+
+
+		private Item ConstructItem(int itemID)
+		{
+			// REPLACE ME:
+			// Connect to database and create a new item from information in the database.
+			return new Item();
+		}
 
 		private List<Item> m_Items;
 		private Employee m_Employee;
@@ -111,14 +157,24 @@ namespace Snap_Register_System_Interface
 	//		FUNCTIONS:
 	//			public Item()
 	//				Basic constructor.
+	//			public Item(Item source)
+	//				Copy Constructor.
 	//		PERMISSIONS:
 	//			None.
 	//*************************************************************************************************************
 	public class Item
 	{
 		public Item()
-		{ }
-
+		{
+			discounts = new List<double>();
+		}
+		public Item(Item source)
+		{
+			id = source.id;
+			itemName = source.itemName;
+			price = price;
+			discounts = new List<double>(source.discounts);
+		}
 		public int id { get; set; }
 		public string itemName { get; set; }
 		public double price { get; set; }
