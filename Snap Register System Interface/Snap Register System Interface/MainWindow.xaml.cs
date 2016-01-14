@@ -66,7 +66,7 @@ namespace Snap_Register_System_Interface
 	//			public void OverrideCost(int itemID, double newPrice, string reason = "No description")
 	//				Overrides the cost of the item specified with the new price specified with "newPrice".
 	//				"reason" is the reason the employee chose to override the price.
-	//			public void ApplyCoupon(int CouponID)
+	//			public void ApplyCoupon(int couponID)
 	//				Applies a coupon to the sale.
 	//			public void Checkout()
 	//				Finishes the transaction and begins processing payment.
@@ -126,12 +126,50 @@ namespace Snap_Register_System_Interface
 				throw e;
 			}
 		}
+		public void OverrideCost(int itemID, double newPrice, string reason = "No description")
+		{
+			// Find the item to change the price of in the list assign changedItem these values.
+			Item changedItem = new Item(m_Items.Find(x => x.id == itemID));
+			
+			if (changedItem == null)
+				throw new InvalidOperationException("Item specified is not in sale.");
 
+			if(reason == "No description")
+			{
+				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverrideNoReason))
+					throw new InvalidOperationException("A reason must be specified for this action.");
+				else
+					changedItem.price = newPrice;
+			}
+			else
+			{
+				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverride))
+					throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
+				else
+					changedItem.price = newPrice;
+			}
+
+			// Reassign the item's price.
+			m_Items[m_Items.FindIndex(x => x.id == itemID)].price = changedItem.price;
+		}
+		public void ApplyCoupon(int couponID)
+		{
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.ApplyCoupon))
+				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
+
+			// Connect to the database and check if the couponID is correct. If not throw an exception.
+
+			// For each item in m_Items, look at the database and see if the coupon should be applied to it. If so, add
+			// a new discount to m_Items[that item].discounts.
+		}
+		public void Checkout()
+		{
+			// Some sort of credit card magic goes here.
+		}
 
 
 		private Item ConstructItem(int itemID)
 		{
-			// REPLACE ME:
 			// Connect to database and create a new item from information in the database.
 			return new Item();
 		}
