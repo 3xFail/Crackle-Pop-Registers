@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointOfSales.Users;
+using PointOfSales.Permissions;
 
 namespace Snap_Register_System_Interface
 {
@@ -50,9 +52,13 @@ namespace Snap_Register_System_Interface
 	//			This class contains all information about the current sale. A new class should be created for each
 	//			Transaction at a register. This class allows the managing of a sale from scanning to payment.
 	//		MEMBERS:
-	//			private List<items> m_Items
-	//				A list of all items in the transaction.
+	//			private List<Item> m_Items
+	//				A list of all items in the transaction.'
+	//			private Employee m_Employee
+	//				The currently logged in employee.
 	//		FUNCTIONS:
+	//			public Transaction(Employee employee)
+	//				Constructor for a new transaction opened by the specified employee.
 	//			public void AddItem(int itemID)
 	//				Adds an item to the current transaction.
 	//			public void RemoveItem(int itemID)
@@ -72,6 +78,50 @@ namespace Snap_Register_System_Interface
 	//*************************************************************************************************************
 	public class Transaction
 	{
+		public Transaction(Employee employee)
+		{
+			if (employee == null)
+				throw new InvalidOperationException("Invalid Employee Credentials.");
+			if (!Permissions.CheckPermissions(employee, Permissions.PointOfSalesPermissions.UseRegister))
+				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
+			m_Employee = employee;
+			m_Items = new List<Item>();
+		}
+
+
+		private List<Item> m_Items;
+		private Employee m_Employee;
+	}
+
+	//*************************************************************************************************************
+	// public class Item
+	//		SUMMARY: 
+	//			This class stores information about an item used in a sale. This information contains an ID for
+	//			the item, a price, a list of discounts, etc.
+	//		MEMBERS:
+	//			public int idD
+	//				The ID of the item.
+	//			public string itemName
+	//				The name of the item.
+	//			public double price
+	//				The price of the item.
+	//			public List<double> discounts
+	//				A list of all discounts this item has.
+	//		FUNCTIONS:
+	//			public Item()
+	//				Basic constructor.
+	//		PERMISSIONS:
+	//			None.
+	//*************************************************************************************************************
+	public class Item
+	{
+		public Item()
+		{ }
+
+		public int id { get; set; }
+		public string itemName { get; set; }
+		public double price { get; set; }
+		public List<double> discounts { get; set; }
 	}
 }
