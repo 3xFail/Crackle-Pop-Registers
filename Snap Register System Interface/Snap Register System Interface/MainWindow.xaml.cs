@@ -53,16 +53,22 @@ namespace Snap_Register_System_Interface
 	//			private List<items> m_Items
 	//				A list of all items in the transaction.
 	//		FUNCTIONS:
+	//			public void AddItem(int itemID)
+	//				Adds an item to the current transaction.
 	//			public void RemoveItem(int itemID)
 	//				Removes the item with the ID matching "itemID" from the transaction.
-	//			public void OverRideCost(int itemID, double newPrice, string reason = "No description")
+	//			public void OverrideCost(int itemID, double newPrice, string reason = "No description")
 	//				Overrides the cost of the item specified with the new price specified with "newPrice".
 	//				"reason" is the reason the employee chose to override the price.
 	//			public void ApplyCoupon(int CouponID)
+	//				Applies a coupon to the sale.
+	//			public void Checkout
 	//		PERMISSIONS:
-	//			RemoveItem - 
-	//			
-	// 
+	//			AddItem						- UseRegister
+	//			RemoveItem					- UseRegister
+	//			OverrideCost				- PriceOverride, PriceOverrideNoReason
+	//			ApplyCoupon					- ApplyCoupon
+	//			Checkout					- ProcessPayment
 	//*************************************************************************************************************
 	public class Transaction
 	{
