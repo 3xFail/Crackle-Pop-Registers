@@ -1,0 +1,234 @@
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/13/2016
+-- Description:	Fetch Information of an item 
+-- and return it in xml
+-- =============================================
+CREATE PROCEDURE GetItem 
+	-- Add the parameters for the stored procedure here
+	@Barcode bigint = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	FROM SnapProducts
+	WHERE SnapProducts.Barcode = @Barcode
+	FOR XML AUTO;
+END
+GO
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/13/2016
+-- Description:	Fetches the password of the user 
+-- that is trying to login to the system to 
+-- compare and validate
+-- =============================================
+CREATE PROCEDURE GetUserLoginPass 
+	-- Add the parameters for the stored procedure here
+	@UserName varchar(50) = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT [Password]
+	FROM SnapUsers
+	WHERE SnapUsers.Username = @UserName
+	FOR XML AUTO;
+END
+GO
+
+USE [snap]
+GO
+/****** Object:  StoredProcedure [dbo].[AddUser]    Script Date: 1/13/2016 11:44:02 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/13/2016
+-- Description:	User Creation Script
+-- =============================================
+ALTER PROCEDURE [dbo].[AddUser] 
+	-- Add the parameters for the stored procedure here
+	@Username varchar = 0, 
+	@PhoneNum int = 5418851000,
+	@Permission int = 31
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[SnapUsers]
+           ([Username]
+           ,[Password]
+           ,[PermissionsID]
+           ,[EmployeePhone])
+     VALUES
+           (@Username
+           ,(@Username + (@PhoneNum / 1000000))
+           ,@Permission
+           ,@PhoneNum)
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/13/2016
+-- Description:	This will add a item to the 
+-- database when given the values for each of 
+-- its information
+-- =============================================
+CREATE PROCEDURE AddItem 
+	-- Add the parameters for the stored procedure here
+	@Name varchar(50) = null, 
+	@Price money = $0.00,
+	@Barcode bigint = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[SnapProducts]
+           ([Barcode]
+           ,[Price]
+           ,[Name])
+     VALUES
+           (@Barcode
+           ,@Price
+           ,@Name)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/14/2016
+-- Description:	This is a procedure that will 
+-- add inventory to the inventory table when given
+-- the three parameters or less
+-- =============================================
+CREATE PROCEDURE AddInventory 
+	-- Add the parameters for the stored procedure here
+	@Quantity int = 1, 
+	@ProductID int = 0,
+	@DaysUntilExpire int = 15
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[SnapInventory]
+           ([ProductID]
+           ,[DateRecieved]
+           ,[ExpirationDate]
+           ,[Quantity])
+     VALUES
+           (@ProductID
+           ,CONVERT (smalldatetime, GETDATE())
+           ,Convert( smalldatetime, (Dateadd(day, @DaysUntilExpire,  GETDATE())))
+           ,@Quantity)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/14/2016
+-- Description:	This procedure will add coupons to the coupon table
+-- =============================================
+CREATE PROCEDURE AddCoupons 
+	-- Add the parameters for the stored procedure here
+	@PriceChange money = 0.00
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[SnapCoupons]
+           ([PriceModification])
+     VALUES
+           (@PriceChange)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Ryan Williams
+-- Create date: 1/14/2016
+-- Description:	This Procedure will allow a sale to be added to the sale table
+-- =============================================
+CREATE PROCEDURE AddSale 
+	-- Add the parameters for the stored procedure here
+	@PriceChange money = $0.00
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [dbo].[SnapSales]
+           ([SaleDiscount])
+     VALUES
+           (@PriceChange)
+END
+GO
