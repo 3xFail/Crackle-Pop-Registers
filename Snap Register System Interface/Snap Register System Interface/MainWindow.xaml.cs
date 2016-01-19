@@ -208,11 +208,11 @@ namespace Snap_Register_System_Interface
 	//			sale. The first TextBlock displays the name and cost of the product while the second displays all
 	//			the discounts that item has.
 	//		MEMBERS:
-	//			public TextBlock itemDetails
-	//				A TextBlock displaying the item's name and the item's price. The item's name is left aligned
+	//			public DisplayBox itemDetails
+	//				A DisplayBox displaying the item's name and the item's price. The item's name is left aligned
 	//				and the item's price is right aligned. This box will always be the height of the itemDiscounts
 	//				text block. If it is short, blank lines will be added to ensure it is the same height.
-	//			public TextBlock itemDiscounts
+	//			public Grid itemDiscounts
 	//				A TextBlock displaying each discount applied to the item. The discount's name is left aligned
 	//				while the discount's amount is right aligned. Each discount gets its own line.
 	//			public int idD
@@ -241,6 +241,8 @@ namespace Snap_Register_System_Interface
 		{
 			discountNames = new List<string>();
 			discountAmounts = new List<double>();
+
+			UpdateDisplayBoxes();
 		}
 		public Item(Item source)
 		{
@@ -249,7 +251,18 @@ namespace Snap_Register_System_Interface
 			price = source.price;
 			discountNames = new List<string>(source.discountNames);
 			discountAmounts = new List<double>(source.discountAmounts);
+
+			UpdateDisplayBoxes();
 		}
+
+		private void UpdateDisplayBoxes()
+		{
+			itemDetails.Text
+		}
+
+
+		public TextBlock itemDetails { get; set; }
+		public TextBlock itemDiscounts { get; set; }
 		public int id { get; set; }
 		public string itemName { get; set; }
 		public double price { get; set; }
