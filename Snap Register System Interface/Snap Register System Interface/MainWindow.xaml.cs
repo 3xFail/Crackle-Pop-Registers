@@ -14,35 +14,50 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PointOfSales.Users;
 using PointOfSales.Permissions;
+using System.Device;
 
 namespace Snap_Register_System_Interface
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+	//*************************************************************************************************************
+	// public partial class MainWindow : Window
+	//		SUMMARY:
+	//			This is the main class that drives the main window of the user interface. It contains functions
+	//			used to move the sale forward and display the information to the screen.
+	//		MEMBERS:
+	//			private Transaction m_transaction
+	//				Contains the data of the sale as well as manipulation of that data.
+	//			private Employee m_employee
+	//				The employee who is currently using the register. This data is pulled from the login page.
+	//		FUNCTIONS:
+	//			public MainWindow(Employee currentEmployee)
+	//				Constructs the main sales window. An employee must be specified in order to check permissions.
+	//			private UpdateItemDisplay
+	//		PERMISSIONS:
+	//			Permissions are handled by the Transaction class.
+	//*************************************************************************************************************
 	public partial class MainWindow : Window
 	{
+		// temp constructor for testing.
 		public MainWindow()
 		{
+			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3));
+
 			InitializeComponent();
+			m_employee = currentEmployee;
+			m_transaction = new Transaction(m_employee);
 		}
 
-		private void MainMenuButtonClick(object sender, RoutedEventArgs e)
+		public MainWindow(Employee currentEmployee)
 		{
-			if (m_mainMenu == null)
-			{
-				m_mainMenu = new MainMenu();
-				m_mainMenu.Show();
-			}
-			else
-			{
-				m_mainMenu.Hide();
-				m_mainMenu.Close();
-				m_mainMenu = null;
-			}
+			InitializeComponent();
+
+			m_employee = currentEmployee;
+			m_transaction = new Transaction(m_employee);
 		}
 
-		private Snap_Register_System_Interface.MainMenu m_mainMenu = null;
+
+		private Transaction m_transaction = null;
+		private Employee m_employee = null;
 	}
 
 
@@ -53,7 +68,7 @@ namespace Snap_Register_System_Interface
 	//			Transaction at a register. This class allows the managing of a sale from scanning to payment.
 	//		MEMBERS:
 	//			private List<Item> m_Items
-	//				A list of all items in the transaction.'
+	//				A list of all items in the transaction.
 	//			private Employee m_Employee
 	//				The currently logged in employee.
 	//		FUNCTIONS:
@@ -70,6 +85,9 @@ namespace Snap_Register_System_Interface
 	//				Applies a coupon to the sale.
 	//			public void Checkout()
 	//				Finishes the transaction and begins processing payment.
+	//			public List<Item> GetItems()
+	//				Returns a copy of all the items in this sale. The list of items cannot be changed without
+	//				proper permissions but can be read with this.
 	//			private Item ConstructItem(int itemID)
 	//				Contacts the database and constructs an item from the given item ID.
 	//		PERMISSIONS:
@@ -78,6 +96,7 @@ namespace Snap_Register_System_Interface
 	//			OverrideCost				- PriceOverride, PriceOverrideNoReason
 	//			ApplyCoupon					- ApplyCoupon
 	//			Checkout					- ProcessPayment
+	//			GetItems					- UseRegister
 	//*************************************************************************************************************
 	public class Transaction
 	{
@@ -167,6 +186,10 @@ namespace Snap_Register_System_Interface
 			// Some sort of credit card magic goes here.
 		}
 
+		public List<Item> GetItems()
+		{
+			return m_Items;
+		}
 
 		private Item ConstructItem(int itemID)
 		{
@@ -181,22 +204,34 @@ namespace Snap_Register_System_Interface
 	//*************************************************************************************************************
 	// public class Item
 	//		SUMMARY: 
-	//			This class stores information about an item used in a sale. This information contains an ID for
-	//			the item, a price, a list of discounts, etc.
+	//			This class represents an item in the sale. It contains 2 TextBlocks and data about the item for
+	//			sale. The first TextBlock displays the name and cost of the product while the second displays all
+	//			the discounts that item has.
 	//		MEMBERS:
+	//			public TextBlock itemDetails
+	//				A TextBlock displaying the item's name and the item's price. The item's name is left aligned
+	//				and the item's price is right aligned. This box will always be the height of the itemDiscounts
+	//				text block. If it is short, blank lines will be added to ensure it is the same height.
+	//			public TextBlock itemDiscounts
+	//				A TextBlock displaying each discount applied to the item. The discount's name is left aligned
+	//				while the discount's amount is right aligned. Each discount gets its own line.
 	//			public int idD
-	//				The ID of the item.
+	//				The ID of the item. Updating this updates the display boxes.
 	//			public string itemName
-	//				The name of the item.
+	//				The name of the item. Updating this updates the display boxes.
 	//			public double price
-	//				The price of the item.
-	//			public List<double> discounts
-	//				A list of all discounts this item has.
+	//				The price of the item. Updating this updates the display boxes.
+	//			public List<string> discountName
+	//				A list of the names of all the discounts this item has. Updating this updates the display boxes.
+	//			public List<double> discountAmounts
+	//				A list of all discount quantities this item has. Updating this updates the display boxes.
 	//		FUNCTIONS:
 	//			public Item()
 	//				Basic constructor.
 	//			public Item(Item source)
 	//				Copy Constructor.
+	//			private void UpdateDisplayBoxes
+	//				Reassigns text to the display box with the current info in the item.
 	//		PERMISSIONS:
 	//			None.
 	//*************************************************************************************************************
@@ -204,18 +239,23 @@ namespace Snap_Register_System_Interface
 	{
 		public Item()
 		{
-			discounts = new List<double>();
+			discountNames = new List<string>();
+			discountAmounts = new List<double>();
 		}
 		public Item(Item source)
 		{
 			id = source.id;
 			itemName = source.itemName;
-			price = price;
-			discounts = new List<double>(source.discounts);
+			price = source.price;
+			discountNames = new List<string>(source.discountNames);
+			discountAmounts = new List<double>(source.discountAmounts);
 		}
 		public int id { get; set; }
 		public string itemName { get; set; }
 		public double price { get; set; }
-		public List<double> discounts { get; set; }
+		public List<string> discountNames { get; set; }
+		public List<double> discountAmounts { get; set; }
 	}
+
+
 }
