@@ -34,14 +34,14 @@ Remove Customer-(would need to check if there are user and rewards links)
 	
 
 --Modifies--
-Change Permission
-Change Phone Number
-Change User Password
+Change Permission by id									Done
+Change Phone Number by id								Done
+Change User Password by id								Done
 
 --Fetches--
-Customer Phone Number 
+Customer Phone Number 									Done 
 Customer ID 
-Customers Rewards (join)
+Customers all info (join)								Done
 Find Orders(based on customer)
 Get Item										DONE
 Get User Passwords									DONE 
