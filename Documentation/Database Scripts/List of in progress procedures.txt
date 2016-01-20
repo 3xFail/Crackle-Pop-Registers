@@ -1,19 +1,37 @@
 --Adds--
-Add Inventory									DONE 
+Add Inventory										DONE 
 Add Coupons										DONE
 Add Sales										DONE
-Add Customer
-Add Permission(To Permissions Table)
+Add Customer										DONE
+Add Permission(To Permissions Table)							DONE
 Add Users 										DONE 
 Add Item 										DONE
 
 --Removes--
-Remove Item
-Remove User
-Remove Inventory
+Remove Item- (will have check inventory links)
+	ID										Done 
+	Name										Done
+	Barcode										Done
+										
+Remove User - (will hace to check if there are customer links)
+	Full name
+	ID
+	username
+	
+Remove Inventory- (will have to specify a quantity)
+	InventoryID
+	ProductID 
+	
 Remove Coupons
+	ID										Done
+
 Remove Sales
-Remove Customer
+	ID										Done
+
+Remove Customer-(would need to check if there are user and rewards links)
+	ID 
+	Name 
+	
 
 --Modifies--
 Change Permission
@@ -26,7 +44,7 @@ Customer ID
 Customers Rewards (join)
 Find Orders(based on customer)
 Get Item										DONE
-Get User Passwords								DONE 
+Get User Passwords									DONE 
 
 --Order Related--
 Add Item to Order
