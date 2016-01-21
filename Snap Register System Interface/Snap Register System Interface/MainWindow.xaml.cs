@@ -269,6 +269,36 @@ namespace Snap_Register_System_Interface
 		public List<string> discountNames { get; set; }
 		public List<double> discountAmounts { get; set; }
 	}
+	//*************************************************************************************************************
+	// public class ItemDisplayBox
+	//		SUMMARY:
+	//			This is a displayable item showing the name of the item and the price of the item. The entire
+	//			object is a Grid with a TextBlock for each item.
+	//		MEMBERS:
+	//			public Grid displayItem
+	//				This is the object to display. Contains the name of the item and its price.
+	//			public TextBlock itemName
+	//				The name of the item. This will be left, top aligned to the Grid.
+	//			public TextBlock itemPrice
+	//				The price of the item. This will be right, top aligned to the Grid.
+	//		FUNCTIONS:
+	//			public ItemDisplayBox()
+	//				Basic constructor. Creates a blank item.
+	//			public ItemDisplayBox(string name, double price)
+	//				Overloaded constructor. Takes a name and a price and creates an item from those parameters.
+	//		PERMISSIONS:
+	//			None.
+	//*************************************************************************************************************
+	public class ItemDisplayBox
+	{
+		public ItemDisplayBox()
+		{ }
+
+		public ItemDisplayBox(string name, double price)
+		{ }
 
 
+		public Grid displayItem { get; set; }
+		public TextBlock itemName { get; set; }
+		public TextBlock itemPrice { get; set; }
 }
