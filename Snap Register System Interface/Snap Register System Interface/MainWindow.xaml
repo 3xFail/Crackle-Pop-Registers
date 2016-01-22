@@ -19,28 +19,7 @@ ResizeMode="NoResize"
             </Grid.ColumnDefinitions>
 
             <!--Item Display Panel-->
-            <Border 
-				Grid.Column="0" Margin="3,0,0,0"
-				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.95*"/>
-                        <RowDefinition Height="0.05*"/>
-                    </Grid.RowDefinitions>
-                    <DockPanel Name="ItemsList"
-							   Grid.Row="0">
-                    </DockPanel>
-                    <!--Item Roll-up-->
-                    <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="Cost:" FontSize="{StaticResource SubTotalsFontSize}"
-							   Margin="5,0,0,0"/>
-                    <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="0.00" FontSize="{StaticResource SubTotalsFontSize}"
-							   Margin="0,0,5,0"
-							   Name="CostTotal"/>
-                </Grid>
-            </Border>
-            <!--Coupon Display Panel-->
+hori            <!--Coupon Display Panel-->
             <Border 
 				Grid.Column="1" Margin="3,0,0,0"
 				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">

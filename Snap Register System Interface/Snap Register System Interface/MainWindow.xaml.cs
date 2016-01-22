@@ -204,34 +204,15 @@ namespace Snap_Register_System_Interface
 	//*************************************************************************************************************
 	// public class Item
 	//		SUMMARY: 
-	//			This class represents an item in the sale. It contains 2 TextBlocks and data about the item for
-	//			sale. The first TextBlock displays the name and cost of the product while the second displays all
-	//			the discounts that item has.
+	//			This class represents an item in the sale. It contains an ItemDisplayBox and a list of
+	//			DiscountDisplayBoxs that apply to the item.
 	//		MEMBERS:
-	//			public DisplayBox itemDetails
-	//				A DisplayBox displaying the item's name and the item's price. The item's name is left aligned
-	//				and the item's price is right aligned. This box will always be the height of the itemDiscounts
-	//				text block. If it is short, blank lines will be added to ensure it is the same height.
-	//			public Grid itemDiscounts
-	//				A TextBlock displaying each discount applied to the item. The discount's name is left aligned
-	//				while the discount's amount is right aligned. Each discount gets its own line.
-	//			public int idD
-	//				The ID of the item. Updating this updates the display boxes.
-	//			public string itemName
-	//				The name of the item. Updating this updates the display boxes.
-	//			public double price
-	//				The price of the item. Updating this updates the display boxes.
-	//			public List<string> discountName
-	//				A list of the names of all the discounts this item has. Updating this updates the display boxes.
-	//			public List<double> discountAmounts
-	//				A list of all discount quantities this item has. Updating this updates the display boxes.
+	//			
 	//		FUNCTIONS:
 	//			public Item()
 	//				Basic constructor.
 	//			public Item(Item source)
 	//				Copy Constructor.
-	//			private void UpdateDisplayBoxes
-	//				Reassigns text to the display box with the current info in the item.
 	//		PERMISSIONS:
 	//			None.
 	//*************************************************************************************************************
@@ -239,66 +220,219 @@ namespace Snap_Register_System_Interface
 	{
 		public Item()
 		{
-			discountNames = new List<string>();
-			discountAmounts = new List<double>();
-
-			UpdateDisplayBoxes();
+			discounts = new List<DiscountDisplayBox>();
 		}
 		public Item(Item source)
 		{
 			id = source.id;
 			itemName = source.itemName;
 			price = source.price;
-			discountNames = new List<string>(source.discountNames);
-			discountAmounts = new List<double>(source.discountAmounts);
-
-			UpdateDisplayBoxes();
+			discounts = new List<DiscountDisplayBox>(source.discounts);
 		}
 
-		private void UpdateDisplayBoxes()
-		{
-			itemDetails.Text
-		}
-
-
-		public TextBlock itemDetails { get; set; }
-		public TextBlock itemDiscounts { get; set; }
-		public int id { get; set; }
-		public string itemName { get; set; }
-		public double price { get; set; }
-		public List<string> discountNames { get; set; }
-		public List<double> discountAmounts { get; set; }
+		public ItemDisplayBox itemDisplayBox { get; set; }
+		public List<DiscountDisplayBox> discounts { get; set; }
 	}
 	//*************************************************************************************************************
 	// public class ItemDisplayBox
 	//		SUMMARY:
 	//			This is a displayable item showing the name of the item and the price of the item. The entire
-	//			object is a Grid with a TextBlock for each item.
+	//			object is a Grid with a TextBlock for name and price.
 	//		MEMBERS:
 	//			public Grid displayItem
 	//				This is the object to display. Contains the name of the item and its price.
-	//			public TextBlock itemName
-	//				The name of the item. This will be left, top aligned to the Grid.
-	//			public TextBlock itemPrice
-	//				The price of the item. This will be right, top aligned to the Grid.
+	//			private TextBlock itemName
+	//				The TextBlock that will display the name of the item. This will be left, top aligned to the
+	//				Grid.
+	//			private TextBlock itemPrice
+	//				The TextBlock that will display the price of the item. This will be right, top aligned to the
+	//				Grid.
+	//			private double rawItemPrice
+	//				The price of the item stored as a double.
 	//		FUNCTIONS:
 	//			public ItemDisplayBox()
 	//				Basic constructor. Creates a blank item.
 	//			public ItemDisplayBox(string name, double price)
 	//				Overloaded constructor. Takes a name and a price and creates an item from those parameters.
+	//			public string GetItemNameAsString()
+	//				Returns the name of the item in itemName as a string.
+	//			public SetItemName(string name)
+	//				Sets the name of this item to the name given.
+	//			public string GetItemPriceAsString()
+	//				Returns the price of the item as a string.
+	//			public double GetItemPriceAsDouble()
+	//				Returns the price of the item as a double.
+	//			public void SetItemPrice(double price)
+	//				Sets the price of the item to the price specified.
 	//		PERMISSIONS:
 	//			None.
 	//*************************************************************************************************************
 	public class ItemDisplayBox
 	{
 		public ItemDisplayBox()
-		{ }
+		{
+			itemName = new TextBlock();
+			itemPrice = new TextBlock();
+			displayItem = new Grid();
+
+			itemName.TextAlignment = TextAlignment.Left;
+			itemName.HorizontalAlignment = HorizontalAlignment.Left;
+			itemPrice.TextAlignment = TextAlignment.Right;
+			itemPrice.HorizontalAlignment = HorizontalAlignment.Right;
+
+			displayItem.Children.Add(itemName);
+			displayItem.Children.Add(itemPrice);
+		}
 
 		public ItemDisplayBox(string name, double price)
-		{ }
+		{
+			itemName = new TextBlock();
+			itemPrice = new TextBlock();
+			displayItem = new Grid();
 
+			itemName.TextAlignment = TextAlignment.Left;
+			itemName.HorizontalAlignment = HorizontalAlignment.Left;
+			itemPrice.TextAlignment = TextAlignment.Right;
+			itemPrice.HorizontalAlignment = HorizontalAlignment.Right;
+
+			displayItem.Children.Add(itemName);
+			displayItem.Children.Add(itemPrice);
+
+			itemName.Text = name;
+
+			rawItemPrice = price;
+			itemPrice.Text = price.ToString();
+		}
+
+		public string GetItemNameAsString()
+		{
+			return itemName.Text;
+		}
+		public void SetItemName(string name)
+		{
+			itemName.Text = name;
+		}
+		public string GetItemPriceAsString()
+		{
+			return itemPrice.Text;
+		}
+		public double GetItemPriceAsDouble()
+		{
+			return rawItemPrice;
+		}
+		public void SetItemPrice(double price)
+		{
+			rawItemPrice = price;
+			itemPrice.Text = price.ToString();
+		}
 
 		public Grid displayItem { get; set; }
-		public TextBlock itemName { get; set; }
-		public TextBlock itemPrice { get; set; }
+		private TextBlock itemName { get; set; }
+		private TextBlock itemPrice {get; set; }
+
+		private double rawItemPrice = 0;
+	}
+
+	//*************************************************************************************************************
+	// public class DiscountDisplayBox
+	//		SUMMARY:
+	//			This is a a displayable box that contains a single discount for a single item. The entire object
+	//			is a grid that contains a TextBlock for the name of the discount and a TextBlock that contains the
+	//			amount.
+	//		MEMBERS:
+	//			public Grid displayDiscount
+	//				This is the object to display. Contains the name of the discount and the amount.
+	//			private TextBlock discountName
+	//				The TextBlock displaying the name of the discount. This will be left, top aligned to the Grid.
+	//			private TextBlock discountAmount
+	//				The TextBlock displaying the discount amount. This will be right, top aligned to the Grid.
+	//			private double rawDiscountAmount
+	//				The discount stored as a double.
+	//		FUNCTIONS:
+	//			public DiscountDisplayBox()
+	//				Basic constructor. Creates a blank discount.
+	//			public DiscountDisplayBox(string name, double amount)
+	//				Overloaded constructor. Takes the name of the discount and the amount and constructs a 
+	//				discount item from that.
+	//			public string GetDiscountNameAsString()
+	//				Returns the name of the item in itemName as a string.
+	//			public void SetDiscountName(string name)
+	//				Sets the discount name to the name specified.
+	//			public string GetDiscountAmountAsString()
+	//				Returns the discount amount as a string.
+	//			public double GetDiscountAmountAsDouble()
+	//				Returns the discount amount as a double.
+	//			public void SetDiscountAmount(double amount)
+	//				Sets the discount amount to the amount specified.
+	//		PERMISSIONS:
+	//			None.
+	//*************************************************************************************************************
+	public class DiscountDisplayBox
+	{
+		public DiscountDisplayBox()
+		{
+			discountName = new TextBlock();
+			discountAmount = new TextBlock();
+			displayItem = new Grid();
+
+			discountName.TextAlignment = TextAlignment.Left;
+			discountName.HorizontalAlignment = HorizontalAlignment.Left;
+			discountAmount.TextAlignment = TextAlignment.Right;
+			discountAmount.HorizontalAlignment = HorizontalAlignment.Right;
+
+			displayItem.Children.Add(discountName);
+			displayItem.Children.Add(discountAmount);
+		}
+		public DiscountDisplayBox(string name, double amount)
+		{
+			discountName = new TextBlock();
+			discountAmount = new TextBlock();
+			displayItem = new Grid();
+
+			discountName.TextAlignment = TextAlignment.Left;
+			discountName.HorizontalAlignment = HorizontalAlignment.Left;
+			discountAmount.TextAlignment = TextAlignment.Right;
+			discountAmount.HorizontalAlignment = HorizontalAlignment.Right;
+
+			displayItem.Children.Add(discountName);
+			displayItem.Children.Add(discountAmount);
+
+			discountName.Text = name;
+			discountAmount.Text = amount.ToString();
+		}
+
+		public string GetDiscountNameAsString()
+		{
+			return discountName.Text;
+		}
+
+		public void SetDiscountName(string name)
+		{
+			discountName.Text = name;
+		}
+
+		public string GetDiscountAmountAsString()
+		{
+			return discountAmount.Text;
+		}
+
+		public double GetDiscountAmountAsDouble()
+		{
+			return rawDiscountAmount;
+		}
+
+		public void SetDiscountAmount(double amount)
+		{
+			rawDiscountAmount = amount;
+			discountAmount.Text = amount.ToString();
+		}
+
+		public Grid displayItem { get; set; }
+		private TextBlock discountName { get; set; }
+		private TextBlock discountAmount { get; set; }
+		private double rawDiscountAmount = 0;
+
+
+	}
 }
+
