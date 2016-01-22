@@ -13,22 +13,33 @@ namespace PointOfSales.Permissions
 		{
 			// Allows the user to use a register to scan items.
 			UseRegister = 1,
+
 			// Allows the user to process a payment for the transaction.
 			ProcessPayment = 2,
+
 			// Allows the user to apply a coupon to the sale.
 			ApplyCoupon = 4,
-			// Allows the user to override predefined prices with an entered value.
+
+			// Allows the user to override predefined prices with an entered value, A reason must be entered as to why the price was changed.
 			PriceOverride = 8,
+
 			// Allows the user to change the stored amount of an item.
 			ChangeAStockQuantity = 16,
+
 			// Allows the addition or removal of store products.
 			AddRemoveAProduct = 32,
+
 			// Allows the user to change the price/brand/etc. of a product.
 			ChangeProductDetails = 64,
+
 			// Allows the user to change the value of transactions that have happened in the past.
 			ModifyTransaction = 128,
+
 			// Allows the user to change other users' permissions.
-			ChangePermissions = 256
+			ChangePermissions = 256,
+
+			// Allows the user to override predefined prices with an entered value.
+			PriceOverrideNoReason = 512,
 		}
 
 		// Adds a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
