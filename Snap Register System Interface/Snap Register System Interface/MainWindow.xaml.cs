@@ -44,7 +44,7 @@ namespace Snap_Register_System_Interface
 
 			InitializeComponent();
 			m_employee = currentEmployee;
-			m_transaction = new Transaction(m_employee);
+			m_transaction = new Transaction(m_employee, ref ItemsList, ref CouponList);
 		}
 
 		public MainWindow(Employee currentEmployee)
@@ -52,7 +52,7 @@ namespace Snap_Register_System_Interface
 			InitializeComponent();
 
 			m_employee = currentEmployee;
-			m_transaction = new Transaction(m_employee);
+			m_transaction = new Transaction(m_employee, ref ItemsList, ref CouponList);
 		}
 
 
@@ -103,6 +103,7 @@ namespace Snap_Register_System_Interface
 	//*************************************************************************************************************
 	public class Transaction
 	{
+		// TODO: Make it so that multiple of the same item can be added without breaking functions.
 		public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
 		{
 			if (employee == null)
@@ -126,9 +127,11 @@ namespace Snap_Register_System_Interface
 				Item newItem = new Item(ConstructItem(itemID));
                 m_Items.Add(newItem);
 
-				// Set the height of this eventually.
-
+				// TODO: Make this box's height equal to the combined discount's height.
 				itemOutput.Children.Add(newItem.itemDisplayBox.displayItem);
+
+				foreach(DiscountDisplayBox discount in newItem.discounts)
+					discountOutput.Children.Add(discount.displayItem);
 
 
 			}
@@ -145,8 +148,17 @@ namespace Snap_Register_System_Interface
 			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				// Remove item from the list.
-				m_Items.Remove(new Item(ConstructItem(itemID)));
+				m_Items.RemoveAll(x => x.id == itemID);
+				
+				foreach (UIElement item in itemOutput.Children)
+				{
+					itemOutput.Children.Remove(item);
+				}
+
+				foreach (UIElement item in discountOutput.Children)
+				{
+					discountOutput.Children.Remove(item);
+				}
 
 			}
 			catch (InvalidOperationException e)
@@ -185,6 +197,8 @@ namespace Snap_Register_System_Interface
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.ApplyCoupon))
 				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 
+			// TODO: Connect to database and attempt to apply coupon.
+
 			// Connect to the database and check if the couponID is correct. If not throw an exception.
 
 			// For each item in m_Items, look at the database and see if the coupon should be applied to it. If so, add
@@ -192,7 +206,7 @@ namespace Snap_Register_System_Interface
 		}
 		public void Checkout()
 		{
-			// Some sort of credit card magic goes here.
+			// TODO: Insert credit card magic here.
 		}
 
 		public List<Item> GetItems()
@@ -202,7 +216,7 @@ namespace Snap_Register_System_Interface
 
 		private Item ConstructItem(int itemID)
 		{
-			// Connect to database and create a new item from information in the database.
+			// TODO: Connect to database and construct item from given item ID.
 			return new Item();
 		}
 
@@ -261,6 +275,8 @@ namespace Snap_Register_System_Interface
 	//			This is a displayable item showing the name of the item and the price of the item. The entire
 	//			object is a Grid with a TextBlock for name and price.
 	//		MEMBERS:
+	//			public int id
+	//				The id of the item this box is associated with.
 	//			public Grid displayItem
 	//				This is the object to display. Contains the name of the item and its price.
 	//			private TextBlock itemName
@@ -348,6 +364,7 @@ namespace Snap_Register_System_Interface
 			itemPrice.Text = price.ToString();
 		}
 
+		public int id = 0;
 		public Grid displayItem { get; set; }
 		private TextBlock itemName { get; set; }
 		private TextBlock itemPrice {get; set; }
@@ -362,6 +379,8 @@ namespace Snap_Register_System_Interface
 	//			is a grid that contains a TextBlock for the name of the discount and a TextBlock that contains the
 	//			amount.
 	//		MEMBERS:
+	//			public int id
+	//				The id of the item this discount is associated with.
 	//			public Grid displayDiscount
 	//				This is the object to display. Contains the name of the discount and the amount.
 	//			private TextBlock discountName
@@ -449,6 +468,7 @@ namespace Snap_Register_System_Interface
 			discountAmount.Text = amount.ToString();
 		}
 
+		public int id = 0;
 		public Grid displayItem { get; set; }
 		private TextBlock discountName { get; set; }
 		private TextBlock discountAmount { get; set; }
