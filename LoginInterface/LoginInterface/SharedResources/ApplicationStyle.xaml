@@ -1,0 +1,33 @@
+﻿<ResourceDictionary x:Class="Resources.ApplicationStyle"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<!--General Controls-->
+    <SolidColorBrush x:Key="Background" Color="#00A2E8"/>
+    <SolidColorBrush x:Key="BackgroundAccent" Color="#18E2DD"/>
+
+	<!-- Field Controls-->
+    <sys:Double x:Key="DropShadowDirection">225</sys:Double>
+    <Thickness x:Key="FieldMargins">10</Thickness>
+    <SolidColorBrush x:Key="FieldBackground" Color="White"/>
+    <CornerRadius x:Key="FieldCornerRadius">6</CornerRadius>
+    <SolidColorBrush x:Key="FieldBorder" Color="Black"/>
+    <Thickness x:Key="FieldBorderThickness">5</Thickness>
+
+    <!--Font Controls-->
+    <sys:Double x:Key="CompanyNameFontSize">20</sys:Double>
+    <sys:Double x:Key="TotalsFontSize">60</sys:Double>
+    <SolidColorBrush x:Key="PrimaryText" Color="Black"/>
+    <SolidColorBrush x:Key="CouponText" Color="#021DD2"/>
+    <SolidColorBrush x:Key="VoidedText" Color="#ED1C24"/>
+    <SolidColorBrush x:Key="SaleText" Color="#22B14C"/>
+
+	<!--Turtle Button Controls-->
+    <Thickness x:Key="TurtleButtonBorder">15</Thickness>
+    <SolidColorBrush x:Key="TurtleButtonHoverColor" Color="#40FFFF"/>
+
+    <!--Button Controls-->
+    <sys:Double x:Key="ButtonFontSize">20</sys:Double>
+
+</ResourceDictionary>
