@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="410" Width="300">
-    <Window.Background>
-        <SolidColorBrush Color="#87CEFA"></SolidColorBrush>
-    </Window.Background>
+        Title="MainWindow" Height="410" Width="300"
+        Background="{StaticResource Background}">
+    
+    
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="Login_Executed" CanExecute="Login_CanExecute" />
         <CommandBinding Command="local:CustomCommands.Exit" Executed="Cancel_Executed" CanExecute="Cancel_CanExecute" />

@@ -4,7 +4,7 @@
 					xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 	<!--General Controls-->
-    <SolidColorBrush x:Key="Background" Color="#00A2E8"/>
+    <SolidColorBrush x:Key="Background" Color="#87CEFA"/>
     <SolidColorBrush x:Key="BackgroundAccent" Color="#18E2DD"/>
 
 	<!-- Field Controls-->
