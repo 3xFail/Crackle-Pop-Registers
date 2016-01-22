@@ -3,6 +3,11 @@ using System.Text;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using PointOfSales.Users;
+using PointOfSales.Permissions;
+using System.Device.Location;
+using System.Device;
+
 
 using System.Security.Cryptography;
 
@@ -61,11 +66,15 @@ namespace WpfApplication2
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
                 MessageBox.Show("Success!");
+                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
             }
             else
                 MessageBox.Show("Failure");
+           
         }
 
+        
+        
 
 
         private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
