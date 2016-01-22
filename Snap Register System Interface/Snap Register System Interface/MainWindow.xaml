@@ -10,7 +10,7 @@ WindowState="Maximized"
 ResizeMode="NoResize"
 		Title="MainWindow" Height="350" Width="525">
     <!--Everything-->
-    <Grid Background="{StaticResource Background}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
@@ -71,7 +71,7 @@ ResizeMode="NoResize"
                                 <Ellipse Fill="{StaticResource FieldBorder}"/>
                                 <Ellipse x:Name="TurtleBacking"	Fill="{StaticResource BackgroundAccent}"
 								Margin="{StaticResource FieldBorderThickness}"/>
-                                <Image		Source="Resources/Images/Emblem.png"/>
+                                <Image		Source="SharedResources/Images/Emblem.png"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">

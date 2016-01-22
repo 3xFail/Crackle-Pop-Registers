@@ -1,4 +1,4 @@
-﻿<Window x:Class="Snap_Register_System_Interface.MainMenu"
+﻿<Window x:Class="Snap_Register_System_Interface.Y"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

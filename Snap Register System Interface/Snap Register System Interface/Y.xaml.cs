@@ -17,9 +17,9 @@ namespace Snap_Register_System_Interface
 	/// <summary>
 	/// Interaction logic for MainMenu.xaml
 	/// </summary>
-	public partial class MainMenu : Window
+	public partial class Y : Window
 	{
-		public MainMenu()
+		public Y()
 		{
 			InitializeComponent();
 		}

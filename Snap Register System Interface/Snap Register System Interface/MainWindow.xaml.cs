@@ -29,7 +29,8 @@ namespace Snap_Register_System_Interface
 		{
 			if (m_mainMenu == null)
 			{
-				m_mainMenu = new MainMenu();
+				this.Close();
+				m_mainMenu = new Y();
 				m_mainMenu.Show();
 			}
 			else
@@ -40,6 +41,6 @@ namespace Snap_Register_System_Interface
 			}
 		}
 
-		private Snap_Register_System_Interface.MainMenu m_mainMenu = null;
+		private Snap_Register_System_Interface.Y m_mainMenu = null;
 	}
 }
