@@ -21,7 +21,7 @@ ResizeMode="NoResize"
             <!--Item Display Panel-->
             <Border 
 				Grid.Column="0" Margin="3,0,0,0"
-				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
+				BorderThickness="{StaticResource ThinBorderThickness}" BorderBrush="{StaticResource DefaultColor}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.95*"/>
@@ -32,10 +32,10 @@ ResizeMode="NoResize"
                     </DockPanel>
                     <!--Item Roll-up-->
                     <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="Cost:" FontSize="{StaticResource SubTotalsFontSize}"
+							   Text="Cost:" FontSize="{StaticResource FontSizeMedium}"
 							   Margin="5,0,0,0"/>
                     <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="0.00" FontSize="{StaticResource SubTotalsFontSize}"
+							   Text="0.00" FontSize="{StaticResource FontSizeMedium}"
 							   Margin="0,0,5,0"
 							   Name="CostTotal"/>
                 </Grid>
@@ -43,7 +43,7 @@ ResizeMode="NoResize"
             <!--Coupon Display Panel-->
             <Border 
 				Grid.Column="1" Margin="3,0,0,0"
-				BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
+				BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.95*"/>
@@ -54,10 +54,10 @@ ResizeMode="NoResize"
                     </DockPanel>
 					<!--Coupon Roll-up-->
 					<TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="Savings:" FontSize="{StaticResource SubTotalsFontSize}"
+							   Text="Savings:" FontSize="{StaticResource FontSizeMedium}"
 							   Margin="5,0,0,0"/>
                     <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="0.00" FontSize="{StaticResource SubTotalsFontSize}"
+							   Text="0.00" FontSize="{StaticResource FontSizeMedium}"
 							   Margin="0,0,5,0"
 							   Name="SavingsTotal"/>
                 </Grid>
@@ -76,13 +76,13 @@ ResizeMode="NoResize"
 					</Grid.ColumnDefinitions>
                     <!--Totals Box-->
                     <Border Grid.Column="1"
-						BorderThickness="1" BorderBrush="{StaticResource FieldBorder}">
+						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
                         <Grid>
                             <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top"
-							   Text="Total:" FontSize="{StaticResource TotalsFontSize}"
+							   Text="Total:" FontSize="{StaticResource FontSizeVeryLarge}"
 							   Margin="5,0,0,0"/>
                             <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-							   Text="0.00" FontSize="{StaticResource TotalsFontSize}"
+							   Text="0.00" FontSize="{StaticResource FontSizeVeryLarge}"
 							   Margin="0,0,5,0"
 							   Name="Total"/>
                         </Grid>
