@@ -66,7 +66,7 @@ namespace WpfApplication2
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
                 MessageBox.Show("Success!");
-                Employee loggedIn = new Employee(10, "admin", null, "987654321" , new DateTime(1, 1, 1));
+                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
             }
             else
                 MessageBox.Show("Failure");
