@@ -42,7 +42,6 @@ namespace AccessLibraryTest
 			Assert.AreEqual(birthday, customer.birthday);
 
 		}
-
 		[TestMethod]
 		public void AssignProperties()
 		{
