@@ -72,12 +72,15 @@ namespace Snap_Register_System_Interface
 	//			private Employee m_Employee
 	//				The currently logged in employee.
 	//		FUNCTIONS:
-	//			public Transaction(Employee employee)
-	//				Constructor for a new transaction opened by the specified employee.
+	//			public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
+	//				Constructor for a new transaction opened by the specified employee. itemOutput is a DockPanel
+	//				passed by reference where items should be displayed to while discountOutput is the same thing
+	//				except for discounts instead.
 	//			public void AddItem(int itemID)
-	//				Adds an item to the current transaction.
+	//				Adds an item to the current transaction. Displays this item to the outputs.
 	//			public void RemoveItem(int itemID)
-	//				Removes the item with the ID matching "itemID" from the transaction.
+	//				Removes the item with the ID matching "itemID" from the transaction. removes it from the
+	//				output.
 	//			public void OverrideCost(int itemID, double newPrice, string reason = "No description")
 	//				Overrides the cost of the item specified with the new price specified with "newPrice".
 	//				"reason" is the reason the employee chose to override the price.
@@ -96,11 +99,11 @@ namespace Snap_Register_System_Interface
 	//			OverrideCost				- PriceOverride, PriceOverrideNoReason
 	//			ApplyCoupon					- ApplyCoupon
 	//			Checkout					- ProcessPayment
-	//			GetItems					- UseRegister
+	//			GetItems					- None
 	//*************************************************************************************************************
 	public class Transaction
 	{
-		public Transaction(Employee employee)
+		public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -120,7 +123,13 @@ namespace Snap_Register_System_Interface
 			try
 			{
 				// Construct a new item from the given itemID and add it to the list.
-				m_Items.Add(new Item(ConstructItem(itemID)));
+				Item newItem = new Item(ConstructItem(itemID));
+                m_Items.Add(newItem);
+
+				// Set the height of this eventually.
+
+				itemOutput.Children.Add(newItem.itemDisplayBox.displayItem);
+
 
 			}
 			catch (InvalidOperationException e)
@@ -133,10 +142,10 @@ namespace Snap_Register_System_Interface
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Checks to make sure the item was valid before adding it to the list.
+			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				// Construct a new item from the given itemID and add it to the list.
+				// Remove item from the list.
 				m_Items.Remove(new Item(ConstructItem(itemID)));
 
 			}
@@ -158,18 +167,18 @@ namespace Snap_Register_System_Interface
 				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverrideNoReason))
 					throw new InvalidOperationException("A reason must be specified for this action.");
 				else
-					changedItem.price = newPrice;
+					changedItem.itemDisplayBox.SetItemPrice(newPrice);
 			}
 			else
 			{
 				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverride))
 					throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 				else
-					changedItem.price = newPrice;
+					changedItem.itemDisplayBox.SetItemPrice(newPrice);
 			}
 
 			// Reassign the item's price.
-			m_Items[m_Items.FindIndex(x => x.id == itemID)].price = changedItem.price;
+			m_Items[m_Items.FindIndex(x => x.id == itemID)].itemDisplayBox.SetItemPrice(changedItem.itemDisplayBox.GetItemPriceAsDouble());
 		}
 		public void ApplyCoupon(int couponID)
 		{
@@ -197,8 +206,10 @@ namespace Snap_Register_System_Interface
 			return new Item();
 		}
 
-		private List<Item> m_Items;
-		private Employee m_Employee;
+		private List<Item> m_Items = null;
+		private Employee m_Employee = null;
+		private DockPanel itemOutput = null;
+		private DockPanel discountOutput = null;
 	}
 
 	//*************************************************************************************************************
@@ -207,7 +218,16 @@ namespace Snap_Register_System_Interface
 	//			This class represents an item in the sale. It contains an ItemDisplayBox and a list of
 	//			DiscountDisplayBoxs that apply to the item.
 	//		MEMBERS:
-	//			
+	//			public int id;
+	//				The id of this item.
+	//			public ItemDisplayBox
+	//				This box is responsible for displaying the name and the price of the item. Contains a grid
+	//				with the name of the item left aligned and the price of the item right aligned. Can be
+	//				manipulated with the SetItemName() and SetItemPrice() functions.
+	//			public List<DiscountDisplayBox> discounts
+	//				This is a list of box's responsible for displaying one discount item for this item. Each box
+	//				contains a grid with the name of the discount left aligned and the amount of the discount right
+	//				aligned. Can be manipulated with the SetDiscountName() and SetDiscountAmount() functions.
 	//		FUNCTIONS:
 	//			public Item()
 	//				Basic constructor.
@@ -220,16 +240,18 @@ namespace Snap_Register_System_Interface
 	{
 		public Item()
 		{
+			id = 0;
+			itemDisplayBox = new ItemDisplayBox();
 			discounts = new List<DiscountDisplayBox>();
 		}
 		public Item(Item source)
 		{
 			id = source.id;
-			itemName = source.itemName;
-			price = source.price;
+			itemDisplayBox = new ItemDisplayBox(source.itemDisplayBox.GetItemNameAsString(), source.itemDisplayBox.GetItemPriceAsDouble());
 			discounts = new List<DiscountDisplayBox>(source.discounts);
 		}
 
+		public int id;
 		public ItemDisplayBox itemDisplayBox { get; set; }
 		public List<DiscountDisplayBox> discounts { get; set; }
 	}
