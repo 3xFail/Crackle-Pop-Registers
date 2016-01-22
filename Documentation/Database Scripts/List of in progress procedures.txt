@@ -1,0 +1,61 @@
+--Adds--
+Add Inventory										DONE 
+Add Coupons										DONE
+Add Sales										DONE
+Add Customer										DONE
+Add Permission(To Permissions Table)							DONE
+Add Users 										DONE 
+Add Item 										DONE
+
+--Removes--
+Remove Item- (will have check inventory links)
+	ID										Done 
+	Name										Done
+	Barcode										Done
+										
+Remove User - (will hace to check if there are customer links)
+	Full name
+	ID
+	username
+	
+Remove Inventory- (will have to specify a quantity)
+	InventoryID
+	ProductID 
+	
+Remove Coupons
+	ID										Done
+
+Remove Sales
+	ID										Done
+
+Remove Customer-(would need to check if there are user and rewards links)
+	ID 
+	Name 
+	
+
+--Modifies--
+Change Permission by id									Done
+Change Phone Number by id								Done
+Change User Password by id								Done
+
+--Fetches--
+Customer Phone Number 									Done 
+Customer ID 
+Customers all info (join)								Done
+Find Orders(based on customer)
+Get Item										DONE
+Get User Passwords									DONE 
+
+--Order Related--
+Add Item to Order
+Remove Item from Order
+Modify Item price (Barcode, percent discount) //possibly just add sale???
+Check Coupons for item
+Check Sales for Item
+Check Inventory for Item
+Get Order Price
+Look up order
+Add sale to order (UserID, amount of sale) // checks if user is allowed to do this
+
+--Possibles to add--
+Differ CustID

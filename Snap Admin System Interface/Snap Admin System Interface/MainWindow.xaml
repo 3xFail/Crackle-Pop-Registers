@@ -1,0 +1,69 @@
+﻿<Window x:Class="Snap_Admin_System_Interface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Snap_Admin_System_Interface"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        WindowState="Maximized" WindowStyle="SingleBorderWindow">
+    <!--Height="768" Width="1024"-->
+
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="152*"/>
+            <ColumnDefinition Width="329*"/>
+            <ColumnDefinition Width="127*"/>
+            <ColumnDefinition Width="153*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Margin="0,0,0,0">
+            <StackPanel Grid.Column="0" Margin="0,10,100,0">
+                <TextBlock Name="Tabs" Margin="10" FontSize="20"></TextBlock>
+                <Button x:Name="Inventory_btn" Margin="0,30" Click="btn_Inv" Height="60">Inventory</Button>
+                <Button x:Name="Analysis_btn" Margin="0,30" Click="btn_Anal" Height="60">Analysis</Button>
+                <Button x:Name="Employees_btn" Margin="0,30" Click="btn_Emp" Height="60">Employees</Button>
+                <Button x:Name="Customers_btn" Margin="0,30" Click="btn_Cust" Height="60">Customers</Button>
+                <Button x:Name="Sales_btn" Margin="0,30" Click="btn_Sales" Height="60">Sales</Button>
+                <Button x:Name="Options_btn" Margin="0,30" Click="btn_Opt" Height="60">Options</Button>
+            </StackPanel>
+        </DockPanel>
+
+        <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="3">
+            <TabControl Name="InventoryTabs" Visibility="Collapsed">
+                <TabItem Header="InvTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            <TabControl Name="AnalysisTabs" Visibility="Collapsed">
+                <TabItem Header="AnalTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            <TabControl Name="EmployeesTabs" Visibility="Collapsed">
+                <TabItem Header="EmpTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            <TabControl Name="CustomersTabs" Visibility="Collapsed">
+                <TabItem Header="CustTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            <TabControl Name="SalesTabs" Visibility="Collapsed">
+                <TabItem Header="SaleTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+            <TabControl Name="OptionsTabs" Visibility="Collapsed">
+                <TabItem Header="OptTab">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        
+        
+
+    </Grid>
+</Window>
