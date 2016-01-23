@@ -28,7 +28,14 @@
 	
 	
 	
-	
+	<!--
+	Name:
+		MainBackgroundColor
+	Location Used
+		Login
+			This is the background color for the main forum
+	-->
+	<SolidColorBrush x:Key="Background" Color="#add8e6"/>
     <!--
 	Name:
 		ThinBorderThickness

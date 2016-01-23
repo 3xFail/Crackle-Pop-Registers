@@ -60,6 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
+      <Link>LoginMainWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="..\..\SharedResources\ApplicationStyle.xaml">
       <Link>SharedResources\ApplicationStyle.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
@@ -69,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
+      <Link>LoginMainWindow.xaml.cs</Link>
+    </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>

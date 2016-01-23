@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
         Title="MainWindow" Height="410" Width="300"
-        Background="{StaticResource DefaultColor}">
+        Background="{StaticResource Background}">
     
     
     <Window.CommandBindings>
@@ -14,7 +14,7 @@
         <CommandBinding Command="local:CustomCommands.Exit" Executed="Cancel_Executed" CanExecute="Cancel_CanExecute" />
     </Window.CommandBindings>
     <StackPanel Margin="10">
-        <Image Width="200" Source="Emblem.png"></Image>
+        <Image Width="200" Source="/SharedResources/Images/Emblem.png"/>
         <Label Content="Username:"/>
         <TextBox x:Name="usernameField">
             <TextBox.InputBindings>
