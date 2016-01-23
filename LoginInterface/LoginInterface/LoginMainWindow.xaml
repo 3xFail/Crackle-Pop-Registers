@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
         Title="MainWindow" Height="410" Width="300"
-        Background="{StaticResource Background}">
+        Background="{StaticResource DefaultColor}">
     
     
     <Window.CommandBindings>
