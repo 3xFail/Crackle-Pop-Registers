@@ -59,11 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SharedResources\ApplicationStyle.cs" />
+    <Page Include="..\..\SharedResources\ApplicationStyle.xaml">
+      <Link>SharedResources\ApplicationStyle.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
+      <Link>SharedResources\ApplicationStyle.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -72,10 +79,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SharedResources\ApplicationStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -106,8 +109,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="..\..\SharedResources\Images\Emblem.png">
+      <Link>SharedResources\Images\Emblem.png</Link>
+    </Resource>
     <Content Include="Resources\AccessLibrary.dll" />
-    <Resource Include="SharedResources\Images\Emblem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
