@@ -16,7 +16,7 @@ using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
 
-namespace Snap_Register_System_Interface
+namespace SnapRegisters
 {
 	//*************************************************************************************************************
 	// public partial class MainWindow : Window
@@ -40,7 +40,7 @@ namespace Snap_Register_System_Interface
 		// temp constructor for testing.
 		public RegisterMainWindow()
 		{
-			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3));
+			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 256);
 
 			InitializeComponent();
 			m_employee = currentEmployee;

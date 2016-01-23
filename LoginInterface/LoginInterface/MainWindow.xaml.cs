@@ -11,12 +11,12 @@ using System.Device;
 
 using System.Security.Cryptography;
 
-namespace WpfApplication2
+namespace SnapRegisters
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginMainWindow : Window
     {
         public class LoginDetails
         {
@@ -26,7 +26,7 @@ namespace WpfApplication2
         }
 
 
-        public MainWindow()
+        public LoginMainWindow()
         {
             InitializeComponent();
 

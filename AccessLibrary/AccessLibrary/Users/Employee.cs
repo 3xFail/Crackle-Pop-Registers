@@ -14,12 +14,22 @@ namespace PointOfSales.Users
 			: base()
 		{ }
 
-		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, int permissions)
 			: base(id, Name, Address, PhoneNumber, Birthday)
-		{ }
+		{
+			m_employeePermissions = permissions;
+		}
+
+		public int GetEmployeePermissions()
+		{
+			return m_employeePermissions;
+		}
+
 
 		// Employees by default are allowed to use the register.
 		// See PointOfSales.Permissions for details.
-		public int EmployeePermissions = 1;
+		private int m_employeePermissions = 0;
+
+
 	}
 }

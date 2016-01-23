@@ -48,7 +48,7 @@ namespace PointOfSales.Permissions
 			if (!CheckPermissions(User, PointOfSalesPermissions.ChangePermissions))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
-			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions | (int)PermissionToAdd;
+			// TODO: Connect to the database, change permissions and rebuild the employee class.
 		}
 
 		// Removes a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
@@ -57,13 +57,13 @@ namespace PointOfSales.Permissions
 			if (!CheckPermissions(User, PointOfSalesPermissions.ChangePermissions))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
-			EmployeeToModify.EmployeePermissions = EmployeeToModify.EmployeePermissions & (~(int)PermissionToRemove);
+			// TODO: Connect to the database, change permissions and rebuild the employee class.
 		}
 
 		// Checks if the user EmployeeToCheck has the required permissions to perform a given operation.
 		public static bool CheckPermissions(PointOfSales.Users.Employee EmployeeToCheck, PointOfSalesPermissions PermissionToCheck)
 		{
-			return ((EmployeeToCheck.EmployeePermissions & (int)PermissionToCheck) != 0);
+			return ((EmployeeToCheck.GetEmployeePermissions() & (int)PermissionToCheck) != 0);
 		}
     }
 }

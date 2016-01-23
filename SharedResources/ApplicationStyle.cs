@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Snap_Register_System_Interface.Resources
+namespace SnapRegisters.Resources
 {
 	public partial class ApplicationStyle : ResourceDictionary
 	{

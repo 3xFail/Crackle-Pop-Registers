@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AccessLibrary">
-      <HintPath>Resources\AccessLibrary.dll</HintPath>
+      <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
