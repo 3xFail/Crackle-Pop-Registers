@@ -59,13 +59,6 @@ namespace SnapRegisters
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
 	}
-	//*************************************************************************************************************
-	// Override function for login
-	//*************************************************************************************************************
-
-	RegisterMainWindow RegisterUI = new RegisterMainWindow(loggedIn);
-	RegisterUI.Show();
-
 
 
 	//*************************************************************************************************************
