@@ -63,23 +63,21 @@ namespace SnapRegisters
             attempt.Password = HashIt(passwordField.Password);
             attempt.Username = usernameField.Text;
 
+			// TODO: Replace this conditional with an actual check for login.
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
 
-				Login(loggedIn);
+
+				// TODO: Ask Calvin how to keep this from being chaotic between versions.
+				MessageBox.Show("Success!");
+
 				this.Close();
             }
             else
                 MessageBox.Show("Failure");
            
         }
-
-        public virtual void Login(Employee loggingIn)
-		{
-			MessageBox.Show("Success!");
-		}
-        
 
 
         private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
