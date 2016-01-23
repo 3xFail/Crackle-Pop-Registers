@@ -15,8 +15,6 @@
 			Used for the text size of the tab buttons.	
 	-->
 	
-	
-	
 	<!--Example Types
 		<SolidColorBrush x:Key="SampleHexColor" Color="#00A2E8"/>
 		<SolidColorBrush x:Key="SampleNamedColor" Color="Black"/>
