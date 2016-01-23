@@ -35,10 +35,10 @@ namespace Snap_Register_System_Interface
 	//		PERMISSIONS:
 	//			Permissions are handled by the Transaction class.
 	//*************************************************************************************************************
-	public partial class MainWindow : Window
+	public partial class RegisterMainWindow : Window
 	{
 		// temp constructor for testing.
-		public MainWindow()
+		public RegisterMainWindow()
 		{
 			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3));
 
@@ -47,7 +47,7 @@ namespace Snap_Register_System_Interface
 			m_transaction = new Transaction(m_employee, ref ItemsList, ref CouponList);
 		}
 
-		public MainWindow(Employee currentEmployee)
+		public RegisterMainWindow(Employee currentEmployee)
 		{
 			InitializeComponent();
 
