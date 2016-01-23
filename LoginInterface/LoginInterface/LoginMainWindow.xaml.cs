@@ -65,15 +65,20 @@ namespace SnapRegisters
 
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
-                MessageBox.Show("Success!");
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+
+				Login(loggedIn);
+				this.Close();
             }
             else
                 MessageBox.Show("Failure");
            
         }
 
-        
+        public virtual void Login(Employee loggingIn)
+		{
+			MessageBox.Show("Success!");
+		}
         
 
 
