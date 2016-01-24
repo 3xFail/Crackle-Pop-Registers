@@ -1,0 +1,134 @@
+** Means later feature
+[Implementation]
+
+Inventory [Button]
+	Inventory [Tab]
+		Add    [Button]
+			Empty Product Page [Page]
+				Save [Button]
+				Back [Button]
+		Search [Button]
+			Item [Page]
+				Remove  [Button]
+				Modify  [Button]
+				Save [Button]
+				Back [Button]
+		Catalog [Button]
+			**Sort focus [Button]
+			Back [Button]
+		Back [Button]	
+	
+	
+Analysis [Button]
+	Analysis [Tab]
+		Gross earnings  [Button]
+			Earnings list [Page]
+				Back [Button]
+				**Sort focus [Button]
+		Product losses  [Button]
+			Product Losses list [Page]
+				**Sort focus [Button]
+				Back [Button]
+		**Guest Customer Count/ Cash flow
+		Back [Button]
+	
+Employees [Button]
+	Employees [Tab]
+		Add   [Button]
+			New Empty Employee form [Page]
+				Save [Button]
+				Back [Button]
+		Search  [Button]
+			Persons file [Page]
+				Remove([Button] removes person from everywhere including the db)
+				Modify Information([Button] makes the persons file editable)
+				Stats([Button] brings up a window to display stats)
+					Stats Page [Page]
+						Back [Button]
+				Save [Button]
+				Back [Button]
+			Back [Button]
+		Back [Button]
+	
+Customers [Button]
+	Customers [Tab]
+		Search [Button]
+			Customer file [Page]
+				Modify  [Button]
+				View Order history [Button]
+					Order List [Page]
+						Back [Button]
+				Save [Button]
+				Back [Button]
+		All customers list [Button]
+			Customers List [Page]
+				**Sort focus [Button]
+				Back [Button]
+			Back [Button]
+		Back [Button]
+	
+Sales [Button]
+	Sales and Coupons [Tab]
+		Sales [Button]
+			Add   [Button]
+				New Empty Sale form [Page]
+					Save [Button]
+					Back [Button]
+			Back [Button]
+			Search  [Button]
+				Sale Page [Page]
+					Remove([Button] removes person from everywhere including the db)
+					Modify Information([Button] makes the persons file editable)
+					Save [Button]
+					Back [Button]
+				Back [Button]
+			Back [Button]
+		Coupons [Button]
+			Add   [Button]
+				New Empty Coupon form [Page]
+					Save [Button]
+					Back [Button]
+				Back [Button]
+			Search  [Button]
+				Coupon Page [Page]
+					Remove([Button] removes person from everywhere including the db)
+					Modify Information([Button] makes the persons file editable)
+					Save [Button]
+					Back [Button]
+				Back [Button]
+			Back [Button]
+		List of Sales [Button]
+			Sale list [Page]
+				Back [Button]
+				**Sort focus [Button]
+			Back [Button]
+		List of Coupons [Button]
+			Coupons list [Page]
+				Back [Button]
+				**Sort focus [Button]
+			Back [Button]
+		Back [Button]
+		
+Options [Button]
+	Options [Tab]
+		Manage Registers [Button]
+		**Mange Theme [Tab]
+	
+Logout [Button]
+
+ShutDown [Button]	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

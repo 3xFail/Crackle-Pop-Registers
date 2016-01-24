@@ -40,9 +40,9 @@ namespace SnapRegisters
 		// temp constructor for testing.
 		public RegisterMainWindow()
 		{
-			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 256);
-
 			InitializeComponent();
+
+			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
 			m_employee = currentEmployee;
 			m_transaction = new Transaction(m_employee, ref ItemsList, ref CouponList);
 		}
@@ -217,7 +217,20 @@ namespace SnapRegisters
 		private Item ConstructItem(int itemID)
 		{
 			// TODO: Connect to database and construct item from given item ID.
-			return new Item();
+			Item newItem = new Item();
+
+				
+			foreach (UIElement TextField in newItem.itemDisplayBox.displayItem.Children)
+				((TextBlock)TextField).PreviewMouseLeftButtonDown += ItemClickedEvent;
+
+			return newItem;
+		}
+
+		private void ItemClickedEvent(object sender, MouseButtonEventArgs e)
+		{
+			EditItemMenu editItemMenu = new EditItemMenu();
+
+			editItemMenu.Show();
 		}
 
 		private List<Item> m_Items = null;
