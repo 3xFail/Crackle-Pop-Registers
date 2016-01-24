@@ -79,5 +79,10 @@ namespace Snap_Admin_System_Interface
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Visible;
         }
+
+        private void EmployeesTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }   
 }

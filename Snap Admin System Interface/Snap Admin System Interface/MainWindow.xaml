@@ -10,14 +10,21 @@
     <!--Height="768" Width="1024"-->
 
     <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="460*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="152*"/>
-            <ColumnDefinition Width="329*"/>
-            <ColumnDefinition Width="127*"/>
-            <ColumnDefinition Width="153*"/>
+            <ColumnDefinition Width="154*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="265*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel Margin="0,0,0,0">
+        <DockPanel Margin="10,0,1.4,-0.147" Grid.RowSpan="3">
             <StackPanel Grid.Column="0" Margin="0,10,100,0">
                 <TextBlock Name="Tabs" Margin="10" FontSize="20"></TextBlock>
                 <Button x:Name="Inventory_btn" Margin="0,30" Click="btn_Inv" Height="60">Inventory</Button>
@@ -29,19 +36,33 @@
             </StackPanel>
         </DockPanel>
 
-        <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="3">
-            <TabControl Name="InventoryTabs" Visibility="Collapsed">
-                <TabItem Header="InvTab">
+        <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="5" Margin="0.6,0,-0.4,-0.147" Grid.RowSpan="3">
+            <TabControl Name="InventoryTabs" Visibility="Visible">
+                <TabItem Header="Inventory">
                     <Label Content="Content goes here..." />
                 </TabItem>
             </TabControl>
             <TabControl Name="AnalysisTabs" Visibility="Collapsed">
-                <TabItem Header="AnalTab">
+                <TabItem Header="Gross Earnings">
                     <Label Content="Content goes here..." />
                 </TabItem>
+                <TabItem Header="Product Losses">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+                <StackPanel Height="100" Width="100"/>
             </TabControl>
-            <TabControl Name="EmployeesTabs" Visibility="Collapsed">
-                <TabItem Header="EmpTab">
+            <TabControl Name="EmployeesTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+                <TabItem Header="Search">
+                    <StackPanel>
+                        <TextBox Height="30" Width="672" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" Margin="10,10,0,0"/>
+                        <Button x:Name="button" Height="26" Width="100" Content="Search" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                        <ListBoxItem x:Name="ListOfEmp" Content="ListBoxItem" Height="390" Width="669" HorizontalAlignment="Left" VerticalContentAlignment="Top"  Margin="13,10,0,0" BorderThickness="1"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Add">
+                    <Label Content="Content goes here..." />
+                </TabItem>
+                <TabItem Header="Statistics">
                     <Label Content="Content goes here..." />
                 </TabItem>
             </TabControl>
@@ -62,8 +83,8 @@
             </TabControl>
         </Grid>
 
-        
-        
+
+
 
     </Grid>
 </Window>
