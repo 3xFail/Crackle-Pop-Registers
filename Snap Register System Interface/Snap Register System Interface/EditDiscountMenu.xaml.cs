@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SnapRegisters
+namespace Snap_Register_System_Interface
 {
 	/// <summary>
-	/// Interaction logic for EditItemMenu.xaml
+	/// Interaction logic for EditDiscountMenu.xaml
 	/// </summary>
 	public partial class EditDiscountMenu : Window
 	{

@@ -70,6 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="EditDiscountMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditItemMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +91,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EditDiscountMenu.xaml.cs">
+      <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditItemMenu.xaml.cs">
       <DependentUpon>EditItemMenu.xaml</DependentUpon>

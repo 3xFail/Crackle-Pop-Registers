@@ -68,6 +68,13 @@ ResizeMode="NoResize"
 					<RowDefinition Height=".85*"/>
 					<RowDefinition Height=".15*"/>
 				</Grid.RowDefinitions>
+				<!--Company Logo Button-->
+                <Viewbox Grid.Row="0" Margin="10,0,0,0"
+						 VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button x:Name="OptionsButton" Content="Btn" 
+							Margin="60,0,0,60"
+							Width="80" Height="80"/>
+				</Viewbox>
 				<!--Totals Box-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>

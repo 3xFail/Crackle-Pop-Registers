@@ -228,7 +228,7 @@ namespace SnapRegisters
 
 		private void ItemClickedEvent(object sender, MouseButtonEventArgs e)
 		{
-			EditItemMenu editItemMenu = new EditItemMenu();
+			EditDiscountMenu editItemMenu = new EditDiscountMenu();
 
 			editItemMenu.Show();
 		}
