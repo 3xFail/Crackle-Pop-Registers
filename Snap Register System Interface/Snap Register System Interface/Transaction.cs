@@ -15,6 +15,9 @@ namespace SnapRegisters
 	//			This class contains all information about the current sale. A new class should be created for each
 	//			Transaction at a register. This class allows the managing of a sale from scanning to payment.
 	//		MEMBERS:
+	//			public delegate void AddItemToOutput(ref Item);
+	//				After an item is created this delegate will be called allowing the item to be output to some
+	//				sort of display.
 	//			private List<Item> m_Items
 	//				A list of all items in the transaction.
 	//			private Employee m_Employee
@@ -51,8 +54,12 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public class Transaction
 	{
+
+		// Delegate for output function
+		public delegate void ItemOutputDelegate(Item itemToAdd);
+
 		// TODO: Make it so that multiple of the same item can be added without breaking functions.
-		public Transaction(Employee employee)
+		public Transaction(Employee employee, ItemOutputDelegate itemToAdd)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -61,6 +68,7 @@ namespace SnapRegisters
 
 			m_Employee = employee;
 			m_Items = new List<Item>();
+			OutputDelegate = itemToAdd;
 		}
 
 		public void AddItem(int itemID)
@@ -72,7 +80,11 @@ namespace SnapRegisters
 			try
 			{
 				// Construct a new item from the given itemID and add it to the list.
-				Item newItem = new Item(ConstructItem(itemID));
+				Item newItem = ConstructItem(itemID);
+
+				// Fire whatever Output method has been assigned for this item.
+				OutputDelegate(newItem);
+
 				m_Items.Add(newItem);
 
 				// TODO: Make this box's height equal to the combined discount's height.
@@ -90,7 +102,7 @@ namespace SnapRegisters
 			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				m_Items.RemoveAll(x => x.id == itemID);
+				m_Items.RemoveAll(x => x.ID == itemID);
 			}
 			catch (InvalidOperationException e)
 			{
@@ -100,7 +112,7 @@ namespace SnapRegisters
 		public void OverrideCost(int itemID, double newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = new Item(m_Items.Find(x => x.id == itemID));
+			Item changedItem = m_Items.Find(x => x.ID == itemID);
 
 			if (changedItem == null)
 				throw new InvalidOperationException("Item specified is not in sale.");
@@ -110,18 +122,15 @@ namespace SnapRegisters
 				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverrideNoReason))
 					throw new InvalidOperationException("A reason must be specified for this action.");
 				else
-					changedItem.itemDisplayBox.SetItemPrice(newPrice);
+					changedItem.Price = newPrice;
 			}
 			else
 			{
 				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverride))
 					throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 				else
-					changedItem.itemDisplayBox.SetItemPrice(newPrice);
+					changedItem.Price = newPrice;
 			}
-
-			// Reassign the item's price.
-			m_Items[m_Items.FindIndex(x => x.id == itemID)].itemDisplayBox.SetItemPrice(changedItem.itemDisplayBox.GetItemPriceAsDouble());
 		}
 		public void ApplyCoupon(int couponID)
 		{
@@ -153,6 +162,7 @@ namespace SnapRegisters
 			return newItem;
 		}
 
+		public ItemOutputDelegate OutputDelegate { get; set; }
 		private List<Item> m_Items = null;
 		private Employee m_Employee = null;
 	}

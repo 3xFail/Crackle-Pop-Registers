@@ -55,9 +55,11 @@ namespace SnapRegisters
 			m_transaction = new Transaction(m_employee);
 		}
 
-
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
+
+		private DockPanel m_itemPanel = null;
+		private DockPanel m_discountList = null;
 	}
 }
 
