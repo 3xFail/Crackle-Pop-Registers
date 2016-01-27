@@ -31,13 +31,17 @@ ResizeMode="NoResize"
 							   Grid.Row="0">
                     </DockPanel>
                     <!--Item Roll-up-->
-                    <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="Cost:" FontSize="{StaticResource FontSizeMedium}"
+                    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
+                        <TextBlock TextAlignment="Left" 
+							   Text="Cost:"
 							   Margin="5,0,0,0"/>
-                    <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="0.00" FontSize="{StaticResource FontSizeMedium}"
+                    </Viewbox>
+                    <Viewbox HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1">
+                        <TextBlock TextAlignment="Right" 
+							   Text="0.00"
 							   Margin="0,0,5,0"
 							   Name="CostTotal"/>
+                    </Viewbox>
                 </Grid>
             </Border>
             <!--Coupon Display Panel-->
@@ -53,13 +57,17 @@ ResizeMode="NoResize"
 							   Grid.Row="0">
                     </DockPanel>
 					<!--Coupon Roll-up-->
-					<TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="Savings:" FontSize="{StaticResource FontSizeMedium}"
+                    <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
+                        <TextBlock TextAlignment="Left"
+							   Text="Savings:"
 							   Margin="5,0,0,0"/>
-                    <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1"
-							   Text="0.00" FontSize="{StaticResource FontSizeMedium}"
+                    </Viewbox>
+                    <Viewbox HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1">
+                        <TextBlock TextAlignment="Right"
+							   Text="0.00"
 							   Margin="0,0,5,0"
 							   Name="SavingsTotal"/>
+                    </Viewbox>
                 </Grid>
             </Border>
 			<!--Side Panel-->
@@ -85,13 +93,17 @@ ResizeMode="NoResize"
                     <Border Grid.Column="1"
 						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
                         <Grid>
-                            <TextBlock TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top"
-							   Text="Total:" FontSize="{StaticResource FontSizeVeryLarge}"
-							   Margin="5,0,0,0"/>
-                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-							   Text="0.00" FontSize="{StaticResource FontSizeVeryLarge}"
-							   Margin="0,0,5,0"
-							   Name="Total"/>
+                            <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <TextBlock TextAlignment="Left" 
+										   Text="Total:"
+										   Margin="5,0,45,0"/>
+                            </Viewbox>
+                            <Viewbox  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <TextBlock TextAlignment="Right" 
+										   Text="0.00" 
+										   Margin="45,0,5,0"
+										   Name="Total"/>
+                            </Viewbox>
                         </Grid>
                     </Border>
                 </Grid>
