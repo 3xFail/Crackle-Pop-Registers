@@ -44,7 +44,7 @@ namespace SnapRegisters
 
 			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
 			m_employee = currentEmployee;
-			m_transaction = new Transaction(m_employee);
+			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
 		}
 
 		public RegisterMainWindow(Employee currentEmployee)
@@ -52,8 +52,20 @@ namespace SnapRegisters
 			InitializeComponent();
 
 			m_employee = currentEmployee;
-			m_transaction = new Transaction(m_employee);
+			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
 		}
+
+		private void AddItemToOutputPanels(Item itemToAdd)
+		{
+			ItemDisplayBox itemDescription = new ItemDisplayBox();
+
+			// Bind the item name.
+			Binding binding = new Binding();
+			binding.Source = itemToAdd;
+			binding.Path = new PropertyPath(Name);
+			itemDescription.itemName.SetBinding(TextBlock.TextProperty, binding);
+		}
+
 
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;

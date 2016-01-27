@@ -63,6 +63,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DiscountDisplayBox.cs" />
+    <Compile Include="EditDiscountMenu.xaml.cs">
+      <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditItemMenu.xaml.cs">
+      <DependentUpon>EditItemMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemDisplayBox.cs" />
     <Compile Include="Transaction.cs" />
@@ -97,12 +103,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="EditDiscountMenu.xaml.cs">
-      <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditItemMenu.xaml.cs">
-      <DependentUpon>EditItemMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterMainWindow.xaml.cs">
       <DependentUpon>RegisterMainWindow.xaml</DependentUpon>

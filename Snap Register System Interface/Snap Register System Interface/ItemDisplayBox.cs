@@ -81,9 +81,10 @@ namespace SnapRegisters
 			itemPrice.Text = price.ToString();
 		}
 
-		public string GetItemNameAsString()
+
+		public TextBlock GetItemNameAsTextBlock()
 		{
-			return itemName.Text;
+			return itemName;
 		}
 		public void SetItemName(string name)
 		{
@@ -105,8 +106,8 @@ namespace SnapRegisters
 
 		public int id = 0;
 		public Grid displayItem { get; set; }
-		private TextBlock itemName { get; set; }
-		private TextBlock itemPrice { get; set; }
+		public TextBlock itemName { get; set; }
+		public TextBlock itemPrice { get; set; }
 
 		private double rawItemPrice = 0;
 	}
