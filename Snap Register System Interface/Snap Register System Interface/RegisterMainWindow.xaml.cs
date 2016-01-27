@@ -45,6 +45,9 @@ namespace SnapRegisters
 			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
 			m_employee = currentEmployee;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
+
+			m_itemPanel = ItemsList;
+			m_discountList = CouponList;
 		}
 
 		public RegisterMainWindow(Employee currentEmployee)
@@ -60,10 +63,19 @@ namespace SnapRegisters
 			ItemDisplayBox itemDescription = new ItemDisplayBox();
 
 			// Bind the item name.
-			Binding binding = new Binding();
-			binding.Source = itemToAdd;
-			binding.Path = new PropertyPath(Name);
-			itemDescription.itemName.SetBinding(TextBlock.TextProperty, binding);
+			Binding ItemNameBinding = new Binding();
+			ItemNameBinding.Source = itemToAdd;
+			ItemNameBinding.Path = new PropertyPath(itemToAdd.ItemName);
+			itemDescription.itemName.SetBinding(TextBlock.TextProperty, ItemNameBinding);
+
+			// Bind the item's price. type's don't make sense here.
+			Binding ItemPriceBinding = new Binding();
+			ItemPriceBinding.Source = itemToAdd;
+			ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
+			itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
+
+			m_itemPanel.Children.Add(itemDescription.displayItem);
+
 		}
 
 
