@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Snap_Admin_System_Interface
+namespace SnapRegisters
 {
     /// <summary>
     /// Interaction logic for App.xaml

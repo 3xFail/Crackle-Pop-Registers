@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Snap_Admin_System_Interface.Properties
+namespace SnapRegisters.Properties
 {
 
 

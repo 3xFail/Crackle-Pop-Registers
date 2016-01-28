@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointOfSales.Users;
+using PointOfSales.Permissions;
 
-namespace Snap_Admin_System_Interface
+
+namespace SnapRegisters
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AdminMainWindow : Window
     {
-        public MainWindow()
+        public AdminMainWindow(Employee currentEmployee)
         {
             InitializeComponent();
+			m_employee = currentEmployee;
         }
 
         private void btn_Inv(object sender, RoutedEventArgs e)
@@ -84,5 +88,11 @@ namespace Snap_Admin_System_Interface
         {
 
         }
-    }   
+
+		
+		private Employee m_employee = null;
+
+		private DockPanel m_itemPanel = null;
+		private DockPanel m_discountList = null;
+	}   
 }

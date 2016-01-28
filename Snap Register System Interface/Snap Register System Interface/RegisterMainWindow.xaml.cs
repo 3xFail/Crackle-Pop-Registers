@@ -38,17 +38,17 @@ namespace SnapRegisters
 	public partial class RegisterMainWindow : Window
 	{
 		// temp constructor for testing.
-		public RegisterMainWindow()
-		{
-			InitializeComponent();
+		//public RegisterMainWindow()
+		//{
+		//	InitializeComponent();
 
-			Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
-			m_employee = currentEmployee;
-			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
+		//	Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
+		//	m_employee = currentEmployee;
+		//	m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
 
-			m_itemPanel = ItemsList;
-			m_discountList = CouponList;
-		}
+		//	m_itemPanel = ItemsList;
+		//	m_discountList = CouponList;
+		//}
 
 		public RegisterMainWindow(Employee currentEmployee)
 		{

@@ -70,8 +70,8 @@ namespace SnapRegisters
 
 
 #if ADMIN
-				// TODO: Ask Calvin how to keep this from being chaotic between versions.
-				MessageBox.Show("Admin Success!");
+				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
+				MainAdminWindow.Show();
 
 #elif REGISTER
 				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
