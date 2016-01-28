@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpClient
 {
-    class message
+    public class message
     {
         public static readonly int header_length = 4;
         public static readonly int id_length = 4;

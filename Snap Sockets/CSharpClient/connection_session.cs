@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CSharpClient
 {
-    class connection_session
+    public class connection_session
     {
         public connection_session( string host, int port, string username, string password )
         {

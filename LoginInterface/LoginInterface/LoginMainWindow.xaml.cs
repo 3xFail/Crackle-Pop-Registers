@@ -31,13 +31,7 @@ namespace SnapRegisters
             InitializeComponent();
 
         }
-
-
-        private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
-        }
-
+        
         public static string HashIt(string input)
         {
 
@@ -52,6 +46,11 @@ namespace SnapRegisters
                 stringBuilder.Append(hashBytes[idx].ToString("X2"));
             }
             return stringBuilder.ToString();
+        }
+
+        private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
         }
 
         //Login code placeholder
