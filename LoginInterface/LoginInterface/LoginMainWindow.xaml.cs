@@ -53,16 +53,14 @@ namespace SnapRegisters
             e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
         }
 
-        //Login code placeholder
+
         private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             LoginDetails attempt = new LoginDetails();
-
-
+            
             attempt.Password = passwordField.Password;
             attempt.Username = usernameField.Text;
-
-
+            
             connection_session connection;
             try
             {
@@ -89,7 +87,6 @@ namespace SnapRegisters
             {
                 MessageBox.Show("Server not found");
             }
-
         }
 
            //*******************Deprecated Code**********************
