@@ -31,22 +31,22 @@ namespace SnapRegisters
             InitializeComponent();
 
         }
-        
-        public static string HashIt(string input)
-        {
+        //************Deprecated code************
+        //public static string HashIt(string input)
+        //{
 
-            MD5 hasher = MD5.Create();
-            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-            byte[] hashBytes = hasher.ComputeHash(inputBytes);
+        //    MD5 hasher = MD5.Create();
+        //    byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+        //    byte[] hashBytes = hasher.ComputeHash(inputBytes);
 
 
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int idx = 0; idx < hashBytes.Length; idx++)
-            {
-                stringBuilder.Append(hashBytes[idx].ToString("X2"));
-            }
-            return stringBuilder.ToString();
-        }
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    for (int idx = 0; idx < hashBytes.Length; idx++)
+        //    {
+        //        stringBuilder.Append(hashBytes[idx].ToString("X2"));
+        //    }
+        //    return stringBuilder.ToString();
+        //}
 
         private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -59,39 +59,57 @@ namespace SnapRegisters
             LoginDetails attempt = new LoginDetails();
 
 
-            attempt.Password = HashIt(passwordField.Password);
+            attempt.Password = passwordField.Password;
             attempt.Username = usernameField.Text;
 
 
             connection_session connection;
             try
             {
-               connection = new connection_session("127.0.0.1", 1, "david.asmuth", "1234");
+                connection = new connection_session("127.0.0.1", 1, attempt.Username, attempt.Password);
 
-            }
-            catch (InvalidOperationException ee)
-            {
-                MessageBox.Show(ee.ToString());
-            }
-
-            // TODO: Replace this conditional with an actual check for login.
-            if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
-            {
-                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+                Employee loggedIn = new Employee(10, attempt.Username, null, "987654321", new DateTime(1, 1, 1), 31);
 #if ADMIN
-				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
-				MainAdminWindow.Show();
+                SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
+                MainAdminWindow.Show();
 #elif REGISTER
 				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
 				MainRegisterWindow.Show();
 #else
 				MessageBox.Show("Success!");
 #endif
-				this.Close();
+                this.Close();
             }
-            else
-                MessageBox.Show("Failure");    
+            catch (InvalidOperationException ee)
+            {
+                MessageBox.Show(ee.ToString());
+             
+            }
+            catch (Exception eee)
+            {
+                MessageBox.Show("Server not found");
+            }
+
         }
+
+           //*******************Deprecated Code**********************
+//            if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
+//            {
+//                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+//#if ADMIN
+//				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
+//				MainAdminWindow.Show();
+//#elif REGISTER
+//				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
+//				MainRegisterWindow.Show();
+//#else
+//				MessageBox.Show("Success!");
+//#endif
+//				this.Close();
+//            }
+//            else
+//                MessageBox.Show("Failure");    
+//        }
 
 
         private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)

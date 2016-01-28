@@ -25,7 +25,7 @@ namespace CSharpClient
             var conn = new connection_session( host, port, username, password );
             Console.WriteLine( "connecting..." );
             conn.write( new message( Console.ReadLine() ) );
-            return 0;
+            return 0; 
 
 
         }
