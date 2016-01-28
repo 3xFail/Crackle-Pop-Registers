@@ -22,9 +22,9 @@ namespace CSharpClient
             Console.WriteLine( "Enter your password: " );
             string password = Console.ReadLine();
 
-            var server = new connection_session( host, port, username, password );
+            var conn = new connection_session( host, port, username, password );
             Console.WriteLine( "connecting..." );
-            server.write( new message( Console.ReadLine() ) );
+            conn.write( new message( Console.ReadLine() ) );
             return 0;
 
 

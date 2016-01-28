@@ -22,6 +22,7 @@ namespace CSharpClient
 
                 //create a TCP/IP socket
                 _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+                _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
 
                 connect( password );
             }
@@ -32,7 +33,6 @@ namespace CSharpClient
 
         }
 
-
         private void connect( string password )
         {
             //connects the socket to the remote endpoint. catch any errors.
@@ -41,9 +41,9 @@ namespace CSharpClient
                 _sender.Connect( _remoteEP );
                 Console.WriteLine( "Socket connected to {0}", _sender.RemoteEndPoint.ToString() );
                 byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
-                int bytesSent = _sender.Send( msg );
-
-                Thread.Sleep( 1000 );
+                _sender.Send( msg );
+                Thread.Sleep( 500 );
+                read_response();
 
 
             }
@@ -76,8 +76,9 @@ namespace CSharpClient
             _msg_queue.First().encode_id( _id ); //attach unique ID to message
             _msg_queue.First().encode_username( _username ); //attach username to end of message
 
-            int bytessent = _sender.Send( _msg_queue.First().data() );
-            Thread.Sleep( 1000 );
+            int bytessent = _sender.Send( _msg_queue.First().data(), _msg_queue.First().total_length( true ), SocketFlags.None );
+            //Thread.Sleep( 1000 );
+            read_response();
 
             _msg_queue.Dequeue();
             if( _msg_queue.Count > 0 )
@@ -86,16 +87,39 @@ namespace CSharpClient
             }
         }
 
+        public void read_response()
+        {
+            message msg = new message();
 
+            _sender.Receive( msg._data, 0, message.header_length, SocketFlags.None );
+            if( msg.decode_header() )
+            {
+                _sender.Receive( msg._data, message.header_length, message.id_length, SocketFlags.None );
+                if( msg.decode_id() )
+                {
+                    Console.WriteLine( "received messaged of length: " + msg._body_length );
+                    _sender.Receive( msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None );
+                    parse_message( msg );
+                }
+            }
+        }
+
+        public void parse_message( message msg )
+        {
+            if( msg.ToString() == "valid_login" )
+            {
+                _id = msg._id;
+                Console.WriteLine( "valid_login, your ID is" + _id );
+            }
+            else
+                Console.WriteLine( msg.ToString() );
+        }
 
 
         private IPEndPoint _remoteEP;
         private Socket _sender;
 
-
-
-        private message _cur_msg;
-        private Queue<message> _msg_queue;
+        private Queue<message> _msg_queue = new Queue<message>();
 
         private int _id;
         private string _username;
