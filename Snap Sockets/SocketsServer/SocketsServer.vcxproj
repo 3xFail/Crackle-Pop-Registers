@@ -85,7 +85,8 @@
       <AdditionalDependencies>"C:\cppdb\cppdb-0.3.1\build\Debug\cppdb.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)*.txt $(OutDir)</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy text files to output directory.</Message>
@@ -120,8 +121,7 @@
       <AdditionalDependencies>"C:\cppdb\cppdb-0.3.1\build\Debug\cppdb.lib";"C:\cryptopp\cryptopp563\Win32\Output\Debug\cryptlib.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(ProjectDir)*.txt $(OutDir)
-del $(OutDir)*.ilk $(OutDir)*.pdb</Command>
+      <Command>del $(OutDir)*.ilk $(OutDir)*.pdb</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>copy text files to output directory. delete .ilk and .pdb files in output directory</Message>
