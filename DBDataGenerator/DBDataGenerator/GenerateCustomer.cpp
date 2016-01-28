@@ -80,6 +80,7 @@ void GenerateCustomer::Process(int numberOfCustomers)
 
 		//User ID & end line
 		output << "NULL\n";
+
 	}
 }
 

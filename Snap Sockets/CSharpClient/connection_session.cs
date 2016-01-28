@@ -106,13 +106,13 @@ namespace CSharpClient
 
         public void parse_message( message msg )
         {
-            if( msg.ToString() == "valid_login" )
+            if (msg.ToString() == "valid_login")
             {
                 _id = msg._id;
-                Console.WriteLine( "valid_login, your ID is" + _id );
+                Console.WriteLine("valid_login, your ID is" + _id);
             }
             else
-                Console.WriteLine( msg.ToString() );
+                throw new InvalidOperationException("Invalid Login");
         }
 
 

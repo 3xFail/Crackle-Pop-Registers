@@ -7,7 +7,7 @@ using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device.Location;
 using System.Device;
-
+using CSharpClient;
 
 using System.Security.Cryptography;
 
@@ -62,7 +62,21 @@ namespace SnapRegisters
             attempt.Password = HashIt(passwordField.Password);
             attempt.Username = usernameField.Text;
 
-			// TODO: Replace this conditional with an actual check for login.
+
+            connection_session connection;
+            try
+            {
+               connection = new connection_session("127.0.0.1", 1, "david.asmuth", "1234");
+
+            }
+            catch (InvalidOperationException ee)
+            {
+                //failed to log in 
+            }
+
+
+
+            // TODO: Replace this conditional with an actual check for login.
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
