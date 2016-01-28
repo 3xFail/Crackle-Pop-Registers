@@ -64,7 +64,7 @@ namespace SnapRegisters
             connection_session connection;
             try
             {
-                connection = new connection_session("127.0.0.1", 1, attempt.Username, attempt.Password);
+                connection = new connection_session("172.20.10.10", 500, attempt.Username, attempt.Password);
 
                 Employee loggedIn = new Employee(10, attempt.Username, null, "987654321", new DateTime(1, 1, 1), 31);
 #if ADMIN
@@ -80,7 +80,7 @@ namespace SnapRegisters
             }
             catch (InvalidOperationException ee)
             {
-                MessageBox.Show(ee.ToString());
+                MessageBox.Show("Invalid username or password");
              
             }
             catch (Exception eee)
