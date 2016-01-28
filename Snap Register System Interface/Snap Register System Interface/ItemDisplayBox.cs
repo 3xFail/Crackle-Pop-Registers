@@ -46,22 +46,7 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public class ItemDisplayBox
 	{
-		public ItemDisplayBox()
-		{
-			itemName = new TextBlock();
-			itemPrice = new TextBlock();
-			displayItem = new Grid();
-
-			itemName.TextAlignment = TextAlignment.Left;
-			itemName.HorizontalAlignment = HorizontalAlignment.Left;
-			itemPrice.TextAlignment = TextAlignment.Right;
-			itemPrice.HorizontalAlignment = HorizontalAlignment.Right;
-
-			displayItem.Children.Add(itemName);
-			displayItem.Children.Add(itemPrice);
-		}
-
-		public ItemDisplayBox(string name, double price)
+		public ItemDisplayBox(Item sourceItem)
 		{
 			itemName = new TextBlock();
 			itemPrice = new TextBlock();
@@ -75,17 +60,23 @@ namespace SnapRegisters
 			displayItem.Children.Add(itemName);
 			displayItem.Children.Add(itemPrice);
 
-			itemName.Text = name;
 
-			rawItemPrice = price;
-			itemPrice.Text = price.ToString();
+			m_sourceItem = sourceItem;
+
+			itemName.Text = m_sourceItem.ItemName;
+
+			rawItemPrice = m_sourceItem.Price;
+			itemPrice.Text = m_sourceItem.Price.ToString();
+
+			displayItem.PreviewMouseLeftButtonDown += DisplayItemClickedEvent;
 		}
 
-
-		public TextBlock GetItemNameAsTextBlock()
+		private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			return itemName;
+			EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
+			editMenu.Show();
 		}
+
 		public void SetItemName(string name)
 		{
 			itemName.Text = name;
@@ -104,7 +95,9 @@ namespace SnapRegisters
 			itemPrice.Text = price.ToString();
 		}
 
-		public int id = 0;
+
+
+		private Item m_sourceItem = null;
 		public Grid displayItem { get; set; }
 		public TextBlock itemName { get; set; }
 		public TextBlock itemPrice { get; set; }

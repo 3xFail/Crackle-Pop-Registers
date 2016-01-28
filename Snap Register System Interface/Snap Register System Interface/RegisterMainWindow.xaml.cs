@@ -60,7 +60,7 @@ namespace SnapRegisters
 
 		private void AddItemToOutputPanels(Item itemToAdd)
 		{
-			ItemDisplayBox itemDescription = new ItemDisplayBox();
+			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
 
 			// Bind the item name.
 			Binding ItemNameBinding = new Binding();
@@ -77,8 +77,6 @@ namespace SnapRegisters
 			m_itemPanel.Children.Add(itemDescription.displayItem);
 
 		}
-
-
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
 

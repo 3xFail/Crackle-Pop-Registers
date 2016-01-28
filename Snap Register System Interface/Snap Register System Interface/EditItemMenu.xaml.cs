@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Snap_Register_System_Interface
+namespace SnapRegisters
 {
 	/// <summary>
 	/// Interaction logic for EditItemMenu.xaml
 	/// </summary>
 	public partial class EditItemMenu : Window
 	{
-		public EditItemMenu()
+		public EditItemMenu(Item itemToEdit)
 		{
 			InitializeComponent();
+
+			m_sourceItem = itemToEdit;
+			ItemNameBox.Text = m_sourceItem.ItemName;
 		}
+
+		private Item m_sourceItem = null;
 	}
 }
