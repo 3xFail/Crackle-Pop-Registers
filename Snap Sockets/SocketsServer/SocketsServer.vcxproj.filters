@@ -36,11 +36,11 @@
     <ClCompile Include="client.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="db_conn_str.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SharedCode\scrypt-jane.c">
       <Filter>Scrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="db_conn_str.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
