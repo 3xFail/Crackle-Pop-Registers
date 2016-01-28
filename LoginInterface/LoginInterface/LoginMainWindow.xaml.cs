@@ -118,12 +118,8 @@ namespace SnapRegisters
         {
             Application.Current.Shutdown();
         }
-
-
-
-
-
     }
+
     public static class CustomCommands
     {
         public static readonly RoutedUICommand Exit = new RoutedUICommand
@@ -136,7 +132,5 @@ namespace SnapRegisters
                     new KeyGesture(Key.F4, ModifierKeys.Alt)
             }
         );
-
-
     }
 }
