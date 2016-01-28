@@ -71,33 +71,26 @@ namespace SnapRegisters
             }
             catch (InvalidOperationException ee)
             {
-                //failed to log in 
+                MessageBox.Show(ee.ToString());
             }
-
-
 
             // TODO: Replace this conditional with an actual check for login.
             if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
             {
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-
-
 #if ADMIN
 				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
 				MainAdminWindow.Show();
-
 #elif REGISTER
 				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
 				MainRegisterWindow.Show();
 #else
 				MessageBox.Show("Success!");
 #endif
-
 				this.Close();
             }
             else
-                MessageBox.Show("Failure");
-           
+                MessageBox.Show("Failure");    
         }
 
 
