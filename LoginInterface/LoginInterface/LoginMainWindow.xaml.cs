@@ -69,8 +69,16 @@ namespace SnapRegisters
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
 
 
+#if ADMIN
 				// TODO: Ask Calvin how to keep this from being chaotic between versions.
+				MessageBox.Show("Admin Success!");
+
+#elif REGISTER
+				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
+				MainRegisterWindow.Show();
+#else
 				MessageBox.Show("Success!");
+#endif
 
 				this.Close();
             }
