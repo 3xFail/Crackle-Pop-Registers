@@ -15,8 +15,7 @@ namespace CSharpClient
         {
             _username = username;
             //connect to a remote device
-            try
-            {
+         
                 //establish the remote endpoint for the socket
                 _remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );
 
@@ -24,20 +23,16 @@ namespace CSharpClient
                 _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
                 _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
 
-                connect( password );
-            }
-            catch( Exception e )
-            {
-                Console.WriteLine( e.ToString() );
-            }
+            connect( password );
+            
+           
 
         }
 
         private void connect( string password )
         {
             //connects the socket to the remote endpoint. catch any errors.
-            try
-            {
+           
                 _sender.Connect( _remoteEP );
                 Console.WriteLine( "Socket connected to {0}", _sender.RemoteEndPoint.ToString() );
                 byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
@@ -46,19 +41,7 @@ namespace CSharpClient
                 read_response();
 
 
-            }
-            catch( ArgumentNullException ane )
-            {
-                Console.WriteLine( "ArgumentNullException: {0}", ane.ToString() );
-            }
-            catch( SocketException se )
-            {
-                Console.WriteLine( "SocketException : {0}", se.ToString() );
-            }
-            catch( Exception e )
-            {
-                Console.WriteLine( "Unexpected exception : {0}", e.ToString() );
-            }
+         
         }
 
         public void write( message msg )
@@ -121,7 +104,7 @@ namespace CSharpClient
 
         private Queue<message> _msg_queue = new Queue<message>();
 
-        private int _id;
+        public int _id = -1;
         private string _username;
     }
 }
