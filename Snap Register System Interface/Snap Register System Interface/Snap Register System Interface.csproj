@@ -139,7 +139,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="..\..\SharedResources\AccessLibrary.dll">
+      <Link>SharedResources\AccessLibrary.dll</Link>
+    </Content>
+    <Content Include="..\..\SharedResources\CSharpClient.dll">
+      <Link>SharedResources\CSharpClient.dll</Link>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="..\..\SharedResources\Images\Emblem.png">
       <Link>SharedResources\Images\Emblem.png</Link>
