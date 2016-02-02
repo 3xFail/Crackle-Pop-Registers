@@ -74,6 +74,9 @@
     </Compile>
     <Compile Include="Item.cs" />
     <Compile Include="ItemDisplayBox.cs" />
+    <Compile Include="PriceOverrideMenu.xaml.cs">
+      <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Transaction.cs" />
     <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
       <Link>LoginMainWindow.xaml</Link>
@@ -90,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditItemMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PriceOverrideMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
