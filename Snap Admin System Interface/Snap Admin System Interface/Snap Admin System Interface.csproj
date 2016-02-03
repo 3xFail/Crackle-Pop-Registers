@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AccessLibrary">
-      <HintPath>Resources\AccessLibrary.dll</HintPath>
+    <Reference Include="AccessLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CSharpClient">
       <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
@@ -63,7 +64,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
-      <Link>LoginMainWindow.xaml</Link>
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -72,12 +73,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AdminMainWindow.xaml">
+    <Page Include="AdminWindowParts\WPF UI\AdminMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
-      <Link>LoginMainWindow.xaml.cs</Link>
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
     </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
@@ -86,7 +87,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AdminMainWindow.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -123,12 +124,17 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="AdminWindowParts\Buisness Objects\" />
+    <Folder Include="LoginWindowParts\Buisness Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\SharedResources\AccessLibrary.dll">
+      <Link>SharedResources\AccessLibrary.dll</Link>
+    </Content>
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
-    <Content Include="Resources\AccessLibrary.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
