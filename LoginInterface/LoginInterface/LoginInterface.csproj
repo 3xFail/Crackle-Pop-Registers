@@ -79,6 +79,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LoginWindowParts\WPF UI\CustomCommand.cs" />
+    <Compile Include="LoginWindowParts\Business Objects\LoginDetails.cs" />
     <Compile Include="LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -121,9 +123,7 @@
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LoginWindowParts\Business Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

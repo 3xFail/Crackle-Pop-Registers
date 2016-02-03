@@ -13,19 +13,9 @@ using System.Security.Cryptography;
 
 namespace SnapRegisters
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+	// Document me.
 	public partial class LoginMainWindow : Window
 	{
-		public class LoginDetails
-		{
-			public string Username { get; set; }
-			public string Password { get; set; }
-
-		}
-
-
 		public LoginMainWindow()
 		{
 			InitializeComponent();
@@ -69,15 +59,9 @@ namespace SnapRegisters
 				connection = new connection_session("172.20.10.10", 500, attempt.Username, attempt.Password);
 
 				Employee loggedIn = new Employee(10, attempt.Username, null, "987654321", new DateTime(1, 1, 1), 31);
-#if ADMIN
-				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
-				MainAdminWindow.Show();
-#elif REGISTER
-				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
-				MainRegisterWindow.Show();
-#else
-				MessageBox.Show("Success!");
-#endif
+
+				OpenInterfaceWindow(loggedIn);
+
 				this.Close();
 			}
 			catch (InvalidOperationException ee)
@@ -112,6 +96,23 @@ namespace SnapRegisters
 		//        }
 
 
+
+
+		private void OpenInterfaceWindow(Employee employeeLoggedIn)
+		{
+#if ADMIN
+				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
+				MainAdminWindow.Show();
+#elif REGISTER
+				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
+				MainRegisterWindow.Show();
+#else
+			MessageBox.Show("Success!");
+#endif
+		}
+
+
+
 		private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = true;
@@ -121,19 +122,5 @@ namespace SnapRegisters
 		{
 			Application.Current.Shutdown();
 		}
-	}
-
-	public static class CustomCommands
-	{
-		public static readonly RoutedUICommand Exit = new RoutedUICommand
-		(
-			"Exit",
-			"Exit",
-			typeof(CustomCommands),
-			new InputGestureCollection()
-			{
-					new KeyGesture(Key.F4, ModifierKeys.Alt)
-			}
-		);
 	}
 }
