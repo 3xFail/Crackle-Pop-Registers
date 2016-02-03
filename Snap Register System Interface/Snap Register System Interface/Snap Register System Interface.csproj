@@ -65,6 +65,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
+      <DependentUpon>LoginMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
@@ -72,14 +76,14 @@
     <Compile Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml.cs">
       <DependentUpon>EditItemMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterWindowParts\Buisness Objects\Item.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\Item.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
       <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterWindowParts\Buisness Objects\Transaction.cs" />
-    <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
-      <Link>LoginWindowParts\LoginMainWindow.xaml</Link>
+    <Compile Include="RegisterWindowParts\Business Objects\Transaction.cs" />
+    <Page Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml">
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -104,9 +108,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
-      <Link>LoginWindowParts\LoginMainWindow.xaml.cs</Link>
-    </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>
@@ -159,7 +160,9 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="LoginWindowParts\Business Objects\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

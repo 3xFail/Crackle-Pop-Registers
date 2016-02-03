@@ -63,7 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
+    <Page Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml">
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,8 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
+      <DependentUpon>LoginMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
@@ -125,8 +126,8 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AdminWindowParts\Buisness Objects\" />
-    <Folder Include="LoginWindowParts\Buisness Objects\" />
+    <Folder Include="AdminWindowParts\Business Objects\" />
+    <Folder Include="LoginWindowParts\Business Objects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\SharedResources\AccessLibrary.dll">
