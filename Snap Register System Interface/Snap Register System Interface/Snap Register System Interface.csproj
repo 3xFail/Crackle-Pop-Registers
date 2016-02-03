@@ -65,21 +65,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DiscountDisplayBox.cs" />
-    <Compile Include="EditDiscountMenu.xaml.cs">
+    <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditItemMenu.xaml.cs">
+    <Compile Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml.cs">
       <DependentUpon>EditItemMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Item.cs" />
-    <Compile Include="ItemDisplayBox.cs" />
-    <Compile Include="PriceOverrideMenu.xaml.cs">
+    <Compile Include="RegisterWindowParts\Buisness Objects\Item.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
       <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Transaction.cs" />
+    <Compile Include="RegisterWindowParts\Buisness Objects\Transaction.cs" />
     <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
-      <Link>LoginMainWindow.xaml</Link>
+      <Link>LoginWindowParts\LoginMainWindow.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -88,24 +88,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EditDiscountMenu.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditItemMenu.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PriceOverrideMenu.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegisterMainWindow.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\RegisterMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
-      <Link>LoginMainWindow.xaml.cs</Link>
+      <Link>LoginWindowParts\LoginMainWindow.xaml.cs</Link>
     </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
@@ -114,7 +114,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RegisterMainWindow.xaml.cs">
+    <Compile Include="RegisterWindowParts\WPF UI\RegisterMainWindow.xaml.cs">
       <DependentUpon>RegisterMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -159,6 +159,7 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
