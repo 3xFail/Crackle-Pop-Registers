@@ -65,6 +65,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\Business Objects\LoginDetails.cs">
+      <Link>LoginWindowParts\Business Objects\LoginDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\CustomCommand.cs">
+      <Link>LoginWindowParts\WPF UI\CustomCommand.cs</Link>
+    </Compile>
     <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
@@ -160,9 +166,7 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LoginWindowParts\Business Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

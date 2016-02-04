@@ -22,23 +22,6 @@ namespace SnapRegisters
 
 		}
 
-		//************Deprecated Hash function code************
-		//public static string HashIt(string input)
-		//{
-
-		//    MD5 hasher = MD5.Create();
-		//    byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-		//    byte[] hashBytes = hasher.ComputeHash(inputBytes);
-
-
-		//    StringBuilder stringBuilder = new StringBuilder();
-		//    for (int idx = 0; idx < hashBytes.Length; idx++)
-		//    {
-		//        stringBuilder.Append(hashBytes[idx].ToString("X2"));
-		//    }
-		//    return stringBuilder.ToString();
-		//}
-
 		private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
@@ -52,7 +35,60 @@ namespace SnapRegisters
 			attempt.Password = passwordField.Password;
 			attempt.Username = usernameField.Text;
 #if DEBUG
+			ConnectToMockServer(attempt);
 #else
+			ConnectToServer(attempt);
+#endif
+		}
+
+
+
+
+
+
+		private void OpenInterfaceWindow(Employee employeeLoggedIn)
+		{
+#if ADMIN
+			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn);
+			MainAdminWindow.Show();
+#elif REGISTER
+			SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn);
+			MainRegisterWindow.Show();
+#else
+			MessageBox.Show("Success!");
+#endif
+		}
+#if DEBUG
+		public static string HashIt(string input)
+		{
+
+		    MD5 hasher = MD5.Create();
+		    byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+		    byte[] hashBytes = hasher.ComputeHash(inputBytes);
+
+
+		    StringBuilder stringBuilder = new StringBuilder();
+		    for (int idx = 0; idx < hashBytes.Length; idx++)
+		    {
+		        stringBuilder.Append(hashBytes[idx].ToString("X2"));
+		    }
+		    return stringBuilder.ToString();
+		}
+
+		private void ConnectToMockServer(LoginDetails attempt)
+		{
+			if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
+			{
+				Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+				OpenInterfaceWindow(loggedIn);
+				this.Close();
+			}
+			else
+				MessageBox.Show("Failure");    
+		}
+#else
+		private void ConnectToServer(LoginDetails attempt)
+		{
 			connection_session connection;
 			try
 			{
@@ -67,51 +103,14 @@ namespace SnapRegisters
 			catch (InvalidOperationException ee)
 			{
 				MessageBox.Show("Invalid username or password");
-			 
+
 			}
 			catch (Exception eee)
 			{
 				MessageBox.Show("Server not found");
 			}
-#endif
 		}
-
-		//*******************Deprecated Code**********************
-		//            if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
-		//            {
-		//                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-		//#if ADMIN
-		//				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
-		//				MainAdminWindow.Show();
-		//#elif REGISTER
-		//				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
-		//				MainRegisterWindow.Show();
-		//#else
-		//				MessageBox.Show("Success!");
-		//#endif
-		//				this.Close();
-		//            }
-		//            else
-		//                MessageBox.Show("Failure");    
-		//        }
-
-
-
-
-		private void OpenInterfaceWindow(Employee employeeLoggedIn)
-		{
-#if ADMIN
-				SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(loggedIn);
-				MainAdminWindow.Show();
-#elif REGISTER
-				SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(loggedIn);
-				MainRegisterWindow.Show();
-#else
-			MessageBox.Show("Success!");
 #endif
-		}
-
-
 
 		private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{

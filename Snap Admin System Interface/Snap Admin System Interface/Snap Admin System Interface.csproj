@@ -77,6 +77,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\Business Objects\LoginDetails.cs">
+      <Link>LoginWindowParts\Business Objects\LoginDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\CustomCommand.cs">
+      <Link>LoginWindowParts\WPF UI\CustomCommand.cs</Link>
+    </Compile>
     <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
@@ -127,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminWindowParts\Business Objects\" />
-    <Folder Include="LoginWindowParts\Business Objects\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\SharedResources\AccessLibrary.dll">
