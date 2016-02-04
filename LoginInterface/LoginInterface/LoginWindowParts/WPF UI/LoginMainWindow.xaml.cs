@@ -59,25 +59,10 @@ namespace SnapRegisters
 #endif
 		}
 #if DEBUG
-		public static string HashIt(string input)
-		{
-
-		    MD5 hasher = MD5.Create();
-		    byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-		    byte[] hashBytes = hasher.ComputeHash(inputBytes);
-
-
-		    StringBuilder stringBuilder = new StringBuilder();
-		    for (int idx = 0; idx < hashBytes.Length; idx++)
-		    {
-		        stringBuilder.Append(hashBytes[idx].ToString("X2"));
-		    }
-		    return stringBuilder.ToString();
-		}
 
 		private void ConnectToMockServer(LoginDetails attempt)
 		{
-			if (attempt.Username == "admin" && attempt.Password == HashIt("password"))
+			if (attempt.Username == "admin" && attempt.Password == "password")
 			{
 				Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
 				OpenInterfaceWindow(loggedIn);
