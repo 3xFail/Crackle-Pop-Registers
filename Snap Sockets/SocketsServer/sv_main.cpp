@@ -58,15 +58,25 @@ string hash_salt_password( const string & user, const string & pass )
 }
 
 
-int main()
+int main( int argc, char ** argv )
 {
 #ifdef _DEBUG
 	cout << "DEBUG BUILD. THIS WILL GREALY SLOW DOWN PASSWORD HASHING\n";
 #endif
 
-	unsigned short port;
-	cout << "Enter server port: ";
-	cin >> port;
+	if( argc < 2 )
+	{
+		cout << "Required port number not passed.\n";
+		return 1;
+	}
+
+	int port = atoi( argv[1] );
+	if( port == 0 )
+	{
+		cout << "Valid port number not passed.\n";
+		return 1;
+	}
+
 	try
 	{
 		sql_singleton::instance().open( load_connection_string().get() );
