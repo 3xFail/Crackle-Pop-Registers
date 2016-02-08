@@ -80,7 +80,6 @@ namespace CSharpClient
                 _sender.Receive( msg._data, message.header_length, message.id_length, SocketFlags.None );
                 if( msg.decode_id() )
                 {
-                    Console.WriteLine( "received messaged of length: " + msg._body_length );
                     _sender.Receive( msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None );
                     parse_message( msg );
                 }
@@ -89,13 +88,10 @@ namespace CSharpClient
 
         public void parse_message( message msg )
         {
-            if (msg.ToString() == "valid_login")
-            {
+            if( msg.ToString() == "valid_login" )
                 _id = msg._id;
-                Console.WriteLine("valid_login, your ID is" + _id);
-            }
             else
-                throw new InvalidOperationException("Invalid Login");
+                throw new InvalidOperationException( "Invalid Login" );
         }
 
 

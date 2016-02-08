@@ -68,7 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="LoginMainWindow.xaml">
+    <Page Include="LoginWindowParts\WPF UI\LoginMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -79,7 +79,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginMainWindow.xaml.cs">
+    <Compile Include="LoginWindowParts\WPF UI\CustomCommand.cs" />
+    <Compile Include="LoginWindowParts\Business Objects\LoginDetails.cs" />
+    <Compile Include="LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -112,9 +114,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Emblem.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="..\..\SharedResources\Images\Emblem.png">
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
@@ -124,6 +123,7 @@
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

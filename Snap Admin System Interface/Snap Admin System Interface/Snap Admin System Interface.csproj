@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AccessLibrary">
-      <HintPath>Resources\AccessLibrary.dll</HintPath>
+    <Reference Include="AccessLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CSharpClient">
       <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
@@ -62,8 +63,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml">
-      <Link>LoginMainWindow.xaml</Link>
+    <Page Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml">
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -72,12 +73,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AdminMainWindow.xaml">
+    <Page Include="AdminWindowParts\WPF UI\AdminMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\..\LoginInterface\LoginInterface\LoginMainWindow.xaml.cs">
-      <Link>LoginMainWindow.xaml.cs</Link>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\Business Objects\LoginDetails.cs">
+      <Link>LoginWindowParts\Business Objects\LoginDetails.cs</Link>
+    </Compile>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\CustomCommand.cs">
+      <Link>LoginWindowParts\WPF UI\CustomCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs">
+      <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
+      <DependentUpon>LoginMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
@@ -86,7 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AdminMainWindow.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -123,9 +131,16 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Resources\AccessLibrary.dll" />
+    <Folder Include="AdminWindowParts\Business Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\SharedResources\AccessLibrary.dll">
+      <Link>SharedResources\AccessLibrary.dll</Link>
+    </Content>
+    <Content Include="..\..\SharedResources\CSharpClient.dll">
+      <Link>SharedResources\CSharpClient.dll</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

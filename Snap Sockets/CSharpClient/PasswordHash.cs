@@ -9,7 +9,7 @@ namespace CSharpClient
 {
     public sealed class PasswordHash
     {
-        private static readonly int Iterations = 10000;
+        
         private static readonly int SaltBytes = 16;
         private static readonly int HashBytes = 20;
         public static string Hash( string pass )
