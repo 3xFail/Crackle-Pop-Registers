@@ -106,5 +106,15 @@ namespace SnapRegisters
 		{
 			Application.Current.Shutdown();
 		}
-	}
+
+        private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Management_Operations_Can_Execute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
+    }
 }

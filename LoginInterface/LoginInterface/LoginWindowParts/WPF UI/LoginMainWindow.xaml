@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="410" Width="300"
+        Title="MainWindow" Height="461.797" Width="300"
         Background="{StaticResource Background}">
-    
-    
+
+
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="Login_Executed" CanExecute="Login_CanExecute" />
+        <CommandBinding Command="ManagementOperation" Executed="Management_Operations_Executed" CanExecute="Management_Operations_Can_Execute" />
         <CommandBinding Command="local:CustomCommands.Exit" Executed="Cancel_Executed" CanExecute="Cancel_CanExecute" />
+        
     </Window.CommandBindings>
     <StackPanel Margin="10">
         <Image Width="200" Source="/SharedResources/Images/Emblem.png"/>
@@ -30,6 +32,7 @@
         <Grid>
             <Button Command="local:CustomCommands.Exit" Content="Cancel" Width="90" Height="40" Margin="162,26,10,-26" />
             <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" Margin="10,26,162,-26" />
+            <Button Command="ManagementOperation" Content="Management Operations" Height="40" Margin="50,86,50,-86" />
         </Grid>
     </StackPanel>
 </Window>
