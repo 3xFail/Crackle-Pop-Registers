@@ -16,7 +16,7 @@ namespace CSharpClient
             Console.WriteLine( "Enter the port: " );
             int port = Int32.Parse( Console.ReadLine() );
 
-            Console.WriteLine( "Enter your username: " );
+            Console.WriteLine("Enter your username: ");
             string username = Console.ReadLine();
 
             Console.WriteLine( "Enter your password: " );
