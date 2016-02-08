@@ -16,6 +16,8 @@ namespace SnapRegisters
 	// Document me.
 	public partial class LoginMainWindow : Window
 	{
+        private bool isLoggedIn= false;
+
 		public LoginMainWindow()
 		{
 			InitializeComponent();
@@ -30,24 +32,38 @@ namespace SnapRegisters
 
 		private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			LoginDetails attempt = new LoginDetails();
-			
-			attempt.Password = passwordField.Password;
-			attempt.Username = usernameField.Text;
+            Employee loggedIn = null;
+
+            if (!isLoggedIn)
+            {
+                LoginDetails attempt = new LoginDetails();
+
+                attempt.Password = passwordField.Password;
+                attempt.Username = usernameField.Text;
 #if DEBUG
-			ConnectToMockServer(attempt);
+                loggedIn = ConnectToMockServer(attempt);
 #else
-			ConnectToServer(attempt);
+			    ConnectToServer(attempt);
 #endif
-		}
+            }
+            else
+            {
+                OpenInterfaceWindow(loggedIn);
+                this.Close();
+            }
+        }
 
 
 
 
 
 
-		private void OpenInterfaceWindow(Employee employeeLoggedIn)
+        private void OpenInterfaceWindow(Employee employeeLoggedIn)
 		{
+
+
+
+
 #if ADMIN
 			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn);
 			MainAdminWindow.Show();
@@ -55,22 +71,29 @@ namespace SnapRegisters
 			SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn);
 			MainRegisterWindow.Show();
 #else
-			MessageBox.Show("Success!");
+			MessageBox.Show("Success: Interface now on screen.");
 #endif
 		}
 #if DEBUG
 
-		private void ConnectToMockServer(LoginDetails attempt)
+		private Employee ConnectToMockServer(LoginDetails attempt)
 		{
-			if (attempt.Username == "admin" && attempt.Password == "password")
-			{
-				Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-				OpenInterfaceWindow(loggedIn);
-				this.Close();
-			}
-			else
-				MessageBox.Show("Failure");    
-		}
+            if (attempt.Username == "admin" && attempt.Password == "password")
+            {
+                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+                //OpenInterfaceWindow(loggedIn);
+                //this.Close();
+                MessageBox.Show("Success!");
+                isLoggedIn = true;
+                return loggedIn;
+            }
+            else
+            {
+                MessageBox.Show("Failure");
+                isLoggedIn = false;
+                return null;
+            }
+        }
 #else
 		private void ConnectToServer(LoginDetails attempt)
 		{
