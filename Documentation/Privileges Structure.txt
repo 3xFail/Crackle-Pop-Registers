@@ -1,15 +1,5 @@
 Unlimited levels of management, customizable by admin.
 
-Admin Console Privileges
--Log in
--Employee logins: Change/View
--Privileges: Change/View
--Levels of Management: Change/View
--Register layout: Change/View
--Coupons: Change/View
--Inventory: Change/View
--Stock: Change/View
-
 
 Register Privileges
 -Log in
@@ -24,5 +14,17 @@ Register Privileges
 -Program Close/System release: Yes/No
 -Restart System: Yes/No
 -Register access past certain time of day: Yes/No
+
+
+
+Admin Console Privileges
+-Log in
+-Employee logins: Change/View
+-Privileges: Change/View
+-Levels of Management: Change/View
+-Register layout: Change/View
+-Coupons: Change/View
+-Inventory: Change/View
+-Stock: Change/View
 
 
