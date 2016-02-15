@@ -16,7 +16,6 @@ namespace SnapRegisters
 	// Document me.
 	public partial class LoginMainWindow : Window
 	{
-        private bool isLoggedIn= false;
 
 		public LoginMainWindow()
 		{
@@ -32,33 +31,32 @@ namespace SnapRegisters
 
 		private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-            Employee loggedIn = null;
+			Employee loggedIn = null;
 
-            if (!isLoggedIn)
-            {
-                LoginDetails attempt = new LoginDetails();
+			LoginDetails attempt = new LoginDetails();
 
-                attempt.Password = passwordField.Password;
-                attempt.Username = usernameField.Text;
+			attempt.Password = passwordField.Password;
+			attempt.Username = usernameField.Text;
 #if DEBUG
-                loggedIn = ConnectToMockServer(attempt);
+			loggedIn = ConnectToMockServer(attempt);
 #else
-			    ConnectToServer(attempt);
+			loggedIn = ConnectToServer(attempt);
 #endif
-            }
-            else
-            {
-                OpenInterfaceWindow(loggedIn);
-                this.Close();
-            }
-        }
+			if (loggedIn != null)
+			{
+				OpenInterfaceWindow(loggedIn);
+				this.Close();
+			}
+			else
+				MessageBox.Show("Failed to connect.");
+		}
 
 
 
 
 
 
-        private void OpenInterfaceWindow(Employee employeeLoggedIn)
+		private void OpenInterfaceWindow(Employee employeeLoggedIn)
 		{
 
 
@@ -75,27 +73,20 @@ namespace SnapRegisters
 #endif
 		}
 #if DEBUG
-
 		private Employee ConnectToMockServer(LoginDetails attempt)
 		{
-            if (attempt.Username == "admin" && attempt.Password == "password")
-            {
-                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-                //OpenInterfaceWindow(loggedIn);
-                //this.Close();
-                MessageBox.Show("Success!");
-                isLoggedIn = true;
-                return loggedIn;
-            }
-            else
-            {
-                MessageBox.Show("Failure");
-                isLoggedIn = false;
-                return null;
-            }
-        }
+			if (attempt.Username == "admin" && attempt.Password == "password")
+			{
+				Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
+				return loggedIn;
+			}
+			else
+			{
+				return null;
+			}
+		}
 #else
-		private void ConnectToServer(LoginDetails attempt)
+		private Employee ConnectToServer(LoginDetails attempt)
 		{
 			connection_session connection;
 			try
@@ -104,18 +95,18 @@ namespace SnapRegisters
 
 				Employee loggedIn = new Employee(10, attempt.Username, null, "987654321", new DateTime(1, 1, 1), 31);
 
-				OpenInterfaceWindow(loggedIn);
-
-				this.Close();
+				return loggedIn;
 			}
 			catch (InvalidOperationException ee)
 			{
 				MessageBox.Show("Invalid username or password");
+				return null;
 
 			}
 			catch (Exception eee)
 			{
 				MessageBox.Show("Server not found");
+				return null;
 			}
 		}
 #endif
@@ -130,14 +121,14 @@ namespace SnapRegisters
 			Application.Current.Shutdown();
 		}
 
-        private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
+		private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
 
-        }
+		}
 
-        private void Management_Operations_Can_Execute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = false;
-        }
-    }
+		private void Management_Operations_Can_Execute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = false;
+		}
+	}
 }
