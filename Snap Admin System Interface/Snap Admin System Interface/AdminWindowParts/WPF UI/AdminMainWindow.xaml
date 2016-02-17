@@ -39,8 +39,14 @@
         <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="5" Margin="0.6,0,-0.4,-0.147" Grid.RowSpan="3">
             <TabControl Name="InventoryTabs" Visibility="Visible">
                 <TabItem Header="Inventory">
-                    <Label Content="Content goes here..." />
+                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
+                        <Button x:Name="AddBtn" Content="Add" Height="50"/>
+                        <Button x:Name="SearchBtn" Content="Search" Height="50"/>
+                        <Button x:Name="CatalogBtn" Content="Catalog" Height="50"/>
+                        <Button x:Name="BackBtn" Content="Back" Height="50"/>
+                    </StackPanel>
                 </TabItem>
+                
             </TabControl>
             <TabControl Name="AnalysisTabs" Visibility="Collapsed">
                 <TabItem Header="Gross Earnings">
