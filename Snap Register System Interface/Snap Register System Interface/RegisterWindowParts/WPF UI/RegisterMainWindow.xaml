@@ -91,7 +91,7 @@ ResizeMode="NoResize"
 						<ColumnDefinition Width=".5*"/>
 						<ColumnDefinition Width=".5*"/>
 					</Grid.ColumnDefinitions>
-					
+
                     <!--Bar code Box-->
                     <Viewbox Grid.Column="0" Margin="3,0,3,0"
 							 HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
