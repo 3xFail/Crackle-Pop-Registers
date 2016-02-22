@@ -26,9 +26,15 @@ namespace SnapRegisters
         public AdminMainWindow(Employee currentEmployee)
         {
             InitializeComponent();
-			m_employee = currentEmployee;
+			//m_employee = currentEmployee;
         }
 
+        //public AddPage(Employee currentEmployee)
+        //{
+        //    //InitializeComponent();
+        //}
+
+        // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Visible;
@@ -38,6 +44,7 @@ namespace SnapRegisters
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
         }
+        // opens the analytics page
         private void btn_Anal(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Collapsed;
@@ -47,6 +54,7 @@ namespace SnapRegisters
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
         }
+        // opens the employees page
         private void btn_Emp(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Collapsed;
@@ -56,6 +64,7 @@ namespace SnapRegisters
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
         }
+        // opens the cutomers page
         private void btn_Cust(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Collapsed;
@@ -65,6 +74,7 @@ namespace SnapRegisters
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
         }
+        // opens the sale page
         private void btn_Sales(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Collapsed;
@@ -74,6 +84,7 @@ namespace SnapRegisters
             SalesTabs.Visibility = Visibility.Visible;
             OptionsTabs.Visibility = Visibility.Collapsed;
         }
+        // opens the options page
         private void btn_Opt(object sender, RoutedEventArgs e)
         {
             InventoryTabs.Visibility = Visibility.Collapsed;
@@ -84,15 +95,11 @@ namespace SnapRegisters
             OptionsTabs.Visibility = Visibility.Visible;
         }
 
-        private void EmployeesTabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        
 		
-		private Employee m_employee = null;
+		//private Employee m_employee = null;
 
-		private DockPanel m_itemPanel = null;
-		private DockPanel m_discountList = null;
+		//private DockPanel m_itemPanel = null;
+		//private DockPanel m_discountList = null;
 	}   
 }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="SnapRegisters.AdminMainWindow"
+<Window x:Class="SnapRegisters.AdminMainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -35,9 +35,9 @@
                 <Button x:Name="Options_btn" Margin="0,30" Click="btn_Opt" Height="60">Options</Button>
             </StackPanel>
         </DockPanel>
-        
+
         <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="5" Margin="0.6,0,-0.4,-0.147" Grid.RowSpan="3">
-            <TabControl Name="InventoryTabs" Visibility="Visible" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="InventoryTabs" Visibility="Visible" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Inventory">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="AddBtn" Content="Add" Height="50"/>
@@ -47,7 +47,7 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-            <TabControl Name="AnalysisTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="AnalysisTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Analysis">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="GrossBtn" Content="Gross Earnings" Height="50"/>
@@ -56,7 +56,7 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-            <TabControl Name="EmployeesTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="EmployeesTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Employees">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="EmpAddBtn" Content="Add" Height="50"/>
@@ -70,7 +70,7 @@
                     </StackPanel>-->
                 </TabItem>
             </TabControl>
-            <TabControl Name="CustomersTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="CustomersTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Customers">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="CustSearchBtn" Content="Search" Height="50"/>
@@ -79,7 +79,7 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-            <TabControl Name="SalesTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="SalesTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Sales and Coupons">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="SalesBtn" Content="Sales" Height="50"/>
@@ -90,7 +90,7 @@
                     </StackPanel>
                 </TabItem>
             </TabControl>
-            <TabControl Name="OptionsTabs" Visibility="Collapsed" SelectionChanged="EmployeesTabs_SelectionChanged" Margin="-90,0,-0.2,-0.253">
+            <TabControl Name="OptionsTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Options">
                     <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
                         <Button x:Name="MngBtn" Content="Manage Registers" Height="50"/>
