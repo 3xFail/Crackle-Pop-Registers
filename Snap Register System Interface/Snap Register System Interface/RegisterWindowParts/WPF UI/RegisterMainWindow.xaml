@@ -83,12 +83,22 @@ ResizeMode="NoResize"
 							Margin="60,0,0,60"
 							Width="80" Height="80"/>
 				</Viewbox>
-				<!--Totals Box-->
+
+                <!--Totals Area-->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
 						<ColumnDefinition Width=".5*"/>
 						<ColumnDefinition Width=".5*"/>
 					</Grid.ColumnDefinitions>
+					
+                    <!--Bar code Box-->
+                    <Viewbox Grid.Column="0" Margin="3,0,3,0"
+							 HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                        <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Viewbox}}, Path=ActualWidth}">
+                            <TextBox Grid.Row="1"  Text="C"
+									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Grid>
+                    </Viewbox>
                     <!--Totals Box-->
                     <Border Grid.Column="1"
 						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
