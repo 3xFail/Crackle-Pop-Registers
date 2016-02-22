@@ -5,11 +5,12 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:SnapRegisters"
 		mc:Ignorable="d"
-WindowStyle="None" 
-WindowState="Normal"
-ResizeMode="CanResize"
+
+WindowStyle="None"
+WindowState="Maximized"
+ResizeMode="NoResize"
 		Title="MainWindow" Height="350" Width="525">
-    <!--Everything-->
+    <!--C Everything-->
     <Grid>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
