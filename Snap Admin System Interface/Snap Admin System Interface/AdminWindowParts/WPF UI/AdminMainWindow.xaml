@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
         Title="Snap Admininstrator Program"
-        WindowState="Maximized" WindowStyle="SingleBorderWindow">
+        WindowState="Maximized"  WindowStyle="SingleBorderWindow">
     <!--Height="768" Width="1024"-->
 
     <Grid Margin="0,0,0,0">
@@ -35,7 +35,7 @@
                 <Button x:Name="Options_btn" Margin="0,30" Click="btn_Opt" Height="60">Options</Button>
             </StackPanel>
         </DockPanel>
-
+        
         <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="5" Margin="0.6,0,-0.4,-0.147" Grid.RowSpan="3">
             <TabControl Name="InventoryTabs" Visibility="Visible" Margin="-90,0,-0.2,-0.253">
                 <TabItem Header="Inventory">
