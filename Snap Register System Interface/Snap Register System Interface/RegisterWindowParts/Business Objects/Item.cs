@@ -12,8 +12,8 @@ namespace SnapRegisters
 	//			This class represents an item in the sale. It contains basic information about it such as price,
 	//			name and its id number.
 	//		MEMBERS:
-	//			public int ID;
-	//				The id of this item.
+	//			public string ID;
+	//				The UPC code of this item.
 	//			public string ItemName
 	//				The name of this item.
 	//			public double Price
@@ -35,7 +35,7 @@ namespace SnapRegisters
 	{
 		public Item()
 		{
-			ID = 0;
+			ID = "";
 			ItemName = "";
 			Price = 0;
 			Discounts = new List<KeyValuePair<string, double>>();
@@ -49,7 +49,7 @@ namespace SnapRegisters
 			Discounts = source.Discounts;
 		}
 
-		public int ID { get; set; }
+		public string ID { get; set; }
 		public string ItemName { get; set; }
 		public double Price { get; set; }
 		public List<KeyValuePair<string, double>> Discounts { get; set; }

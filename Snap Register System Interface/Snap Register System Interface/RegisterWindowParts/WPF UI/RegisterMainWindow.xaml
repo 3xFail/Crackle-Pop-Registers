@@ -9,7 +9,7 @@
 WindowStyle="None"
 WindowState="Maximized"
 ResizeMode="NoResize"
-		Title="MainWindow" Height="350" Width="525">
+		Title="MainWindow" Height="350" Width="525" KeyDown="ShortcutKeyPressed" MouseDown="WindowClicked">
     <!--C Everything-->
     <Grid>
         <Grid Margin="10">
@@ -96,8 +96,8 @@ ResizeMode="NoResize"
                     <Viewbox Grid.Column="0" Margin="3,0,3,0"
 							 HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                         <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Viewbox}}, Path=ActualWidth}">
-                            <TextBox Grid.Row="1"  Text="C"
-									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                            <TextBox Grid.Row="1"  Text="C" x:Name="UPCField"
+									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" KeyDown="ShortcutKeyPressed"/>
                         </Grid>
                     </Viewbox>
                     <!--Totals Box-->
