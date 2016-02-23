@@ -85,9 +85,9 @@ namespace SnapRegisters
 
 		private void UpdateTotals()
 		{
-			CostTotal.Text = m_costTotal.ToString();
-			SavingsTotal.Text = m_savingsTotal.ToString();
-			Total.Text = m_totalTotal.ToString();
+			CostTotal.Text = m_costTotal.ToString( "C" );
+			SavingsTotal.Text = m_savingsTotal.ToString( "C" );
+			Total.Text = m_totalTotal.ToString( "C" );
 		}
 
 

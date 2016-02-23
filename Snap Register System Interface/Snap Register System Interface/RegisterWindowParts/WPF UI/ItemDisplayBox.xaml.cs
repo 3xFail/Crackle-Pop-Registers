@@ -29,7 +29,7 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
 
 			NameField.Text = m_sourceItem.ItemName;
 			rawItemPrice = m_sourceItem.Price;
-			AmountField.Text = rawItemPrice.ToString();
+			AmountField.Text = rawItemPrice.ToString( "C" );
 
 			PreviewMouseLeftButtonDown += DisplayItemClickedEvent;
 		}
