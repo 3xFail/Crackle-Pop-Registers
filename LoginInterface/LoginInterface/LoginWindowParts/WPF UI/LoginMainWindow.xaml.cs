@@ -9,7 +9,7 @@ using PointOfSales.Permissions;
 using System.Device.Location;
 using System.Device;
 using CSharpClient;
-
+using System.Management;
 
 
 using System.Security.Cryptography;
@@ -17,27 +17,27 @@ using System.Xml;
 
 namespace SnapRegisters
 {
-	// Document me.
-	public partial class LoginMainWindow : Window
-	{
+    // Document me.
+    public partial class LoginMainWindow : Window
+    {
         private bool isLoggedIn = false;
         private connection_session connection;
-		public LoginMainWindow()
-		{
-			InitializeComponent();
+        public LoginMainWindow()
+        {
+            InitializeComponent();
 
             FocusManager.SetFocusedElement(this, usernameField);
 
-		}
+        }
 
-		private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
-		}
+        private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
+        }
 
 
-		private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
+        private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
             Employee loggedIn = null;
 
             if (!isLoggedIn)
@@ -47,7 +47,7 @@ namespace SnapRegisters
                 attempt.Password = passwordField.Password;
                 attempt.Username = usernameField.Text;
 
-			    ConnectToServer(attempt);
+                ConnectToServer(attempt);
             }
             else
             {
@@ -62,7 +62,7 @@ namespace SnapRegisters
 
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
-		{
+        {
 
 
 
@@ -71,16 +71,16 @@ namespace SnapRegisters
 			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn);
 			MainAdminWindow.Show();
 #elif REGISTER
-			SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, connection);
+            SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, connection);
             MainRegisterWindow.Show();
-            
+
 #else
 			MessageBox.Show("Success: Interface now on screen.");
 #endif
-		}
+        }
 
-		private Employee ConnectToMockServer(LoginDetails attempt)
-		{
+        private Employee ConnectToMockServer(LoginDetails attempt)
+        {
             if (attempt.Username == "admin" && attempt.Password == "password")
             {
                 Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
@@ -98,11 +98,11 @@ namespace SnapRegisters
             }
         }
 
-		private void ConnectToServer(LoginDetails attempt)
-		{
-			try
-			{
-				connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
+        private void ConnectToServer(LoginDetails attempt)
+        {
+            try
+            {
+                connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
 
 
@@ -114,40 +114,41 @@ namespace SnapRegisters
                 string phone = item.Attributes["EmployeePhone"].Value;
                 int id = Int32.Parse(item.Attributes["UserID"].Value);
 
-				Employee loggedIn = new Employee(id, attempt.Username, null, phone, new DateTime(1, 1, 1), permissions);
+                Employee loggedIn = new Employee(id, attempt.Username, null, phone, new DateTime(1, 1, 1), permissions);
 
                 isLoggedIn = true;
-				OpenInterfaceWindow(loggedIn);
+                OpenInterfaceWindow(loggedIn);
 
-				this.Close();
-			}
-			catch (InvalidOperationException )
-			{
-				MessageBox.Show( "Invalid username or password" );
+                this.Close();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Invalid username or password");
 
-			}
-			catch (Exception ee)
-			{
-				MessageBox.Show(ee.ToString());
-			}
-		}
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.ToString());
+            }
+        }
 
-		private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = true;
-		}
+        private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
-		private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			Application.Current.Shutdown();
-		}
+        private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //TOCODE
             MessageBox.Show("Manager functions pop up now");
-            SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup();
-            managerFunctionsPopup.Show();
+            SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup(this);
+            //this.
+            //managerFunctionsPopup.Show();
 
         }
 
@@ -156,9 +157,32 @@ namespace SnapRegisters
             e.CanExecute = true;
         }
 
-        private void Manager_Function_Button_Click(object sender, RoutedEventArgs e)
+
+
+        private void btnClosePopup_Click(object sender, RoutedEventArgs e)
         {
-           
+            myPopup.IsOpen = false;
+        }
+
+        private void btnShowPopup_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender == btnShowPopup)
+            {
+                myPopup.IsOpen = true;
+            }
+
+        }
+
+        private void Restart_Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Shutdown", "-r -t 00");
+            btnClosePopup_Click(sender, e);
+        }
+
+        private void Shutdown_Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("Shutdown", "-s -t 00");
+            btnClosePopup_Click(sender, e);
         }
     }
 }

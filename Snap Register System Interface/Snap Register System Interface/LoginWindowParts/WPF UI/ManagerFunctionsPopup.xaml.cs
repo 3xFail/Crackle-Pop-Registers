@@ -17,11 +17,22 @@ namespace SnapRegisters
     /// <summary>
     /// Interaction logic for ManagerFunctionsPopup.xaml
     /// </summary>
-    public partial class ManagerFunctionsPopup : Window
+    public partial class ManagerFunctionsPopup
     {
-        public ManagerFunctionsPopup()
+        LoginMainWindow _originalWindow;
+
+        
+
+        public ManagerFunctionsPopup(LoginMainWindow originalWindow)
         {
             InitializeComponent();
+            _originalWindow = originalWindow;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //this.Close();
+
         }
     }
 }
