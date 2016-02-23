@@ -163,19 +163,27 @@ namespace SnapRegisters
 
             m_connection.write("EXEC [dbo].[GetItem] \"" + itemID + "\"");
 
-            XmlNode it = m_connection.Response[0];
-
-            float price = float.Parse(it.Attributes["Price"].Value);
-            string name = it.Attributes["Name"].Value;
-            bool active = it.Attributes["Active_Use"].Value == "1";
-            int product_id = int.Parse(it.Attributes["ProductID"].Value);
+            try
+            {
+                XmlNode it = m_connection.Response[0];
 
 
-            // if the active use is false a error needs to be thrown
-            Item newItem = new Item(name, price, itemID);
-            
+                float price = float.Parse( it.Attributes["Price"].Value );
+                string name = it.Attributes["Name"].Value;
+                bool active = it.Attributes["Active_Use"].Value == "1";
+                int product_id = int.Parse( it.Attributes["ProductID"].Value );
 
-            return newItem;
+
+                // if the active use is false a error needs to be thrown
+                Item newItem = new Item( name, price, itemID );
+
+
+                return newItem;
+            }
+            catch( Exception e )
+            {
+                throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
+            }
 		}
 
 		public ItemOutputDelegate OutputDelegate { get; set; }
