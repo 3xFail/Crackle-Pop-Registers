@@ -9,7 +9,7 @@
 WindowStyle="None"
 WindowState="Maximized"
 ResizeMode="NoResize"
-		Title="MainWindow" Height="350" Width="525">
+		Title="MainWindow" Height="350" Width="525" KeyDown="ShortcutKeyPressed" MouseDown="WindowClicked">
     <!--C Everything-->
     <Grid>
         <Grid Margin="10">
@@ -95,10 +95,10 @@ ResizeMode="NoResize"
                     <!--Bar code Box-->
                     <Grid>
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
-                            <TextBox Text="C" Height="20" Width="100"/>
+                            <TextBox x:Name="UPCField" Text="C" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
                         </Viewbox>
                     </Grid>
-
+                    
                     <!--Totals Box-->
                     <Border Grid.Column="1"
 						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">

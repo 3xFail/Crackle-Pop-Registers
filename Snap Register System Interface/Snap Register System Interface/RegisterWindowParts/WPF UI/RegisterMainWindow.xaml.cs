@@ -56,6 +56,7 @@ namespace SnapRegisters
 
 			m_employee = currentEmployee;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
+			FocusManager.SetFocusedElement(this, UPCField);
 		}
 
 		private void AddItemToOutputPanels(Item itemToAdd)
@@ -82,6 +83,29 @@ namespace SnapRegisters
 
 		private DockPanel m_itemPanel = null;
 		private DockPanel m_discountList = null;
+
+		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
+		{
+			switch (e.Key)
+			{
+				case Key.Enter:
+					try { m_transaction.AddItem(UPCField.Text); }
+					catch (Exception error) { }
+					break;
+				case Key.Escape:
+					FocusManager.SetFocusedElement(this, UPCField);
+					break;
+				default:
+					break;
+					
+					
+			}
+			
+		}
+		private void WindowClicked(object sender, MouseButtonEventArgs e)
+		{
+			FocusManager.SetFocusedElement(this, UPCField);
+		}
 	}
 }
 
