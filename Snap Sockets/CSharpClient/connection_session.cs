@@ -17,31 +17,27 @@ namespace CSharpClient
             _username = username;
             //connect to a remote device
          
-                //establish the remote endpoint for the socket
-                _remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );
+            //establish the remote endpoint for the socket
+            _remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );
 
-                //create a TCP/IP socket
-                _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-                _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
+            //create a TCP/IP socket
+            _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+            _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
 
             connect( password );
-            
-           
-
         }
 
         private void connect( string password )
         {
             //connects the socket to the remote endpoint. catch any errors.
            
-                _sender.Connect( _remoteEP );
-                Console.WriteLine( "Socket connected to {0}", _sender.RemoteEndPoint.ToString() );
-                byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
-                _sender.Send( msg );
-                Thread.Sleep( 500 );
-                read_response();
+            _sender.Connect( _remoteEP );
+            byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
 
+            _sender.Send( msg );
 
+            Thread.Sleep( 500 );
+            read_response();
          
         }
 
@@ -66,7 +62,6 @@ namespace CSharpClient
             _msg_queue.First().encode_username( _username ); //attach username to end of message
 
             int bytessent = _sender.Send( _msg_queue.First().data(), _msg_queue.First().total_length( true ), SocketFlags.None );
-            //Thread.Sleep( 1000 );
             read_response();
 
             _msg_queue.Dequeue();
@@ -86,8 +81,13 @@ namespace CSharpClient
                 _sender.Receive( msg._data, message.header_length, message.id_length, SocketFlags.None );
                 if( msg.decode_id() )
                 {
-                    _sender.Receive( msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None );
-                    parse_message( msg );
+                    if( msg._body_length != 0 )
+                    {
+                        _sender.Receive( msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None );
+                        parse_message( msg );
+                    }
+                    else
+                        Response = new XmlDocument().GetElementsByTagName( "" ); //if we have an incoming empty message, don't bother parsing. Just set Response to an empty list
                 }
             }
         }
@@ -101,8 +101,15 @@ namespace CSharpClient
             else
             {
                 var doc = new XmlDocument();
-                doc.LoadXml(msg.ToString());
-                Response = doc.GetElementsByTagName("row"); //If any stored procedure does not return data with 'FOR XML RAW', this will throw an exception. Ryan pls.
+
+                try
+                {
+                    doc.LoadXml( msg.ToString() ); //try to convert the response to an xml object.
+                }
+                catch ( XmlException ){ } //if it fails, then GetElementsByTagName is still fine. It will simply return an empty list. So we don't need to do anything here.
+
+                Response = doc.GetElementsByTagName( "row" ); //If any stored procedure does not return data with 'FOR XML RAW', this will be empty despite valid xml being found.
+
             }
         }
 

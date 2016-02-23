@@ -105,13 +105,19 @@ namespace SnapRegisters
 			if (e.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
 				UPCField.Clear();
 
-			if (e.Key == Key.Enter)
-				try {
-						m_transaction.AddItem(UPCField.Text);
-						UPCField.Clear();
-					}
-				catch (Exception) { }
-			if (e.Key == Key.Escape)
+            if( e.Key == Key.Enter )
+            {
+                try
+                {
+                    m_transaction.AddItem( UPCField.Text );
+                    UPCField.Clear();
+                }
+                catch( Exception ex )
+                {
+                    MessageBox.Show( ex.Message );
+                }
+            }
+			else if (e.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
 		}
 		private void WindowClicked(object sender, MouseButtonEventArgs e)
