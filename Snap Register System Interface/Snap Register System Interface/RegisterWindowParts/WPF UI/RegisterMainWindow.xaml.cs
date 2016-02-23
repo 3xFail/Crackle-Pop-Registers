@@ -89,21 +89,14 @@ namespace SnapRegisters
 
 		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
 		{
-			switch (e.Key)
-			{
-				case Key.Enter:
-					try { m_transaction.AddItem(UPCField.Text); }
-					catch (Exception error) { }
-					break;
-				case Key.Escape:
-					FocusManager.SetFocusedElement(this, UPCField);
-					break;
-				default:
-					break;
-					
-					
-			}
-			
+			if (e.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+				UPCField.Clear();
+
+			if (e.Key == Key.Enter)
+				try { m_transaction.AddItem(UPCField.Text); }
+				catch (Exception error) { }
+			if (e.Key == Key.Escape)
+				FocusManager.SetFocusedElement(this, UPCField);
 		}
 		private void WindowClicked(object sender, MouseButtonEventArgs e)
 		{
