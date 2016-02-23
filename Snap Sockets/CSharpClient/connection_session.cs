@@ -35,13 +35,12 @@ namespace CSharpClient
             //connects the socket to the remote endpoint. catch any errors.
            
                 _sender.Connect( _remoteEP );
-                Console.WriteLine( "Socket connected to {0}", _sender.RemoteEndPoint.ToString() );
                 byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
+
                 _sender.Send( msg );
+
                 Thread.Sleep( 500 );
                 read_response();
-
-
          
         }
 
@@ -66,7 +65,6 @@ namespace CSharpClient
             _msg_queue.First().encode_username( _username ); //attach username to end of message
 
             int bytessent = _sender.Send( _msg_queue.First().data(), _msg_queue.First().total_length( true ), SocketFlags.None );
-            //Thread.Sleep( 1000 );
             read_response();
 
             _msg_queue.Dequeue();
@@ -101,8 +99,14 @@ namespace CSharpClient
             else
             {
                 var doc = new XmlDocument();
-                doc.LoadXml(msg.ToString());
-                Response = doc.GetElementsByTagName("row"); //If any stored procedure does not return data with 'FOR XML RAW', this will throw an exception. Ryan pls.
+                try
+                {
+                    doc.LoadXml( msg.ToString() ); //try to convert the response to an xml object.
+                }
+                catch ( XmlException ){ } //if it fails, then GetElementsByTagName is still fine. It will simply return an empty list. So we don't need to do anything here.
+
+                Response = doc.GetElementsByTagName( "row" ); //If any stored procedure does not return data with 'FOR XML RAW', this will be empty. Ryan pls.
+
             }
         }
 
