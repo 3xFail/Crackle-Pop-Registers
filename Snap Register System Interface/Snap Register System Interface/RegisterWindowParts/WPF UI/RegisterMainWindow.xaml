@@ -9,7 +9,7 @@
 WindowStyle="None"
 WindowState="Maximized"
 ResizeMode="NoResize"
-		Title="MainWindow" Height="350" Width="525" KeyDown="ShortcutKeyPressed" MouseDown="WindowClicked">
+		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked">
     <!--C Everything-->
     <Grid>
         <Grid Margin="10">

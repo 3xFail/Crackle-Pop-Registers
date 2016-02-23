@@ -64,19 +64,17 @@ namespace SnapRegisters
 
 		private void AddItemToOutputPanels(Item itemToAdd)
 		{
-			MessageBox.Show(itemToAdd.ItemName);
+			//MessageBox.Show(itemToAdd.ItemName);
 
 
-			//ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
+			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
 
 			//// Bind the item's price. type's don't make sense here.
 			//Binding ItemPriceBinding = new Binding();
 			//ItemPriceBinding.Source = itemToAdd;
 			//ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
 			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
-			TextBlock x = new TextBlock();
-			x.Text = "Item";
-			ItemsList.Children.Add(x);
+			ItemsList.Children.Add(itemDescription.itemName);
 
 		}
         private connection_session m_connection = null;
@@ -88,6 +86,9 @@ namespace SnapRegisters
 
 		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
 		{
+			if (UPCField.Text == string.Empty)
+				return;
+
 			if (e.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
 				UPCField.Clear();
 
@@ -96,7 +97,7 @@ namespace SnapRegisters
 						m_transaction.AddItem(UPCField.Text);
 						UPCField.Clear();
 					}
-				catch (Exception error) { }
+				catch (Exception) { }
 			if (e.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
 		}
