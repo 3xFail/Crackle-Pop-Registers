@@ -16,7 +16,7 @@ using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
-
+using SnapRegisters.RegisterWindowParts.WPF_UI;
 namespace SnapRegisters
 {
 	//*************************************************************************************************************
@@ -68,13 +68,13 @@ namespace SnapRegisters
 
 
 			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
-
+			itemDescription.Height = 100;
 			//// Bind the item's price. type's don't make sense here.
 			//Binding ItemPriceBinding = new Binding();
 			//ItemPriceBinding.Source = itemToAdd;
 			//ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
 			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
-			ItemsList.Children.Add(itemDescription.itemName);
+			ItemsList.Children.Add(itemDescription);
 
 		}
         private connection_session m_connection = null;
