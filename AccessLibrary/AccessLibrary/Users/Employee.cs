@@ -14,7 +14,7 @@ namespace PointOfSales.Users
 			: base()
 		{ }
 
-		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, int permissions)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, long permissions)
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{
 			m_employeePermissions = permissions;
