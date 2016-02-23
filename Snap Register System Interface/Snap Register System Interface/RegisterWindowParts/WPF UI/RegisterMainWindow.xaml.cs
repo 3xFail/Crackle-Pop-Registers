@@ -57,7 +57,7 @@ namespace SnapRegisters
 
 			m_employee = currentEmployee;
             m_connection = session;
-			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
+			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
 			FocusManager.SetFocusedElement(this, UPCField);
 		}
 

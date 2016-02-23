@@ -33,11 +33,11 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public class Item
 	{
-		public Item()
+		public Item(string Name, float price, string barcode)
 		{
-			ID = "";
-			ItemName = "";
-			Price = 0;
+			ID = barcode;
+			ItemName = Name;
+			Price = price;
 			Discounts = new List<KeyValuePair<string, double>>();
 		}
 		public Item(Item source)

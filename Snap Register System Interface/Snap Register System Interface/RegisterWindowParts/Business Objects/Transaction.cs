@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
+using CSharpClient;
+using System.Xml;
 
 namespace SnapRegisters
 {
@@ -59,13 +61,14 @@ namespace SnapRegisters
 		public delegate void ItemOutputDelegate(Item itemToAdd);
 
 		// TODO: Make it so that multiple of the same item can be added without breaking functions.
-		public Transaction(Employee employee, ItemOutputDelegate itemToAdd)
+		public Transaction(Employee employee, ItemOutputDelegate itemToAdd, connection_session session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
 			if (!Permissions.CheckPermissions(employee, Permissions.SystemPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
+            m_connection = session;
 			m_Employee = employee;
 			m_Items = new List<Item>();
 			OutputDelegate = itemToAdd;
@@ -157,13 +160,28 @@ namespace SnapRegisters
 		private Item ConstructItem(string itemID)
 		{
 			// TODO: Connect to database and construct item from given item ID.
-			Item newItem = new Item();
+			
 
-			return newItem;
+            m_connection.write("EXEC [dbo].[GetItem] \"" + itemID + "\"");
+
+            XmlNode it = m_connection.Response[0];
+
+            float price = float.Parse(it.Attributes["Price"].Value);
+            string name = it.Attributes["Name"].Value;
+            bool active = bool.Parse(it.Attributes["Active_Use"].Value);
+            int product_id = int.Parse(it.Attributes["ProductID"].Value);
+
+
+            // if the active use is false a error needs to be thrown
+            Item newItem = new Item(name, price, itemID);
+            
+
+            return newItem;
 		}
 
 		public ItemOutputDelegate OutputDelegate { get; set; }
 		private List<Item> m_Items = null;
 		private Employee m_Employee = null;
+        private connection_session m_connection = null;
 	}
 }
