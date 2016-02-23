@@ -107,7 +107,7 @@ namespace SnapRegisters
 
                 XmlNode item = connection.Response[0];
 
-                int permissions = Int32.Parse(item.Attributes["PermissionsID"].Value);
+                long permissions = long.Parse(item.Attributes["PermissionsID"].Value);
                 string phone = item.Attributes["EmployeePhone"].Value;
                 int id = Int32.Parse(item.Attributes["UserID"].Value);
 

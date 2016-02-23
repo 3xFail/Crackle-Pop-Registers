@@ -59,25 +59,24 @@ namespace SnapRegisters
             m_connection = session;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
 			FocusManager.SetFocusedElement(this, UPCField);
+
 		}
 
 		private void AddItemToOutputPanels(Item itemToAdd)
 		{
-			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
+			MessageBox.Show(itemToAdd.ItemName);
 
-			// Bind the item name.
-			Binding ItemNameBinding = new Binding();
-			ItemNameBinding.Source = itemToAdd;
-			ItemNameBinding.Path = new PropertyPath(itemToAdd.ItemName);
-			itemDescription.itemName.SetBinding(TextBlock.TextProperty, ItemNameBinding);
 
-			// Bind the item's price. type's don't make sense here.
-			Binding ItemPriceBinding = new Binding();
-			ItemPriceBinding.Source = itemToAdd;
-			ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
-			itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
+			//ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
 
-			m_itemPanel.Children.Add(itemDescription.displayItem);
+			//// Bind the item's price. type's don't make sense here.
+			//Binding ItemPriceBinding = new Binding();
+			//ItemPriceBinding.Source = itemToAdd;
+			//ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
+			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
+			TextBlock x = new TextBlock();
+			x.Text = "Item";
+			ItemsList.Children.Add(x);
 
 		}
         private connection_session m_connection = null;
@@ -93,7 +92,10 @@ namespace SnapRegisters
 				UPCField.Clear();
 
 			if (e.Key == Key.Enter)
-				try { AddItemToOutputPanels(m_transaction.AddItem(UPCField.Text)); }
+				try {
+						m_transaction.AddItem(UPCField.Text);
+						UPCField.Clear();
+					}
 				catch (Exception error) { }
 			if (e.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
