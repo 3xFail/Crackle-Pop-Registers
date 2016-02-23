@@ -20,7 +20,7 @@ namespace PointOfSales.Users
 			m_employeePermissions = permissions;
 		}
 
-		public int GetEmployeePermissions()
+		public long GetEmployeePermissions()
 		{
 			return m_employeePermissions;
 		}
@@ -28,7 +28,7 @@ namespace PointOfSales.Users
 
 		// Employees by default are allowed to use the register.
 		// See PointOfSales.Permissions for details.
-		private int m_employeePermissions = 0;
+		private long m_employeePermissions = 0;
 
 
 	}

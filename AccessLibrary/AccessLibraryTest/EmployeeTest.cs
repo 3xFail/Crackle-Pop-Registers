@@ -24,8 +24,8 @@ namespace AccessLibraryTest
 		{
 			PointOfSales.Users.Employee SallySue = new PointOfSales.Users.Employee(-1, "SallySue", null, "5", new DateTime(1, 2, 3), 1);
 			//Removing permissions to change permissions before changing permissions.
-			Permissions.RemovePermissions(SallySue, SallySue, Permissions.SystemPermissions.ChangePermissions);
-			Permissions.AddPermission(SallySue, SallySue, Permissions.SystemPermissions.UseRegister);
+			Permissions.RemovePermissions(SallySue, SallySue, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE);
+			Permissions.AddPermission(SallySue, SallySue, Permissions.SystemPermissions.LOG_IN_REGISTER);
 		}
     }
 }
