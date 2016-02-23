@@ -93,13 +93,12 @@ ResizeMode="NoResize"
 					</Grid.ColumnDefinitions>
 
                     <!--Bar code Box-->
-                    <Viewbox Grid.Column="0" Margin="3,0,3,0"
-							 HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                        <Grid Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Viewbox}}, Path=ActualWidth}">
-                            <TextBox Grid.Row="1"  Text="C"
-									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                        </Grid>
-                    </Viewbox>
+                    <Grid>
+                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
+                            <TextBox Text="C" Height="20" Width="100"/>
+                        </Viewbox>
+                    </Grid>
+
                     <!--Totals Box-->
                     <Border Grid.Column="1"
 						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
