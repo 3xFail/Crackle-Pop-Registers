@@ -169,7 +169,7 @@ namespace SnapRegisters
 
             float price = float.Parse(it.Attributes["Price"].Value);
             string name = it.Attributes["Name"].Value;
-            bool active = bool.Parse(it.Attributes["Active_Use"].Value);
+            bool active = it.Attributes["Active_Use"].Value == "1";
             int product_id = int.Parse(it.Attributes["ProductID"].Value);
 
 
