@@ -119,6 +119,15 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\SharedResources\Server\cppdb.dll">
+      <Link>SharedResources\Server\cppdb.dll</Link>
+    </Content>
+    <Resource Include="..\..\SharedResources\Server\database_connection_info.txt">
+      <Link>SharedResources\Server\database_connection_info.txt</Link>
+    </Resource>
+    <Content Include="..\..\SharedResources\Server\SocketsServer.exe">
+      <Link>SharedResources\Server\SocketsServer.exe</Link>
+    </Content>
     <Content Include="..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
