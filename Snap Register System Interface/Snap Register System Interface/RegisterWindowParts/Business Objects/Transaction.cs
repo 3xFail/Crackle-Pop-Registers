@@ -74,7 +74,7 @@ namespace SnapRegisters
 			OutputDelegate = itemToAdd;
 		}
 
-		public void AddItem(string itemID)
+		public Item AddItem(string itemID)
 		{
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -89,6 +89,7 @@ namespace SnapRegisters
 				OutputDelegate(newItem);
 
 				m_Items.Add(newItem);
+				return newItem;
 
 				// TODO: Make this box's height equal to the combined discount's height.
 			}

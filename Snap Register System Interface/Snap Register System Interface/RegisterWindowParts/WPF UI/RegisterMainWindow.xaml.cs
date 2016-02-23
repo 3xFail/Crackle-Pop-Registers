@@ -93,7 +93,7 @@ namespace SnapRegisters
 				UPCField.Clear();
 
 			if (e.Key == Key.Enter)
-				try { m_transaction.AddItem(UPCField.Text); }
+				try { AddItemToOutputPanels(m_transaction.AddItem(UPCField.Text)); }
 				catch (Exception error) { }
 			if (e.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
