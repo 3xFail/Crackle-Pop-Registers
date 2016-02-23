@@ -145,7 +145,7 @@ namespace SnapRegisters
 
         private void Manager_Function_Button_Click(object sender, RoutedEventArgs e)
         {
-            0
+           
         }
     }
 }
