@@ -58,6 +58,7 @@ namespace SnapRegisters
 			m_employee = currentEmployee;
             m_connection = session;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
+
 			FocusManager.SetFocusedElement(this, UPCField);
 
 		}
@@ -76,14 +77,26 @@ namespace SnapRegisters
 			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
 			ItemsList.Children.Add(itemDescription);
 
+			m_costTotal += itemToAdd.Price;
+			m_totalTotal += itemToAdd.Price;
+
+			UpdateTotals();
 		}
+
+		private void UpdateTotals()
+		{
+			CostTotal.Text = m_costTotal.ToString();
+			SavingsTotal.Text = m_savingsTotal.ToString();
+			Total.Text = m_totalTotal.ToString();
+		}
+
+
         private connection_session m_connection = null;
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
-
-		private DockPanel m_itemPanel = null;
-		private DockPanel m_discountList = null;
-
+		private double m_costTotal = 0;
+		private double m_savingsTotal = 0;
+		private double m_totalTotal = 0;
 		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
 		{
 			if (UPCField.Text == string.Empty)

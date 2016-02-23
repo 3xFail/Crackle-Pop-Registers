@@ -28,5 +28,10 @@ namespace SnapRegisters
 		}
 
 		private Item m_sourceItem = null;
+
+		private void ItemWindowDeactivated(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }
