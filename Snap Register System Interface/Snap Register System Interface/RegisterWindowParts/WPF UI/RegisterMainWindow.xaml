@@ -80,10 +80,12 @@ ResizeMode="NoResize"
 				<!--Company Logo Button-->
                 <Viewbox Grid.Row="0" Margin="10,0,0,0"
 						 VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Button x:Name="OptionsButton" Content="Btn" 
+                    <Button x:Name="OptionsButton"  
 							Margin="60,0,0,60"
-							Width="80" Height="80"/>
-				</Viewbox>
+							Width="80" Height="80" Background="{StaticResource Background}">
+                        <Image Source="/SharedResources/Images/Emblem.png" Width="76" Height="76"/>
+                    </Button>
+                </Viewbox>
 
                 <!--Totals Area-->
                 <Grid Grid.Row="1">
