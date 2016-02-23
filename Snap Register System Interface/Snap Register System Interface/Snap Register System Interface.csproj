@@ -86,7 +86,9 @@
       <DependentUpon>EditItemMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Item.cs" />
-    <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml.cs">
+      <DependentUpon>ItemDisplayBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
       <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -110,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

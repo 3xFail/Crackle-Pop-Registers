@@ -23,5 +23,10 @@ namespace SnapRegisters
 		{
 			InitializeComponent();
 		}
+
+		private void DiscountWindowDeactivated(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

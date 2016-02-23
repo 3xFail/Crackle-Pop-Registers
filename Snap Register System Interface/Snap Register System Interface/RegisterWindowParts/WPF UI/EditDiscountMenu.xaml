@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EditDiscountMenu" Height="200" Width="600"
 		WindowStyle="None"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize" Deactivated="DiscountWindowDeactivated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>

@@ -28,9 +28,9 @@ ResizeMode="NoResize"
                         <RowDefinition Height="0.95*"/>
                         <RowDefinition Height="0.05*"/>
                     </Grid.RowDefinitions>
-                    <DockPanel Name="ItemsList"
+                    <StackPanel Name="ItemsList"
 							   Grid.Row="0">
-                    </DockPanel>
+                    </StackPanel>
                     <!--Item Roll-up-->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
                         <TextBlock TextAlignment="Left" 
@@ -54,9 +54,9 @@ ResizeMode="NoResize"
                         <RowDefinition Height="0.95*"/>
                         <RowDefinition Height="0.05*"/>
                     </Grid.RowDefinitions>
-                    <DockPanel Name="CouponList"
+                    <StackPanel Name="CouponList"
 							   Grid.Row="0">
-                    </DockPanel>
+                    </StackPanel>
 					<!--Coupon Roll-up-->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
                         <TextBlock TextAlignment="Left"

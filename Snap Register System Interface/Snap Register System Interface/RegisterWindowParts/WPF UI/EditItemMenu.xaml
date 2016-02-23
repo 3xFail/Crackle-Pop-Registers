@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="EditItemMenu" Height="200" Width="600"
 		WindowStyle="None"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize" Deactivated="ItemWindowDeactivated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>

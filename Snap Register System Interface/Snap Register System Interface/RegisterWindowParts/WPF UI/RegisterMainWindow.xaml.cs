@@ -16,7 +16,7 @@ using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
-
+using SnapRegisters.RegisterWindowParts.WPF_UI;
 namespace SnapRegisters
 {
 	//*************************************************************************************************************
@@ -58,6 +58,7 @@ namespace SnapRegisters
 			m_employee = currentEmployee;
             m_connection = session;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
+
 			FocusManager.SetFocusedElement(this, UPCField);
 
 		}
@@ -68,22 +69,34 @@ namespace SnapRegisters
 
 
 			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
-
+			itemDescription.Height = 100;
 			//// Bind the item's price. type's don't make sense here.
 			//Binding ItemPriceBinding = new Binding();
 			//ItemPriceBinding.Source = itemToAdd;
 			//ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
 			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
-			ItemsList.Children.Add(itemDescription.itemName);
+			ItemsList.Children.Add(itemDescription);
 
+			m_costTotal += itemToAdd.Price;
+			m_totalTotal += itemToAdd.Price;
+
+			UpdateTotals();
 		}
+
+		private void UpdateTotals()
+		{
+			CostTotal.Text = m_costTotal.ToString();
+			SavingsTotal.Text = m_savingsTotal.ToString();
+			Total.Text = m_totalTotal.ToString();
+		}
+
+
         private connection_session m_connection = null;
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
-
-		private DockPanel m_itemPanel = null;
-		private DockPanel m_discountList = null;
-
+		private double m_costTotal = 0;
+		private double m_savingsTotal = 0;
+		private double m_totalTotal = 0;
 		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
 		{
 			if (UPCField.Text == string.Empty)
@@ -92,13 +105,19 @@ namespace SnapRegisters
 			if (e.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
 				UPCField.Clear();
 
-			if (e.Key == Key.Enter)
-				try {
-						m_transaction.AddItem(UPCField.Text);
-						UPCField.Clear();
-					}
-				catch (Exception) { }
-			if (e.Key == Key.Escape)
+            if( e.Key == Key.Enter )
+            {
+                try
+                {
+                    m_transaction.AddItem( UPCField.Text );
+                    UPCField.Clear();
+                }
+                catch( Exception ex )
+                {
+                    MessageBox.Show( ex.Message );
+                }
+            }
+			else if (e.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
 		}
 		private void WindowClicked(object sender, MouseButtonEventArgs e)
