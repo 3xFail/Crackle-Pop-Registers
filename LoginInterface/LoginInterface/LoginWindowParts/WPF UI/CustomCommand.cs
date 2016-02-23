@@ -20,5 +20,16 @@ namespace SnapRegisters
 					new KeyGesture(Key.F4, ModifierKeys.Alt)
 			}
 		);
-	}
+        public static readonly RoutedUICommand ManagerFunctions = new RoutedUICommand
+            (
+            "Manager_Functions",
+            "Manager_Functions",
+            typeof(CustomCommands)
+
+
+
+            );
+    }
+
+
 }

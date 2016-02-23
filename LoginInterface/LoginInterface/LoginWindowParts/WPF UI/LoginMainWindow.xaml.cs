@@ -24,6 +24,8 @@ namespace SnapRegisters
 		{
 			InitializeComponent();
 
+            FocusManager.SetFocusedElement(this, usernameField);
+
 		}
 
 		private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -137,12 +139,18 @@ namespace SnapRegisters
 
         private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            //TOCODE
+            MessageBox.Show("Manager functions pop up now");
         }
 
-        private void Management_Operations_Can_Execute(object sender, CanExecuteRoutedEventArgs e)
+        private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = false;
+            e.CanExecute = true;
+        }
+
+        private void Manager_Function_Button_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

@@ -5,32 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="461.797" Width="300"
+        Title="MainWindow" Height="789.797" Width="1197.5"
+        WindowStyle="None" ResizeMode="NoResize"  
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Background="{StaticResource Background}">
 
 
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="Login_Executed" CanExecute="Login_CanExecute" />
         <CommandBinding Command="local:CustomCommands.Exit" Executed="Cancel_Executed" CanExecute="Cancel_CanExecute" />
-        
+        <CommandBinding Command="local:CustomCommands.ManagerFunctions" Executed="Management_Operations_Executed" CanExecute="Management_Operations_CanExecute"/>
+
     </Window.CommandBindings>
-    <StackPanel Margin="10">
-        <Image Width="200" Source="/SharedResources/Images/Emblem.png"/>
-        <Label Content="Username:"/>
-        <TextBox x:Name="usernameField">
-            <TextBox.InputBindings>
-                <KeyBinding Command="ApplicationCommands.New" Key="Enter"></KeyBinding>
-            </TextBox.InputBindings>
-        </TextBox>
-        <Label Content="Password:"/>
-        <PasswordBox Name="passwordField">
-            <PasswordBox.InputBindings>
-                <KeyBinding Command="ApplicationCommands.New" Key="Enter"></KeyBinding>
-            </PasswordBox.InputBindings>
-        </PasswordBox>
-        <Grid>
-            <Button Command="local:CustomCommands.Exit" Content="Cancel" Width="90" Height="40" Margin="162,26,10,-26" />
-            <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" Margin="10,26,162,-26" />
-        </Grid>
-    </StackPanel>
+    <Grid VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" Margin="0,0,0,60">
+            <Image Width="200" Source="/SharedResources/Images/Emblem.png"/>
+            <Label Content="Username:" HorizontalAlignment="Center" Width="300"/>
+            <TextBox x:Name="usernameField" Width="300">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="ApplicationCommands.New" Key="Enter"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <Label Content="Password:" HorizontalAlignment="Center" Width="300" />
+            <PasswordBox x:Name="passwordField" Width="300">
+                <PasswordBox.InputBindings>
+                    <KeyBinding Command="ApplicationCommands.New" Key="Enter"/>
+                </PasswordBox.InputBindings>
+            </PasswordBox>
+            <Grid>
+                <Button Command="local:CustomCommands.Exit" Content="Cancel" Width="90" Height="40" HorizontalAlignment="Left" Margin="20"/>
+                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Right" Margin="20"/>
+            </Grid>
+            <Grid>
+                <Button Command="local:CustomCommands.ManagerFunctions" Content="Manager Functions" Width="150" Height="40" Click="Manager_Function_Button_Click"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
 </Window>
