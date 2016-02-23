@@ -72,7 +72,8 @@ namespace SnapRegisters
 			MainAdminWindow.Show();
 #elif REGISTER
 			SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, connection);
-			MainRegisterWindow.Show();
+            MainRegisterWindow.Show();
+            
 #else
 			MessageBox.Show("Success: Interface now on screen.");
 #endif

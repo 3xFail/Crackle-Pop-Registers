@@ -55,21 +55,34 @@ namespace SnapRegisters
 
 		public RegisterMainWindow(Employee currentEmployee, connection_session session)
 		{
-			InitializeComponent();
-
-			m_employee = currentEmployee;
-            m_connection = session;
-			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
-
-			FocusManager.SetFocusedElement(this, UPCField);
-
+            //Updates the clock constantly
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 this.dateText.Text = DateTime.Now.ToString("hh:mm tt");
             }, this.Dispatcher);
 
+            //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second)
+            System.Threading.Thread.Sleep(1100);
 
-            LoggedInAs.Text = /*"Currently logged in as\n" +*/ currentEmployee.name;
+
+            //Initialize window after the clock is ticked
+            InitializeComponent();
+
+
+
+
+            m_employee = currentEmployee;
+            m_connection = session;
+			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
+
+			FocusManager.SetFocusedElement(this, UPCField);
+
+
+
+            
+
+            //Sets the username to the employee logged in
+            LoggedInAs.Text = currentEmployee.name;
 
 		}
 
