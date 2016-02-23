@@ -17,35 +17,38 @@ namespace PointOfSales.Permissions
             /// Deprecated Permissions
             ///***********************
 
-            // Allows the user to use a register to scan items.
-            UseRegister = 1,
+            //// Allows the user to use a register to scan items.
+            //UseRegister = 1,
 
-            // Allows the user to process a payment for the transaction.
-            ProcessPayment = 2,
+            //// Allows the user to process a payment for the transaction.
+            //ProcessPayment = 2,
 
-            // Allows the user to apply a coupon to the sale.
-            ApplyCoupon = 4,
+            //// Allows the user to apply a coupon to the sale.
+            //ApplyCoupon = 4,
 
-            // Allows the user to override predefined prices with an entered value, A reason must be entered as to why the price was changed.
-            PriceOverride = 8,
+            //// Allows the user to override predefined prices with an entered value, A reason must be entered as to why the price was changed.
+            //PriceOverride = 8,
 
-            // Allows the user to change the stored amount of an item.
-            ChangeAStockQuantity = 16,
+            //// Allows the user to change the stored amount of an item.
+            //ChangeAStockQuantity = 16,
 
-            // Allows the addition or removal of store products.
-            AddRemoveAProduct = 32,
+            //// Allows the addition or removal of store products.
+            //AddRemoveAProduct = 32,
 
-            // Allows the user to change the price/brand/etc. of a product.
-            ChangeProductDetails = 64,
+            //// Allows the user to change the price/brand/etc. of a product.
+            //ChangeProductDetails = 64,
 
-            // Allows the user to change the value of transactions that have happened in the past.
-            ModifyTransaction = 128,
+            //// Allows the user to change the value of transactions that have happened in the past.
+            //ModifyTransaction = 128,
 
-            // Allows the user to change other users' permissions.
-            ChangePermissions = 256,
+            //// Allows the user to change other users' permissions.
+            //ChangePermissions = 256,
 
-            // Allows the user to override predefined prices with an entered value.
-            PriceOverrideNoReason = 512,
+            //// Allows the user to override predefined prices with an entered value.
+            //PriceOverrideNoReason = 512,
+
+            //// Allows the employee to use Manager functions at the login window
+            //UseLoginWindowManagerFunctions = 1024,
 
 
 
@@ -118,7 +121,7 @@ namespace PointOfSales.Permissions
 		// Adds a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
 		public static void AddPermission(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, SystemPermissions PermissionToAdd)
 		{
-			if (!CheckPermissions(User, SystemPermissions.ChangePermissions))
+			if (!CheckPermissions(User, SystemPermissions.CHANGE_EMPLOYEE_DATABASE))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			// TODO: Connect to the database, change permissions and rebuild the employee class.
@@ -127,7 +130,7 @@ namespace PointOfSales.Permissions
 		// Removes a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
 		public static void RemovePermissions(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, SystemPermissions PermissionToRemove)
 		{
-			if (!CheckPermissions(User, SystemPermissions.ChangePermissions))
+			if (!CheckPermissions(User, SystemPermissions.CHANGE_EMPLOYEE_DATABASE))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			// TODO: Connect to the database, change permissions and rebuild the employee class.
