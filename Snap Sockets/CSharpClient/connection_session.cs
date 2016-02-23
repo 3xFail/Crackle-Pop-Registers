@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CSharpClient
 {
@@ -54,6 +55,11 @@ namespace CSharpClient
             }
         }
 
+        public void write( string msg )
+        {
+            write( new message( msg ) );
+        }
+
         private void write()
         {
             _msg_queue.First().encode_id( _id ); //attach unique ID to message
@@ -88,16 +94,22 @@ namespace CSharpClient
 
         public void parse_message( message msg )
         {
-            if( msg.ToString() == "valid_login" )
+            if (msg.ToString() == "valid_login")
                 _id = msg._id;
+            else if (msg.ToString() == "invalid_login")
+                throw new InvalidOperationException("Invalid Login");
             else
-                throw new InvalidOperationException( "Invalid Login" );
+            {
+                var doc = new XmlDocument();
+                doc.LoadXml(msg.ToString());
+                Response = doc.GetElementsByTagName("row"); //If any stored procedure does not return data with 'FOR XML RAW', this will throw an exception. Ryan pls.
+            }
         }
 
 
         private IPEndPoint _remoteEP;
         private Socket _sender;
-
+        public XmlNodeList Response { get; set; }
         private Queue<message> _msg_queue = new Queue<message>();
 
         public int _id = -1;

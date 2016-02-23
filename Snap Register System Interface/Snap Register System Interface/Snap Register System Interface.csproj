@@ -160,6 +160,9 @@
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
+    <Resource Include="sv_ip.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\..\SharedResources\Images\Emblem.png">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Windows;
@@ -10,14 +11,15 @@ using System.Device;
 using CSharpClient;
 
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace SnapRegisters
 {
 	// Document me.
 	public partial class LoginMainWindow : Window
 	{
-        private bool isLoggedIn= false;
-
+        private bool isLoggedIn = false;
+        private connection_session connection;
 		public LoginMainWindow()
 		{
 			InitializeComponent();
@@ -40,11 +42,8 @@ namespace SnapRegisters
 
                 attempt.Password = passwordField.Password;
                 attempt.Username = usernameField.Text;
-#if DEBUG
-                loggedIn = ConnectToMockServer(attempt);
-#else
+
 			    ConnectToServer(attempt);
-#endif
             }
             else
             {
@@ -74,7 +73,6 @@ namespace SnapRegisters
 			MessageBox.Show("Success: Interface now on screen.");
 #endif
 		}
-#if DEBUG
 
 		private Employee ConnectToMockServer(LoginDetails attempt)
 		{
@@ -94,31 +92,38 @@ namespace SnapRegisters
                 return null;
             }
         }
-#else
+
 		private void ConnectToServer(LoginDetails attempt)
 		{
-			connection_session connection;
 			try
 			{
-				connection = new connection_session("172.20.10.10", 500, attempt.Username, attempt.Password);
+				connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
-				Employee loggedIn = new Employee(10, attempt.Username, null, "987654321", new DateTime(1, 1, 1), 31);
+                connection.write("EXEC	[dbo].[GetEmployee_Username] \"" + attempt.Username + "\"");
 
+                XmlNode item = connection.Response[0];
+
+                int permissions = Int32.Parse(item.Attributes["PermissionsID"].Value);
+                string phone = item.Attributes["EmployeePhone"].Value;
+                int id = Int32.Parse(item.Attributes["UserID"].Value);
+
+				Employee loggedIn = new Employee(id, attempt.Username, null, phone, new DateTime(1, 1, 1), permissions);
+
+                isLoggedIn = true;
 				OpenInterfaceWindow(loggedIn);
 
 				this.Close();
 			}
-			catch (InvalidOperationException ee)
+			catch (InvalidOperationException )
 			{
-				MessageBox.Show("Invalid username or password");
+				MessageBox.Show( "Invalid username or password" );
 
 			}
-			catch (Exception eee)
+			catch (Exception ee)
 			{
-				MessageBox.Show("Server not found");
+				MessageBox.Show(ee.ToString());
 			}
 		}
-#endif
 
 		private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
