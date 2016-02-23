@@ -95,7 +95,7 @@ ResizeMode="NoResize"
                     <!--Bar code Box-->
                     <Grid>
                         <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
-                            <TextBox x:Name="UPCField" Text="C" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
+                            <TextBox x:Name="UPCField" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
                         </Viewbox>
                     </Grid>
                     
