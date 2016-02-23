@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
+using CSharpClient;
 
 namespace SnapRegisters
 {
@@ -37,24 +38,25 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public partial class RegisterMainWindow : Window
 	{
-		// temp constructor for testing.
-		//public RegisterMainWindow()
-		//{
-		//	InitializeComponent();
+        // temp constructor for testing.
+        //public RegisterMainWindow()
+        //{
+        //	InitializeComponent();
 
-		//	Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
-		//	m_employee = currentEmployee;
-		//	m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
+        //	Employee currentEmployee = new Employee(1, "Joe", null, "5", new DateTime(1,2,3), 255);
+        //	m_employee = currentEmployee;
+        //	m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
 
-		//	m_itemPanel = ItemsList;
-		//	m_discountList = CouponList;
-		//}
+        //	m_itemPanel = ItemsList;
+        //	m_discountList = CouponList;
+        //}
 
-		public RegisterMainWindow(Employee currentEmployee)
+		public RegisterMainWindow(Employee currentEmployee, connection_session session)
 		{
 			InitializeComponent();
 
 			m_employee = currentEmployee;
+            m_connection = session;
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels);
 			FocusManager.SetFocusedElement(this, UPCField);
 		}
@@ -78,6 +80,7 @@ namespace SnapRegisters
 			m_itemPanel.Children.Add(itemDescription.displayItem);
 
 		}
+        private connection_session m_connection = null;
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
 
