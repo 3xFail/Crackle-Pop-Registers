@@ -141,6 +141,15 @@
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
+    <Content Include="..\..\SharedResources\Server\cppdb.dll">
+      <Link>SharedResources\Server\cppdb.dll</Link>
+    </Content>
+    <Resource Include="..\..\SharedResources\Server\database_connection_info.txt">
+      <Link>SharedResources\Server\database_connection_info.txt</Link>
+    </Resource>
+    <Content Include="..\..\SharedResources\Server\SocketsServer.exe">
+      <Link>SharedResources\Server\SocketsServer.exe</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
