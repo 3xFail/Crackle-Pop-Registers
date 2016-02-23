@@ -17,6 +17,8 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
+using System.Windows.Threading;
+
 namespace SnapRegisters
 {
 	//*************************************************************************************************************
@@ -60,6 +62,14 @@ namespace SnapRegisters
 			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
 
 			FocusManager.SetFocusedElement(this, UPCField);
+
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                this.dateText.Text = DateTime.Now.ToString("hh:mm tt");
+            }, this.Dispatcher);
+
+
+            LoggedInAs.Text = /*"Currently logged in as\n" +*/ currentEmployee.name;
 
 		}
 
