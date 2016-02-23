@@ -75,6 +75,9 @@
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
+      <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
@@ -95,6 +98,10 @@
     </Page>
     <Page Include="..\..\SharedResources\ApplicationStyle.xaml">
       <Link>SharedResources\ApplicationStyle.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

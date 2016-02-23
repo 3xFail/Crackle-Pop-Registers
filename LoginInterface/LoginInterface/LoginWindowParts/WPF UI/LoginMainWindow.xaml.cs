@@ -10,6 +10,8 @@ using System.Device.Location;
 using System.Device;
 using CSharpClient;
 
+
+
 using System.Security.Cryptography;
 using System.Xml;
 
@@ -143,6 +145,9 @@ namespace SnapRegisters
         {
             //TOCODE
             MessageBox.Show("Manager functions pop up now");
+            SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup();
+            managerFunctionsPopup.Show();
+
         }
 
         private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
