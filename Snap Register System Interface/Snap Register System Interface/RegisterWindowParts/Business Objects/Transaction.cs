@@ -32,7 +32,7 @@ namespace SnapRegisters
 	//			public void RemoveItem(int itemID)
 	//				Removes the item with the ID matching "itemID" from the transaction. removes it from the
 	//				output.
-	//			public void OverrideCost(int itemID, double newPrice, string reason = "No description")
+	//			public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 	//				Overrides the cost of the item specified with the new price specified with "newPrice".
 	//				"reason" is the reason the employee chose to override the price.
 	//			public void ApplyCoupon(int couponID)
@@ -42,7 +42,7 @@ namespace SnapRegisters
 	//			public List<Item> GetItems()
 	//				Returns a copy of all the items in this sale. The list of items cannot be changed without
 	//				proper permissions but can be read with this.
-	//			private Item ConstructItem(int itemID)
+	//			private Item ConstructItem(string itemID)
 	//				Contacts the database and constructs an item from the given item ID.
 	//		PERMISSIONS:
 	//			AddItem						- UseRegister
@@ -63,7 +63,7 @@ namespace SnapRegisters
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
-			if (!Permissions.CheckPermissions(employee, Permissions.PointOfSalesPermissions.UseRegister))
+			if (!Permissions.CheckPermissions(employee, Permissions.SystemPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
 			m_Employee = employee;
@@ -71,9 +71,9 @@ namespace SnapRegisters
 			OutputDelegate = itemToAdd;
 		}
 
-		public void AddItem(int itemID)
+		public void AddItem(string itemID)
 		{
-			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.UseRegister))
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before adding it to the list.
@@ -94,9 +94,9 @@ namespace SnapRegisters
 				throw e;
 			}
 		}
-		public void RemoveItem(int itemID)
+		public void RemoveItem(string itemID)
 		{
-			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.UseRegister))
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.UseRegister))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before removing it from the list.
@@ -109,7 +109,7 @@ namespace SnapRegisters
 				throw e;
 			}
 		}
-		public void OverrideCost(int itemID, double newPrice, string reason = "No description")
+		public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
 			Item changedItem = m_Items.Find(x => x.ID == itemID);
@@ -119,14 +119,14 @@ namespace SnapRegisters
 
 			if (reason == "No description")
 			{
-				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverrideNoReason))
+				if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.PriceOverrideNoReason))
 					throw new InvalidOperationException("A reason must be specified for this action.");
 				else
 					changedItem.Price = newPrice;
 			}
 			else
 			{
-				if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.PriceOverride))
+				if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.PriceOverride))
 					throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 				else
 					changedItem.Price = newPrice;
@@ -134,7 +134,7 @@ namespace SnapRegisters
 		}
 		public void ApplyCoupon(int couponID)
 		{
-			if (!Permissions.CheckPermissions(m_Employee, Permissions.PointOfSalesPermissions.ApplyCoupon))
+			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.ApplyCoupon))
 				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 
 			// TODO: Connect to database and attempt to apply coupon.
@@ -154,7 +154,7 @@ namespace SnapRegisters
 			return m_Items;
 		}
 
-		private Item ConstructItem(int itemID)
+		private Item ConstructItem(string itemID)
 		{
 			// TODO: Connect to database and construct item from given item ID.
 			Item newItem = new Item();
