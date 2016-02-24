@@ -105,9 +105,10 @@ namespace SnapRegisters
 
         private void ConnectToServer(LoginDetails attempt)
         {
+            loggedIn = null;
+            isLoggedIn = false;
             try
             {
-                loggedIn = null;
                 connection = new connection_session( File.ReadAllText( "sv_ip.txt" ), 6119, attempt.Username, attempt.Password );
 
                 connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
@@ -127,7 +128,6 @@ namespace SnapRegisters
             }
             catch (InvalidOperationException)
             {
-                isLoggedIn = false;
                 MessageBox.Show( "Invalid username or password" );
             }
             catch (Exception ee)
@@ -155,28 +155,28 @@ namespace SnapRegisters
 
         private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password
-                && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
+            lastAttempt = new LoginDetails();
+
+            lastAttempt.Password = passwordField.Password;
+            lastAttempt.Username = usernameField.Text;
+
+            ConnectToServer( lastAttempt );
+
+            if (isLoggedIn && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
             {
                 btnShowPopup_Click(sender, e);
             }
             else
             {
                 isLoggedIn = false;
-                MessageBox.Show("Mismatched password: Access to Manager Functions Denied");
+                loggedIn = null;
+                MessageBox.Show("Access to Manager Functions Denied");
             }
         }
 
         private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = false;
-            if (isLoggedIn)
-            {
-                if (Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                {
-                    e.CanExecute = true;
-                }
-            }
+            e.CanExecute = true;
         }
 
         private void btnClosePopup_Click(object sender, RoutedEventArgs e)
