@@ -88,21 +88,17 @@ namespace SnapRegisters
 
 		private void AddItemToOutputPanels(Item itemToAdd)
 		{
-			//MessageBox.Show(itemToAdd.ItemName);
-
-
 			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
 			itemDescription.Height = 100;
-			//// Bind the item's price. type's don't make sense here.
-			//Binding ItemPriceBinding = new Binding();
-			//ItemPriceBinding.Source = itemToAdd;
-			//ItemPriceBinding.Path = new PropertyPath(itemToAdd.Price);
-			//itemDescription.itemPrice.SetBinding(TextBlock.TextProperty, ItemPriceBinding);
+
 			ItemsList.Children.Add(itemDescription);
 
 			m_costTotal += itemToAdd.Price;
 			m_totalTotal += itemToAdd.Price;
 
+
+			ItemScroll.ScrollToBottom();
+			CouponScroll.ScrollToBottom();
 			UpdateTotals();
 		}
 
