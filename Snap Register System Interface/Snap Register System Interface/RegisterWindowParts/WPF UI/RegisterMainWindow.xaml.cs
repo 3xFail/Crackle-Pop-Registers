@@ -89,7 +89,7 @@ namespace SnapRegisters
 		private void AddItemToOutputPanels(Item itemToAdd)
 		{
 			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
-			itemDescription.Height = 100;
+			itemDescription.Height = 60;
 
 			ItemsList.Children.Add(itemDescription);
 
