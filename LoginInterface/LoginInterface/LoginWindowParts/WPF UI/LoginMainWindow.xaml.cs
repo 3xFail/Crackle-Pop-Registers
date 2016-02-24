@@ -158,12 +158,8 @@ namespace SnapRegisters
 
         private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //TOCODE
-            //MessageBox.Show("Manager functions pop up now");
-            //SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup(this);
-            //this.
-            //managerFunctionsPopup.Show();
-            if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
+            if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password
+                && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
             {
                 btnShowPopup_Click(sender, e);
             }
@@ -172,9 +168,6 @@ namespace SnapRegisters
                 isLoggedIn = false;
                 MessageBox.Show("Mismatched password: Access to Manager Functions Denied");
             }
-
-
-
         }
 
         private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
