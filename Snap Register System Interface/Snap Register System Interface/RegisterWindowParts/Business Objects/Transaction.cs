@@ -159,20 +159,18 @@ namespace SnapRegisters
 		private Item ConstructItem(string itemID)
 		{
             m_connection.write( string.Format( "GetItem \"{0}\"", itemID ) );
-            //SQL injection will be fixed, I pinky-swear.
             try
             {
                 XmlNode it = m_connection.Response[0];
 
+                if( it.Attributes["Active_Use"].Value[0] == '1' )
+                    throw new Exception( "Cannot sell inactive item" );
+
                 float price = float.Parse( it.Attributes["Price"].Value );
                 string name = it.Attributes["Name"].Value;
-                bool active = it.Attributes["Active_Use"].Value[0] == '1';
                 int product_id = int.Parse( it.Attributes["ProductID"].Value );
                 
-                if( active )
-                    return new Item( name, price, itemID );
-                else
-                    throw new Exception( "Cannot sell inactive item" );
+                return new Item( name, price, itemID );
             }
             catch( NullReferenceException )
             {
