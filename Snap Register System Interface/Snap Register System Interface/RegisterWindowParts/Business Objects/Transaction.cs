@@ -159,6 +159,7 @@ namespace SnapRegisters
 		private Item ConstructItem(string itemID)
 		{
             m_connection.write( string.Format( "GetItem \"{0}\"", itemID ) );
+
             try
             {
                 XmlNode it = m_connection.Response[0];

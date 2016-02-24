@@ -112,30 +112,32 @@ namespace SnapRegisters
             try
             {
                 loggedIn = null;
-                connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
+                connection = new connection_session( File.ReadAllText( "sv_ip.txt" ), 6119, attempt.Username, attempt.Password );
 
-                connection.write(string.Format("GetEmployee_Username \"{0}\"", attempt.Username));
+                connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
                 //I know this will get SQL injected. Will fix ASAP.
 
                 XmlNode item = connection.Response[0];
 
-                long permissions = long.Parse(item.Attributes["PermissionsID"].Value);
+                long permissions = long.Parse( item.Attributes["PermissionsID"].Value );
                 string phone = item.Attributes["EmployeePhone"].Value;
-                int id = Int32.Parse(item.Attributes["UserID"].Value);
+                int id = Int32.Parse( item.Attributes["UserID"].Value );
                 string username = item.Attributes["Name"].Value;
 
-                loggedIn = new Employee(id, username, null, phone, new DateTime(1, 1, 1), permissions);
+                //Ask ryan to join birthday and address to GetEmployee_Username query so we can put it in here.
+
+                loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
 
                 isLoggedIn = true;
             }
             catch (InvalidOperationException)
             {
                 isLoggedIn = false;
-                MessageBox.Show("Invalid username or password");
+                MessageBox.Show( "Invalid username or password" );
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                MessageBox.Show( ee.Message );
             }
         }
 
