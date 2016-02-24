@@ -5,26 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SnapRegisters.RegisterWindowParts.WPF_UI"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="500"
-			 HorizontalAlignment="Stretch">
+             d:DesignHeight="40" d:DesignWidth="500"
+			 BorderBrush="Black"
+			 BorderThickness="0"
+			 >
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+       
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height=".50*"/>
+            <RowDefinition Height=".50*"/>
         </Grid.RowDefinitions>
-        <Viewbox>
-            <TextBlock	Name="NameField" Grid.Column="0"
-					HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Left"
+        <Viewbox HorizontalAlignment="Left">
+            <TextBlock	Name="NameField"
+					 VerticalAlignment="Bottom" TextAlignment="Left"
 					Text="nil"/>
         </Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="1">
+        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
             <TextBlock	Name="AmountField" 
-					HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Right"
+					 VerticalAlignment="Top" TextAlignment="Right"
 					Text="0.00"/>
         </Viewbox>
     </Grid>
