@@ -135,7 +135,7 @@ namespace SnapRegisters
         {
             //TOCODE
             MessageBox.Show("Manager functions pop up now");
-            SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup(this);
+            //SnapRegisters.ManagerFunctionsPopup managerFunctionsPopup = new ManagerFunctionsPopup(this);
             //this.
             //managerFunctionsPopup.Show();
 

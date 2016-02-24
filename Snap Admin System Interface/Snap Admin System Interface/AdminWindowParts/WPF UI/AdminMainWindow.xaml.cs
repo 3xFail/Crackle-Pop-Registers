@@ -43,6 +43,7 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Collapsed;
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Collapsed;
         }
         // opens the analytics page
         private void btn_Anal(object sender, RoutedEventArgs e)
@@ -53,6 +54,7 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Collapsed;
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Collapsed;
         }
         // opens the employees page
         private void btn_Emp(object sender, RoutedEventArgs e)
@@ -63,6 +65,7 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Collapsed;
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Collapsed;
         }
         // opens the cutomers page
         private void btn_Cust(object sender, RoutedEventArgs e)
@@ -73,6 +76,7 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Visible;
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Collapsed;
         }
         // opens the sale page
         private void btn_Sales(object sender, RoutedEventArgs e)
@@ -83,6 +87,7 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Visible;
             SalesTabs.Visibility = Visibility.Visible;
             OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Collapsed;
         }
         // opens the options page
         private void btn_Opt(object sender, RoutedEventArgs e)
@@ -93,13 +98,49 @@ namespace SnapRegisters
             CustomersTabs.Visibility = Visibility.Collapsed;
             SalesTabs.Visibility = Visibility.Collapsed;
             OptionsTabs.Visibility = Visibility.Visible;
+            CleanTabs.Visibility = Visibility.Collapsed;
+        }
+        private void clean_tab(object sender, RoutedEventArgs e)
+        {
+            InventoryTabs.Visibility = Visibility.Collapsed;
+            AnalysisTabs.Visibility = Visibility.Collapsed;
+            EmployeesTabs.Visibility = Visibility.Collapsed;
+            CustomersTabs.Visibility = Visibility.Collapsed;
+            SalesTabs.Visibility = Visibility.Collapsed;
+            OptionsTabs.Visibility = Visibility.Collapsed;
+            CleanTabs.Visibility = Visibility.Visible;
+
+            //Button b = new Button();
+            //b.Content = "Hello";
+            //StackPanel myPanel = new StackPanel();
+            //myPanel.Children.Add(b);
+            //this.Content = myPanel;
+
+            //StackPanel panel = new StackPanel();
+            //Button b1 = new Button { Content = "Hello" };
+            //Button b2 = new Button { Content = "Hi" };
+
+            //panel.Children.Add(b1);
+            //panel.Children.Add(b2);
+
+            //Page page = new Page { Content = panel };
+
+            //this.Content = page;
         }
 
-        
-		
-		//private Employee m_employee = null;
+        //private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Hyperlink hpl = sender as Hyperlink;
+        //    if (hpl.NavigateUri != null)
+        //    {
+        //        frame.NavigationService.Navigate(hpl.NavigateUri);
+        //    }
+        //}
 
-		//private DockPanel m_itemPanel = null;
-		//private DockPanel m_discountList = null;
-	}   
+
+        //private Employee m_employee = null;
+
+        //private DockPanel m_itemPanel = null;
+        //private DockPanel m_discountList = null;
+    }   
 }

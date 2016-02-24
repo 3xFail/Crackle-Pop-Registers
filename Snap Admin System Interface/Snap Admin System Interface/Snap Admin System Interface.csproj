@@ -144,6 +144,9 @@
     <Content Include="..\..\SharedResources\Server\cppdb.dll">
       <Link>SharedResources\Server\cppdb.dll</Link>
     </Content>
+    <Content Include="sv_ip.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="..\..\SharedResources\Server\database_connection_info.txt">
       <Link>SharedResources\Server\database_connection_info.txt</Link>
     </Resource>
