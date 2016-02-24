@@ -19,7 +19,7 @@
     </Window.CommandBindings>
     <Grid VerticalAlignment="Center">
         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,60">
-            <Image Width="200" Source="/SharedResources/Images/Emblem.png"/>
+            <Image Width="200" Source="/SharedResources/Images/Emblem.png" />
             <Label Content="Username:" HorizontalAlignment="Center" Width="300"/>
             <TextBox x:Name="usernameField" Width="300">
                 <TextBox.InputBindings>
@@ -27,17 +27,20 @@
                 </TextBox.InputBindings>
             </TextBox>
             <Label Content="Password:" HorizontalAlignment="Center" Width="300" />
-            <PasswordBox x:Name="passwordField" Width="300">
+            <PasswordBox x:Name="passwordField" Width="300" Margin="0,0,0,45">
                 <PasswordBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.New" Key="Enter"/>
                 </PasswordBox.InputBindings>
             </PasswordBox>
             <Grid>
-                <Button Command="local:CustomCommands.Exit" Content="Cancel" Width="90" Height="40" HorizontalAlignment="Left" Margin="20"/>
-                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Right" Margin="20"/>
+                
             </Grid>
             <Grid>
-                <Button Content="Manager Functions" Name="btnShowPopup" Width="150" Height="40" Click="btnShowPopup_Click"/>
+                
+                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Left" Margin="20"/>
+            
+                <Button Content="Functions" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" />
+                <!--<Button Command="local:CustomCommands.Exit" Content="Exit" Width="90" Height="40" VerticalAlignment="Top" Margin="20"/>-->
                 <StackPanel>
                     <Popup AllowsTransparency="True" Height="400" Name="myPopup" 
                         PlacementTarget="{Binding ElementName=MainPanel}"

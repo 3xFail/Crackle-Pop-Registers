@@ -105,7 +105,9 @@ namespace PointOfSales.Permissions
             CHANGE_EMPLOYEE_DATABASE = 8192,
 
 
-
+            // Temporary permission to test manager functions, will be removed later
+            ///TO REMOVE
+            IS_OWNER = 16384,
 
 
 

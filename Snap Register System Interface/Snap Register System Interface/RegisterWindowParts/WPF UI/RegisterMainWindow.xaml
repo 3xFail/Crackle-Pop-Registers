@@ -10,6 +10,9 @@ WindowStyle="None"
 WindowState="Maximized"
 ResizeMode="NoResize"
 		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="F4" Command="local:CustomCommands.doNothing" />
+    </Window.InputBindings>
     <!--C Everything-->
     <Grid>
         <Grid Margin="10">
@@ -71,12 +74,12 @@ ResizeMode="NoResize"
                     </Viewbox>
                 </Grid>
             </Border>
-			<!--Side Panel-->
+            <!--Side Panel-->
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
-					<RowDefinition Height=".85*"/>
-					<RowDefinition Height=".15*"/>
-				</Grid.RowDefinitions>
+                    <RowDefinition Height=".85*"/>
+                    <RowDefinition Height=".15*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width=".40*"/>
                     <ColumnDefinition Width=".60*"/>
@@ -87,56 +90,56 @@ ResizeMode="NoResize"
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="0.75*"/>
                     </Grid.RowDefinitions>
-                <Viewbox Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="0" >
-                    <TextBlock Name="dateText" Text="Time"/>
-                </Viewbox>
-                <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" >
-                    <TextBlock TextAlignment="Center"
+                    <Viewbox Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="0" >
+                        <TextBlock Name="dateText" Text="Time"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" >
+                        <TextBlock TextAlignment="Center"
 							   Text="username"
 							   Margin="10"
 							   Name="LoggedInAs"/>
-                </Viewbox>
+                    </Viewbox>
                 </Grid>
                 <!--Company Logo Button-->
                 <Viewbox Grid.Row="0" Grid.Column="1" Margin="10,0,0,0"
 						 VerticalAlignment="Top" HorizontalAlignment="Right">
-                    
+
                     <Button x:Name="OptionsButton"  
 							Margin="0,0,0,0"
-							Width="80" Height="80" Background="{StaticResource Background}">
+							Width="80" Height="80" Background="{StaticResource Background}" Click="OptionsButton_Click">
                         <Image Source="/SharedResources/Images/Emblem.png" Width="76" Height="76"/>
                     </Button>
                 </Viewbox>
 
                 <!--Totals Area-->
-               
 
-                    <!--Bar code Box-->
-                    <Grid Grid.Row="1">
-                        <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
-                            <TextBox x:Name="UPCField" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
-                        </Viewbox>
-                    </Grid>
 
-                    <!--Totals Box-->
-                    <Border Grid.Column="1" Grid.Row="1"
+                <!--Bar code Box-->
+                <Grid Grid.Row="1">
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
+                        <TextBox x:Name="UPCField" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
+                    </Viewbox>
+                </Grid>
+
+                <!--Totals Box-->
+                <Border Grid.Column="1" Grid.Row="1"
 						BorderThickness="1" BorderBrush="{StaticResource DefaultColor}">
-                        <Grid>
-                            <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
-                                <TextBlock TextAlignment="Left" 
+                    <Grid>
+                        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <TextBlock TextAlignment="Left" 
 										   Text="Total:"
 										   Margin="5,0,45,0"/>
-                            </Viewbox>
-                            <Viewbox  HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                <TextBlock TextAlignment="Right" 
+                        </Viewbox>
+                        <Viewbox  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <TextBlock TextAlignment="Right" 
 										   Text="0.00" 
 										   Margin="45,0,5,0"
 										   Name="Total"/>
-                            </Viewbox>
-                        </Grid>
-                    </Border>
-                </Grid>
-            
+                        </Viewbox>
+                    </Grid>
+                </Border>
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>

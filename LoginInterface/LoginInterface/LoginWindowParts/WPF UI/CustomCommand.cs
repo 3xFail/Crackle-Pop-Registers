@@ -31,6 +31,9 @@ namespace SnapRegisters
 
 
             );
+        public static RoutedUICommand doNothing = new RoutedUICommand();
+
+
     }
 
 
