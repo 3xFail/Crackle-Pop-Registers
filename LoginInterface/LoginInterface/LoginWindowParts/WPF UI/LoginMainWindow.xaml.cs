@@ -36,7 +36,6 @@ namespace SnapRegisters
             e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
         }
 
-
         private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (!isLoggedIn || usernameField.Text != lastAttempt.Username)
@@ -70,9 +69,6 @@ namespace SnapRegisters
                 }
             }
         }
-
-
-
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
@@ -125,7 +121,6 @@ namespace SnapRegisters
                 string username = item.Attributes["Name"].Value;
 
                 //Ask ryan to join birthday and address to GetEmployee_Username query so we can put it in here.
-
                 loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
 
                 isLoggedIn = true;
@@ -183,8 +178,6 @@ namespace SnapRegisters
                 }
             }
         }
-
-
 
         private void btnClosePopup_Click(object sender, RoutedEventArgs e)
         {
