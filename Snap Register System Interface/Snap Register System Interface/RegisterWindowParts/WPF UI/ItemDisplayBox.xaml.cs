@@ -27,7 +27,14 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
 
 			m_sourceItem = sourceItem;
 
-			NameField.Text = m_sourceItem.ItemName;
+			//NameField.Text = m_sourceItem.ItemName;
+
+			NameField.Text = Convert.ToString(sourceItem.ItemName[0]);
+			for (int idx = 1; idx < 40 && idx < sourceItem.ItemName.Length; idx++)
+			{
+				NameField.Text += sourceItem.ItemName[idx];
+			}
+
 			rawItemPrice = m_sourceItem.Price;
 			AmountField.Text = rawItemPrice.ToString( "C" );
 
