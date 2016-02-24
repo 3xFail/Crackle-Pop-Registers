@@ -10,7 +10,7 @@ namespace SnapRegisters
 {
 	public static class CustomCommands
 	{
-		public static readonly RoutedUICommand Exit = new RoutedUICommand
+		public static RoutedUICommand Exit = new RoutedUICommand
 		(
 			"Exit",
 			"Exit",
@@ -20,6 +20,8 @@ namespace SnapRegisters
 					new KeyGesture(Key.F4, ModifierKeys.Alt)
 			}
 		);
+
+
         public static readonly RoutedUICommand ManagerFunctions = new RoutedUICommand
             (
             "Manager_Functions",

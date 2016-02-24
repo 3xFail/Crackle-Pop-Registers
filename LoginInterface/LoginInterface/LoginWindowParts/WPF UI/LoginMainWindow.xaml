@@ -37,7 +37,30 @@
                 <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Right" Margin="20"/>
             </Grid>
             <Grid>
-                <Button Command="local:CustomCommands.ManagerFunctions" Content="Manager Functions" Width="150" Height="40" Click="Manager_Function_Button_Click"/>
+                <Button Content="Manager Functions" Name="btnShowPopup" Width="150" Height="40" Click="btnShowPopup_Click"/>
+                <StackPanel>
+                    <Popup AllowsTransparency="True" Height="400" Name="myPopup" 
+                        PlacementTarget="{Binding ElementName=MainPanel}"
+                        Placement="Center" StaysOpen="True" Width="300" >
+
+                        <StackPanel Background="{StaticResource Background}">
+
+                            <Button Command="local:CustomCommands.Exit" Content="Exit to Desktop" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Width="150" Height="40" Margin="15"/>
+                            <Button Content="Restart Workstation" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Width="150" Height="40" Margin="15" Click="Restart_Button_Click" />
+                            <Button Content="Shut Down Workstation" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Width="150" Height="40" Margin="15" Click="Shutdown_Button_Click"/>
+                            <Button Click="btnClosePopup_Click" Content="Back" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Width="150" Height="40" Margin="15"/>
+                            </StackPanel>
+                       
+                    </Popup>
+                </StackPanel>
             </Grid>
         </StackPanel>
     </Grid>

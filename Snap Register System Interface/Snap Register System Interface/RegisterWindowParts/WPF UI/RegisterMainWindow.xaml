@@ -28,9 +28,9 @@ ResizeMode="NoResize"
                         <RowDefinition Height="0.95*"/>
                         <RowDefinition Height="0.05*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Name="ItemsList"
-							   Grid.Row="0">
-                    </StackPanel>
+                    <ScrollViewer Grid.Row="0" Name="ItemScroll">
+                        <StackPanel Name="ItemsList"/>
+                    </ScrollViewer>
                     <!--Item Roll-up-->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
                         <TextBlock TextAlignment="Left" 
@@ -54,10 +54,10 @@ ResizeMode="NoResize"
                         <RowDefinition Height="0.95*"/>
                         <RowDefinition Height="0.05*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Name="CouponList"
-							   Grid.Row="0">
-                    </StackPanel>
-					<!--Coupon Roll-up-->
+                    <ScrollViewer Name="CouponScroll" Grid.Row="0">
+                        <StackPanel Name="CouponList"/>
+                    </ScrollViewer>
+                    <!--Coupon Roll-up-->
                     <Viewbox HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="1">
                         <TextBlock TextAlignment="Left"
 							   Text="Savings:"

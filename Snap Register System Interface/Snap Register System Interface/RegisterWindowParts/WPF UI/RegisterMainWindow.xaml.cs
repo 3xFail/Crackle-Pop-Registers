@@ -81,7 +81,7 @@ namespace SnapRegisters
 
             
 
-            //Sets the username to the employee logged in
+            //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
 		}
