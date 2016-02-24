@@ -158,7 +158,7 @@ namespace SnapRegisters
 
 		private Item ConstructItem(string itemID)
 		{
-            m_connection.write( string.Format( "EXEC [dbo].[GetItem] \"{0}\"", itemID ) );
+            m_connection.write( string.Format( "GetItem \"{0}\"", itemID ) );
             //SQL injection will be fixed, I pinky-swear.
             try
             {

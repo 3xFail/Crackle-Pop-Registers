@@ -94,7 +94,7 @@ namespace SnapRegisters
             {
                 connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
-                connection.write( string.Format( "EXEC [dbo].[GetEmployee_Username] \"{0}\"", attempt.Username ) );
+                connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
                 //I know this will get SQL injected. Will fix ASAP.
 
                 XmlNode item = connection.Response[0];
