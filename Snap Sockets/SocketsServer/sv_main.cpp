@@ -22,7 +22,6 @@ using cppdb::cppdb_error;
 
 #include "client.h"
 #include "server.h"
-#include "../SharedCode/scrypt-jane.c"
 
 #include <iostream>
 using std::cin;

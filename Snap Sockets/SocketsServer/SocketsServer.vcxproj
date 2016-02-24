@@ -143,7 +143,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\SharedCode\message.cpp" />
-    <ClCompile Include="..\SharedCode\scrypt-jane.c" />
     <ClCompile Include="auth.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="db_conn_str.cpp" />
@@ -152,41 +151,7 @@
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\SharedCode\code\scrypt-conf.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-chacha.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_blake256.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_blake512.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_keccak.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_sha256.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_sha512.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-hash_skein512.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-avx.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-sse2.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-ssse3.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha-xop.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_chacha.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-avx.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-sse2.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa-xop.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-avx.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-avx2.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-sse2.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-ssse3.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64-xop.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-mix_salsa64.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-pbkdf2.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-portable-x86.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-portable.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix-basic.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix-template.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-romix.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-salsa.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-salsa64.h" />
-    <ClInclude Include="..\SharedCode\code\scrypt-jane-test-vectors.h" />
     <ClInclude Include="..\SharedCode\message.h" />
-    <ClInclude Include="..\SharedCode\scrypt-jane.h" />
     <ClInclude Include="auth.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="client_handler.h" />

@@ -64,9 +64,6 @@ namespace SnapRegisters
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
 		{
 
-
-
-
 #if ADMIN
 			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn);
 			MainAdminWindow.Show();
@@ -104,8 +101,6 @@ namespace SnapRegisters
 			{
 				connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
-
-
                 connection.write("EXEC	[dbo].[GetEmployee_Username] \"" + attempt.Username + "\"");
 
                 XmlNode item = connection.Response[0];
@@ -113,8 +108,9 @@ namespace SnapRegisters
                 long permissions = long.Parse(item.Attributes["PermissionsID"].Value);
                 string phone = item.Attributes["EmployeePhone"].Value;
                 int id = Int32.Parse(item.Attributes["UserID"].Value);
+                string username = item.Attributes["Name"].Value;
 
-				Employee loggedIn = new Employee(id, attempt.Username, null, phone, new DateTime(1, 1, 1), permissions);
+				Employee loggedIn = new Employee(id, username, null, phone, new DateTime(1, 1, 1), permissions);
 
                 isLoggedIn = true;
 				OpenInterfaceWindow(loggedIn);
@@ -124,11 +120,10 @@ namespace SnapRegisters
 			catch (InvalidOperationException )
 			{
 				MessageBox.Show( "Invalid username or password" );
-
 			}
 			catch (Exception ee)
 			{
-				MessageBox.Show(ee.ToString());
+				MessageBox.Show(ee.Message);
 			}
 		}
 

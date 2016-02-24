@@ -180,7 +180,7 @@ namespace SnapRegisters
 
                 return newItem;
             }
-            catch( Exception e )
+            catch( Exception )
             {
                 throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
             }
