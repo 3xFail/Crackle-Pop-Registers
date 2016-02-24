@@ -94,7 +94,8 @@ namespace SnapRegisters
             {
                 connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
-                connection.write("EXEC	[dbo].[GetEmployee_Username] \"" + attempt.Username + "\"");
+                connection.write( string.Format( "EXEC [dbo].[GetEmployee_Username] \"{0}\"", attempt.Username ) );
+                //I know this will get SQL injected. Will fix ASAP.
 
                 XmlNode item = connection.Response[0];
 
@@ -113,11 +114,10 @@ namespace SnapRegisters
             catch (InvalidOperationException)
             {
                 MessageBox.Show("Invalid username or password");
-
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                MessageBox.Show(ee.Message);
             }
         }
 

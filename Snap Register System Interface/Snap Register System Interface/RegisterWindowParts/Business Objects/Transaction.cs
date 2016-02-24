@@ -158,29 +158,23 @@ namespace SnapRegisters
 
 		private Item ConstructItem(string itemID)
 		{
-			// TODO: Connect to database and construct item from given item ID.
-			
-
-            m_connection.write("EXEC [dbo].[GetItem] \"" + itemID + "\"");
-
+            m_connection.write( string.Format( "EXEC [dbo].[GetItem] \"{0}\"", itemID ) );
+            //SQL injection will be fixed, I pinky-swear.
             try
             {
                 XmlNode it = m_connection.Response[0];
 
-
                 float price = float.Parse( it.Attributes["Price"].Value );
                 string name = it.Attributes["Name"].Value;
-                bool active = it.Attributes["Active_Use"].Value == "1";
+                bool active = it.Attributes["Active_Use"].Value[0] == '1';
                 int product_id = int.Parse( it.Attributes["ProductID"].Value );
-
-
-                // if the active use is false a error needs to be thrown
-                Item newItem = new Item( name, price, itemID );
-
-
-                return newItem;
+                
+                if( active )
+                    return new Item( name, price, itemID );
+                else
+                    throw new Exception( "Cannot sell inactive item" );
             }
-            catch( Exception )
+            catch( NullReferenceException )
             {
                 throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
             }
