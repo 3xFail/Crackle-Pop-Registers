@@ -78,6 +78,8 @@
       <AdditionalIncludeDirectories>C:\boost\boost_1_59_0;C:\cppdb\cppdb-0.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SERVER;_CRT_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;SCRYPT_SALSA64;SCRYPT_SHA512</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,6 +114,7 @@
       <PreprocessorDefinitions>SERVER;_CRT_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;SCRYPT_SALSA64;SCRYPT_SHA512</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\boost\boost_1_59_0;C:\cppdb\cppdb-0.3.1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

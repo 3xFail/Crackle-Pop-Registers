@@ -38,36 +38,15 @@ namespace SnapRegisters
 
         private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!isLoggedIn || usernameField.Text != lastAttempt.Username)
+            lastAttempt = new LoginDetails()
             {
-                lastAttempt = new LoginDetails();
+                Password = passwordField.Password,
+                Username = usernameField.Text
+            };
 
-                lastAttempt.Password = passwordField.Password;
-                lastAttempt.Username = usernameField.Text;
-
-                ConnectToServer(lastAttempt);
-                if (isLoggedIn && !Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                {
-                    OpenInterfaceWindow(loggedIn);
-                    this.Close();
-                }
-                if (loggedIn != null && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                    MessageBox.Show("Welcome " + loggedIn.name + ". You now have access to Manager Functions.");
-            }
-            else
-            {
-                if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password)
-                {
-                    OpenInterfaceWindow(loggedIn);
-                    this.Close();
-                }
-                else
-                {
-                    isLoggedIn = false;
-                    MessageBox.Show("Mismatched password: ERROR");
-
-                }
-            }
+            ConnectToServer(lastAttempt);
+            OpenInterfaceWindow(loggedIn);
+            this.Close();
         }
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
@@ -84,25 +63,6 @@ namespace SnapRegisters
 #endif
         }
 
-        private Employee ConnectToMockServer(LoginDetails attempt)
-        {
-            if (attempt.Username == "admin" && attempt.Password == "password")
-            {
-                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-                //OpenInterfaceWindow(loggedIn);
-                //this.Close();
-                MessageBox.Show("Success!");
-                isLoggedIn = true;
-                return loggedIn;
-            }
-            else
-            {
-                MessageBox.Show("Failure");
-                isLoggedIn = false;
-                return null;
-            }
-        }
-
         private void ConnectToServer(LoginDetails attempt)
         {
             loggedIn = null;
@@ -112,16 +72,15 @@ namespace SnapRegisters
                 connection = new connection_session( File.ReadAllText( "sv_ip.txt" ), 6119, attempt.Username, attempt.Password );
 
                 connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
-                //I know this will get SQL injected. Will fix ASAP.
 
                 XmlNode item = connection.Response[0];
 
-                long permissions = long.Parse( item.Attributes["PermissionsID"].Value );
-                string phone = item.Attributes["EmployeePhone"].Value;
-                int id = Int32.Parse( item.Attributes["UserID"].Value );
-                string username = item.Attributes["Name"].Value;
+                long permissions = long.Parse( item.Get( "PermissionsID" ) );
+                string phone = item.Get( "EmployeePhone" );
+                int id = Int32.Parse( item.Get( "UserID" ) );
+                string username = item.Get( "Name" );
+                string Address = item.Get( "Address" );
 
-                //Ask ryan to join birthday and address to GetEmployee_Username query so we can put it in here.
                 loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
 
                 isLoggedIn = true;
@@ -153,12 +112,13 @@ namespace SnapRegisters
             Application.Current.Shutdown();
         }
 
-        private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void Management_Operations_Executed( object sender, ExecutedRoutedEventArgs e )
         {
-            lastAttempt = new LoginDetails();
-
-            lastAttempt.Password = passwordField.Password;
-            lastAttempt.Username = usernameField.Text;
+            lastAttempt = new LoginDetails()
+            {
+                Password = passwordField.Password,
+                Username = usernameField.Text
+            };
 
             ConnectToServer( lastAttempt );
 
@@ -176,7 +136,7 @@ namespace SnapRegisters
 
         private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            e.CanExecute = usernameField.Name != string.Empty && passwordField.Password != string.Empty;
         }
 
         private void btnClosePopup_Click(object sender, RoutedEventArgs e)

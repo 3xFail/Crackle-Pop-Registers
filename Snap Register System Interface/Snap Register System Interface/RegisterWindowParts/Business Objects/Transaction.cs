@@ -164,7 +164,7 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                if( it.Attributes["Active_Use"].Value[0] == '1' )
+                if( it.Attributes["Active_Use"].Value[0] == '0' )
                     throw new Exception( "Cannot sell inactive item" );
 
                 float price = float.Parse( it.Attributes["Price"].Value );
