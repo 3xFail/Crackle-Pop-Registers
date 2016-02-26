@@ -164,12 +164,12 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                if( it.Attributes["Active_Use"].Value[0] == '0' )
+                if( it.Get("Active_Use" )[0] == '0' )
                     throw new Exception( "Cannot sell inactive item" );
 
-                float price = float.Parse( it.Attributes["Price"].Value );
-                string name = it.Attributes["Name"].Value;
-                int product_id = int.Parse( it.Attributes["ProductID"].Value );
+                float price = float.Parse( it.Get( "Price" ) );
+                string name = it.Get( "Name" );
+                int product_id = int.Parse( it.Get( "ProductID" ) );
                 
                 return new Item( name, price, itemID );
             }

@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System;
 
 namespace CSharpClient
 {
@@ -6,11 +7,14 @@ namespace CSharpClient
     {
         public static string Get( this XmlNode node, string field )
         {
+            if( node == null )
+                throw new NullReferenceException();
+
             try
             {
                 return node.Attributes[field].Value;
             }
-            catch
+            catch( Exception )
             {
                 return string.Empty;
             }
