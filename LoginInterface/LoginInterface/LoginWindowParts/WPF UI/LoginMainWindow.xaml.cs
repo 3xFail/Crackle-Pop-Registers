@@ -36,43 +36,18 @@ namespace SnapRegisters
             e.CanExecute = !(string.IsNullOrEmpty(usernameField.Text) || string.IsNullOrEmpty(passwordField.Password));
         }
 
-
         private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!isLoggedIn || usernameField.Text != lastAttempt.Username)
+            lastAttempt = new LoginDetails()
             {
-                lastAttempt = new LoginDetails();
+                Password = passwordField.Password,
+                Username = usernameField.Text
+            };
 
-                lastAttempt.Password = passwordField.Password;
-                lastAttempt.Username = usernameField.Text;
-
-                ConnectToServer(lastAttempt);
-                if (isLoggedIn && !Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                {
-                    OpenInterfaceWindow(loggedIn);
-                    this.Close();
-                }
-                if (loggedIn != null && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                    MessageBox.Show("Welcome " + loggedIn.name + ". You now have access to Manager Functions.");
-            }
-            else
-            {
-                if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password)
-                {
-                    OpenInterfaceWindow(loggedIn);
-                    this.Close();
-                }
-                else
-                {
-                    isLoggedIn = false;
-                    MessageBox.Show("Mismatched password: ERROR");
-
-                }
-            }
+            ConnectToServer(lastAttempt);
+            OpenInterfaceWindow(loggedIn);
+            this.Close();
         }
-
-
-
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
@@ -88,54 +63,35 @@ namespace SnapRegisters
 #endif
         }
 
-        private Employee ConnectToMockServer(LoginDetails attempt)
-        {
-            if (attempt.Username == "admin" && attempt.Password == "password")
-            {
-                Employee loggedIn = new Employee(10, "admin", null, "987654321", new DateTime(1, 1, 1), 31);
-                //OpenInterfaceWindow(loggedIn);
-                //this.Close();
-                MessageBox.Show("Success!");
-                isLoggedIn = true;
-                return loggedIn;
-            }
-            else
-            {
-                MessageBox.Show("Failure");
-                isLoggedIn = false;
-                return null;
-            }
-        }
-
         private void ConnectToServer(LoginDetails attempt)
         {
+            loggedIn = null;
+            isLoggedIn = false;
             try
             {
-                loggedIn = null;
-                connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
+                connection = new connection_session( File.ReadAllText( "sv_ip.txt" ), 6119, attempt.Username, attempt.Password );
 
-                connection.write(string.Format("GetEmployee_Username \"{0}\"", attempt.Username));
-                //I know this will get SQL injected. Will fix ASAP.
+                connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
 
                 XmlNode item = connection.Response[0];
 
-                long permissions = long.Parse(item.Attributes["PermissionsID"].Value);
-                string phone = item.Attributes["EmployeePhone"].Value;
-                int id = Int32.Parse(item.Attributes["UserID"].Value);
-                string username = item.Attributes["Name"].Value;
+                long permissions = long.Parse( item.Get( "PermissionsID" ) );
+                string phone = item.Get( "EmployeePhone" );
+                int id = Int32.Parse( item.Get( "UserID" ) );
+                string username = item.Get( "Name" );
+                string Address = item.Get( "Address" );
 
-                loggedIn = new Employee(id, username, null, phone, new DateTime(1, 1, 1), permissions);
+                loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
 
                 isLoggedIn = true;
             }
             catch (InvalidOperationException)
             {
-                isLoggedIn = false;
-                MessageBox.Show("Invalid username or password");
+                MessageBox.Show( "Invalid username or password" );
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                MessageBox.Show( ee.Message );
             }
         }
 
@@ -156,33 +112,32 @@ namespace SnapRegisters
             Application.Current.Shutdown();
         }
 
-        private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void Management_Operations_Executed( object sender, ExecutedRoutedEventArgs e )
         {
-            if (usernameField.Text == lastAttempt.Username && passwordField.Password == lastAttempt.Password
-                && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
+            lastAttempt = new LoginDetails()
+            {
+                Password = passwordField.Password,
+                Username = usernameField.Text
+            };
+
+            ConnectToServer( lastAttempt );
+
+            if (isLoggedIn && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
             {
                 btnShowPopup_Click(sender, e);
             }
             else
             {
                 isLoggedIn = false;
-                MessageBox.Show("Mismatched password: Access to Manager Functions Denied");
+                loggedIn = null;
+                MessageBox.Show("Access to Manager Functions Denied");
             }
         }
 
         private void Management_Operations_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = false;
-            if (isLoggedIn)
-            {
-                if (Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
-                {
-                    e.CanExecute = true;
-                }
-            }
+            e.CanExecute = usernameField.Name != string.Empty && passwordField.Password != string.Empty;
         }
-
-
 
         private void btnClosePopup_Click(object sender, RoutedEventArgs e)
         {

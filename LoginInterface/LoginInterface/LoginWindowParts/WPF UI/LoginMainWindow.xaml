@@ -39,8 +39,7 @@
                 
                 <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Left" Margin="20"/>
             
-                <Button Content="Functions" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" 
-                        HorizontalAlignment="Right" Margin="20" />
+                <Button Content="Manager" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" />
                 <!--<Button Command="local:CustomCommands.Exit" Content="Exit" Width="90" Height="40" VerticalAlignment="Top" Margin="20"/>-->
                 <StackPanel>
                     <Popup AllowsTransparency="True" Height="400" Name="myPopup" 
