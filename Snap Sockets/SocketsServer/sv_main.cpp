@@ -37,9 +37,9 @@ using std::exception;
 db_conn_str load_connection_string();
 
 
-int main(int argc, char ** argv)
+/*int main(int argc, char ** argv)
 {
-	if (argc < 2)
+	if (argc < 2)*/
 #define RESULT_SIZE 16
 #ifdef _DEBUG
 #define N_FACTOR 13 //how many chunks, increases both memory and CPU usage
@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
 
 		auto thenum = 0;
 		if (argc < 2)
-			>> >> >> > Stashed changes
+			//>> >> >> > Stashed changes
 		{
 			cout << "Required port number not passed.\n";
 			return 1;
