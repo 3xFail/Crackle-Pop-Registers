@@ -71,7 +71,7 @@ namespace SnapRegisters
 
 		// Delegate for output function
 		public delegate void ItemOutputDelegate(Item itemToAdd);
-        public delegate void CouponOutputDelegate(Coupon CouponToAdd);
+        
 
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
@@ -86,7 +86,8 @@ namespace SnapRegisters
 			m_Employee = employee;
 			m_Items = new List<Item>();
             m_Coupons = new List<Coupon>();
-			OutputDelegate = itemToAdd;
+			m_OutputDelegate = itemToAdd;
+            
 		}
 
 		public Item AddItem(string itemID)
@@ -101,7 +102,7 @@ namespace SnapRegisters
 				Item newItem = ConstructItem(itemID);
 
 				// Fire whatever Output method has been assigned for this item.
-				OutputDelegate(newItem);
+				m_OutputDelegate(newItem);
 
 				m_Items.Add(newItem);
 				return newItem;
@@ -167,7 +168,7 @@ namespace SnapRegisters
                 //don't know what todo about this, have a funtion but not sure 
                 // if i need to make another deleget to handle Coupons...
 
-                //OutputDelegate(newCoupon);
+                //m_OutputDelegate(newCoupon);
 
                 foreach (Item i in m_Items)
                 {
@@ -236,7 +237,7 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                bool active = it.Get("Active")[0] == 0 ? true : false ;
+                bool active = it.Get("Active")[0] == '1';
 
                 if (!active)
                     throw new Exception("Cannot use inactive coupon");
@@ -255,7 +256,7 @@ namespace SnapRegisters
 
         }
 
-		public ItemOutputDelegate OutputDelegate { get; set; }
+		public ItemOutputDelegate m_OutputDelegate { get; set; }
 		private List<Item> m_Items = null;
         private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;

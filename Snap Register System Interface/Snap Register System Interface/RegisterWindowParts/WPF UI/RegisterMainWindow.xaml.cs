@@ -101,6 +101,7 @@ namespace SnapRegisters
         {
             ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
             itemDescription.Height = 60;
+            double height_t = itemDescription.Height;
 
             ItemsList.Children.Add(itemDescription);
 
@@ -108,12 +109,26 @@ namespace SnapRegisters
             m_totalTotal += itemToAdd.Price;
 
 
+            foreach(Coupon coupon in itemToAdd.Discounts)
+            {
+                // need a Discounts Display box
+                ItemDisplayBox couponDescription = new ItemDisplayBox(coupon);
+                couponDescription.Height = 60;
+
+                //
+
+
+
+                CouponList.Children.Add(couponDescription);
+            }
+
+
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
         }
 
-        private void AddCouponToOutputPanels(Coupon couponToAdd)
+        /*private void AddCouponToOutputPanels(Coupon couponToAdd)
         {
             DiscountDisplayBox CouponDescription = new DiscountDisplayBox(couponToAdd.m_name, couponToAdd.m_discount);
 
@@ -130,7 +145,7 @@ namespace SnapRegisters
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
-        }
+        }*/
 
         private void UpdateTotals()
         {
