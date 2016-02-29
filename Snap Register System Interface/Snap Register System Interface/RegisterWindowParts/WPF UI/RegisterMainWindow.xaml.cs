@@ -20,6 +20,7 @@ using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
 using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
+
 namespace SnapRegisters
 {
     //*************************************************************************************************************
@@ -53,9 +54,11 @@ namespace SnapRegisters
         //	m_itemPanel = ItemsList;
         //	m_discountList = CouponList;
         //}
-
+        public static KeyboardHook kh;
         public RegisterMainWindow(Employee currentEmployee, connection_session session)
         {
+
+            
             //Updates the clock constantly
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -85,7 +88,11 @@ namespace SnapRegisters
             //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
+
+            kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
+
+        
 
         private void AddItemToOutputPanels(Item itemToAdd)
         {

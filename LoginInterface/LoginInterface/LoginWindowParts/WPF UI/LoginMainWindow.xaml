@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="789.797" Width="1197.5"
+        Title="MainWindow"
         WindowStyle="None" ResizeMode="NoResize"  
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Background="{StaticResource Background}">
