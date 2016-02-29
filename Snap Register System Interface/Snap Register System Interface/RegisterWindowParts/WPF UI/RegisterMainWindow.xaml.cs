@@ -65,9 +65,11 @@ namespace SnapRegisters
                 this.dateText.Text = DateTime.Now.ToString("hh:mm tt");
             }, this.Dispatcher);
 
-            //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second)
-            System.Threading.Thread.Sleep(1100);
 
+#if DEBUG   //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second)
+#else       //Doesn't delay the in debug mode for quicker development
+            System.Threading.Thread.Sleep(1100);
+#endif
 
             //Initialize window after the clock is ticked
             InitializeComponent();
@@ -88,7 +90,8 @@ namespace SnapRegisters
             //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
-
+            //Experimental - Not working yet
+            //This code is supposed to lock the keyboard to this application
             //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
 
