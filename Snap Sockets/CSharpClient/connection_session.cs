@@ -11,13 +11,19 @@ namespace CSharpClient
 {
     public class connection_session
     {
-        public connection_session( string host, int port, string username, string password )
+
+        public connection_session( string hostString, int port, string username, string password )
         {
             _username = username;
             //connect to a remote device
-         
+
+            //DNS resolver resolves IP address from hostname (currently only using first returned IP)
+            IPHostEntry host;
+            host = Dns.GetHostEntry(hostString);
+
             //establish the remote endpoint for the socket
-            _remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );
+            //_remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );      **DEPRECATED** 
+            _remoteEP = new IPEndPoint(host.AddressList[0], port);
 
             //create a TCP/IP socket
             _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
