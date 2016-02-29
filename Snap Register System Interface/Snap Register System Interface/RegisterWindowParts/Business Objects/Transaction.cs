@@ -8,6 +8,7 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
@@ -71,6 +72,7 @@ namespace SnapRegisters
             m_connection = session;
 			m_Employee = employee;
 			m_Items = new List<Item>();
+            m_Coupons = new List<Coupon>();
 			OutputDelegate = itemToAdd;
 		}
 
@@ -136,16 +138,43 @@ namespace SnapRegisters
 					changedItem.Price = newPrice;
 			}
 		}
-		public void ApplyCoupon(int couponID)
+		public void ApplyCoupon(string couponID)
 		{
+            //used to check if the coupon matched any of the items in the transaction
+            bool matching_flag = false;
 
-			// TODO: Connect to database and attempt to apply coupon.
+            if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Connect to the database and check if the couponID is correct. If not throw an exception.
+            try
+            {
+                
+                Coupon newCoupon = ConstructCoupon(couponID);
 
-			// For each item in m_Items, look at the database and see if the coupon should be applied to it. If so, add
-			// a new discount to m_Items[that item].discounts.
-		}
+                //don't know what todo about this
+                //OutputDelegate(newCoupon);
+
+                foreach (Item i in m_Items)
+                {
+                    if (i.ID == newCoupon.m_related_barcode)
+                    {
+                        matching_flag = true;
+                        i.Discounts.Add(newCoupon);
+                    }
+
+                }
+
+                if(matching_flag)
+                    m_Coupons.Add(newCoupon);
+
+                
+            }
+            catch (InvalidOperationException e)
+            {
+                throw e;
+            }
+
+        }
 		public void Checkout()
 		{
 			// TODO: Insert credit card magic here.
@@ -155,6 +184,11 @@ namespace SnapRegisters
 		{
 			return m_Items;
 		}
+
+        public List<Coupon> GetCoupons()
+        {
+            return m_Coupons;
+        }
 
 		private Item ConstructItem(string itemID)
 		{
@@ -179,8 +213,35 @@ namespace SnapRegisters
             }
 		}
 
+        private Coupon ConstructCoupon(string coupon_id)
+        {
+            m_connection.write(string.Format("GetCoupon \"{0}\"", coupon_id));
+
+            try
+            {
+                XmlNode it = m_connection.Response[0];
+
+                bool active = it.Get("Active")[0] == 0 ? true : false ;
+
+                if (!active)
+                    throw new Exception("Cannot use inactive coupon");
+
+                float discount = float.Parse(it.Get("PriceModification"));
+                string related_barcode = it.Get("Barcode");
+                
+
+                return new Coupon(coupon_id, related_barcode, discount, active);
+            }
+            catch (NullReferenceException)
+            {
+                throw new Exception("Coupon with barcode \"" + coupon_id + "\" not found.");
+            }
+
+        }
+
 		public ItemOutputDelegate OutputDelegate { get; set; }
 		private List<Item> m_Items = null;
+        private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;
         private connection_session m_connection = null;
 	}
