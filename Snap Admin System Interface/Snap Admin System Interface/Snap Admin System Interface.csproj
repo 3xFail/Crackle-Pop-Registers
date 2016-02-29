@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="AccessLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
+      <HintPath>..\..\AccessLibrary\AccessLibrary\bin\Release\AccessLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CSharpClient">
       <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
@@ -135,9 +135,6 @@
     <Folder Include="AdminWindowParts\Business Objects\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\SharedResources\AccessLibrary.dll">
-      <Link>SharedResources\AccessLibrary.dll</Link>
-    </Content>
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
