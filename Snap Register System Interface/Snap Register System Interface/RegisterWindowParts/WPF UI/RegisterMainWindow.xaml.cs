@@ -89,7 +89,7 @@ namespace SnapRegisters
             LoggedInAs.Text = currentEmployee.name;
 
 
-            kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
+            //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
 
         
