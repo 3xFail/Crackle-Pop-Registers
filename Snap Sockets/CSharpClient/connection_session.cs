@@ -70,13 +70,21 @@ namespace CSharpClient
             //adds a host entry to the final product for each host detected
             foreach (string individualHost in splitHostNames)
             {
-                if (individualHost == "localhost")
+                IPAddress throwAwayIP;
+                if (individualHost == "localhost" || individualHost == "127.0.0.1")
                 {
                     IPHostEntry localhost = new IPHostEntry();
+                    localhost.AddressList = new IPAddress[1];
                     localhost.AddressList[0] = IPAddress.Parse("127.0.0.1");
+                    localhost.HostName = "localhost";
                     parsedHosts.Add(localhost);
                 }
-                parsedHosts.Add(Dns.GetHostEntry(individualHost));
+                else if (IPAddress.TryParse(individualHost, out throwAwayIP))
+                {
+
+                }
+                else
+                    parsedHosts.Add(Dns.GetHostEntry(individualHost));
             }
 
             return parsedHosts;

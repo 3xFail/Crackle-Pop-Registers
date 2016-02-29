@@ -12,7 +12,7 @@ namespace SOCKET_TESTING
         {
             try
             {
-                connection_session connection = new connection_session("newgenstudios.duckdns.org", 6119, "a", "a");
+                connection_session connection = new connection_session("localhost", 6119, "a", "a");
                 connection.write(string.Format("GetEmployee_Username \"{0}\"", "a"));
                 
             }
