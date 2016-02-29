@@ -18,6 +18,7 @@ using System.Device;
 using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
@@ -95,6 +96,25 @@ namespace SnapRegisters
 
             m_costTotal += itemToAdd.Price;
             m_totalTotal += itemToAdd.Price;
+
+
+            ItemScroll.ScrollToBottom();
+            CouponScroll.ScrollToBottom();
+            UpdateTotals();
+        }
+
+        private void AddCouponToOutputPanels(Coupon couponToAdd)
+        {
+            DiscountDisplayBox CouponDescription = new DiscountDisplayBox(couponToAdd.m_name, couponToAdd.m_discount);
+
+            //not any current xaml object todo this
+            //CouponDescription.Height = 60;
+
+            //breaking because of not being able to convert to a UI Element
+            //CouponList.Children.Add(CouponDescription);
+
+            m_savingsTotal += couponToAdd.m_discount;
+            m_totalTotal -= couponToAdd.m_discount;
 
 
             ItemScroll.ScrollToBottom();

@@ -25,6 +25,8 @@ namespace SnapRegisters
 	//				A list of all items in the transaction.
 	//			private Employee m_Employee
 	//				The currently logged in employee.
+    //          private List<Coupon> m_Coupons
+    //              A list of all currently applied coupons for the transaction 
 	//		FUNCTIONS:
 	//			public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
 	//				Constructor for a new transaction opened by the specified employee. itemOutput is a DockPanel
@@ -38,7 +40,7 @@ namespace SnapRegisters
 	//			public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 	//				Overrides the cost of the item specified with the new price specified with "newPrice".
 	//				"reason" is the reason the employee chose to override the price.
-	//			public void ApplyCoupon(int couponID)
+	//			public void ApplyCoupon(string couponID)
 	//				Applies a coupon to the sale.
 	//			public void Checkout()
 	//				Finishes the transaction and begins processing payment.
@@ -47,6 +49,13 @@ namespace SnapRegisters
 	//				proper permissions but can be read with this.
 	//			private Item ConstructItem(string itemID)
 	//				Contacts the database and constructs an item from the given item ID.
+    //          public List<Coupon> GetCoupons()
+    //              returns a copy of all the coupons applied to items in the transaction
+    //          private Coupon ConstructCoupon(string coupon_id)
+    //              Contacts the database and constructs an coupon from a given coupon_id
+    //
+    //
+    //
 	//		PERMISSIONS:
 	//			AddItem						- UseRegister
 	//			RemoveItem					- UseRegister
@@ -228,9 +237,10 @@ namespace SnapRegisters
 
                 float discount = float.Parse(it.Get("PriceModification"));
                 string related_barcode = it.Get("Barcode");
-                
+                string name = it.Get("Coupon_Name");
 
-                return new Coupon(coupon_id, related_barcode, discount, active);
+
+                return new Coupon(coupon_id, related_barcode, name, discount, active);
             }
             catch (NullReferenceException)
             {
