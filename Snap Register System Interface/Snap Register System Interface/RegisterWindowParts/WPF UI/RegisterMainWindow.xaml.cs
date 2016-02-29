@@ -109,18 +109,18 @@ namespace SnapRegisters
             m_totalTotal += itemToAdd.Price;
 
 
-            foreach(Coupon coupon in itemToAdd.Discounts)
-            {
-                // need a Discounts Display box
-                ItemDisplayBox couponDescription = new ItemDisplayBox(coupon);
-                couponDescription.Height = 60;
+            //foreach(Coupon coupon in itemToAdd.Discounts)
+            //{
+            //    // need a Discounts Display box
+            //    ItemDisplayBox couponDescription = new ItemDisplayBox(coupon);
+            //    couponDescription.Height = 60;
 
-                //
+            //    //
 
 
 
-                CouponList.Children.Add(couponDescription);
-            }
+            //    CouponList.Children.Add(couponDescription);
+            //}
 
 
             ItemScroll.ScrollToBottom();
