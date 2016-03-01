@@ -6,125 +6,42 @@
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
         Title="Snap Admininstrator Program"
-        WindowState="Maximized"  WindowStyle="SingleBorderWindow">
-    <!--Height="768" Width="1024"-->
+        WindowState="Maximized" WindowStyle="SingleBorderWindow" Height="840" Width="1293.6">
+        <!--Height="350" Width="525">-->
+        <!--WindowState="Maximized"  WindowStyle="SingleBorderWindow" d:DesignHeight="843.9" Width="1170.8">-->
 
-    <Grid Margin="0,0,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="460*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="154*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="98*"/>
-            <ColumnDefinition Width="224*"/>
-            <ColumnDefinition Width="265*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
-
-        <DockPanel Margin="10,0,1.4,-0.147" Grid.RowSpan="3">
-            <StackPanel Grid.Column="0" Margin="0,10,100,0">
-                <TextBlock Name="Tabs" Margin="10" FontSize="20"></TextBlock>
-                <Button x:Name="Inventory_btn" Margin="0,30" Click="btn_Inv" Height="60">Inventory</Button>
-                <Button x:Name="Analysis_btn" Margin="0,30" Click="btn_Anal" Height="60">Analysis</Button>
-                <Button x:Name="Employees_btn" Margin="0,30" Click="btn_Emp" Height="60">Employees</Button>
-                <Button x:Name="Customers_btn" Margin="0,30" Click="btn_Cust" Height="60">Customers</Button>
-                <Button x:Name="Sales_btn" Margin="0,30" Click="btn_Sales" Height="60">Sales</Button>
-                <Button x:Name="Options_btn" Margin="0,30" Click="btn_Opt" Height="60">Options</Button>
-            </StackPanel>
-        </DockPanel>
-
-        <Grid Name="GridTab" Grid.Column="1" Grid.ColumnSpan="5" Margin="0.6,0,-0.4,-0.147" Grid.RowSpan="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="300*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="370*"/>
             </Grid.ColumnDefinitions>
-            <TabControl Name="InventoryTabs" Visibility="Visible" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Inventory">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="AddBtn" Content="Add" Click="clean_tab" Height="50"/>
-                        <Button x:Name="SearchBtn" Content="Search" Height="50"/>
-                        <Button x:Name="CatalogBtn" Content="Catalog" Height="50"/>
-                        <Button x:Name="InvBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-            <TabControl Name="AnalysisTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Analysis">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="GrossBtn" Content="Gross Earnings" Height="50"/>
-                        <Button x:Name="ProductBtn" Content="Product Losses" Height="50"/>
-                        <Button x:Name="AnalyBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-            <TabControl Name="EmployeesTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Employees">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="EmpAddBtn" Content="Add" Height="50"/>
-                        <Button x:Name="EmpSearchBtn" Content="Search" Height="50"/>
-                        <Button x:Name="EmpBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                    <!--<StackPanel>
-                        <TextBox Height="30" Width="672" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="1" Margin="10,10,0,0"/>
-                        <Button x:Name="button" Height="26" Width="100" Content="Search" HorizontalAlignment="Left" Margin="10,10,0,0"/>
-                        <ListBoxItem x:Name="ListOfEmp" Content="Employee Information" Height="390" Width="669" HorizontalAlignment="Left" VerticalContentAlignment="Top"  Margin="13,10,0,0" BorderThickness="1"/>
-                    </StackPanel>-->
-                </TabItem>
-            </TabControl>
-            <TabControl Name="CustomersTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Customers">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="CustSearchBtn" Content="Search" Height="50"/>
-                        <Button x:Name="AllCustBtn" Content="All Customers" Height="50"/>
-                        <Button x:Name="CustBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-            <TabControl Name="SalesTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Sales and Coupons">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="SalesBtn" Content="Sales" Height="50"/>
-                        <Button x:Name="CouponsBtn" Content="Coupons" Height="50"/>
-                        <Button x:Name="ListSalesBtn" Content="List of Sales" Height="50"/>
-                        <Button x:Name="ListCouponsBtn" Content="List of Coupons" Height="50"/>
-                        <Button x:Name="SalesBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-            <TabControl Name="OptionsTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem Header="Options">
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <Button x:Name="MngBtn" Content="Manage Registers" Height="50"/>
-                        <Button x:Name="OptBackBtn" Content="Back" Height="50"/>
-                    </StackPanel>
-                </TabItem>
-            </TabControl>
-            <TabControl Name="CleanTabs" Visibility="Collapsed" Margin="-90,0,-0.2,-0.253" Grid.ColumnSpan="2">
-                <TabItem>
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                        <!--<Button x:Name="SalesBtn" Content="Sales" Height="50"/>
-                        <Button x:Name="CouponsBtn" Content="Coupons" Height="50"/>
-                        <Button x:Name="ListSalesBtn" Content="List of Sales" Height="50"/>
-                        <Button x:Name="ListCouponsBtn" Content="List of Coupons" Height="50"/>
-                        <Button x:Name="SalesBackBtn" Content="Back" Height="50"/>-->
-                    </StackPanel>
-                </TabItem>
 
-                <!--<ContentControl Visibility="Visible" >
-                    <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-                    --><!--<Button x:Name="SalesBtn" Content="Sales" Height="50"/>
-                        <Button x:Name="CouponsBtn" Content="Coupons" Height="50"/>
-                        <Button x:Name="ListSalesBtn" Content="List of Sales" Height="50"/>
-                        <Button x:Name="ListCouponsBtn" Content="List of Coupons" Height="50"/>
-                        <Button x:Name="SalesBackBtn" Content="Back" Height="50"/>--><!--
-                    </StackPanel>
-                </ContentControl>-->
+            <!--panel of main navigational buttons-->
+            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="1">
+                <StackPanel>
+                    <Button x:Name="Inventory_btn" Margin="10,20,10,0" Click="btn_Inv" Height="60">Inventory</Button>
+                    <Button x:Name="Analysis_btn" Margin="10,50,10,0" Click="btn_Anal" Height="60">Analysis</Button>
+                    <Button x:Name="Employees_btn" Margin="10,50,10,0" Click="btn_Emp" Height="60">Employees</Button>
+                    <Button x:Name="Customers_btn" Margin="10,50,10,0" Click="btn_Cust" Height="60">Customers</Button>
+                    <Button x:Name="Sales_btn" Margin="10,50,10,0" Click="btn_Sales" Height="60">Sales</Button>
+                    <Button x:Name="Options_btn" Margin="10,50,10,0" Click="btn_Opt" Height="60">Options</Button>
+                </StackPanel>
+            </DockPanel>
 
+            <!--status bar-->
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Background="LightGray">
+                <TextBlock>Status: Completed</TextBlock>
+            </StackPanel>
 
-            </TabControl>
+            <!--section for subsections of each navigational button-->
+            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="0,70,10,0" Grid.RowSpan="2">
+                <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden" />
+            </Border>
+
         </Grid>
-    </Grid>
-</Window>
+    </Window>

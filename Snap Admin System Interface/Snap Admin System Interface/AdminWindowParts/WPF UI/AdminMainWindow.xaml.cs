@@ -14,7 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PointOfSales.Users;
 using PointOfSales.Permissions;
-
+using System.Device;
+//using SnapRegisters.AdminWindowParts.WPF_UI;
+using System.Windows.Threading;
+using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -26,121 +29,55 @@ namespace SnapRegisters
         public AdminMainWindow(Employee currentEmployee)
         {
             InitializeComponent();
-			//m_employee = currentEmployee;
+            //m_employee = currentEmployee;
         }
-
-        //public AddPage(Employee currentEmployee)
+        //    public AdminMainWindow()
         //{
-        //    //InitializeComponent();
+        //    InitializeComponent();
         //}
 
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Visible;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Collapsed;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new InventoryPage());
+            this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
         }
-        // opens the analytics page
+        // opens the analysis page
         private void btn_Anal(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Visible;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Collapsed;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new AnalysisPage());
+            this.NavigationFrame.Navigate(new Uri("AnalysisPage.xaml", UriKind.Relative));
         }
         // opens the employees page
         private void btn_Emp(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Visible;
-            CustomersTabs.Visibility = Visibility.Collapsed;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new EmployeesPage());
+            this.NavigationFrame.Navigate(new Uri("EmployeesPage.xaml", UriKind.Relative));
         }
-        // opens the cutomers page
+        // opens the customers page
         private void btn_Cust(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Visible;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new CustomersPage());
+            this.NavigationFrame.Navigate(new Uri("CustomersPage.xaml", UriKind.Relative));
         }
-        // opens the sale page
+        // opens the sales page
         private void btn_Sales(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Visible;
-            SalesTabs.Visibility = Visibility.Visible;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new SalesPage());
+            this.NavigationFrame.Navigate(new Uri("SalesPage.xaml", UriKind.Relative));
         }
         // opens the options page
         private void btn_Opt(object sender, RoutedEventArgs e)
         {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Collapsed;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Visible;
-            CleanTabs.Visibility = Visibility.Collapsed;
+            NavigationFrame.Navigate(new OptionsPage());
+            this.NavigationFrame.Navigate(new Uri("OptionsPage.xaml", UriKind.Relative));
         }
-        private void clean_tab(object sender, RoutedEventArgs e)
-        {
-            InventoryTabs.Visibility = Visibility.Collapsed;
-            AnalysisTabs.Visibility = Visibility.Collapsed;
-            EmployeesTabs.Visibility = Visibility.Collapsed;
-            CustomersTabs.Visibility = Visibility.Collapsed;
-            SalesTabs.Visibility = Visibility.Collapsed;
-            OptionsTabs.Visibility = Visibility.Collapsed;
-            CleanTabs.Visibility = Visibility.Visible;
-
-            //Button b = new Button();
-            //b.Content = "Hello";
-            //StackPanel myPanel = new StackPanel();
-            //myPanel.Children.Add(b);
-            //this.Content = myPanel;
-
-            //StackPanel panel = new StackPanel();
-            //Button b1 = new Button { Content = "Hello" };
-            //Button b2 = new Button { Content = "Hi" };
-
-            //panel.Children.Add(b1);
-            //panel.Children.Add(b2);
-
-            //Page page = new Page { Content = panel };
-
-            //this.Content = page;
-        }
-
-        //private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        //// opens the add employee page
+        //private void AddEmp(object sender, RoutedEventArgs e)
         //{
-        //    Hyperlink hpl = sender as Hyperlink;
-        //    if (hpl.NavigateUri != null)
-        //    {
-        //        frame.NavigationService.Navigate(hpl.NavigateUri);
-        //    }
+        //    NavigationFrame.Navigate(new AddEmployeePage());
+        //    this.NavigationFrame.Navigate(new Uri("AddEmployeePage.xaml", UriKind.Relative));
         //}
-
-
-        //private Employee m_employee = null;
-
-        //private DockPanel m_itemPanel = null;
-        //private DockPanel m_discountList = null;
-    }   
+    }
 }
+
