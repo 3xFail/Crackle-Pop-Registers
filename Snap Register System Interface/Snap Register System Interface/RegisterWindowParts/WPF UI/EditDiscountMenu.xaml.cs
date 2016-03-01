@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,18 @@ namespace SnapRegisters
 	/// </summary>
 	public partial class EditDiscountMenu : Window
 	{
-		public EditDiscountMenu()
+		public EditDiscountMenu(Coupon CouponToEdit)
 		{
 			InitializeComponent();
+            m_source = CouponToEdit;
+            ItemNameBox.Text = m_source.m_name;
 		}
 
 		private void DiscountWindowDeactivated(object sender, EventArgs e)
 		{
 			this.Close();
 		}
+
+        private Coupon m_source = null;
 	}
 }

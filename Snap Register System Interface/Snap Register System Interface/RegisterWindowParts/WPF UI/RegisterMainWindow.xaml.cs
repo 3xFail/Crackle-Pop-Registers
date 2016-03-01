@@ -19,7 +19,7 @@ using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
 using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
-
+using Snap_Register_System_Interface.RegisterWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -102,6 +102,7 @@ namespace SnapRegisters
             ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
             itemDescription.Height = 60;
             double height_t = itemDescription.Height;
+            int count = 0;
 
             ItemsList.Children.Add(itemDescription);
 
@@ -111,13 +112,17 @@ namespace SnapRegisters
 
             foreach(Coupon coupon in itemToAdd.Discounts)
             {
-                // need a Discounts Display box
-                ItemDisplayBox couponDescription = new ItemDisplayBox(coupon);
+                //need a Discounts Display box
+                CouponDisplayBox couponDescription = new CouponDisplayBox(coupon);
                 couponDescription.Height = 60;
+                count++;
 
-                //
 
-
+                if (height_t != (count * couponDescription.Height) && couponDescription.Height != 0 )
+                {
+                      height_t += couponDescription.Height;
+                      itemDescription.Height =  height_t;
+                }
 
                 CouponList.Children.Add(couponDescription);
             }
