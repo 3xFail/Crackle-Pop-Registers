@@ -99,9 +99,11 @@ namespace CSharpClient
             _sender.Connect(_remoteEP);
             */
 
+            Console.WriteLine(_remoteEP.Address);
             IAsyncResult result = _sender.BeginConnect( _remoteEP, null, null );
             bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
 
+            
             if( _sender.Connected )
             {
                 byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
@@ -115,6 +117,7 @@ namespace CSharpClient
             {
                 //Freak out and die
             }
+            
         }
 
 public void write(message msg)
