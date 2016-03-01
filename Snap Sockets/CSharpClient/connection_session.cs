@@ -115,12 +115,15 @@ namespace CSharpClient
             }
             else
             {
+                //create a TCP/IP socket
+                _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+                _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
                 //Freak out and die
             }
             
         }
 
-public void write(message msg)
+        public void write(message msg)
         {
             bool write_in_progress = _msg_queue.Count != 0;
             _msg_queue.Enqueue( msg );
