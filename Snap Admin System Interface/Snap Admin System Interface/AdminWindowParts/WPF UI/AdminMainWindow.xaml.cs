@@ -26,10 +26,16 @@ namespace SnapRegisters
     /// </summary>
     public partial class AdminMainWindow : Window
     {
+        private Employee m_employee = null;
+
+        private DockPanel m_itemPanel = null;
+        private DockPanel m_discountList = null;
+
+
         public AdminMainWindow(Employee currentEmployee)
         {
             InitializeComponent();
-            //m_employee = currentEmployee;
+            m_employee = currentEmployee;
         }
         //    public AdminMainWindow()
         //{
