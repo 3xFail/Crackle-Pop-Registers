@@ -34,13 +34,19 @@ namespace SnapRegisters
 
         public AdminMainWindow(Employee currentEmployee)
         {
+            // update the clock manually
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                this.dateText.Text = DateTime.Now.ToString("hh:mm tt");
+            }, this.Dispatcher);
+
             InitializeComponent();
             m_employee = currentEmployee;
+
+            // set the username to the employee that logged in
+            LoggedInAs.Text = currentEmployee.name;
         }
-        //    public AdminMainWindow()
-        //{
-        //    InitializeComponent();
-        //}
+       
 
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)

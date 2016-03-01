@@ -89,12 +89,15 @@ namespace CSharpClient
         }
 
 
+        //connects the socket to the remote endpoint. catch any errors.
         private void connect(string password)
         {
-            //connects the socket to the remote endpoint. catch any errors.
-
-            //_sender.SendTimeout = 1000;
-            //_sender.Connect(_remoteEP);
+            /*
+            Console.WriteLine(_remoteEP.Address);
+            _sender.SendTimeout = 100;
+            _sender.ReceiveTimeout = 100;
+            _sender.Connect(_remoteEP);
+            */
 
             IAsyncResult result = _sender.BeginConnect( _remoteEP, null, null );
             bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
@@ -114,7 +117,7 @@ namespace CSharpClient
             }
         }
 
-        public void write(message msg)
+public void write(message msg)
         {
             bool write_in_progress = _msg_queue.Count != 0;
             _msg_queue.Enqueue( msg );
