@@ -93,8 +93,8 @@ namespace CSharpClient
         {
             //connects the socket to the remote endpoint. catch any errors.
             Console.WriteLine(_remoteEP.Address);
-            _sender.SendTimeout = 1000;
-            _sender.ReceiveTimeout = 1000;
+            _sender.SendTimeout = 100;
+            _sender.ReceiveTimeout = 100;
             _sender.Connect(_remoteEP);
             byte[] msg = Encoding.ASCII.GetBytes(_username + " " + password);
 
