@@ -25,7 +25,9 @@ namespace CSharpClient
             //DNS resolver resolves IP address from hostname (currently only using first returned IP)
             //host = Dns.GetHostEntry(hostString);
 
-
+            //create a TCP/IP socket
+            _sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
 
 
             //establish the remote endpoint for the socket
@@ -37,7 +39,8 @@ namespace CSharpClient
                 try
                 {
                     _remoteEP = new IPEndPoint(hosts[idx].AddressList[0], port);
-                    break;
+                    connect(password);
+                    break;          //sorry Todd
                 }
                 catch (Exception e)
                 {
@@ -46,15 +49,6 @@ namespace CSharpClient
                 }
 
             }
-
-
-
-
-            //create a TCP/IP socket
-            _sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
-
-            connect(password);
         }
 
 
