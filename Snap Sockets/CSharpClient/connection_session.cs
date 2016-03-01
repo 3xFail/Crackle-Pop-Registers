@@ -12,43 +12,121 @@ namespace CSharpClient
     public class connection_session
     {
 
-        public connection_session( string hostString, int port, string username, string password )
+        public connection_session(string hostString, int port, string username, string password)
         {
             _username = username;
             //connect to a remote device
 
+
+            //parses the passed in host string to check for multiple servers
+            //DNS resolver within 
+            List<IPHostEntry> hosts = parseServerList(hostString);
+
             //DNS resolver resolves IP address from hostname (currently only using first returned IP)
-            IPHostEntry host;
-            host = Dns.GetHostEntry(hostString);
+            //host = Dns.GetHostEntry(hostString);
+
+            //create a TCP/IP socket
+            _sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
+
 
             //establish the remote endpoint for the socket
             //_remoteEP = new IPEndPoint( IPAddress.Parse( host ), port );      **DEPRECATED** 
-            _remoteEP = new IPEndPoint(host.AddressList[0], port);
+            //_remoteEP = new IPEndPoint(hosts[0].AddressList[0], port);        **DEPRECATED**
+            //support for server redundancy - if one server fails, try the next one
+            for (int idx = 0; idx < hosts.Count; idx++)
+            {
+                try
+                {
+                    _remoteEP = new IPEndPoint(hosts[idx].AddressList[0], port);
+                    connect(password);
+                    break;          //sorry Todd
+                }
+                catch (Exception e)
+                {
+                    if (idx == hosts.Count - 1)
+                        throw e;
+                }
 
-            //create a TCP/IP socket
-            _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-            _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
-
-            connect( password );
+            }
         }
 
-        private void connect( string password )
+
+        //parses the passed in string and returns a list of all host entries found
+        private List<IPHostEntry> parseServerList(string rawHostString)
         {
-            //connects the socket to the remote endpoint. catch any errors.
-           
-            _sender.Connect( _remoteEP );
-            byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
+            //list of hosts to be returned
+            List<IPHostEntry> parsedHosts = new List<IPHostEntry>();
 
-            _sender.Send( msg );
+            //splits the passed strings for multiple hosts
+            string[] splitHostNames = rawHostString.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);
 
-            Thread.Sleep( 500 );
-            read_response();
-         
+            //adds a host entry to the final product for each host detected
+            foreach (string individualHost in splitHostNames)
+            {
+                IPAddress parsedIP;
+                if (individualHost == "localhost" || individualHost == "127.0.0.1")
+                {
+                    IPHostEntry localhost = new IPHostEntry();
+                    localhost.AddressList = new IPAddress[1];
+                    localhost.AddressList[0] = IPAddress.Parse("127.0.0.1");
+                    localhost.HostName = "localhost";
+                    parsedHosts.Add(localhost);
+                }
+                else if (IPAddress.TryParse(individualHost, out parsedIP))
+                {
+                    IPHostEntry passthrough = new IPHostEntry();
+                    passthrough.AddressList = new IPAddress[1];
+                    passthrough.AddressList[0] = parsedIP;
+                    passthrough.HostName = individualHost;
+                    parsedHosts.Add(passthrough);
+                }
+                else
+                    parsedHosts.Add(Dns.GetHostEntry(individualHost));
+            }
+
+            return parsedHosts;
         }
 
-        public void write( message msg )
+
+        //connects the socket to the remote endpoint. catch any errors.
+        private void connect(string password)
         {
-            bool write_in_progress = ( _msg_queue.Count != 0 );
+            /*
+            Console.WriteLine(_remoteEP.Address);
+            _sender.SendTimeout = 100;
+            _sender.ReceiveTimeout = 100;
+            _sender.Connect(_remoteEP);
+            */
+
+            Console.WriteLine(_remoteEP.Address);
+            IAsyncResult result = _sender.BeginConnect( _remoteEP, null, null );
+            bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
+
+            
+            if( _sender.Connected )
+            {
+                byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
+
+                _sender.Send( msg );
+
+                Thread.Sleep( 500 );
+                read_response();
+            }
+            else
+            {
+                //create a TCP/IP socket
+                _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
+                _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
+                //Freak out and die
+                throw new Exception("Server connection timed out");
+            }
+            
+        }
+
+        public void write(message msg)
+        {
+            bool write_in_progress = _msg_queue.Count != 0;
             _msg_queue.Enqueue( msg );
             if( !write_in_progress )
             {
@@ -56,21 +134,21 @@ namespace CSharpClient
             }
         }
 
-        public void write( string msg )
+        public void write(string msg)
         {
             write( new message( msg ) );
         }
 
         private void write()
         {
-            _msg_queue.First().encode_id( _id ); //attach unique ID to message
-            _msg_queue.First().encode_username( _username ); //attach username to end of message
+            _msg_queue.First().encode_id(_id); //attach unique ID to message
+            _msg_queue.First().encode_username(_username); //attach username to end of message
 
-            int bytessent = _sender.Send( _msg_queue.First().data(), _msg_queue.First().total_length( true ), SocketFlags.None );
+            _sender.Send(_msg_queue.First().data(), _msg_queue.First().total_length(true), SocketFlags.None);
             read_response();
 
             _msg_queue.Dequeue();
-            if( _msg_queue.Count > 0 )
+            if (_msg_queue.Count > 0)
             {
                 write();
             }
@@ -80,24 +158,24 @@ namespace CSharpClient
         {
             message msg = new message();
 
-            _sender.Receive( msg._data, 0, message.header_length, SocketFlags.None );
-            if( msg.decode_header() )
+            _sender.Receive(msg._data, 0, message.header_length, SocketFlags.None);
+            if (msg.decode_header())
             {
-                _sender.Receive( msg._data, message.header_length, message.id_length, SocketFlags.None );
-                if( msg.decode_id() )
+                _sender.Receive(msg._data, message.header_length, message.id_length, SocketFlags.None);
+                if (msg.decode_id())
                 {
-                    if( msg._body_length != 0 )
+                    if (msg._body_length != 0)
                     {
-                        _sender.Receive( msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None );
-                        parse_message( msg );
+                        _sender.Receive(msg._data, message.header_length + message.id_length, msg._body_length, SocketFlags.None);
+                        parse_message(msg);
                     }
                     else
-                        Response = new XmlDocument().GetElementsByTagName( "" ); //if we have an incoming empty message, don't bother parsing. Just set Response to an empty list
+                        Response = new XmlDocument().GetElementsByTagName(""); //if we have an incoming empty message, don't bother parsing. Just set Response to an empty list
                 }
             }
         }
 
-        public void parse_message( message msg )
+        public void parse_message(message msg)
         {
             if (msg.ToString() == "valid_login")
                 _id = msg._id;
@@ -109,18 +187,18 @@ namespace CSharpClient
 
                 try
                 {
-                    doc.LoadXml( msg.ToString() ); //try to convert the response to an xml object.
+                    doc.LoadXml(msg.ToString()); //try to convert the response to an xml object.
                 }
-                catch ( XmlException ){ } //if it fails, then GetElementsByTagName is still fine. It will simply return an empty list. So we don't need to do anything here.
+                catch (XmlException) { } //if it fails, then GetElementsByTagName is still fine. It will simply return an empty list. So we don't need to do anything here.
 
-                Response = doc.GetElementsByTagName( "row" ); //If any stored procedure does not return data with 'FOR XML RAW', this will be empty despite valid xml being found.
+                Response = doc.GetElementsByTagName("row"); //If any stored procedure does not return data with 'FOR XML RAW', this will be empty despite valid xml being found.
 
             }
         }
 
 
-        private IPEndPoint _remoteEP;
-        private Socket _sender;
+        private IPEndPoint _remoteEP { get; set; }
+        private Socket _sender { get; set; }
         public XmlNodeList Response { get; set; }
         private Queue<message> _msg_queue = new Queue<message>();
 
