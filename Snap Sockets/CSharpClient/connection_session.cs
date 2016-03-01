@@ -93,6 +93,7 @@ namespace CSharpClient
         {
             //connects the socket to the remote endpoint. catch any errors.
 
+            _sender.SendTimeout = 1000;
             _sender.Connect(_remoteEP);
             byte[] msg = Encoding.ASCII.GetBytes(_username + " " + password);
 
@@ -105,9 +106,9 @@ namespace CSharpClient
 
         public void write(message msg)
         {
-            bool write_in_progress = (_msg_queue.Count != 0);
-            _msg_queue.Enqueue(msg);
-            if (!write_in_progress)
+            bool write_in_progress = _msg_queue.Count != 0;
+            _msg_queue.Enqueue( msg );
+            if( !write_in_progress )
             {
                 write();
             }
@@ -115,7 +116,7 @@ namespace CSharpClient
 
         public void write(string msg)
         {
-            write(new message(msg));
+            write( new message( msg ) );
         }
 
         private void write()
@@ -123,7 +124,7 @@ namespace CSharpClient
             _msg_queue.First().encode_id(_id); //attach unique ID to message
             _msg_queue.First().encode_username(_username); //attach username to end of message
 
-            int bytessent = _sender.Send(_msg_queue.First().data(), _msg_queue.First().total_length(true), SocketFlags.None);
+            _sender.Send(_msg_queue.First().data(), _msg_queue.First().total_length(true), SocketFlags.None);
             read_response();
 
             _msg_queue.Dequeue();
@@ -176,8 +177,8 @@ namespace CSharpClient
         }
 
 
-        private IPEndPoint _remoteEP;
-        private Socket _sender;
+        private IPEndPoint _remoteEP { get; set; }
+        private Socket _sender { get; set; }
         public XmlNodeList Response { get; set; }
         private Queue<message> _msg_queue = new Queue<message>();
 
