@@ -18,6 +18,8 @@ using System.Device;
 using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+
 
 namespace SnapRegisters
 {
@@ -52,18 +54,22 @@ namespace SnapRegisters
         //	m_itemPanel = ItemsList;
         //	m_discountList = CouponList;
         //}
-
+        public static KeyboardHook kh;
         public RegisterMainWindow(Employee currentEmployee, connection_session session)
         {
+
+            
             //Updates the clock constantly
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 this.dateText.Text = DateTime.Now.ToString("hh:mm tt");
             }, this.Dispatcher);
 
-            //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second)
-            System.Threading.Thread.Sleep(1100);
 
+#if DEBUG   //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second)
+#else       //Doesn't delay the in debug mode for quicker development
+            System.Threading.Thread.Sleep(1100);
+#endif
 
             //Initialize window after the clock is ticked
             InitializeComponent();
@@ -84,12 +90,18 @@ namespace SnapRegisters
             //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
+            //Experimental - Not working yet
+            //This code is supposed to lock the keyboard to this application
+            //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
+
+        
 
         private void AddItemToOutputPanels(Item itemToAdd)
         {
             ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
             itemDescription.Height = 60;
+            double height_t = itemDescription.Height;
 
             ItemsList.Children.Add(itemDescription);
 
@@ -97,10 +109,43 @@ namespace SnapRegisters
             m_totalTotal += itemToAdd.Price;
 
 
+            //foreach(Coupon coupon in itemToAdd.Discounts)
+            //{
+            //    // need a Discounts Display box
+            //    ItemDisplayBox couponDescription = new ItemDisplayBox(coupon);
+            //    couponDescription.Height = 60;
+
+            //    //
+
+
+
+            //    CouponList.Children.Add(couponDescription);
+            //}
+
+
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
         }
+
+        /*private void AddCouponToOutputPanels(Coupon couponToAdd)
+        {
+            DiscountDisplayBox CouponDescription = new DiscountDisplayBox(couponToAdd.m_name, couponToAdd.m_discount);
+
+            //not any current xaml object todo this
+            //CouponDescription.Height = 60;
+
+            //breaking because of not being able to convert to a UI Element
+            //CouponList.Children.Add(CouponDescription);
+
+            m_savingsTotal += couponToAdd.m_discount;
+            m_totalTotal -= couponToAdd.m_discount;
+
+
+            ItemScroll.ScrollToBottom();
+            CouponScroll.ScrollToBottom();
+            UpdateTotals();
+        }*/
 
         private void UpdateTotals()
         {

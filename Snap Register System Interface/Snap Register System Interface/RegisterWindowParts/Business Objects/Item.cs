@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,7 +39,7 @@ namespace SnapRegisters
 			ID = barcode;
 			ItemName = Name;
 			Price = price;
-			Discounts = new List<KeyValuePair<string, double>>();
+			Discounts = new List<Coupon>();
 		}
 		public Item(Item source)
 		{
@@ -52,6 +53,6 @@ namespace SnapRegisters
 		public string ID { get; set; }
 		public string ItemName { get; set; }
 		public double Price { get; set; }
-		public List<KeyValuePair<string, double>> Discounts { get; set; }
+		public List<Coupon> Discounts { get; set; }
 	}
 }

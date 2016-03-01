@@ -75,9 +75,13 @@
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml.cs</Link>
       <DependentUpon>LoginMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\..\SharedResources\Keyboard.cs">
+      <Link>SharedResources\Keyboard.cs</Link>
+    </Compile>
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\Business Objects\Coupon.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
@@ -156,6 +160,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

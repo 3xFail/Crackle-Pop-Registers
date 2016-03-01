@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
 	//	cout << "Required port number not passed.\n";
 	//}
 
-	// Hope you don't mind if I set the port to default to 6119
+	// Port defaults to 6119
 	int port = 0;
 
 	if (argc >= 2)

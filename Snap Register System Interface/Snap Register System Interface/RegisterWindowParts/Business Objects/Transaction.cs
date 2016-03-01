@@ -8,60 +8,74 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
-	//*************************************************************************************************************
-	// public class Transaction
-	//		SUMMARY: 
-	//			This class contains all information about the current sale. A new class should be created for each
-	//			Transaction at a register. This class allows the managing of a sale from scanning to payment.
-	//		MEMBERS:
-	//			public delegate void AddItemToOutput(ref Item);
-	//				After an item is created this delegate will be called allowing the item to be output to some
-	//				sort of display.
-	//			private List<Item> m_Items
-	//				A list of all items in the transaction.
-	//			private Employee m_Employee
-	//				The currently logged in employee.
-	//		FUNCTIONS:
-	//			public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
-	//				Constructor for a new transaction opened by the specified employee. itemOutput is a DockPanel
-	//				passed by reference where items should be displayed to while discountOutput is the same thing
-	//				except for discounts instead.
-	//			public void AddItem(int itemID)
-	//				Adds an item to the current transaction. Displays this item to the outputs.
-	//			public void RemoveItem(int itemID)
-	//				Removes the item with the ID matching "itemID" from the transaction. removes it from the
-	//				output.
-	//			public void OverrideCost(string itemID, double newPrice, string reason = "No description")
-	//				Overrides the cost of the item specified with the new price specified with "newPrice".
-	//				"reason" is the reason the employee chose to override the price.
-	//			public void ApplyCoupon(int couponID)
-	//				Applies a coupon to the sale.
-	//			public void Checkout()
-	//				Finishes the transaction and begins processing payment.
-	//			public List<Item> GetItems()
-	//				Returns a copy of all the items in this sale. The list of items cannot be changed without
-	//				proper permissions but can be read with this.
-	//			private Item ConstructItem(string itemID)
-	//				Contacts the database and constructs an item from the given item ID.
-	//		PERMISSIONS:
-	//			AddItem						- UseRegister
-	//			RemoveItem					- UseRegister
-	//			OverrideCost				- PriceOverride, PriceOverrideNoReason
-	//			ApplyCoupon					- ApplyCoupon
-	//			Checkout					- ProcessPayment
-	//			GetItems					- None
-	//*************************************************************************************************************
-	public class Transaction
+    //*************************************************************************************************************
+    // public class Transaction
+    //		SUMMARY: 
+    //			This class contains all information about the current sale. A new class should be created for each
+    //			Transaction at a register. This class allows the managing of a sale from scanning to payment.
+    //		MEMBERS:
+    //			public delegate void AddItemToOutput(ref Item);
+    //				After an item is created this delegate will be called allowing the item to be output to some
+    //          public delegate void AddCouponToOutput(ref Coupon);
+    //				After an Coupon is created this delegate will be called allowing the Coupon to be output to some
+    //				sort of display.
+    //			private List<Item> m_Items
+    //				A list of all items in the transaction.
+    //			private Employee m_Employee
+    //				The currently logged in employee.
+    //          private List<Coupon> m_Coupons
+    //              A list of all currently applied coupons for the transaction 
+    //		FUNCTIONS:
+    //			public Transaction(Employee employee, ref DockPanel itemOutput, ref DockPanel discountOutput)
+    //				Constructor for a new transaction opened by the specified employee. itemOutput is a DockPanel
+    //				passed by reference where items should be displayed to while discountOutput is the same thing
+    //				except for discounts instead.
+    //			public void AddItem(int itemID)
+    //				Adds an item to the current transaction. Displays this item to the outputs.
+    //			public void RemoveItem(int itemID)
+    //				Removes the item with the ID matching "itemID" from the transaction. removes it from the
+    //				output.
+    //			public void OverrideCost(string itemID, double newPrice, string reason = "No description")
+    //				Overrides the cost of the item specified with the new price specified with "newPrice".
+    //				"reason" is the reason the employee chose to override the price.
+    //			public void ApplyCoupon(string couponID)
+    //				Applies a coupon to the sale.
+    //			public void Checkout()
+    //				Finishes the transaction and begins processing payment.
+    //			public List<Item> GetItems()
+    //				Returns a copy of all the items in this sale. The list of items cannot be changed without
+    //				proper permissions but can be read with this.
+    //			private Item ConstructItem(string itemID)
+    //				Contacts the database and constructs an item from the given item ID.
+    //          public List<Coupon> GetCoupons()
+    //              returns a copy of all the coupons applied to items in the transaction
+    //          private Coupon ConstructCoupon(string coupon_id)
+    //              Contacts the database and constructs an coupon from a given coupon_id
+    //
+    //
+    //
+    //		PERMISSIONS:
+    //			AddItem						- UseRegister
+    //			RemoveItem					- UseRegister
+    //			OverrideCost				- PriceOverride, PriceOverrideNoReason
+    //			ApplyCoupon					- ApplyCoupon
+    //			Checkout					- ProcessPayment
+    //			GetItems					- None
+    //*************************************************************************************************************
+    public class Transaction
 	{
 
 		// Delegate for output function
 		public delegate void ItemOutputDelegate(Item itemToAdd);
+        
 
-		// TODO: Make it so that multiple of the same item can be added without breaking functions.
-		public Transaction(Employee employee, ItemOutputDelegate itemToAdd, connection_session session)
+
+        // TODO: Make it so that multiple of the same item can be added without breaking functions.
+        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, connection_session session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -71,7 +85,9 @@ namespace SnapRegisters
             m_connection = session;
 			m_Employee = employee;
 			m_Items = new List<Item>();
-			OutputDelegate = itemToAdd;
+            m_Coupons = new List<Coupon>();
+			m_OutputDelegate = itemToAdd;
+            
 		}
 
 		public Item AddItem(string itemID)
@@ -86,7 +102,7 @@ namespace SnapRegisters
 				Item newItem = ConstructItem(itemID);
 
 				// Fire whatever Output method has been assigned for this item.
-				OutputDelegate(newItem);
+				m_OutputDelegate(newItem);
 
 				m_Items.Add(newItem);
 				return newItem;
@@ -136,16 +152,45 @@ namespace SnapRegisters
 					changedItem.Price = newPrice;
 			}
 		}
-		public void ApplyCoupon(int couponID)
+		public void ApplyCoupon(string couponID)
 		{
+            //used to check if the coupon matched any of the items in the transaction
+            bool matching_flag = false;
 
-			// TODO: Connect to database and attempt to apply coupon.
+            if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Connect to the database and check if the couponID is correct. If not throw an exception.
+            try
+            {
+                
+                Coupon newCoupon = ConstructCoupon(couponID);
 
-			// For each item in m_Items, look at the database and see if the coupon should be applied to it. If so, add
-			// a new discount to m_Items[that item].discounts.
-		}
+                //don't know what todo about this, have a funtion but not sure 
+                // if i need to make another deleget to handle Coupons...
+
+                //m_OutputDelegate(newCoupon);
+
+                foreach (Item i in m_Items)
+                {
+                    if (i.ID == newCoupon.m_related_barcode)
+                    {
+                        matching_flag = true;
+                        i.Discounts.Add(newCoupon);
+                    }
+
+                }
+
+                if(matching_flag)
+                    m_Coupons.Add(newCoupon);
+
+                
+            }
+            catch (InvalidOperationException e)
+            {
+                throw e;
+            }
+
+        }
 		public void Checkout()
 		{
 			// TODO: Insert credit card magic here.
@@ -155,6 +200,11 @@ namespace SnapRegisters
 		{
 			return m_Items;
 		}
+
+        public List<Coupon> GetCoupons()
+        {
+            return m_Coupons;
+        }
 
 		private Item ConstructItem(string itemID)
 		{
@@ -179,8 +229,36 @@ namespace SnapRegisters
             }
 		}
 
-		public ItemOutputDelegate OutputDelegate { get; set; }
+        private Coupon ConstructCoupon(string coupon_id)
+        {
+            m_connection.write(string.Format("GetCoupon \"{0}\"", coupon_id));
+
+            try
+            {
+                XmlNode it = m_connection.Response[0];
+
+                bool active = it.Get("Active")[0] == '1';
+
+                if (!active)
+                    throw new Exception("Cannot use inactive coupon");
+
+                float discount = float.Parse(it.Get("PriceModification"));
+                string related_barcode = it.Get("Barcode");
+                string name = it.Get("Coupon_Name");
+
+
+                return new Coupon(coupon_id, related_barcode, name, discount, active);
+            }
+            catch (NullReferenceException)
+            {
+                throw new Exception("Coupon with barcode \"" + coupon_id + "\" not found.");
+            }
+
+        }
+
+		public ItemOutputDelegate m_OutputDelegate { get; set; }
 		private List<Item> m_Items = null;
+        private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;
         private connection_session m_connection = null;
 	}
