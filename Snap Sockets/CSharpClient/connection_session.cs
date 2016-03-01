@@ -119,6 +119,7 @@ namespace CSharpClient
                 _sender = new Socket( AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
                 _sender.ReceiveBufferSize = message.header_length + message.id_length + message.max_body_length + message.username_length;
                 //Freak out and die
+                throw new Exception("Server connection timed out");
             }
             
         }
