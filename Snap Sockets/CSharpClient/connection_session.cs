@@ -93,15 +93,25 @@ namespace CSharpClient
         {
             //connects the socket to the remote endpoint. catch any errors.
 
-            _sender.SendTimeout = 1000;
-            _sender.Connect(_remoteEP);
-            byte[] msg = Encoding.ASCII.GetBytes(_username + " " + password);
+            //_sender.SendTimeout = 1000;
+            //_sender.Connect(_remoteEP);
 
-            _sender.Send(msg);
+            IAsyncResult result = _sender.BeginConnect( _remoteEP, null, null );
+            bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
 
-            Thread.Sleep(500);
-            read_response();
+            if( _sender.Connected )
+            {
+                byte[] msg = Encoding.ASCII.GetBytes( _username + " " + password );
 
+                _sender.Send( msg );
+
+                Thread.Sleep( 500 );
+                read_response();
+            }
+            else
+            {
+                //Freak out and die
+            }
         }
 
         public void write(message msg)
