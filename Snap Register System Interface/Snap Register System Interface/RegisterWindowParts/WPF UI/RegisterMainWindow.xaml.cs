@@ -79,7 +79,7 @@ namespace SnapRegisters
 
             m_employee = currentEmployee;
             m_connection = session;
-            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
+            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, AddCouponToOutputPanels, m_connection);
 
             FocusManager.SetFocusedElement(this, UPCField);
 
@@ -94,8 +94,6 @@ namespace SnapRegisters
             //This code is supposed to lock the keyboard to this application
             //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
-
-        
 
         private void AddItemToOutputPanels(Item itemToAdd)
         {

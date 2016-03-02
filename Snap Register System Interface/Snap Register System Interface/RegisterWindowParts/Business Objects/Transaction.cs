@@ -177,17 +177,14 @@ namespace SnapRegisters
                         matching_flag = true;
                         i.Discounts.Add(newCoupon);
                     }
-
                 }
 
                 if(matching_flag)
-                    m_Coupons.Add(newCoupon);
-
-                
+                    m_Coupons.Add(newCoupon);       
             }
-            catch (InvalidOperationException e )
+            catch( Exception )
             {
-                throw new Exception("Item or coupon not found");
+                throw new Exception( "Item or coupon with ID \"" + couponID + "\" not found" );
             }
 
         }
