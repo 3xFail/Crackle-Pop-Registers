@@ -71,11 +71,11 @@ namespace SnapRegisters
 
 		// Delegate for output function
 		public delegate void ItemOutputDelegate(Item itemToAdd);
-        
+        public delegate void CouponOutputDelegate(Coupon couponToAdd);
 
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
-        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, connection_session session)
+        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, connection_session session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -87,10 +87,11 @@ namespace SnapRegisters
 			m_Items = new List<Item>();
             m_Coupons = new List<Coupon>();
 			m_OutputDelegate = itemToAdd;
+            m_CouponOutputDelegate = couponToAdd;
             
 		}
 
-		public Item AddItem(string itemID)
+		public void AddItem(string itemID)
 		{
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -105,7 +106,6 @@ namespace SnapRegisters
 				m_OutputDelegate(newItem);
 
 				m_Items.Add(newItem);
-				return newItem;
 
 				// TODO: Make this box's height equal to the combined discount's height.
 			}
@@ -152,9 +152,9 @@ namespace SnapRegisters
 					changedItem.Price = newPrice;
 			}
 		}
-		public void ApplyCoupon(string couponID)
+		public void AddCoupon(string couponID)
 		{
-            //used to check if the coupon matched any of the items in the transaction
+            // used to check if the coupon matched any of the items in the transaction
             bool matching_flag = false;
 
             if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
@@ -165,7 +165,7 @@ namespace SnapRegisters
                 
                 Coupon newCoupon = ConstructCoupon(couponID);
 
-                //don't know what todo about this, have a funtion but not sure 
+                // don't know what todo about this, have a funtion but not sure 
                 // if i need to make another deleget to handle Coupons...
 
                 //m_OutputDelegate(newCoupon);
@@ -185,13 +185,14 @@ namespace SnapRegisters
 
                 
             }
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException e )
             {
-                throw e;
+                throw new Exception("Item or coupon not found");
             }
 
         }
-		public void Checkout()
+
+        public void Checkout()
 		{
 			// TODO: Insert credit card magic here.
 		}
@@ -225,6 +226,8 @@ namespace SnapRegisters
             }
             catch( NullReferenceException )
             {
+                //check to see if a coupon
+                //if scan is not a item or a coupon then throw error
                 throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
             }
 		}
@@ -257,6 +260,7 @@ namespace SnapRegisters
         }
 
 		public ItemOutputDelegate m_OutputDelegate { get; set; }
+        public CouponOutputDelegate m_CouponOutputDelegate { get; set; }
 		private List<Item> m_Items = null;
         private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;
