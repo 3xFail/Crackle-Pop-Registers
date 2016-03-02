@@ -107,14 +107,12 @@ namespace SnapRegisters
             m_costTotal += itemToAdd.Price;
             m_totalTotal += itemToAdd.Price;
 
-
             foreach(Coupon coupon in itemToAdd.Discounts)
             {
                 //need a Discounts Display box
                 CouponDisplayBox couponDescription = new CouponDisplayBox(coupon);
                 couponDescription.Height = 60;
                 count++;
-
 
                 if (height_t != (count * couponDescription.Height) && couponDescription.Height != 0 )
                 {
@@ -127,7 +125,6 @@ namespace SnapRegisters
 
                 CouponList.Children.Add(couponDescription);
             }
-
 
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
@@ -182,18 +179,18 @@ namespace SnapRegisters
             {
                 try
                 {
-                    m_transaction.AddItem(UPCField.Text);
+                    m_transaction.AddItem(UPCField.Text); //try constructing an item
                     UPCField.Clear();
                 }
-                catch (Exception ex)
+                catch (Exception ) //if that fails
                 {
                     try
                     {
-                        m_transaction.AddCoupon(UPCField.Text);
+                        m_transaction.AddCoupon(UPCField.Text); //try constructing a coupon
                     }
                     catch( Exception _ex )
                     {
-                        System.Windows.Forms.MessageBox.Show( _ex.Message );
+                        System.Windows.Forms.MessageBox.Show( _ex.Message ); //if both of those fail show the error message
                     }
                 }
             }

@@ -184,7 +184,7 @@ namespace SnapRegisters
             }
             catch( Exception )
             {
-                throw new Exception( "Item or coupon with ID \"" + couponID + "\" not found" );
+                throw new ArgumentException( "Item or coupon with ID \"" + couponID + "\" not found" );
             }
 
         }
@@ -213,7 +213,7 @@ namespace SnapRegisters
                 XmlNode it = m_connection.Response[0];
 
                 if( it.Get("Active_Use" )[0] == '0' )
-                    throw new Exception( "Cannot sell inactive item" );
+                    throw new InvalidOperationException( "Cannot sell inactive item" );
 
                 float price = float.Parse( it.Get( "Price" ) );
                 string name = it.Get( "Name" );
@@ -225,7 +225,7 @@ namespace SnapRegisters
             {
                 //check to see if a coupon
                 //if scan is not a item or a coupon then throw error
-                throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
+                throw new ArgumentException( "Item with barcode \"" + itemID + "\" not found." );
             }
 		}
 
@@ -237,21 +237,19 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                bool active = it.Get("Active")[0] == '1';
-
-                if (!active)
-                    throw new Exception("Cannot use inactive coupon");
+                if( it.Get("Active")[0] == '1' )
+                    throw new InvalidOperationException("Cannot use inactive coupon");
 
                 float discount = float.Parse(it.Get("PriceModification"));
                 string related_barcode = it.Get("Barcode");
                 string name = it.Get("Coupon_Name");
 
 
-                return new Coupon(coupon_id, related_barcode, name, discount, active);
+                return new Coupon( coupon_id, related_barcode, name, discount );
             }
             catch (NullReferenceException)
             {
-                throw new Exception("Coupon with barcode \"" + coupon_id + "\" not found.");
+                throw new ArgumentException( "Coupon with barcode \"" + coupon_id + "\" not found." );
             }
 
         }
