@@ -51,38 +51,41 @@ namespace SnapRegisters
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
+            //NavigationFrame.Navigate(new InventoryPage());
+            //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
+
             NavigationFrame.Navigate(new InventoryPage());
-            this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/InventoryPage.xaml", UriKind.Relative));
         }
         // opens the analysis page
         private void btn_Anal(object sender, RoutedEventArgs e)
         {
             NavigationFrame.Navigate(new AnalysisPage());
-            this.NavigationFrame.Navigate(new Uri("AnalysisPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/AnalysisPage.xaml", UriKind.Relative));
         }
         // opens the employees page
         private void btn_Emp(object sender, RoutedEventArgs e)
         {
             NavigationFrame.Navigate(new EmployeesPage());
-            this.NavigationFrame.Navigate(new Uri("EmployeesPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/EmployeesPage.xaml", UriKind.Relative));
         }
         // opens the customers page
         private void btn_Cust(object sender, RoutedEventArgs e)
         {
             NavigationFrame.Navigate(new CustomersPage());
-            this.NavigationFrame.Navigate(new Uri("CustomersPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/CustomersPage.xaml", UriKind.Relative));
         }
         // opens the sales page
         private void btn_Sales(object sender, RoutedEventArgs e)
         {
             NavigationFrame.Navigate(new SalesPage());
-            this.NavigationFrame.Navigate(new Uri("SalesPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/SalesPage.xaml", UriKind.Relative));
         }
         // opens the options page
         private void btn_Opt(object sender, RoutedEventArgs e)
         {
             NavigationFrame.Navigate(new OptionsPage());
-            this.NavigationFrame.Navigate(new Uri("OptionsPage.xaml", UriKind.Relative));
+            this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/OptionsPage.xaml", UriKind.Relative));
         }
         //// opens the add employee page
         //private void AddEmp(object sender, RoutedEventArgs e)
