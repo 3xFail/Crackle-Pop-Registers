@@ -79,7 +79,7 @@ namespace SnapRegisters
 
             m_employee = currentEmployee;
             m_connection = session;
-            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, m_connection);
+            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, AddCouponToOutputPanels, m_connection);
 
             FocusManager.SetFocusedElement(this, UPCField);
 
@@ -95,8 +95,6 @@ namespace SnapRegisters
             //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
 
-        
-
         private void AddItemToOutputPanels(Item itemToAdd)
         {
             ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
@@ -109,7 +107,6 @@ namespace SnapRegisters
             m_costTotal += itemToAdd.Price;
             m_totalTotal += itemToAdd.Price;
 
-
             foreach(Coupon coupon in itemToAdd.Discounts)
             {
                 //need a Discounts Display box
@@ -117,28 +114,29 @@ namespace SnapRegisters
                 couponDescription.Height = 60;
                 count++;
 
-
                 if (height_t != (count * couponDescription.Height) && couponDescription.Height != 0 )
                 {
                       height_t += couponDescription.Height;
                       itemDescription.Height =  height_t;
                 }
 
+                m_savingsTotal += coupon.m_discount;
+                m_totalTotal -= coupon.m_discount;
+
                 CouponList.Children.Add(couponDescription);
             }
-
 
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
         }
 
-        /*private void AddCouponToOutputPanels(Coupon couponToAdd)
+        private void AddCouponToOutputPanels(Coupon couponToAdd)
         {
-            DiscountDisplayBox CouponDescription = new DiscountDisplayBox(couponToAdd.m_name, couponToAdd.m_discount);
+            CouponDisplayBox CouponDescription = new CouponDisplayBox(couponToAdd);
 
             //not any current xaml object todo this
-            //CouponDescription.Height = 60;
+            CouponDescription.Height = 60;
 
             //breaking because of not being able to convert to a UI Element
             //CouponList.Children.Add(CouponDescription);
@@ -150,7 +148,7 @@ namespace SnapRegisters
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
-        }*/
+        }
 
         private void UpdateTotals()
         {
@@ -181,12 +179,19 @@ namespace SnapRegisters
             {
                 try
                 {
-                    m_transaction.AddItem(UPCField.Text);
+                    m_transaction.AddItem(UPCField.Text); //try constructing an item
                     UPCField.Clear();
                 }
-                catch (Exception ex)
+                catch (Exception ) //if that fails
                 {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        m_transaction.AddCoupon(UPCField.Text); //try constructing a coupon
+                    }
+                    catch( Exception _ex )
+                    {
+                        System.Windows.Forms.MessageBox.Show( _ex.Message ); //if both of those fail show the error message
+                    }
                 }
             }
             else if (e.Key == Key.Escape)

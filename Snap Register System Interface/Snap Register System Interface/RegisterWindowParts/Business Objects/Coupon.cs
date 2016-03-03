@@ -31,29 +31,17 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         //		PERMISSIONS:
         //			None.
         //*************************************************************************************************************
-        public Coupon(string coup_id, string barcode, string name, float price_change, bool active)
+        public Coupon(string coup_id, string barcode, string name, float price_change )
         {
             m_coupon_code = coup_id;
             m_related_barcode = barcode;
             m_discount = price_change;
-            m_active = active;
             m_name = name;
-        }
-
-        public Coupon(Coupon source)
-        {
-            m_coupon_code = source.m_coupon_code;
-            m_related_barcode = source.m_related_barcode;
-            m_discount = source.m_discount;
-            m_active = source.m_active;
-            m_name = source.m_name;
         }
 
         public float m_discount { get; set; }
         public string m_coupon_code { get; set; }
         public string m_related_barcode { get; set; }
-        public bool m_active { get; set; }
-
         public string m_name { get; set; }
     }
 }

@@ -71,11 +71,11 @@ namespace SnapRegisters
 
 		// Delegate for output function
 		public delegate void ItemOutputDelegate(Item itemToAdd);
-        
+        public delegate void CouponOutputDelegate(Coupon couponToAdd);
 
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
-        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, connection_session session)
+        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, connection_session session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -87,10 +87,11 @@ namespace SnapRegisters
 			m_Items = new List<Item>();
             m_Coupons = new List<Coupon>();
 			m_OutputDelegate = itemToAdd;
+            m_CouponOutputDelegate = couponToAdd;
             
 		}
 
-		public Item AddItem(string itemID)
+		public void AddItem(string itemID)
 		{
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -105,7 +106,6 @@ namespace SnapRegisters
 				m_OutputDelegate(newItem);
 
 				m_Items.Add(newItem);
-				return newItem;
 
 				// TODO: Make this box's height equal to the combined discount's height.
 			}
@@ -152,9 +152,9 @@ namespace SnapRegisters
 					changedItem.Price = newPrice;
 			}
 		}
-		public void ApplyCoupon(string couponID)
+		public void AddCoupon(string couponID)
 		{
-            //used to check if the coupon matched any of the items in the transaction
+            // used to check if the coupon matched any of the items in the transaction
             bool matching_flag = false;
 
             if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
@@ -165,7 +165,7 @@ namespace SnapRegisters
                 
                 Coupon newCoupon = ConstructCoupon(couponID);
 
-                //don't know what todo about this, have a funtion but not sure 
+                // don't know what todo about this, have a funtion but not sure 
                 // if i need to make another deleget to handle Coupons...
 
                 //m_OutputDelegate(newCoupon);
@@ -177,21 +177,19 @@ namespace SnapRegisters
                         matching_flag = true;
                         i.Discounts.Add(newCoupon);
                     }
-
                 }
 
                 if(matching_flag)
-                    m_Coupons.Add(newCoupon);
-
-                
+                    m_Coupons.Add(newCoupon);       
             }
-            catch (InvalidOperationException e)
+            catch( Exception )
             {
-                throw e;
+                throw new ArgumentException( "Item or coupon with ID \"" + couponID + "\" not found" );
             }
 
         }
-		public void Checkout()
+
+        public void Checkout()
 		{
 			// TODO: Insert credit card magic here.
 		}
@@ -215,7 +213,7 @@ namespace SnapRegisters
                 XmlNode it = m_connection.Response[0];
 
                 if( it.Get("Active_Use" )[0] == '0' )
-                    throw new Exception( "Cannot sell inactive item" );
+                    throw new InvalidOperationException( "Cannot sell inactive item" );
 
                 float price = float.Parse( it.Get( "Price" ) );
                 string name = it.Get( "Name" );
@@ -225,7 +223,9 @@ namespace SnapRegisters
             }
             catch( NullReferenceException )
             {
-                throw new Exception( "Item with barcode \"" + itemID + "\" not found." );
+                //check to see if a coupon
+                //if scan is not a item or a coupon then throw error
+                throw new ArgumentException( "Item with barcode \"" + itemID + "\" not found." );
             }
 		}
 
@@ -237,26 +237,25 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                bool active = it.Get("Active")[0] == '1';
-
-                if (!active)
-                    throw new Exception("Cannot use inactive coupon");
+                if( it.Get("Active")[0] == '1' )
+                    throw new InvalidOperationException("Cannot use inactive coupon");
 
                 float discount = float.Parse(it.Get("PriceModification"));
                 string related_barcode = it.Get("Barcode");
                 string name = it.Get("Coupon_Name");
 
 
-                return new Coupon(coupon_id, related_barcode, name, discount, active);
+                return new Coupon( coupon_id, related_barcode, name, discount );
             }
             catch (NullReferenceException)
             {
-                throw new Exception("Coupon with barcode \"" + coupon_id + "\" not found.");
+                throw new ArgumentException( "Coupon with barcode \"" + coupon_id + "\" not found." );
             }
 
         }
 
 		public ItemOutputDelegate m_OutputDelegate { get; set; }
+        public CouponOutputDelegate m_CouponOutputDelegate { get; set; }
 		private List<Item> m_Items = null;
         private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;
