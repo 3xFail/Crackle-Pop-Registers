@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
+namespace SnapRegisters.RegisterWindowParts.Business_Objects
 {
     public class Coupon
     {

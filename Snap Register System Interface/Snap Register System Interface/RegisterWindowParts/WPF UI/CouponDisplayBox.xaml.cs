@@ -1,4 +1,4 @@
-﻿using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+﻿using SnapRegisters.RegisterWindowParts.Business_Objects;
 using SnapRegisters;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
+namespace SnapRegisters.RegisterWindowParts.WPF_UI
 {
     /// <summary>
     /// Interaction logic for CouponDisplayBox.xaml

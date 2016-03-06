@@ -18,8 +18,8 @@ using System.Device;
 using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
-using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
-using Snap_Register_System_Interface.RegisterWindowParts.WPF_UI;
+using SnapRegisters.RegisterWindowParts.Business_Objects;
+using SnapRegisters.RegisterWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -201,38 +201,43 @@ namespace SnapRegisters
 		private double m_totalTotal = 0;
 		public static KeyboardHook kh;
 
-		private void ShortcutKeyPressed(object sender, KeyEventArgs e)
+		private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
 		{
-			if (UPCField.Text == string.Empty)
-				return;
-
-			if (e.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+			// Ctrl-B: Special key combo the scanner inserts before the bar-code.
+			if (keyPressed.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
 				UPCField.Clear();
 
+			// F8: Opens the manager override options menu.
+			if (keyPressed.Key == Key.F8)
+			{
 
-			
-			if (e.Key == Key.Enter)
+			}
+
+			// Enter: Enter a bar-code from UPCField
+			if (keyPressed.Key == Key.Enter)
 			{
 				try
 				{
-					m_transaction.AddItem(UPCField.Text); //try constructing an item
-					UPCField.Clear();
+					if (UPCField.Text != string.Empty)
+					{
+						m_transaction.AddItem(UPCField.Text); //try constructing an item
+						UPCField.Clear();
+					}
 				}
-				catch (Exception ) //if that fails
+				catch (Exception) //if that fails
 				{
 					try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
-					catch (Exception _ex) { System.Windows.Forms.MessageBox.Show(_ex.Message); }//if both of those fail show the error message
+					catch (Exception _ex) { System.Windows.Forms.MessageBox.Show(_ex.Message); } //if both of those fail show the error message
 				}
 			}
 
-			if (e.Key == Key.Escape)
+			if (keyPressed.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
 		}
 		private void WindowClicked(object sender, MouseButtonEventArgs e)
 		{
 			FocusManager.SetFocusedElement(this, UPCField);
 		}
-
 		private void OptionsButton_Click(object sender, RoutedEventArgs e)
 		{
 			SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
