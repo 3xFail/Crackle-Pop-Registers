@@ -81,7 +81,9 @@
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
+      <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Coupon.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml.cs">
       <DependentUpon>CouponDisplayBox.xaml</DependentUpon>
@@ -114,6 +116,10 @@
     <Page Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml">
       <SubType>Designer</SubType>

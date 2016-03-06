@@ -1,0 +1,33 @@
+﻿<Window x:Class="SnapRegisters.ManagerOverrideMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SnapRegisters"
+        mc:Ignorable="d"
+        Title="ManagerOverrideMenu" Height="100" Width="300"
+		WindowStyle="None"
+		ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Viewbox Margin="5">
+            <TextBlock Text="Transaction Override"
+				   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Viewbox>
+		<TextBox Name="UPCField" Width="0" Height="0"/>
+        <Button Name="Override" Grid.Row="1"
+				Margin="10"
+				HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button.Content>
+                <Viewbox>
+					<TextBlock Name="OverrideText"
+							   Margin ="4"
+							   Text="Scan Manager Code"/>
+				</Viewbox>
+			</Button.Content>
+        </Button>
+    </Grid>
+</Window>
