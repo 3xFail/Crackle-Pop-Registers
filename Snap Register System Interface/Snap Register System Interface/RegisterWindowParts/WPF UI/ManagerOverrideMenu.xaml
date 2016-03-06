@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="ManagerOverrideMenu" Height="100" Width="300"
 		WindowStyle="None"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize" KeyDown="KeyPressed" Deactivated="WindowDeactivated">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="Override_Executed" CanExecute="Override_CanExecute"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -19,13 +22,14 @@
         </Viewbox>
 		<TextBox Name="UPCField" Width="0" Height="0"/>
         <Button Name="Override" Grid.Row="1"
+				Command="ApplicationCommands.New"
 				Margin="10"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Button.Content>
                 <Viewbox>
 					<TextBlock Name="OverrideText"
 							   Margin ="4"
-							   Text="Scan Manager Code"/>
+							   Text="Scan Override Code"/>
 				</Viewbox>
 			</Button.Content>
         </Button>
