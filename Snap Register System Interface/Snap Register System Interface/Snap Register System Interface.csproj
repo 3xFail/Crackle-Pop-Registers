@@ -179,7 +179,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\AccessLibrary\AccessLibrary\bin\Debug\AccessLibrary.dll">
+    <Content Include="..\..\SharedResources\AccessLibrary.dll">
       <Link>SharedResources\AccessLibrary.dll</Link>
     </Content>
     <Content Include="..\..\SharedResources\CSharpClient.dll">
