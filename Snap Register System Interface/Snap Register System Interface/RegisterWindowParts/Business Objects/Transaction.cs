@@ -8,7 +8,6 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
-using SnapRegisters.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
@@ -100,12 +99,13 @@ namespace SnapRegisters
 			try
 			{
 				// Construct a new item from the given itemID and add it to the list.
-				Item newItem = ConstructItem(itemID);
+				Item item = ConstructItem(itemID);
+                item.Discounts = GetSales( item );
 
 				// Fire whatever Output method has been assigned for this item.
-				m_OutputDelegate(newItem);
+				m_OutputDelegate(item);
 
-				m_Items.Add(newItem);
+				m_Items.Add(item);
 
 				// TODO: Make this box's height equal to the combined discount's height.
 			}
@@ -114,6 +114,23 @@ namespace SnapRegisters
 				throw e;
 			}
 		}
+
+        //Modifies the item price given by the sales that are assigned to the item in the database
+        public DiscountList GetSales(Item new_item)
+        {
+            m_connection.write(string.Format("GetSale_ProdID \"{0}\"", new_item.ID));
+
+            DiscountList Discounts = new DiscountList();
+            foreach (XmlNode sale in m_connection.Response)
+            {
+                string name = sale.Get( "Name" );
+                bool flat = sale.Get( "Flat" )[0] == '1';
+                double amount = double.Parse( sale.Get( "Discount" ) );
+                Discounts.Add( new Sale( flat, name, amount ) );
+            }
+            return Discounts;
+        }
+
 		public void RemoveItem(string itemID)
 		{
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
@@ -122,7 +139,7 @@ namespace SnapRegisters
 			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				m_Items.RemoveAll(x => x.ID == itemID);
+				m_Items.RemoveAll(x => x.Barcode == itemID);
 			}
 			catch (InvalidOperationException e)
 			{
@@ -132,7 +149,7 @@ namespace SnapRegisters
 		public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = m_Items.Find(x => x.ID == itemID);
+			Item changedItem = m_Items.Find(x => x.Barcode == itemID);
 
 			if (changedItem == null)
 				throw new InvalidOperationException("Item specified is not in sale.");
@@ -154,33 +171,19 @@ namespace SnapRegisters
 		}
 		public void AddCoupon(string couponID)
 		{
-            // used to check if the coupon matched any of the items in the transaction
-            bool matching_flag = false;
-
             if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
             try
             {
-                
-                Coupon newCoupon = ConstructCoupon(couponID);
+                Coupon coupon = ConstructCoupon( couponID );
 
-                // don't know what todo about this, have a funtion but not sure 
-                // if i need to make another deleget to handle Coupons...
+                foreach( Item item in m_Items )
+                    if( coupon.AppliesTo( item ) )
+                        item.AddDiscount( coupon );
+                //TODO: More coupon application logic for UI and whatnot
 
-                //m_OutputDelegate(newCoupon);
-
-                foreach (Item i in m_Items)
-                {
-                    if (i.ID == newCoupon.m_related_barcode)
-                    {
-                        matching_flag = true;
-                        i.Discounts.Add(newCoupon);
-                    }
-                }
-
-                if(matching_flag)
-                    m_Coupons.Add(newCoupon);       
+                m_Coupons.Add(coupon);
             }
             catch( Exception )
             {
@@ -219,7 +222,7 @@ namespace SnapRegisters
                 string name = it.Get( "Name" );
                 int product_id = int.Parse( it.Get( "ProductID" ) );
                 
-                return new Item( name, price, itemID );
+                return new Item( name, price, itemID, product_id );
             }
             catch( NullReferenceException )
             {
@@ -240,12 +243,13 @@ namespace SnapRegisters
                 if( it.Get("Active")[0] == '1' )
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
-                float discount = float.Parse(it.Get("PriceModification"));
+                double discount = double.Parse(it.Get("Discount"));
                 string related_barcode = it.Get("Barcode");
-                string name = it.Get("Coupon_Name");
+                string name = it.Get("Name");
+                bool flat = it.Get( "Flat" )[0] == '1';
 
 
-                return new Coupon( coupon_id, related_barcode, name, discount );
+                return new Coupon( coupon_id, flat, name, discount );
             }
             catch (NullReferenceException)
             {

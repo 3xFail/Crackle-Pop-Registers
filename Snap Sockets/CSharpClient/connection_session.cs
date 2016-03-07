@@ -99,10 +99,8 @@ namespace CSharpClient
             _sender.Connect(_remoteEP);
             */
 
-            Console.WriteLine(_remoteEP.Address);
             IAsyncResult result = _sender.BeginConnect( _remoteEP, null, null );
-            bool success = result.AsyncWaitHandle.WaitOne( 1000, true );
-
+            result.AsyncWaitHandle.WaitOne( 1000, true );
             
             if( _sender.Connected )
             {
@@ -110,7 +108,7 @@ namespace CSharpClient
 
                 _sender.Send( msg );
 
-                Thread.Sleep( 500 );
+                Thread.Sleep( 300 );
                 read_response();
             }
             else

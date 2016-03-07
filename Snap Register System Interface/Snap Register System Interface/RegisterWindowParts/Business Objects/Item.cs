@@ -1,5 +1,4 @@
-﻿using SnapRegisters.RegisterWindowParts.Business_Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,25 +33,53 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public class Item
 	{
-		public Item(string Name, float price, string barcode)
+		public Item(string Name, float price, string barcode, int product_id)
 		{
-			ID = barcode;
+            ID = product_id;
+            Barcode = barcode;
 			ItemName = Name;
 			Price = price;
-			Discounts = new List<Coupon>();
+            OriginalPrice = price;
 		}
 		public Item(Item source)
 		{
 			ID = source.ID;
+            Barcode = source.Barcode;
 			ItemName = source.ItemName;
 			Price = source.Price;
-			// Might be a shallow copy, not quite sure if STL's list does deep copy.
-			Discounts = source.Discounts;
+            // Might be a shallow copy, not quite sure if STL's list does deep copy.
+            Discounts = source.Discounts;
+            OriginalPrice = source.OriginalPrice;
 		}
 
-		public string ID { get; set; }
-		public string ItemName { get; set; }
-		public double Price { get; set; }
-		public List<Coupon> Discounts { get; set; }
+        public void Apply( IDiscount sale )
+        {
+            Price = sale.ChangeAmountTo( Price );
+        }
+
+        public void AddDiscount( IDiscount discount )
+        {
+            Discounts.Add( discount );
+            RecalculatePrice();
+        }
+
+        private void RecalculatePrice()
+        {
+            Price = OriginalPrice;
+            Discounts.ApplyTo( this );
+        }
+
+        public int ID { get; set; } = 0;
+        public string Barcode { get; set; } = string.Empty;
+        public string ItemName { get; set; } = string.Empty;
+        public double Price { get; set; } = 0.0;
+        private double OriginalPrice { get; set; } = 0.0;
+        private DiscountList _Discounts = new DiscountList();
+        public DiscountList Discounts
+        {
+            get { return _Discounts; }
+            set { _Discounts = value; RecalculatePrice(); }
+        }
+   
 	}
 }
