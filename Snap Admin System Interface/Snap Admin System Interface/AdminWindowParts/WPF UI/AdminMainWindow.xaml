@@ -55,5 +55,9 @@
             <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden" />
         </Border>
 
+        <!--<Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" Margin="0.4,35.6,10.2,0.4" Grid.RowSpan="2" Grid.Row="1">
+            <Frame x:Name="EmpNavigationFrame" NavigationUIVisibility="Hidden" />
+        </Border>-->
+
     </Grid>
 </Window>

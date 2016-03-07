@@ -45,6 +45,7 @@ namespace SnapRegisters
 
             // set the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
+
         }
        
 
@@ -68,6 +69,9 @@ namespace SnapRegisters
         {
             NavigationFrame.Navigate(new EmployeesPage());
             this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/EmployeesPage.xaml", UriKind.Relative));
+
+            // reference the AdminMainWindow frame
+            EmployeesPage.EmpFrame = NavigationFrame;
         }
         // opens the customers page
         private void btn_Cust(object sender, RoutedEventArgs e)
@@ -87,11 +91,13 @@ namespace SnapRegisters
             NavigationFrame.Navigate(new OptionsPage());
             this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/OptionsPage.xaml", UriKind.Relative));
         }
-        //// opens the add employee page
-        //private void AddEmp(object sender, RoutedEventArgs e)
+        //private void btn_AddEmp(object sender, RoutedEventArgs e)
         //{
-        //    NavigationFrame.Navigate(new AddEmployeePage());
-        //    this.NavigationFrame.Navigate(new Uri("AddEmployeePage.xaml", UriKind.Relative));
+        //    //NavigationFrame.Navigate(new InventoryPage());
+        //    //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
+
+        //    EmpNavigationFrame.Navigate(new AddEmployeePage());
+        //    this.EmpNavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/AddEmployeePage.xaml", UriKind.Relative));
         //}
     }
 }
