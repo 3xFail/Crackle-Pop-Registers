@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="AccessLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
+      <HintPath>..\..\AccessLibrary\AccessLibrary\bin\Release\AccessLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CSharpClient">
       <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
@@ -186,18 +186,12 @@
     <Folder Include="AdminWindowParts\Business Objects\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\SharedResources\AccessLibrary.dll">
-      <Link>SharedResources\AccessLibrary.dll</Link>
-    </Content>
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
     <Content Include="..\..\SharedResources\Server\cppdb.dll">
       <Link>SharedResources\Server\cppdb.dll</Link>
     </Content>
-    <Resource Include="sv_ip.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="bin\Debug\sv_ip.txt" />
     <Resource Include="..\..\SharedResources\Server\database_connection_info.txt">
       <Link>SharedResources\Server\database_connection_info.txt</Link>
