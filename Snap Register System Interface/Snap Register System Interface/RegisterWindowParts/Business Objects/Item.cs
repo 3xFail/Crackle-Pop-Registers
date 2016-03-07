@@ -1,5 +1,4 @@
-﻿using SnapRegisters.RegisterWindowParts.Business_Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,6 +49,7 @@ namespace SnapRegisters
 			Price = source.Price;
             // Might be a shallow copy, not quite sure if STL's list does deep copy.
             Discounts = source.Discounts;
+            OriginalPrice = source.OriginalPrice;
 		}
 
         public void Apply( IDiscount sale )
