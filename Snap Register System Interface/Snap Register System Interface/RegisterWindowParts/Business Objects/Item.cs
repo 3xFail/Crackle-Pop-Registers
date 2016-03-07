@@ -40,7 +40,7 @@ namespace SnapRegisters
             Barcode = barcode;
 			ItemName = Name;
 			Price = price;
-			Discounts = new List<Coupon>();
+            OriginalPrice = price;
 		}
 		public Item(Item source)
 		{
@@ -48,14 +48,38 @@ namespace SnapRegisters
             Barcode = source.Barcode;
 			ItemName = source.ItemName;
 			Price = source.Price;
-			// Might be a shallow copy, not quite sure if STL's list does deep copy.
-			Discounts = source.Discounts;
+            // Might be a shallow copy, not quite sure if STL's list does deep copy.
+            Discounts = source.Discounts;
 		}
 
-		public int ID { get; set; }
-        public string Barcode { get; set; }
-		public string ItemName { get; set; }
-		public double Price { get; set; }
-		public List<Coupon> Discounts { get; set; }
+        public void Apply( IDiscount sale )
+        {
+            Price = sale.ChangeAmountTo( Price );
+        }
+
+        public void AddDiscount( IDiscount discount )
+        {
+            Discounts.Add( discount );
+            RecalculatePrice();
+        }
+
+        private void RecalculatePrice()
+        {
+            Price = OriginalPrice;
+            Discounts.ApplyTo( this );
+        }
+
+        public int ID { get; set; } = 0;
+        public string Barcode { get; set; } = string.Empty;
+        public string ItemName { get; set; } = string.Empty;
+        public double Price { get; set; } = 0.0;
+        private double OriginalPrice { get; set; } = 0.0;
+        private DiscountList _Discounts = new DiscountList();
+        public DiscountList Discounts
+        {
+            get { return _Discounts; }
+            set { _Discounts = value; RecalculatePrice(); }
+        }
+   
 	}
 }

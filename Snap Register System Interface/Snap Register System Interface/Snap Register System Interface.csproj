@@ -82,6 +82,9 @@
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
     </Compile>
