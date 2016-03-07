@@ -37,6 +37,12 @@
             <Button Content="Reset" Height="23" HorizontalAlignment="Left" Margin="259,204,0,0" Name="button2" VerticalAlignment="Top" Width="70"/>
             <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,204,60,0" Name="button3" VerticalAlignment="Top" Width="70"/>
         </Grid>
+
+        <!--<Grid Margin="31,0,29,23" Height="264" VerticalAlignment="Bottom">
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,204,60,0" Name="button3" VerticalAlignment="Top" Width="70" Command="{x:Static NavigationCommands.BrowseBack}"/>
+            --><!--<Button Command="{x:Static NavigationCommands.BrowseBack}">Cancel</Button>--><!--
+        </Grid>-->
+
     </Grid>
 </Page>
 

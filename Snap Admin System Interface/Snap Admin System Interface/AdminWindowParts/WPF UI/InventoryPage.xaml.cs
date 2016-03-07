@@ -25,5 +25,22 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             InitializeComponent();
         }
+
+        
+        // opens the inventory page
+        private void btn_AddEmp(object sender, RoutedEventArgs e)
+        {
+            //NavigationFrame.Navigate(new InventoryPage());
+            //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
+
+            //AddEmployeePage add_emp = new AddEmployeePage();
+            //NavigationService.Navigate = (new System.Uri("/AdminWindowParts/WPF UI/AddEmployeePage.xaml", UriKind.Relative));
+            //add_emp.ShowsNavigationUI;
+            //NavigationService navService = NavigationService.GetNavigationService(this);
+            //NavigationService.Navigate = (new System.Uri("/AdminWindowParts/WPF UI/AddEmployeePage.xaml", UriKind.AbsoluteOrRelative);
+
+            //NavigationFrame.Navigate(new InventoryPage());
+            //this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/InventoryPage.xaml", UriKind.Relative));
+        }
     }
 }
