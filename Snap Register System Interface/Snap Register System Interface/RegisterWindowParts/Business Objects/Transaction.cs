@@ -102,6 +102,11 @@ namespace SnapRegisters
 				// Construct a new item from the given itemID and add it to the list.
 				Item newItem = ConstructItem(itemID);
 
+                
+
+
+
+
 				// Fire whatever Output method has been assigned for this item.
 				m_OutputDelegate(newItem);
 
@@ -114,6 +119,36 @@ namespace SnapRegisters
 				throw e;
 			}
 		}
+
+        //Modifies the item price given by the sales that are assigned to the item in the database
+        public void Check_Sales(ref Item new_item)
+        {
+            m_connection.write(string.Format("GetSale_ProdID \"{0}\"", new_item.ID));
+            List<float> percentages= new List<float>();
+
+           
+            foreach (XmlNode sale in m_connection.Response)
+            {
+                //SKYLER SALE NAME IS HERE 
+                string sale_name = sale.Get("SaleName");
+
+                //this is the flag to determine if the sale is a percentage sale value or a flat discount
+                if (sale.Get("Flat")[0] == '1')
+                {
+                    new_item.Price -= float.Parse(sale.Get("SaleDiscount"));
+                }
+                else 
+                {
+                    percentages.Add(float.Parse(sale.Get("SaleDiscount")));
+                }
+
+            }
+            foreach (float val in percentages)
+            {
+                new_item.Price *= val;
+            }
+        }
+
 		public void RemoveItem(string itemID)
 		{
 			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
@@ -122,7 +157,7 @@ namespace SnapRegisters
 			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				m_Items.RemoveAll(x => x.ID == itemID);
+				m_Items.RemoveAll(x => x.Barcode == itemID);
 			}
 			catch (InvalidOperationException e)
 			{
@@ -132,7 +167,7 @@ namespace SnapRegisters
 		public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = m_Items.Find(x => x.ID == itemID);
+			Item changedItem = m_Items.Find(x => x.Barcode == itemID);
 
 			if (changedItem == null)
 				throw new InvalidOperationException("Item specified is not in sale.");
@@ -172,7 +207,7 @@ namespace SnapRegisters
 
                 foreach (Item i in m_Items)
                 {
-                    if (i.ID == newCoupon.m_related_barcode)
+                    if (i.Barcode == newCoupon.m_related_barcode)
                     {
                         matching_flag = true;
                         i.Discounts.Add(newCoupon);
@@ -219,7 +254,7 @@ namespace SnapRegisters
                 string name = it.Get( "Name" );
                 int product_id = int.Parse( it.Get( "ProductID" ) );
                 
-                return new Item( name, price, itemID );
+                return new Item( name, price, itemID, product_id );
             }
             catch( NullReferenceException )
             {

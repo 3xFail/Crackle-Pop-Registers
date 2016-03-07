@@ -34,9 +34,10 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public class Item
 	{
-		public Item(string Name, float price, string barcode)
+		public Item(string Name, float price, string barcode, int product_id)
 		{
-			ID = barcode;
+            ID = product_id;
+            Barcode = barcode;
 			ItemName = Name;
 			Price = price;
 			Discounts = new List<Coupon>();
@@ -44,13 +45,15 @@ namespace SnapRegisters
 		public Item(Item source)
 		{
 			ID = source.ID;
+            Barcode = source.Barcode;
 			ItemName = source.ItemName;
 			Price = source.Price;
 			// Might be a shallow copy, not quite sure if STL's list does deep copy.
 			Discounts = source.Discounts;
 		}
 
-		public string ID { get; set; }
+		public int ID { get; set; }
+        public string Barcode { get; set; }
 		public string ItemName { get; set; }
 		public double Price { get; set; }
 		public List<Coupon> Discounts { get; set; }
