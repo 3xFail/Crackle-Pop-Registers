@@ -117,6 +117,9 @@
     <Compile Include="AdminWindowParts\WPF UI\SalesPage.xaml.cs">
       <DependentUpon>SalesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\SearchEmployeePage.xaml.cs">
+      <DependentUpon>SearchEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\SalesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\SearchEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
