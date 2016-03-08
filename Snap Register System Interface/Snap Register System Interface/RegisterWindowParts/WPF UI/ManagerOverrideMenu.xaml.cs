@@ -65,13 +65,13 @@ namespace SnapRegisters
 	//					Changes the permissions of the logged in employee and closes this window.
 	//		PERMISSIONS:
 	//*************************************************************************************************************
+	public delegate void AssignPermissionsDelegate(Permissions.SystemPermissions permissionsToAssign);
 	public partial class ManagerOverrideMenu : Window
 	{
-		public ManagerOverrideMenu(ref Employee loggedInEmployee)
+		public ManagerOverrideMenu(AssignPermissionsDelegate permissionsOutput)
 		{
 			InitializeComponent();
-
-			m_loggedInEmployee = loggedInEmployee;
+			m_permissionsOutput = permissionsOutput;
 			m_scannedPermissions = 0;
 		}
 		public void GetPermissions(string employeeIDCode)
@@ -81,8 +81,8 @@ namespace SnapRegisters
 		}
 
 
-		Employee m_loggedInEmployee;
-		Permissions.SystemPermissions m_scannedPermissions;
+		private AssignPermissionsDelegate m_permissionsOutput;
+		private Permissions.SystemPermissions m_scannedPermissions;
 		private void KeyPressed(object sender, KeyEventArgs keyPressed)
 		{
 			if (keyPressed.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
@@ -108,11 +108,7 @@ namespace SnapRegisters
         }
 		private void Override_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			m_loggedInEmployee = new Employee(	m_loggedInEmployee.ID, m_loggedInEmployee.name,
-												m_loggedInEmployee.address, m_loggedInEmployee.phoneNumber,
-												m_loggedInEmployee.birthday, (long)m_scannedPermissions);
-
-			this.Close();
+			m_permissionsOutput(m_scannedPermissions);
 		}
 
 		private void WindowDeactivated(object sender, EventArgs e)

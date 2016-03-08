@@ -1,5 +1,4 @@
-﻿using SnapRegisters.RegisterWindowParts.Business_Objects;
-using SnapRegisters;
+﻿using SnapRegisters;
 using System;
 using System.Collections.Generic;
 using System.Linq;

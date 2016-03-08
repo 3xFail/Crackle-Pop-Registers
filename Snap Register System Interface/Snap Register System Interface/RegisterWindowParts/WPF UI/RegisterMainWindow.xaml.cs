@@ -18,8 +18,6 @@ using System.Device;
 using CSharpClient;
 using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
-using SnapRegisters.RegisterWindowParts.Business_Objects;
-using SnapRegisters.RegisterWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -210,7 +208,7 @@ namespace SnapRegisters
 			// F8: Opens the manager override options menu.
 			if (keyPressed.Key == Key.F8)
 			{
-				ManagerOverrideMenu overrideMenu = new ManagerOverrideMenu(ref m_employee);
+				ManagerOverrideMenu overrideMenu = new ManagerOverrideMenu(ChangeEmployeePermissions);
 				overrideMenu.Show();
 			}
 
@@ -244,6 +242,10 @@ namespace SnapRegisters
 			SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
 			loginWindow.Show();
 			this.Close();
+		}
+		private void ChangeEmployeePermissions(Permissions.SystemPermissions newPermissions)
+		{
+			m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, (long)newPermissions);
 		}
 
 	}
