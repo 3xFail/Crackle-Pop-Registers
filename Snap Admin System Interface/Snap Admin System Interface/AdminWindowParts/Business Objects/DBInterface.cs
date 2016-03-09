@@ -31,7 +31,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.Business_Objects
 
             connection.write(string.Format("AddItem \"{0}\" \"{1}\" \"{2}\" \"{3}\" ", name, price, barcode, "1"));
 
-            if (connection.Response[0].Get("ItemID") == "-1")
+            if (connection.Response[0].Get("ProductID") == "-1")
                 throw new InvalidOperationException("Item with barcode \"" + barcode + "\" already exists.");
         }
 

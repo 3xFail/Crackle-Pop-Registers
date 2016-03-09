@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define SERVER_DOWN
+using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
@@ -44,7 +45,12 @@ namespace SnapRegisters
                 Username = usernameField.Text
             };
 
+
+#if SERVER_DOWN
+            loggedIn = new Employee(99, lastAttempt.Username, null, null, new DateTime(), 31);
+#else
             ConnectToServer(lastAttempt);
+#endif
             OpenInterfaceWindow(loggedIn);
             this.Close();
         }
