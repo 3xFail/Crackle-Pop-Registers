@@ -11,7 +11,7 @@ namespace CSharpClient
 {
     public class connection_session
     {
-
+        
         public connection_session(string hostString, int port, string username, string password)
         {
             _username = username;
@@ -47,7 +47,7 @@ namespace CSharpClient
                     if (idx == hosts.Count - 1)
                         throw e;
                 }
-
+            
             }
         }
 
@@ -152,7 +152,7 @@ namespace CSharpClient
             }
         }
 
-        public void read_response()
+        private void read_response()
         {
             message msg = new message();
 
@@ -173,7 +173,7 @@ namespace CSharpClient
             }
         }
 
-        public void parse_message(message msg)
+        private void parse_message(message msg)
         {
             if (msg.ToString() == "valid_login")
                 _id = msg._id;
@@ -193,7 +193,6 @@ namespace CSharpClient
 
             }
         }
-
 
         private IPEndPoint _remoteEP { get; set; }
         private Socket _sender { get; set; }

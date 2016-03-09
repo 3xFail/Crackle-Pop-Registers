@@ -67,7 +67,7 @@ namespace CSharpClient
             return _body_length >= 0;
         }
 
-        public void encode_header()
+        private void encode_header()
         {
             unchecked //IIIIIIIIIII'M A BAAAAD PERSOOOOOONNN
             {
