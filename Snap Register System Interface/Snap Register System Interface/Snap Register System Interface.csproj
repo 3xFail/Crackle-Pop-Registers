@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Snap_Register_System_Interface</RootNamespace>
     <AssemblyName>Snap Register System Interface</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -81,6 +82,12 @@
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
+      <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Coupon.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml.cs">
       <DependentUpon>CouponDisplayBox.xaml</DependentUpon>
@@ -113,6 +120,10 @@
     <Page Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml">
       <SubType>Designer</SubType>
@@ -179,7 +190,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\AccessLibrary\AccessLibrary\bin\Debug\AccessLibrary.dll">
+    <Content Include="..\..\SharedResources\AccessLibrary.dll">
       <Link>SharedResources\AccessLibrary.dll</Link>
     </Content>
     <Content Include="..\..\SharedResources\CSharpClient.dll">

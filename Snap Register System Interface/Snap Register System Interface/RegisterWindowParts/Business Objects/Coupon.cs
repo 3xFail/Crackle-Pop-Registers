@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
+namespace SnapRegisters
 {
-    public class Coupon
+    public class Coupon: IDiscount
     {
 
         //*************************************************************************************************************
@@ -31,29 +31,40 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         //		PERMISSIONS:
         //			None.
         //*************************************************************************************************************
-        public Coupon(string coup_id, string barcode, string name, float price_change, bool active)
+        //fun fact, string.Empty is not a compile time constant and thus cannot be used as a default param
+        public Coupon( string barcode, bool flat, string name, double amt )
         {
-            m_coupon_code = coup_id;
-            m_related_barcode = barcode;
-            m_discount = price_change;
-            m_active = active;
-            m_name = name;
+            Barcode = barcode;
+            Flat = flat;
+            Name = name;
+            Amount = amt;
         }
 
-        public Coupon(Coupon source)
+        public void AddRelatedID( int ID )
         {
-            m_coupon_code = source.m_coupon_code;
-            m_related_barcode = source.m_related_barcode;
-            m_discount = source.m_discount;
-            m_active = source.m_active;
-            m_name = source.m_name;
+            RelatedIDs.Add( ID );
         }
 
-        public float m_discount { get; set; }
-        public string m_coupon_code { get; set; }
-        public string m_related_barcode { get; set; }
-        public bool m_active { get; set; }
+        public bool AppliesTo( Item item )
+        {
+            return RelatedIDs.Contains( item.ID );
+        }
 
-        public string m_name { get; set; }
+        //Don't let the value go below 0.
+        public double ChangeAmountTo( double amt )
+        {
+            return Math.Max( Flat ? amt - Amount : amt * Amount, 0 );
+        }
+
+        public override string ToString()
+        {
+            return "Coupon: " + Name;
+        }
+
+        public string Barcode { get; set; } = string.Empty;
+        public bool Flat { get; set; } = false;
+        public string Name { get; set; } = string.Empty;
+        public double Amount { get; set; } = 0.0;
+        private List<int> RelatedIDs { get; set; } = new List<int>();
     }
 }
