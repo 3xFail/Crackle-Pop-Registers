@@ -16,10 +16,8 @@ using System.Windows.Shapes;
 
 namespace SnapRegisters
 {
-    /// <summary>
-    /// Interaction logic for CouponDisplayBox.xaml
-    /// </summary>
-    public partial class CouponDisplayBox : UserControl
+	// Document me.
+	public partial class CouponDisplayBox : UserControl
     {
         public CouponDisplayBox(IDiscount discount)
         {

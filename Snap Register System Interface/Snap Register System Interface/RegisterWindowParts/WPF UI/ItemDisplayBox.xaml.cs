@@ -15,24 +15,40 @@ using System.Windows.Shapes;
 
 namespace SnapRegisters
 {
-	/// <summary>
-	/// Interaction logic for ItemDisplayBox.xaml
-	/// </summary>
+	//*************************************************************************************************************
+	// public partial class ItemDisplayBox : UserControl
+	//		SUMMARY:
+	//			A GUI object that displays basic information about an item.
+	//		MEMBERS:
+	//			private Item m_sourceItem
+	//				The item this GUI is displaying.
+	//		WPF NAMES:
+	//			TextBlock NameField
+	//				The name of the item.
+	//			TextBlock AmountField
+	//				The price of the Item.
+	//		FUNCTIONS:
+	//			public ItemDisplayBox(Item sourceItem)
+	//				Creates a new GUI element from the given item.
+	//		EVENTS:
+	//			DisplayItemClickedEvent
+	//			Sender - this
+	//			Event - Click
+	//			Action 
+	//				Open a menu allowing the edit of this object.
+	//*************************************************************************************************************
 	public partial class ItemDisplayBox : UserControl
 	{
 		// Construct with an item.
-		public ItemDisplayBox(Item sourceItem, double minHeight)
+		public ItemDisplayBox(Item sourceItem)
 		{
 			InitializeComponent();
 
 			m_sourceItem = sourceItem;
 
-			//NameField.Text = m_sourceItem.ItemName;
-
 			NameField.Text = sourceItem.ToString().Substring(0, Math.Min(sourceItem.ToString().Length, 40));
 
-			rawItemPrice = m_sourceItem.Price;
-			AmountField.Text = rawItemPrice.ToString( "C" );
+			AmountField.Text = m_sourceItem.Price.ToString( "C" );
 
 			PreviewMouseLeftButtonDown += DisplayItemClickedEvent;
 		}
@@ -43,22 +59,6 @@ namespace SnapRegisters
 			editMenu.Show();
 		}
 
-		public void UpdateHeight()
-		{
-			double newHeight = 0;
-
-			if (m_sourceItem.Discounts.Count() < 2)
-				newHeight = minItemHeight;
-			else
-				newHeight = minItemHeight * m_sourceItem.Discounts.Count();
-
-			this.Height = newHeight;
-		}
-
-
-		public double minItemHeight { get; set; }
-
-		private double rawItemPrice = 0;
 		private Item m_sourceItem;
 	}
 }
