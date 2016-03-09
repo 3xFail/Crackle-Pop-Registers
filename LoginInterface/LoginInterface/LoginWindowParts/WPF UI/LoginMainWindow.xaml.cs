@@ -1,4 +1,4 @@
-﻿#define NO_USERS_IN_DATABASE
+﻿//#define NO_USERS_IN_DATABASE
 using System;
 using System.IO;
 using System.Text;
