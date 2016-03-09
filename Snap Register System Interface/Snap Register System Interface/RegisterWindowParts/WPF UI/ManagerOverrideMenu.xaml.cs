@@ -109,6 +109,7 @@ namespace SnapRegisters
 		private void Override_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			m_permissionsOutput(m_scannedPermissions);
+			this.Close();
 		}
 
 		private void WindowDeactivated(object sender, EventArgs e)
