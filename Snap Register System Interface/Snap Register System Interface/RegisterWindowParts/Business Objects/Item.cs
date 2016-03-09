@@ -9,35 +9,41 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	// public class Item
 	//		SUMMARY: 
-	//			This class represents an item in the sale. It contains basic information about it such as price,
-	//			name and its id number.
-	//		MEMBERS:
-	//			public string ID;
+	//			This class represents an item in the sale. It contains all information about the item
+	//		PROPERTIES:
+	//			public string ID [ get, set ] default: string.Empty
 	//				The UPC code of this item.
-	//			public string ItemName
+	//			public string ItemName [ get, set ] default: string.Empty
 	//				The name of this item.
-	//			public double Price
-	//				The price of this item.
-	//			public List<KeyValuePain<string name, double amount>> Discounts
-	//				A list of all the discounts this item has. Discounts are stored as a key value pair, key
-	//				being the name of the discount and the value being the amount of the discount.
+	//			public double Price [ get, set ] default: 0
+	//				The current price of the item with discounts applied.
+    //          public double OriginalPrice [ get, private set ] default: 0
+    //              The price of the item without discounts applied. 
+    //              Used for recalculating discount values and showing total amount discounted
+	//			public DiscountList Discounts [ get, set ] default: new DiscountList();
+	//				Handles recalculating the price of the item when new discounts are applied
+    //              Also contains information about all discounts that apply to the item
+    //          
 	//		FUNCTIONS:
 	//			public Item()
 	//				Basic constructor.
-	//			public Item(int id, string name, double price, List<KeyValuePair<string, double>> Discounts)
+	//			public Item( string name, float price, string barcode, int product_id )
 	//				Overloaded constructor allowing the construction from known elements of the item.
 	//			public Item(Item source)
 	//				Copy Constructor.
+    //          public AddDiscount( IDiscount discount )
+    //              Adds the passed discount to the Items DiscountList and recalculates the price
+    //              
 	//		PERMISSIONS:
 	//			None.
 	//*************************************************************************************************************
 	public class Item
 	{
-		public Item(string Name, float price, string barcode, int product_id)
+		public Item(string name, float price, string barcode, int product_id)
 		{
             ID = product_id;
             Barcode = barcode;
-			ItemName = Name;
+			ItemName = name;
 			Price = price;
             OriginalPrice = price;
 		}
@@ -47,25 +53,13 @@ namespace SnapRegisters
             Barcode = source.Barcode;
 			ItemName = source.ItemName;
 			Price = source.Price;
-            // Might be a shallow copy, not quite sure if STL's list does deep copy.
             Discounts = source.Discounts;
             OriginalPrice = source.OriginalPrice;
 		}
 
-        public void Apply( IDiscount sale )
-        {
-            Price = sale.ChangeAmountTo( Price );
-        }
-
         public void AddDiscount( IDiscount discount )
         {
             Discounts.Add( discount );
-            RecalculatePrice();
-        }
-
-        private void RecalculatePrice()
-        {
-            Price = OriginalPrice;
             Discounts.ApplyTo( this );
         }
 
@@ -73,12 +67,12 @@ namespace SnapRegisters
         public string Barcode { get; set; } = string.Empty;
         public string ItemName { get; set; } = string.Empty;
         public double Price { get; set; } = 0.0;
-        public double OriginalPrice { get; set; } = 0.0;
+        public double OriginalPrice { get; private set; } = 0.0;
         private DiscountList _Discounts = new DiscountList();
         public DiscountList Discounts
         {
             get { return _Discounts; }
-            set { _Discounts = value; RecalculatePrice(); }
+            set { _Discounts = value; Discounts.ApplyTo( this ); }
         }
    
 	}
