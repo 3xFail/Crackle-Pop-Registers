@@ -14,27 +14,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SnapRegisters.RegisterWindowParts.WPF_UI
+namespace SnapRegisters
 {
     /// <summary>
     /// Interaction logic for CouponDisplayBox.xaml
     /// </summary>
     public partial class CouponDisplayBox : UserControl
     {
-        public CouponDisplayBox(Coupon source)
+        public CouponDisplayBox(IDiscount discount)
         {
             InitializeComponent();
 
-            m_source = source;
+            m_source = discount;
 
-            NameField.Text = Convert.ToString(source.m_name[0]);
-            for (int idx = 1; idx < 40 && idx < source.m_name.Length; idx++)
-            {
-                NameField.Text += source.m_name[idx];
-            }
+			NameField.Text = discount.ToString().Substring(0, Math.Min(discount.ToString().Length, 40));
 
-            raw_discount = m_source.m_discount;
-            AmountField.Text = raw_discount.ToString("C");
+			if (discount.IsFlat())
+				m_discount = discount.Discount().ToString("C");
+			else
+				m_discount = ((int)(discount.Discount() * 100)).ToString() + '%'; //multiply discount amount by 100 then remove decimals then convert to string and add % => .10 becomes "10%"
+
+			AmountField.Text = m_discount;
         }
 
         private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -43,7 +43,7 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
             editMenu.Show();
         }
 
-        private Coupon m_source;
-        private double raw_discount = 0;
+        private IDiscount m_source;
+		private string m_discount = string.Empty;
     }
 }

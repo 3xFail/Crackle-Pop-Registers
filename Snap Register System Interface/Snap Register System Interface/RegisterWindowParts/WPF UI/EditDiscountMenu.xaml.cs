@@ -19,11 +19,11 @@ namespace SnapRegisters
 	/// </summary>
 	public partial class EditDiscountMenu : Window
 	{
-		public EditDiscountMenu(Coupon CouponToEdit)
+		public EditDiscountMenu(IDiscount CouponToEdit)
 		{
 			InitializeComponent();
             m_source = CouponToEdit;
-            ItemNameBox.Text = m_source.m_name;
+            ItemNameBox.Text = m_source.ToString();
 		}
 
 		private void DiscountWindowDeactivated(object sender, EventArgs e)
@@ -31,6 +31,6 @@ namespace SnapRegisters
 			this.Close();
 		}
 
-        private Coupon m_source = null;
+        private IDiscount m_source = null;
 	}
 }

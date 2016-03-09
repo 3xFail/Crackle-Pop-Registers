@@ -181,7 +181,8 @@ namespace SnapRegisters
                 foreach( Item item in m_Items )
                     if( coupon.AppliesTo( item ) )
                         item.AddDiscount( coupon );
-                //TODO: More coupon application logic for UI and whatnot
+
+				m_CouponOutputDelegate(coupon);
 
                 m_Coupons.Add(coupon);
             }

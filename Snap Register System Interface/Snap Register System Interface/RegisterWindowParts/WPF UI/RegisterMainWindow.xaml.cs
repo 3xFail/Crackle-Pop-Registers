@@ -16,9 +16,7 @@ using PointOfSales.Users;
 using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
-using SnapRegisters.RegisterWindowParts.WPF_UI;
 using System.Windows.Threading;
-
 namespace SnapRegisters
 {
 	//*************************************************************************************************************
@@ -118,7 +116,8 @@ namespace SnapRegisters
 
 			m_employee = currentEmployee;
 			m_connection = session;
-			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, AddCouponToOutputPanels, m_connection);
+			m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
+			m_listOfOutputObjects = new List<ItemAndDiscountOutputObject>();
 
 			FocusManager.SetFocusedElement(this, UPCField);
 
@@ -129,56 +128,25 @@ namespace SnapRegisters
 			//This code is supposed to lock the keyboard to this application
 			//kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
 		}
-		private void AddItemToOutputPanels(Item itemToAdd)
+		private void AddItemToOutputPanels(Item item)
 		{
 			// Update the documentation once you have this finished.
-			ItemDisplayBox itemDescription = new ItemDisplayBox(itemToAdd);
-			itemDescription.Height = 60;
-			double height_t = itemDescription.Height;
-			int count = 0;
+			ItemAndDiscountOutputObject itemOutput = new ItemAndDiscountOutputObject(item, 60, ItemsList, CouponList);
+			m_listOfOutputObjects.Add(itemOutput);
 
-			ItemsList.Children.Add(itemDescription);
-
-			m_costTotal += itemToAdd.Price;
-			m_totalTotal += itemToAdd.Price;
-
-			foreach(Coupon coupon in itemToAdd.Discounts)
-			{
-				//need a Discounts Display box
-				CouponDisplayBox couponDescription = new CouponDisplayBox(coupon);
-				couponDescription.Height = 60;
-				count++;
-
-				if (height_t != (count * couponDescription.Height) && couponDescription.Height != 0 )
-				{
-					  height_t += couponDescription.Height;
-					  itemDescription.Height =  height_t;
-				}
-
-				m_savingsTotal += coupon.m_discount;
-				m_totalTotal -= coupon.m_discount;
-
-				CouponList.Children.Add(couponDescription);
-			}
+			m_costTotal += item.OriginalPrice;
+			m_savingsTotal += item.OriginalPrice - item.Price;
+			m_totalTotal += item.Price;
 
 			ItemScroll.ScrollToBottom();
 			CouponScroll.ScrollToBottom();
 			UpdateTotals();
 		}
-		private void AddCouponToOutputPanels(Coupon couponToAdd)
+		private void ShowApplicationOfCouponToSale(Coupon couponToAdd)
 		{
-			// Update the documentation once you have this finished.
-			CouponDisplayBox CouponDescription = new CouponDisplayBox(couponToAdd);
 
-			//not any current xaml object todo this
-			CouponDescription.Height = 60;
-
-			//breaking because of not being able to convert to a UI Element
-			//CouponList.Children.Add(CouponDescription);
-
-			m_savingsTotal += couponToAdd.m_discount;
-			m_totalTotal -= couponToAdd.m_discount;
-
+			foreach(ItemAndDiscountOutputObject output in m_listOfOutputObjects)
+				output.AddDiscount(couponToAdd);
 
 			ItemScroll.ScrollToBottom();
 			CouponScroll.ScrollToBottom();
@@ -194,6 +162,7 @@ namespace SnapRegisters
 		private connection_session m_connection = null;
 		private Transaction m_transaction = null;
 		private Employee m_employee = null;
+		private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
 		private double m_costTotal = 0;
 		private double m_savingsTotal = 0;
 		private double m_totalTotal = 0;
