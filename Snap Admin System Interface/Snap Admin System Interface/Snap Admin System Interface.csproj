@@ -96,6 +96,7 @@
     <Compile Include="..\..\SharedResources\ApplicationStyle.cs">
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>
+    <Compile Include="AdminWindowParts\Business Objects\DBInterface.cs" />
     <Compile Include="AdminWindowParts\WPF UI\AddEmployeePage.xaml.cs">
       <DependentUpon>AddEmployeePage.xaml</DependentUpon>
     </Compile>
@@ -189,9 +190,7 @@
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AdminWindowParts\Business Objects\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="..\..\SharedResources\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>

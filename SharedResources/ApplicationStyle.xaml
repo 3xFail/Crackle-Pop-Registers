@@ -44,8 +44,9 @@
 			This is the thickness of the border around the list of items and the totals box.
 	-->
     <Thickness x:Key="ThinBorderThickness">1</Thickness>
-	
-	<!--
+    
+    <SolidColorBrush x:Key="RequiredAsteriskColor" Color="Red"/>
+    <!--
 	Name:
 		DefaultColor
 	Location Used:

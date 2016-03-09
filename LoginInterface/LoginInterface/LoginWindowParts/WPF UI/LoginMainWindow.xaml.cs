@@ -78,7 +78,7 @@ namespace SnapRegisters
                 long permissions = long.Parse( item.Get( "PermissionsID" ) );
                 string phone = item.Get( "PhoneNumbers" );
                 int id = Int32.Parse( item.Get( "UserID" ) );
-                string username = item.Get( "Name" );
+                string username = item.Get( "FName" ) + ' ' + item.Get("LName") ;
                 //string Address = item.Get( "Address" );
 
                 loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
