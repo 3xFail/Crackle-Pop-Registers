@@ -10,12 +10,12 @@
 		ResizeMode="NoResize"
 		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked">
    
-    <Window.InputBindings>
+    <!--<Window.InputBindings>
         <KeyBinding Modifiers="Alt" Key="F4" Command="local:CustomCommands.doNothing" />
         <KeyBinding Key="LWin" Command="local:CustomCommands.doNothing"/>
         <KeyBinding Key="RWin" Command="local:CustomCommands.doNothing"/>
         <KeyBinding Modifiers="Alt" Key="Tab" Command="local:CustomCommands.doNothing"/>
-    </Window.InputBindings>
+    </Window.InputBindings>-->
     <Window.CommandBindings>
         <CommandBinding Command="local:CustomCommands.PayByCash" Executed="PayByCash_Executed" CanExecute="PayByCash_CanExecute"/>
 
