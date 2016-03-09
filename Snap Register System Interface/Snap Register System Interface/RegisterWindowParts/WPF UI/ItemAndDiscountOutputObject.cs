@@ -53,6 +53,7 @@ namespace SnapRegisters
 			foreach(IDiscount discount in newItem.Discounts)
 			{
 				CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
+				autoAppliedDiscount.Height = boxHeight;
 				m_stackOfCoupons.Children.Add(autoAppliedDiscount);
 			}
 
@@ -79,7 +80,10 @@ namespace SnapRegisters
 
 		public void UpdateHeight()
 		{
-			m_itemDescriptionBox.Height = m_stackOfCoupons.Height;
+			if (double.IsNaN(m_stackOfCoupons.Height) || m_stackOfCoupons.Height == 0 )
+				m_itemDescriptionBox.Height = boxHeight;
+			else
+				m_itemDescriptionBox.Height = m_stackOfCoupons.Height;
 		}
 
 		public double boxHeight { get; set; }
