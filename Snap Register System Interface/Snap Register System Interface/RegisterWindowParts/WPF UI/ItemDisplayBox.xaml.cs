@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SnapRegisters.RegisterWindowParts.WPF_UI
+namespace SnapRegisters
 {
 	/// <summary>
 	/// Interaction logic for ItemDisplayBox.xaml
@@ -21,7 +21,7 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
 	public partial class ItemDisplayBox : UserControl
 	{
 		// Construct with an item.
-		public ItemDisplayBox(Item sourceItem)
+		public ItemDisplayBox(Item sourceItem, double minHeight)
 		{
 			InitializeComponent();
 
@@ -29,11 +29,7 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
 
 			//NameField.Text = m_sourceItem.ItemName;
 
-			NameField.Text = Convert.ToString(sourceItem.ItemName[0]);
-			for (int idx = 1; idx < 40 && idx < sourceItem.ItemName.Length; idx++)
-			{
-				NameField.Text += sourceItem.ItemName[idx];
-			}
+			NameField.Text = sourceItem.ToString().Substring(0, Math.Min(sourceItem.ToString().Length, 40));
 
 			rawItemPrice = m_sourceItem.Price;
 			AmountField.Text = rawItemPrice.ToString( "C" );
@@ -46,6 +42,21 @@ namespace SnapRegisters.RegisterWindowParts.WPF_UI
 			EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
 			editMenu.Show();
 		}
+
+		public void UpdateHeight()
+		{
+			double newHeight = 0;
+
+			if (m_sourceItem.Discounts.Count() < 2)
+				newHeight = minItemHeight;
+			else
+				newHeight = minItemHeight * m_sourceItem.Discounts.Count();
+
+			this.Height = newHeight;
+		}
+
+
+		public double minItemHeight { get; set; }
 
 		private double rawItemPrice = 0;
 		private Item m_sourceItem;

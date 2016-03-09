@@ -85,6 +85,7 @@
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -92,7 +93,6 @@
     <Compile Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml.cs">
       <DependentUpon>CouponDisplayBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
     </Compile>
