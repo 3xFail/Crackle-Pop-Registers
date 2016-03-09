@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSharpClient;
 
-namespace Snap_Admin_System_Interface.AdminWindowParts.Business_Objects
+namespace SnapRegisters
 {
     static class DBInterface
     {
