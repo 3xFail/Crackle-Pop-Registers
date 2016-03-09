@@ -1,4 +1,4 @@
-﻿#define SERVER_DOWN
+﻿#define NO_USERS_IN_DATABASE
 using System;
 using System.IO;
 using System.Text;
@@ -46,7 +46,7 @@ namespace SnapRegisters
             };
 
 
-#if SERVER_DOWN
+#if NO_USERS_IN_DATABASE
             loggedIn = new Employee(99, lastAttempt.Username, null, null, new DateTime(), 31);
 #else
             ConnectToServer(lastAttempt);
