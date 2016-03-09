@@ -73,7 +73,7 @@ namespace SnapRegisters
         public string Barcode { get; set; } = string.Empty;
         public string ItemName { get; set; } = string.Empty;
         public double Price { get; set; } = 0.0;
-        private double OriginalPrice { get; set; } = 0.0;
+        public double OriginalPrice { get; set; } = 0.0;
         private DiscountList _Discounts = new DiscountList();
         public DiscountList Discounts
         {
