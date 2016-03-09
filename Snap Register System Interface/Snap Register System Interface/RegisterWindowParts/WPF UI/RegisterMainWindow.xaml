@@ -15,6 +15,10 @@
         <KeyBinding Key="RWin" Command="local:CustomCommands.doNothing"/>
         <KeyBinding Modifiers="Alt" Key="Tab" Command="local:CustomCommands.doNothing"/>
     </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="local:CustomCommands.PayByCash" Executed="PayByCash_Executed" CanExecute="PayByCash_CanExecute"/>
+
+    </Window.CommandBindings>
     <!--C Everything-->
     <Grid>
         <Grid Margin="10">
