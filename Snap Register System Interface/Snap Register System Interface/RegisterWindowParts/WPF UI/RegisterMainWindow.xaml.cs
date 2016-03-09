@@ -202,7 +202,18 @@ namespace SnapRegisters
 			if (keyPressed.Key == Key.Escape)
 				FocusManager.SetFocusedElement(this, UPCField);
 		}
-		private void WindowClicked(object sender, MouseButtonEventArgs e)
+
+        private void PayByCash_CanExecute( object sender, CanExecuteRoutedEventArgs e )
+        {
+            throw new NotImplementedException(); 
+        }
+
+        private void PayByCash_Executed( object sender, ExecutedRoutedEventArgs e )
+        {
+            throw new NotImplementedException();
+        }
+
+        private void WindowClicked(object sender, MouseButtonEventArgs e)
 		{
 			FocusManager.SetFocusedElement(this, UPCField);
 		}

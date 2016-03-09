@@ -83,7 +83,6 @@
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
-    <Compile Include="RegisterWindowParts\Business Objects\IVisitor.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
