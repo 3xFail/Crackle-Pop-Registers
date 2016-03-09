@@ -39,7 +39,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         // navigate to search employee page
         private void btn_SearchEmp(object sender, RoutedEventArgs e)
         {
-            // navigate to the add employee page
+            // navigate to the search employee page
             EmpFrame.Navigate(new SearchEmployeePage());
             EmpFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/SearchEmployeePage.xaml", UriKind.Relative));
         }

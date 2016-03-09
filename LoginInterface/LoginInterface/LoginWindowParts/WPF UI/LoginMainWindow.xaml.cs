@@ -52,7 +52,7 @@ namespace SnapRegisters
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
 #if ADMIN
-			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn);
+			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, connection);
 			MainAdminWindow.Show();
 #elif REGISTER
             SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, connection);
@@ -76,10 +76,10 @@ namespace SnapRegisters
                 XmlNode item = connection.Response[0];
 
                 long permissions = long.Parse( item.Get( "PermissionsID" ) );
-                string phone = item.Get( "EmployeePhone" );
+                string phone = item.Get( "PhoneNumbers" );
                 int id = Int32.Parse( item.Get( "UserID" ) );
                 string username = item.Get( "Name" );
-                string Address = item.Get( "Address" );
+                //string Address = item.Get( "Address" );
 
                 loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
 

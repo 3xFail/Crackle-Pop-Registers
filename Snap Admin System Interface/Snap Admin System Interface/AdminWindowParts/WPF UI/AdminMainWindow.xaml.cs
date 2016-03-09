@@ -18,6 +18,7 @@ using System.Device;
 //using SnapRegisters.AdminWindowParts.WPF_UI;
 using System.Windows.Threading;
 using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI;
+using CSharpClient;
 
 namespace SnapRegisters
 {
@@ -27,12 +28,12 @@ namespace SnapRegisters
     public partial class AdminMainWindow : Window
     {
         private Employee m_employee = null;
-
+        private connection_session m_connection = null;
         private DockPanel m_itemPanel = null;
         private DockPanel m_discountList = null;
 
 
-        public AdminMainWindow(Employee currentEmployee)
+        public AdminMainWindow(Employee currentEmployee, connection_session connection)
         {
             // update the clock manually
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -42,6 +43,7 @@ namespace SnapRegisters
 
             InitializeComponent();
             m_employee = currentEmployee;
+            m_connection = connection;
 
             // set the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
