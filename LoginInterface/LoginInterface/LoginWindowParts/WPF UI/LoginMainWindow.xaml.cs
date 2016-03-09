@@ -21,10 +21,10 @@ namespace SnapRegisters
     // Document me.
     public partial class LoginMainWindow : Window
     {
-        private bool isLoggedIn = false;
-        private connection_session connection;
-        private Employee loggedIn = null;
-        private LoginDetails lastAttempt;
+        private bool _isLoggedIn = false;
+        private connection_session _connection;
+        private Employee _loggedIn = null;
+        private LoginDetails _lastAttempt;
 
         public LoginMainWindow()
         {
@@ -39,7 +39,7 @@ namespace SnapRegisters
 
         private void Login_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            lastAttempt = new LoginDetails()
+            _lastAttempt = new LoginDetails()
             {
                 Password = passwordField.Password,
                 Username = usernameField.Text
@@ -49,10 +49,13 @@ namespace SnapRegisters
 #if NO_USERS_IN_DATABASE
             loggedIn = new Employee(99, lastAttempt.Username, null, null, new DateTime(), 31);
 #else
-            ConnectToServer(lastAttempt);
+            ConnectToServer(_lastAttempt);
 #endif
-            OpenInterfaceWindow(loggedIn);
-            this.Close();
+            if (_loggedIn != null)
+            {
+                OpenInterfaceWindow(_loggedIn);
+                this.Close();
+            }
         }
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
@@ -61,7 +64,7 @@ namespace SnapRegisters
 			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, connection);
 			MainAdminWindow.Show();
 #elif REGISTER
-            SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, connection);
+            SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, _connection);
             MainRegisterWindow.Show();
 
 #else
@@ -71,42 +74,42 @@ namespace SnapRegisters
 
         private void ConnectToServer(LoginDetails attempt)
         {
-            loggedIn = null;
-            isLoggedIn = false;
+            _loggedIn = null;
+            _isLoggedIn = false;
             try
             {
-                connection = new connection_session( File.ReadAllText( "sv_ip.txt" ), 6119, attempt.Username, attempt.Password );
+                _connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
 
-                connection.write( string.Format( "GetEmployee_Username \"{0}\"", attempt.Username ) );
+                _connection.write(string.Format("GetEmployee_Username \"{0}\"", attempt.Username));
 
-                XmlNode item = connection.Response[0];
+                XmlNode item = _connection.Response[0];
 
-                long permissions = long.Parse( item.Get( "PermissionsGroup" ) );
-                string phone = item.Get( "PhoneNumber" );
-                int id = Int32.Parse( item.Get( "UserID" ) );
-                string username = item.Get( "FName" ) + ' ' + item.Get("LName") ;
+                long permissions = long.Parse(item.Get("PermissionsGroup"));
+                string phone = item.Get("PhoneNumber");
+                int id = Int32.Parse(item.Get("UserID"));
+                string username = item.Get("FName") + ' ' + item.Get("LName");
                 //string Address = item.Get( "Address" );
 
-                loggedIn = new Employee( id, username, null, phone, new DateTime( 1, 1, 1 ), permissions );
+                _loggedIn = new Employee(id, username, null, phone, new DateTime(1, 1, 1), permissions);
 
-                isLoggedIn = true;
+                _isLoggedIn = true;
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show( "Invalid username or password" );
+                MessageBox.Show("Invalid username or password");
             }
             catch (Exception ee)
             {
-                MessageBox.Show( ee.Message );
+                MessageBox.Show(ee.Message);
             }
         }
 
         private void Cancel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = false;
-            if (isLoggedIn)
+            if (_isLoggedIn)
             {
-                if (Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
+                if (Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.IS_OWNER))
                 {
                     e.CanExecute = true;
                 }
@@ -118,24 +121,24 @@ namespace SnapRegisters
             Application.Current.Shutdown();
         }
 
-        private void Management_Operations_Executed( object sender, ExecutedRoutedEventArgs e )
+        private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            lastAttempt = new LoginDetails()
+            _lastAttempt = new LoginDetails()
             {
                 Password = passwordField.Password,
                 Username = usernameField.Text
             };
 
-            ConnectToServer( lastAttempt );
+            ConnectToServer(_lastAttempt);
 
-            if (isLoggedIn && Permissions.CheckPermissions(loggedIn, Permissions.SystemPermissions.IS_OWNER))
+            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.IS_OWNER))
             {
                 btnShowPopup_Click(sender, e);
             }
             else
             {
-                isLoggedIn = false;
-                loggedIn = null;
+                _isLoggedIn = false;
+                _loggedIn = null;
                 MessageBox.Show("Access to Manager Functions Denied");
             }
         }
