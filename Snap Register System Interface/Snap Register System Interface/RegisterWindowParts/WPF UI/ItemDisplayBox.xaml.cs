@@ -46,7 +46,7 @@ namespace SnapRegisters
 
 			m_sourceItem = sourceItem;
 
-			NameField.Text = sourceItem.ToString().Substring(0, Math.Min(sourceItem.ToString().Length, 40));
+			NameField.Text = sourceItem.ItemName.Substring(0, Math.Min(sourceItem.ItemName.Length, 40));
 
 			AmountField.Text = m_sourceItem.Price.ToString( "C" );
 
