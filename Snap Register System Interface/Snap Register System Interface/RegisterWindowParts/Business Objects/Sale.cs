@@ -22,6 +22,9 @@ namespace SnapRegisters
             return "Sale: " + Name;
         }
 
+        public bool IsFlat() { return Flat; }
+        public double Discount() { return Amount; }
+
         public bool Flat { get; set; } = false;
         public string Name { get; set; } = string.Empty;
         public double Amount { get; set; } = 0.0;

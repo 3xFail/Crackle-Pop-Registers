@@ -11,13 +11,13 @@ namespace SnapRegisters
     {
         public void ApplyTo( Item item )
         {
-            foreach( Sale sale in Discounts ) //First apply all flat discounts
-                if( sale.Flat )
-                    item.Apply( sale );
+            foreach( IDiscount discount in Discounts ) //First apply all flat discounts
+                if( discount.Flat() )
+                    item.Apply( discount );
 
-            foreach( Sale sale in Discounts ) //Then apply all percentage discounts
-                if( !sale.Flat )
-                    item.Apply( sale );
+            foreach( IDiscount discount in Discounts ) //Then apply all percentage discounts
+                if( !discount.Flat() )
+                    item.Apply( discount );
         }
 
         public void Add( IDiscount discount )
