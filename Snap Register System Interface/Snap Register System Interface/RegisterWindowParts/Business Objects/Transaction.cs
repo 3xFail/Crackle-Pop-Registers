@@ -186,6 +186,10 @@ namespace SnapRegisters
 
                 m_Coupons.Add(coupon);
             }
+            catch( InvalidOperationException e)
+            {
+                throw e;
+            }
             catch( Exception )
             {
                 throw new ArgumentException( "Item or coupon with ID \"" + couponID + "\" not found" );
@@ -235,17 +239,17 @@ namespace SnapRegisters
 
         private Coupon ConstructCoupon(string coupon_id)
         {
-            m_connection.write(string.Format("GetCoupon \"{0}\"", coupon_id));
+            m_connection.write(string.Format("GetCoupon_ID \"{0}\"", coupon_id));
 
             try
             {
                 XmlNode it = m_connection.Response[0];
 
-                if( it.Get("Active")[0] == '1' )
+                if( it.Get("Active")[0] == '0' )
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
                 double discount = double.Parse(it.Get("Discount"));
-                string related_barcode = it.Get("Barcode");
+                string related_barcode = it.Get("CouponID");
                 string name = it.Get("Name");
                 bool flat = it.Get( "Flat" )[0] == '1';
 
