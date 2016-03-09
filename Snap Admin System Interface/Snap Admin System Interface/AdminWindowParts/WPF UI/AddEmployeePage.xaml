@@ -55,7 +55,7 @@
             <ComboBox HorizontalAlignment="Left" Margin="183,290,0,0" Name="textBoxState" VerticalAlignment="Top" Width="120" Loaded="State_Loaded" SelectionChanged="State_SelectionChanged"/>
             <TextBox Height="23" HorizontalAlignment="Left" Margin="183,320,0,0" Name="textBoxZip" VerticalAlignment="Top" Width="222" />
             <ComboBox HorizontalAlignment="Left" Margin="183,350,0,0" Name="textBoxCountry" VerticalAlignment="Top" Width="120"/>
-            <ComboBox HorizontalAlignment="Left" Margin="183,380,0,0" Name="textBoxAuthorization" VerticalAlignment="Top" Width="120"/>
+            <ComboBox HorizontalAlignment="Left" Margin="183,380,0,0" Name="textBoxAuthorization" VerticalAlignment="Top" Width="120" Loaded="Authorization_Loaded" SelectionChanged="Authorization_SelectionChanged"/>
             <!--birthday information-->
             <DatePicker HorizontalAlignment="Left" Height="23" Margin="183,140,0,0" VerticalAlignment="Top" Width="123" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
             <!--<TextBlock x:Name="DayDash" FontSize="15" HorizontalAlignment="Left" Height="23" Margin="228,140,0,0" Text="/" VerticalAlignment="Top" Width="12"/>
