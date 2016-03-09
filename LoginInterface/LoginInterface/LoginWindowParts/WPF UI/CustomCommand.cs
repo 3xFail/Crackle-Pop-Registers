@@ -8,18 +8,18 @@ using System.Windows.Input;
 // Document me.
 namespace SnapRegisters
 {
-	public static class CustomCommands
-	{
-		public static RoutedUICommand Exit = new RoutedUICommand
-		(
-			"Exit",
-			"Exit",
-			typeof(CustomCommands),
-			new InputGestureCollection()
-			{
-					new KeyGesture(Key.F4, ModifierKeys.Alt)
-			}
-		);
+    public static class CustomCommands
+    {
+        public static RoutedUICommand Exit = new RoutedUICommand
+        (
+            "Exit",
+            "Exit",
+            typeof(CustomCommands),
+            new InputGestureCollection()
+            {
+                    new KeyGesture(Key.F4, ModifierKeys.Alt)
+            }
+        );
 
 
         public static readonly RoutedUICommand ManagerFunctions = new RoutedUICommand
@@ -31,6 +31,15 @@ namespace SnapRegisters
 
 
             );
+
+        public static readonly RoutedUICommand PayByCash = new RoutedUICommand
+        (
+        "Pay_By_Cash",
+        "Pay_By_Cash",
+        typeof(CustomCommands)
+
+        );
+
         public static RoutedUICommand doNothing = new RoutedUICommand();
 
 
