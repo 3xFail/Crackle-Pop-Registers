@@ -27,6 +27,7 @@ namespace SnapRegisters
                     item.Price = discount.ChangeAmountTo( item.Price );
         }
 
+        //Put item in discount list, this also recalculates the item price.
         public void Add( IDiscount discount )
         {
             Discounts.Add( discount );
