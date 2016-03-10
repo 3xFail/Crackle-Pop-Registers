@@ -1,3 +1,4 @@
-﻿localhost
+﻿newgenstudios.duckdns.org
 192.168.1.12
-newgenstudios.duckdns.org
+10.101.10.154
+localhost

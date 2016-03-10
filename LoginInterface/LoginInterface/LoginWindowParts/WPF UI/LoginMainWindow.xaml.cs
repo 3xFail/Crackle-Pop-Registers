@@ -67,6 +67,7 @@ namespace SnapRegisters
             {
                 MessageBox.Show(ex.Message);
             }
+
             passwordField.Clear();
         }
 
@@ -153,6 +154,7 @@ namespace SnapRegisters
             if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.CAN_EXIT_CRACKLE_POP_INTERFACE))
             {
                 btnShowPopup_Click(sender, e);
+                passwordField.Clear();
             }
             else
             {
@@ -199,12 +201,6 @@ namespace SnapRegisters
             passwordField.SelectAll();
         }
 
-        //private void PasswordFieldKeyPressed(object sender, KeyEventArgs keyPressed)
-        //{
-        //    if (keyPressed.Key == Key.Tab)
-        //    {
-        //        usernameField.Focus();
-        //    }
-        //}
+
     }
 }
