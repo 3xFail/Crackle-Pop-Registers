@@ -8,7 +8,8 @@
 		WindowStyle="None"
 		WindowState="Maximized"
 		ResizeMode="NoResize"
-		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked">
+		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked"
+        >
 
     <Window.InputBindings>
         <KeyBinding Modifiers="Alt" Key="F4" Command="local:CustomCommands.doNothing" />
@@ -176,7 +177,7 @@
                                 <ColumnDefinition Width=".6*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="$" HorizontalAlignment="Right" />
-                            <TextBox Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="left" Name="AmountPaidInCashBox"
+                            <TextBox Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="left" Name="AmountPaidInCashBox" PreviewTextInput="NumberValidationTextBox"
                                  Width="100" KeyDown="ShortcutKeyPressedPayByCash"/>
 
 
