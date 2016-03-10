@@ -20,7 +20,7 @@
 
             <!--labels of each input field-->
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,10,0,0" Name="textBlockName" Text="Name" VerticalAlignment="Top" Width="110" />
-            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,80,0,0" Name="textBlockUsername" Text="Username" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,80,0,0" Name="textBlockUsername" Text="Username" VerticalAlignment="Top" Width="110"/>
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,110,0,0" Name="textBlockEmailId" Text="Email" VerticalAlignment="Top" Width="110" />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,140,0,0" Name="textBlockPassword" Text="Password" VerticalAlignment="Top" Width="110"  />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,170,0,0" Name="textBlockBirthday" Text="Birthday" VerticalAlignment="Top" Width="110" Grid.RowSpan="2" />
