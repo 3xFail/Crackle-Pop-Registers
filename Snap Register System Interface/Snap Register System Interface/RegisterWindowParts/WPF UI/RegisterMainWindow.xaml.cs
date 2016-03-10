@@ -151,16 +151,16 @@ namespace SnapRegisters
         private void UpdateTotals()
         {
 
-			m_costTotal = 0;
-			m_savingsTotal = 0;
-			m_totalTotal = 0;
+            m_costTotal = 0;
+            m_savingsTotal = 0;
+            m_totalTotal = 0;
 
-			foreach (Item item in m_transaction.GetItems())
-			{
-				m_costTotal += item.OriginalPrice;
-				m_savingsTotal += item.OriginalPrice - item.Price;
-				m_totalTotal += item.Price;
-			}
+            foreach (Item item in m_transaction.GetItems())
+            {
+                m_costTotal += item.OriginalPrice;
+                m_savingsTotal += item.OriginalPrice - item.Price;
+                m_totalTotal += item.Price;
+            }
 
             CostTotal.Text = m_costTotal.ToString("C");
             SavingsTotal.Text = m_savingsTotal.ToString("C");
@@ -175,7 +175,8 @@ namespace SnapRegisters
         private double m_savingsTotal = 0;
         private double m_totalTotal = 0;
         public static KeyboardHook kh;
-       
+        private double m_cashChange = 0;
+
 
         private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
         {
@@ -225,7 +226,7 @@ namespace SnapRegisters
 
         private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
         {
-            
+
 
             // Enter: Enter the cash paid by customer
             if (keyPressed.Key == Key.Enter)
@@ -235,10 +236,12 @@ namespace SnapRegisters
                     if (AmountPaidInCashBox.Text != string.Empty)
                     {
 
+                        ChangeAmount.Text = (m_totalTotal - double.Parse(AmountPaidInCashBox.Text)).ToString("C");
 
+                        cashPaymentPopup.IsOpen = false;
+                        cashPaidPopup.IsOpen = true;
 
-
-                        ResetRegister();
+                        //ResetRegister();
 
                     }
                 }
@@ -311,11 +314,11 @@ namespace SnapRegisters
         private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
         {
             m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
-			ItemsList.Children.Clear();
-			CouponList.Children.Clear();
+            ItemsList.Children.Clear();
+            CouponList.Children.Clear();
 
-			UpdateTotals();
-            cashPaymentPopup.IsOpen = false;
+            UpdateTotals();
+            cashPaidPopup.IsOpen = false;
         }
     }
 }
