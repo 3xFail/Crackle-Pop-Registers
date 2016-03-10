@@ -311,7 +311,12 @@ namespace SnapRegisters
         private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
         {
             m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
-        }
+			ItemsList.Children.Clear();
+			CouponList.Children.Clear();
+			m_costTotal = 0;
+			m_savingsTotal = 0;
+			m_totalTotal = 0;
+		}
     }
 }
 
