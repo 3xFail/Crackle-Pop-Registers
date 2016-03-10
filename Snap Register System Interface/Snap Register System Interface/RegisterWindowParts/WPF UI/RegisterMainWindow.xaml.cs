@@ -134,10 +134,6 @@ namespace SnapRegisters
             ItemAndDiscountOutputObject itemOutput = new ItemAndDiscountOutputObject(item, 60, ItemsList, CouponList);
             m_listOfOutputObjects.Add(itemOutput);
 
-            m_costTotal += item.OriginalPrice;
-            m_savingsTotal += item.OriginalPrice - item.Price;
-            m_totalTotal += item.Price;
-
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
             UpdateTotals();
@@ -154,6 +150,18 @@ namespace SnapRegisters
         }
         private void UpdateTotals()
         {
+
+			m_costTotal = 0;
+			m_savingsTotal = 0;
+			m_totalTotal = 0;
+
+			foreach (Item item in m_transaction.GetItems())
+			{
+				m_costTotal += item.OriginalPrice;
+				m_savingsTotal += item.OriginalPrice - item.Price;
+				m_totalTotal += item.Price;
+			}
+
             CostTotal.Text = m_costTotal.ToString("C");
             SavingsTotal.Text = m_savingsTotal.ToString("C");
             Total.Text = m_totalTotal.ToString("C");
