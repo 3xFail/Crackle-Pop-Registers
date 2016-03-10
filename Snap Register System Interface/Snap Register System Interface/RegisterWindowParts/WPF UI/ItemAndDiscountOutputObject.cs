@@ -60,15 +60,18 @@ namespace SnapRegisters
 				Grid blankCoupon = new Grid();
 				blankCoupon.Height = boxHeight;
 				m_stackOfCoupons.Children.Add(blankCoupon);
+				m_noDiscounts = true;
 			}
 			else
-				foreach(IDiscount discount in newItem.Discounts)
+			{
+				m_noDiscounts = false;
+				foreach (IDiscount discount in newItem.Discounts)
 				{
 					CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
 					autoAppliedDiscount.Height = boxHeight;
 					m_stackOfCoupons.Children.Add(autoAppliedDiscount);
 				}
-
+			}
 			UpdateHeight();
 			OutputItem();
 		}
@@ -77,6 +80,10 @@ namespace SnapRegisters
 		{
 			if (discount.AppliesTo(m_item))
 			{
+				if (m_noDiscounts)
+					m_stackOfCoupons.Children.Clear();
+
+				m_noDiscounts = false;
 				m_item.AddDiscount(discount);
 				CouponDisplayBox newDiscount = new CouponDisplayBox(discount);
 				newDiscount.Height = boxHeight;
@@ -103,7 +110,7 @@ namespace SnapRegisters
 
 		private StackPanel m_itemOutputPanel;
 		private StackPanel m_couponOutputPanel;
-
+		private bool m_noDiscounts;
 
 		private Grid m_itemDescriptionBox;
 		private StackPanel m_stackOfCoupons;
