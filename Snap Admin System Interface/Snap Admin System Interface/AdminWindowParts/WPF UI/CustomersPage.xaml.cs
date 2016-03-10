@@ -20,9 +20,19 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     /// </summary>
     public partial class CustomersPage : Page
     {
+        // frame to reference the frame in the AdminMainWindow
+        public static Frame CustFrame;
+
         public CustomersPage()
         {
             InitializeComponent();
+        }
+        // navigate to add employee page
+        private void btn_AddCust(object sender, RoutedEventArgs e)
+        {
+            // navigate to the add employee page
+            CustFrame.Navigate(new AddCustomerPage());
+            CustFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/AddCustomerPage.xaml", UriKind.Relative));
         }
     }
 }

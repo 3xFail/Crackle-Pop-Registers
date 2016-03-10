@@ -76,6 +76,9 @@ namespace SnapRegisters
         {
             NavigationFrame.Navigate(new CustomersPage());
             this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/CustomersPage.xaml", UriKind.Relative));
+
+            // reference the AdminMainWindow frame
+            CustomersPage.CustFrame = NavigationFrame;
         }
         // opens the sales page
         private void btn_Sales(object sender, RoutedEventArgs e)

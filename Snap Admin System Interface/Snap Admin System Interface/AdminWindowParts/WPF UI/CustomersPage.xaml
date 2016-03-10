@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-            <Button x:Name="CustAddBtn" Content="Add" Height="50"/>
+            <Button x:Name="CustAddBtn" Content="Add" Click="btn_AddCust" Height="50"/>
             <Button x:Name="CustRemoveBtn" Content="Remove" Height="50"/>
             <Button x:Name="CustSearchBtn" Content="Search" Height="50"/>
             <Button x:Name="CustBackBtn" Content="Back" Height="50"/>

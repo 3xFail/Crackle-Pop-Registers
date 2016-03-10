@@ -1,0 +1,62 @@
+﻿<Page x:Class="Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.AddCustomerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="522.68"
+      Title="AddCustomerPage">
+
+    <Grid Background="White">
+        <!--form header name-->
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Customer Information:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
+
+        <!--end Button as a Link button using style-->
+        <Grid Margin="0,33,0.4,-3" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="252*" />
+            </Grid.RowDefinitions>
+
+            <!--labels of each input field-->
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,10,0,0" Name="textBlockName" Text="Name" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,80,0,0" Name="textBlockEmailId" Text="Email" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,110,0,0" Name="textBlockBirthday" Text="Birthday" VerticalAlignment="Top" Width="110" Grid.RowSpan="2" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,140,0,0" Name="textBlockPhone" Text="Phone" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,170,0,0" Name="textBlockAddress1" Text="Address Line 1" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,200,0,0" Name="textBlockAddress2" Text="Address Line 2" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,230,0,0" Name="textBlockCity" Text="City" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,260,0,0" Name="textBlockState" Text="State" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,290,0,0" Name="textBlockZip" Text="Zipcode" VerticalAlignment="Top" Width="110" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,320,0,0" Name="textBlockCountry" Text="Country" VerticalAlignment="Top" Width="110" />
+
+            <!--input boxes for information-->
+            <!--first and last name-->
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="67,30,0,0" Name="textBoxFirstName" VerticalAlignment="Top" Width="114" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,30,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="114" />
+            <TextBlock x:Name="FName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="67,53,0,0" Text="First" VerticalAlignment="Top" Width="21"/>
+            <TextBlock x:Name="LName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="183,53,0,0" Text="Last" VerticalAlignment="Top"/>
+            <!--email address-->
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,80,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" />
+            <!--phone number-->
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,140,0,0" Name="textBoxPhone" VerticalAlignment="Top" Width="222" />
+            <!--street address-->
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,170,0,0" Name="textBoxAddress1" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,190,0,0" Name="textBoxAddress2" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,230,0,0" Name="textBoxCity" VerticalAlignment="Top" Width="222" />
+            <ComboBox HorizontalAlignment="Left" Margin="183,260,0,0" Name="textBoxState" VerticalAlignment="Top" Width="150" Loaded="State_Loaded" SelectionChanged="State_SelectionChanged"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,290,0,0" Name="textBoxZip" VerticalAlignment="Top" Width="222" />
+            <ComboBox HorizontalAlignment="Left" Margin="183,320,0,0" Name="textBoxCountry" VerticalAlignment="Top" Width="150" Loaded="Country_Loaded" SelectionChanged="Country_SelectionChanged"/>
+            <!--birthday information-->
+            <DatePicker Name="DOB" HorizontalAlignment="Left" Height="23" Margin="183,110,0,0" VerticalAlignment="Top" Width="123" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <!--required information-->
+            <TextBlock x:Name="FNameAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="88,51,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
+            <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="98,80,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
+            <TextBlock x:Name="PhoneAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="103,140,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
+
+            <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,190,10" Name="Submit" VerticalAlignment="Bottom" Width="70" Click="Submit_Click"/>
+            <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,100,10" Name="button2" VerticalAlignment="Bottom" Width="70"/>
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,10,10" Name="button3" VerticalAlignment="Bottom" Width="70"/>
+        </Grid>
+    </Grid>
+</Page>

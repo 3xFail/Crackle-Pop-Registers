@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <!--form header name-->
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Information:" VerticalAlignment="Top" Width="110"  FontSize="17" FontStretch="ExtraCondensed"/>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Employee Information:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
 
         <!--end Button as a Link button using style-->
         <Grid Margin="0,33,0.4,-3" >

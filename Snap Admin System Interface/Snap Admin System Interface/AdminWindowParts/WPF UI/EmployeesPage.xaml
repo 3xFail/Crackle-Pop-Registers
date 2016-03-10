@@ -16,9 +16,9 @@
             <Button x:Name="EmpBackBtn" Content="Back" Height="50"/>
         </StackPanel>
 
-        <Grid>
+        <!--<Grid>
             <Frame x:Name="EmpNavigationFrame" NavigationUIVisibility="Hidden" />
-        </Grid>
+        </Grid>-->
     </Grid>
     
 </Page>
