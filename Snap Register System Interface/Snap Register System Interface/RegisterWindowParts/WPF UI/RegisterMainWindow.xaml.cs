@@ -177,7 +177,6 @@ namespace SnapRegisters
         private double m_savingsTotal = 0;
         private double m_totalTotal = 0;
         public static KeyboardHook kh;
-        private double m_cashChange = 0;
 
 
         private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
@@ -208,6 +207,7 @@ namespace SnapRegisters
                 {
                     try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
                     catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
+                    UPCField.Clear();
                 }
             }
 
@@ -228,22 +228,19 @@ namespace SnapRegisters
 
         private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
         {
-
-
             // Enter: Enter the cash paid by customer
             if (keyPressed.Key == Key.Enter)
             {
-                if (AmountPaidInCashBox.Text != string.Empty)
+                if (AmountPaidInCashBox.Text != string.Empty && double.Parse(AmountPaidInCashBox.Text) >= m_totalTotal )
                 {
                     ChangeAmount.Text = (m_totalTotal - double.Parse(AmountPaidInCashBox.Text)).ToString("C");
 
                     cashPaymentPopup.IsOpen = false;
                     cashPaidPopup.IsOpen = true;
 
+                    CashPaidResetRegister.Focus();
+
                     AmountPaidInCashBox.Clear();
-
-                    //ResetRegister();
-
                 }
             }
         }
@@ -252,7 +249,11 @@ namespace SnapRegisters
 
         private void ResetRegister()
         {
-
+            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
+            ItemsList.Children.Clear();
+            CouponList.Children.Clear();
+            m_listOfOutputObjects.Clear();
+            UpdateTotals();
         }
 
         //Cash payment popup functions
@@ -282,7 +283,10 @@ namespace SnapRegisters
         private void showPayByCashWindow()
         {
             if (m_listOfOutputObjects.Count > 0)
+            {
                 cashPaymentPopup.IsOpen = true;
+                AmountPaidInCashBox.Focus();
+            }
             else
             {
                 throw new InvalidOperationException("No items to pay for.");
@@ -290,18 +294,24 @@ namespace SnapRegisters
         }
         //////////////////////////////////////////////////////////////////
 
-
+        private void hidePayByCashWindow()
+        {
+            cashPaidPopup.IsOpen = false;
+            UPCField.Focus();
+        }
 
         private void WindowClicked(object sender, MouseButtonEventArgs e)
         {
             FocusManager.SetFocusedElement(this, UPCField);
         }
+
         private void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
             SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
             loginWindow.Show();
             this.Close();
         }
+
         private void ChangeEmployeePermissions(Permissions.SystemPermissions newPermissions)
         {
             m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, (long)newPermissions);
@@ -309,19 +319,15 @@ namespace SnapRegisters
 
         private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
         {
-            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
-            ItemsList.Children.Clear();
-            CouponList.Children.Clear();
-            m_listOfOutputObjects.Clear();
-
-
-            UpdateTotals();
-            cashPaidPopup.IsOpen = false;
+            ResetRegister();
+            hidePayByCashWindow();
 
         }
+
+        //Prevents user from typing anything other than numbers into the cash paid box
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = new Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }

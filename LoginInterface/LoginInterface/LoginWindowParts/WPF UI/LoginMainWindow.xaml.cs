@@ -51,26 +51,45 @@ namespace SnapRegisters
 #else
             ConnectToServer(_lastAttempt);
 #endif
-            if (_loggedIn != null)
+            try
             {
-                OpenInterfaceWindow(_loggedIn);
-                this.Close();
+                if (_loggedIn != null)
+                {
+                    OpenInterfaceWindow(_loggedIn);
+                    this.Close();
+                }
             }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            passwordField.Clear();
         }
+
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
+
 #if ADMIN
-			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
-			MainAdminWindow.Show();
+                if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.SystemPermissions.LOG_IN_ADMIN_CONSOLE))
+                    throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+                SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
+                MainAdminWindow.Show();
 #elif REGISTER
+            if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.SystemPermissions.LOG_IN_REGISTER))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
             SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, _connection);
             MainRegisterWindow.Show();
 
 #else
-			MessageBox.Show("Success: Interface now on screen.");
+                MessageBox.Show("Success: Interface now on screen.");
 #endif
         }
+
 
         private void ConnectToServer(LoginDetails attempt)
         {
@@ -109,7 +128,7 @@ namespace SnapRegisters
             e.CanExecute = false;
             if (_isLoggedIn)
             {
-                if (Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.IS_OWNER))
+                if (Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.CAN_EXIT_CRACKLE_POP_INTERFACE))
                 {
                     e.CanExecute = true;
                 }
@@ -131,7 +150,7 @@ namespace SnapRegisters
 
             ConnectToServer(_lastAttempt);
 
-            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.IS_OWNER))
+            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.CAN_EXIT_CRACKLE_POP_INTERFACE))
             {
                 btnShowPopup_Click(sender, e);
             }
