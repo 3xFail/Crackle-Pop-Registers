@@ -61,7 +61,7 @@ namespace SnapRegisters
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
 #if ADMIN
-			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, connection);
+			SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
 			MainAdminWindow.Show();
 #elif REGISTER
             SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, _connection);
