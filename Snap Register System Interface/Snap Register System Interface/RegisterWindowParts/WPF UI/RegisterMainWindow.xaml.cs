@@ -315,7 +315,8 @@ namespace SnapRegisters
 			CouponList.Children.Clear();
 
 			UpdateTotals();
-		}
+            cashPaymentPopup.IsOpen = false;
+        }
     }
 }
 
