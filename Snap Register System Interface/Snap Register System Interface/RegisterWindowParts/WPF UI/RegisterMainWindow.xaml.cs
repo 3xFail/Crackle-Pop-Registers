@@ -105,8 +105,6 @@ namespace SnapRegisters
                                                         DispatcherPriority.Normal,
                                                         delegate { this.dateText.Text = DateTime.Now.ToString("hh:mm tt"); },
                                                         this.Dispatcher);
-
-
             //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second).
             //Doesn't delay the in debug mode for quicker development
 #if !DEBUG

@@ -55,12 +55,19 @@ namespace SnapRegisters
 			m_itemDescriptionBox = new Grid();
 			m_itemDescriptionBox.Children.Add(itemDisplayBox);
 
-			foreach(IDiscount discount in newItem.Discounts)
+			if (newItem.Discounts.Count() == 0)
 			{
-				CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
-				autoAppliedDiscount.Height = boxHeight;
-				m_stackOfCoupons.Children.Add(autoAppliedDiscount);
+				Grid blankCoupon = new Grid();
+				blankCoupon.Height = boxHeight;
+				m_stackOfCoupons.Children.Add(blankCoupon);
 			}
+			else
+				foreach(IDiscount discount in newItem.Discounts)
+				{
+					CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
+					autoAppliedDiscount.Height = boxHeight;
+					m_stackOfCoupons.Children.Add(autoAppliedDiscount);
+				}
 
 			UpdateHeight();
 			OutputItem();
