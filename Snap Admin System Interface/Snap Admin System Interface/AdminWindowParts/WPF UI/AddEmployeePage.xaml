@@ -13,7 +13,7 @@
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Information:" VerticalAlignment="Top" Width="110"  FontSize="17" FontStretch="ExtraCondensed"/>
 
         <!--end Button as a Link button using style-->
-        <Grid Margin="0,30,0,0" >
+        <Grid Margin="0,33,0.4,-3" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="252*" />
             </Grid.RowDefinitions>
@@ -36,7 +36,7 @@
             <!--first and last name-->
             <TextBox Height="23" HorizontalAlignment="Left" Margin="67,30,0,0" Name="textBoxFirstName" VerticalAlignment="Top" Width="114" />
             <TextBox Height="23" HorizontalAlignment="Left" Margin="183,30,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="114" />
-            <TextBlock x:Name="FName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="67,53,0,0" Text="First" VerticalAlignment="Top"/>
+            <TextBlock x:Name="FName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="67,53,0,0" Text="First" VerticalAlignment="Top" Width="21"/>
             <TextBlock x:Name="LName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="183,53,0,0" Text="Last" VerticalAlignment="Top"/>
             <!--email address-->
             <TextBox Height="23" HorizontalAlignment="Left" Margin="183,80,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" />
@@ -65,15 +65,15 @@
             <TextBlock x:Name="Year" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="298,163,0,0" Text="Year" VerticalAlignment="Top" Width="60"/>-->
 
             <!--required information-->
-            <TextBlock x:Name="NameAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="102,10,0,0" Text="*" VerticalAlignment="Top"/>
-            <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="100,80,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
+            <TextBlock x:Name="FNameAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="88,51,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
+            <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="98,80,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
             <TextBlock x:Name="PhoneAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="103,168,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
 
             <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,190,10" Name="Submit" VerticalAlignment="Bottom" Width="70"/>
             <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,100,10" Name="button2" VerticalAlignment="Bottom" Width="70"/>
             <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,10,10" Name="button3" VerticalAlignment="Bottom" Width="70"/>
         </Grid>
-        <TextBlock x:Name="EmailAstrisk_Copy" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="141,408,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
+        <TextBlock x:Name="EmailAstrisk_Copy" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="141,411,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
     </Grid>
 </Page>
 
