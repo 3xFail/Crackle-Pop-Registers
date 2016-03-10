@@ -188,5 +188,23 @@ namespace SnapRegisters
             System.Diagnostics.Process.Start("Shutdown", "-s -t 00");
             btnClosePopup_Click(sender, e);
         }
+
+        private void Username_Field_Got_Focus(object sender, RoutedEventArgs e)
+        {
+            usernameField.SelectAll();
+        }
+
+        private void Password_Field_Got_Focus(object sender, RoutedEventArgs e)
+        {
+            passwordField.SelectAll();
+        }
+
+        //private void PasswordFieldKeyPressed(object sender, KeyEventArgs keyPressed)
+        //{
+        //    if (keyPressed.Key == Key.Tab)
+        //    {
+        //        usernameField.Focus();
+        //    }
+        //}
     }
 }
