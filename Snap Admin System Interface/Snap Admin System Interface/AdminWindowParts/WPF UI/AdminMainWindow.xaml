@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
+        Background="{StaticResource Background}"
         Title="Snap Admininstrator Program"
         WindowState="Maximized" WindowStyle="SingleBorderWindow" Height="840" Width="1293.6">
     <!--Height="350" Width="525">-->
@@ -25,12 +26,12 @@
         <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.Row="2" >
             <StackPanel>
-                <Button x:Name="Inventory_btn" Margin="10,20,10,0" Click="btn_Inv" Height="60">Inventory</Button>
-                <Button x:Name="Analysis_btn" Margin="10,50,10,0" Click="btn_Anal" Height="60">Analysis</Button>
-                <Button x:Name="Employees_btn" Margin="10,50,10,0" Click="btn_Emp" Height="60">Employees</Button>
-                <Button x:Name="Customers_btn" Margin="10,50,10,0" Click="btn_Cust" Height="60">Customers</Button>
-                <Button x:Name="Sales_btn" Margin="10,50,10,0" Click="btn_Sales" Height="60">Sales</Button>
-                <Button x:Name="Options_btn" Margin="10,50,10,0" Click="btn_Opt" Height="60">Options</Button>
+                <Button x:Name="Inventory_btn" FontSize="25" Margin="10,20,10,0" Click="btn_Inv" Height="60">Inventory</Button>
+                <Button x:Name="Analysis_btn" FontSize="25" Margin="10,50,10,0" Click="btn_Anal" Height="60">Analysis</Button>
+                <Button x:Name="Employees_btn" FontSize="25" Margin="10,50,10,0" Click="btn_Emp" Height="60">Employees</Button>
+                <Button x:Name="Customers_btn" FontSize="25" Margin="10,50,10,0" Click="btn_Cust" Height="60">Customers</Button>
+                <Button x:Name="Sales_btn" FontSize="25" Margin="10,50,10,0" Click="btn_Sales" Height="60">Sales</Button>
+                <Button x:Name="Options_btn" FontSize="25" Margin="10,50,10,0" Click="btn_Opt" Height="60">Options</Button>
             </StackPanel>
         </DockPanel>
 
