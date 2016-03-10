@@ -21,13 +21,13 @@
         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,60">
             <Image Width="200" Source="/SharedResources/Images/Emblem.png" />
             <Label Content="Username:" HorizontalAlignment="Center" Width="300"/>
-            <TextBox x:Name="usernameField" Width="300">
+            <TextBox x:Name="usernameField" Width="300" GotFocus="Username_Field_Got_Focus" TabIndex="1">
                 <TextBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.New" Key="Enter"/>
                 </TextBox.InputBindings>
             </TextBox>
             <Label Content="Password:" HorizontalAlignment="Center" Width="300" />
-            <PasswordBox x:Name="passwordField" Width="300" Margin="0,0,0,45">
+            <PasswordBox x:Name="passwordField" Width="300" Margin="0,0,0,45" GotFocus="Password_Field_Got_Focus" TabIndex="2">
                 <PasswordBox.InputBindings>
                     <KeyBinding Command="ApplicationCommands.New" Key="Enter"/>
                 </PasswordBox.InputBindings>
@@ -37,9 +37,9 @@
             </Grid>
             <Grid>
                 
-                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Left" Margin="20"/>
+                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Left" Margin="20" Focusable="False"/>
             
-                <Button Content="Manager" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" />
+                <Button Content="Manager" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" Focusable="False" />
                 <!--<Button Command="local:CustomCommands.Exit" Content="Exit" Width="90" Height="40" VerticalAlignment="Top" Margin="20"/>-->
                 <StackPanel>
                     <Popup AllowsTransparency="True" Height="400" Name="myPopup" 
