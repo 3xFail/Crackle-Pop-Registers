@@ -105,11 +105,8 @@ namespace SnapRegisters
                 ApplyItemToExistingCoupons( ref item );
 
 				// Fire whatever Output method has been assigned for this item.
-				m_OutputDelegate(item);
-
 				m_Items.Add(item);
-
-				// TODO: Make this box's height equal to the combined discount's height.
+				m_OutputDelegate(item);
 			}
 			catch (InvalidOperationException e)
 			{

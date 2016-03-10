@@ -17,6 +17,8 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Windows.Threading;
+using System.Text.RegularExpressions;
+
 namespace SnapRegisters
 {
     //*************************************************************************************************************
@@ -151,16 +153,16 @@ namespace SnapRegisters
         private void UpdateTotals()
         {
 
-			m_costTotal = 0;
-			m_savingsTotal = 0;
-			m_totalTotal = 0;
+            m_costTotal = 0;
+            m_savingsTotal = 0;
+            m_totalTotal = 0;
 
-			foreach (Item item in m_transaction.GetItems())
-			{
-				m_costTotal += item.OriginalPrice;
-				m_savingsTotal += item.OriginalPrice - item.Price;
-				m_totalTotal += item.Price;
-			}
+            foreach (Item item in m_transaction.GetItems())
+            {
+                m_costTotal += item.OriginalPrice;
+                m_savingsTotal += item.OriginalPrice - item.Price;
+                m_totalTotal += item.Price;
+            }
 
             CostTotal.Text = m_costTotal.ToString("C");
             SavingsTotal.Text = m_savingsTotal.ToString("C");
@@ -175,7 +177,8 @@ namespace SnapRegisters
         private double m_savingsTotal = 0;
         private double m_totalTotal = 0;
         public static KeyboardHook kh;
-       
+        private double m_cashChange = 0;
+
 
         private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
         {
@@ -225,31 +228,27 @@ namespace SnapRegisters
 
         private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
         {
-            
+
 
             // Enter: Enter the cash paid by customer
             if (keyPressed.Key == Key.Enter)
             {
-                try
+                if (AmountPaidInCashBox.Text != string.Empty)
                 {
-                    if (AmountPaidInCashBox.Text != string.Empty)
-                    {
+                    ChangeAmount.Text = (m_totalTotal - double.Parse(AmountPaidInCashBox.Text)).ToString("C");
 
+                    cashPaymentPopup.IsOpen = false;
+                    cashPaidPopup.IsOpen = true;
 
+                    AmountPaidInCashBox.Clear();
 
+                    //ResetRegister();
 
-                        ResetRegister();
-
-                    }
-                }
-                catch (Exception) //if that fails
-                {
-                    try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
-                    catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
                 }
             }
-
         }
+
+
 
         private void ResetRegister()
         {
@@ -308,6 +307,24 @@ namespace SnapRegisters
             m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, (long)newPermissions);
         }
 
+        private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
+        {
+            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
+            ItemsList.Children.Clear();
+            CouponList.Children.Clear();
+            m_listOfOutputObjects.Clear();
+
+
+            UpdateTotals();
+            cashPaidPopup.IsOpen = false;
+
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
+
 }
 

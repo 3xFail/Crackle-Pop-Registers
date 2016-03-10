@@ -19,7 +19,7 @@ namespace SnapRegisters
 	//				The panel to output the item box on.
 	//			private StackPanel m_couponOutputPanel
 	//				The panel to output coupons on.
-	//			private ItemDisplayBox m_itemDiscriptionBox
+	//			private Grid m_itemDiscriptionBox
 	//				The GUI element for the item to display its name and price on.
 	//			private StackPanel m_stackOfCoupons
 	//				A stack of GUI elements containing information about coupons. Drawn to the couponOutputPanel.
@@ -46,9 +46,14 @@ namespace SnapRegisters
 
 			m_stackOfCoupons = new StackPanel();
 
+			
 			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(newItem);
+			itemDisplayBox.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+			itemDisplayBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+			itemDisplayBox.Height = boxHeight;
 
-			m_itemDescriptionBox = itemDisplayBox;
+			m_itemDescriptionBox = new Grid();
+			m_itemDescriptionBox.Children.Add(itemDisplayBox);
 
 			foreach(IDiscount discount in newItem.Discounts)
 			{
@@ -81,10 +86,10 @@ namespace SnapRegisters
 
 		public void UpdateHeight()
 		{
-			if (double.IsNaN(m_stackOfCoupons.Height) || m_stackOfCoupons.Height == 0 )
+			if (m_stackOfCoupons.Children.Count < 2 )
 				m_itemDescriptionBox.Height = boxHeight;
 			else
-				m_itemDescriptionBox.Height = m_stackOfCoupons.Height;
+				m_itemDescriptionBox.Height = m_stackOfCoupons.Children.Count * boxHeight;
 		}
 
 		public double boxHeight { get; set; }
@@ -93,7 +98,7 @@ namespace SnapRegisters
 		private StackPanel m_couponOutputPanel;
 
 
-		private ItemDisplayBox m_itemDescriptionBox;
+		private Grid m_itemDescriptionBox;
 		private StackPanel m_stackOfCoupons;
 		private Item m_item;
 	}
