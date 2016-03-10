@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 // Document me.
-namespace SnapRegisters
+namespace SnapRegisters.Commands
 {
     public static class CustomCommands
     {

@@ -217,10 +217,11 @@ namespace SnapRegisters
 
         //Cash payment popup functions
         //////////////////////////////////////////////////
+        //Added command binding extension barebones even though they're not being used
+        //for possible future implementation
         private void PayByCash_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
-
         }
 
         private void PayByCash_Executed(object sender, ExecutedRoutedEventArgs e)
