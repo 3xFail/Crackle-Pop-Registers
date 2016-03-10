@@ -47,7 +47,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             {
                 // no need to display the time
                 this.Title = date.Value.ToShortDateString();
-                //textBoxMM = Day.
             }
         }
         // load the list of items in combobox

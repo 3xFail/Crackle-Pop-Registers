@@ -102,6 +102,8 @@ namespace SnapRegisters
 				Item item = ConstructItem(itemID);
                 item.Discounts = GetSales( item );
 
+                ApplyItemToExistingCoupons( ref item );
+
 				// Fire whatever Output method has been assigned for this item.
 				m_OutputDelegate(item);
 
@@ -146,6 +148,39 @@ namespace SnapRegisters
 				throw e;
 			}
 		}
+
+        public void ApplyItemToExistingCoupons( ref Item item )
+        {
+            foreach( Coupon coupon in m_Coupons )
+                if( coupon.AppliesTo( item ) )
+                    item.AddDiscount( coupon );
+
+            StringBuilder coupon_list = new StringBuilder();
+
+            foreach( Coupon coupon in m_Coupons )
+                if( !coupon.AppliesTo( item ) )
+                    coupon_list.Append( coupon.Barcode + ',' );
+
+            if( coupon_list.Length != 0 )
+            {
+                coupon_list.Length--;
+                m_connection.write( string.Format( "CheckItem_list \"{0}\", \"{1}\"", coupon_list.ToString(), item.ID ) );
+
+                foreach( XmlNode node in m_connection.Response )
+                {
+                    foreach( Coupon coupon in m_Coupons )
+                    {
+                        if( coupon.Barcode == node.Get( "CouponID" ) )
+                        {
+                            item.AddDiscount( coupon );
+                            coupon.AddRelatedID( item.ID );
+                        }
+                    }
+                }
+            }
+                    
+        }
+
 		public void OverrideCost(string itemID, double newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
@@ -249,12 +284,24 @@ namespace SnapRegisters
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
                 double discount = double.Parse(it.Get("Discount"));
-                string related_barcode = it.Get("CouponID");
                 string name = it.Get("Name");
                 bool flat = it.Get( "Flat" )[0] == '1';
 
+                Coupon coupon = new Coupon( coupon_id, flat, name, discount );
 
-                return new Coupon( coupon_id, flat, name, discount );
+                StringBuilder item_list = new StringBuilder();
+                m_Items.ForEach( i => item_list.Append( i.ID.ToString() + ',' ) );
+
+                if( item_list.Length != 0 )
+                {
+                    item_list.Length--;
+                    m_connection.write( string.Format( "CheckCoupons_list \"{0}\", \"{1}\"", item_list.ToString(), coupon_id ) ); //product ID
+
+                    foreach( XmlNode node in m_connection.Response )
+                        coupon.AddRelatedID( int.Parse( node.Get( "ProductID" ) ) );
+                }
+
+                return coupon;
             }
             catch (NullReferenceException)
             {

@@ -53,7 +53,7 @@ namespace SnapRegisters
         //Don't let the value go below 0.
         public double ChangeAmountTo( double amt )
         {
-            return Flat ? Math.Max( amt - Amount, 0 ) : amt * Amount;
+            return Flat ? Math.Max( amt - Amount, 0 ) : amt * ( 1 - Amount );
         }
 
         public override string ToString()
