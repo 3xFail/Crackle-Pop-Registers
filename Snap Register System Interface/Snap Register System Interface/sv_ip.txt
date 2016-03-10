@@ -1,4 +1,2 @@
 ﻿newgenstudios.duckdns.org
-192.168.1.12
-10.101.10.154
-localhost
+127.0.0.1
