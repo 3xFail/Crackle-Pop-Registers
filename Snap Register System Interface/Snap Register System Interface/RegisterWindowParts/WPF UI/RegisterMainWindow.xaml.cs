@@ -167,6 +167,7 @@ namespace SnapRegisters
         private double m_savingsTotal = 0;
         private double m_totalTotal = 0;
         public static KeyboardHook kh;
+       
 
         private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
         {
@@ -214,6 +215,38 @@ namespace SnapRegisters
             }
         }
 
+        private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
+        {
+            
+
+            // Enter: Enter the cash paid by customer
+            if (keyPressed.Key == Key.Enter)
+            {
+                try
+                {
+                    if (AmountPaidInCashBox.Text != string.Empty)
+                    {
+
+
+
+
+                        ResetRegister();
+
+                    }
+                }
+                catch (Exception) //if that fails
+                {
+                    try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
+                    catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
+                }
+            }
+
+        }
+
+        private void ResetRegister()
+        {
+
+        }
 
         //Cash payment popup functions
         //////////////////////////////////////////////////
