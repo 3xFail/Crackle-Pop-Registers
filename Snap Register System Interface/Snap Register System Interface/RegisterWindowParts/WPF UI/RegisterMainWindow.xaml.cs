@@ -316,7 +316,9 @@ namespace SnapRegisters
 			m_costTotal = 0;
 			m_savingsTotal = 0;
 			m_totalTotal = 0;
-		}
+
+            cashPaymentPopup.IsOpen = false;
+        }
     }
 }
 
