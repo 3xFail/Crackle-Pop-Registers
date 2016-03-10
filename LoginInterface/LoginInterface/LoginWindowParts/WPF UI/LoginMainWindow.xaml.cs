@@ -46,7 +46,7 @@ namespace SnapRegisters
             };
 
 
-#if NO_USERS_IN_DATABASE
+#if NO_USERS_IN_DATABASE //For use if Ryan deleted all the employees lol
             loggedIn = new Employee(99, lastAttempt.Username, null, null, new DateTime(), 31);
 #else
             ConnectToServer(_lastAttempt);
