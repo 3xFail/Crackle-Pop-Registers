@@ -66,8 +66,9 @@ namespace SnapRegisters
 			if (discount.AppliesTo(m_item))
 			{
 				m_item.AddDiscount(discount);
-				CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
-				m_stackOfCoupons.Children.Add(autoAppliedDiscount);
+				CouponDisplayBox newDiscount = new CouponDisplayBox(discount);
+				newDiscount.Height = boxHeight;
+				m_stackOfCoupons.Children.Add(newDiscount);
 				UpdateHeight();
 			}
 		}

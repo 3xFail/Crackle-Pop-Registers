@@ -185,7 +185,8 @@ namespace CSharpClient
 
                 try
                 {
-                    doc.LoadXml(msg.ToString()); //try to convert the response to an xml object.
+
+                    doc.LoadXml( @"<root>" + msg.ToString() + @"</root>" ); //try to convert the response to an xml object.
                 }
                 catch (XmlException) { } //if it fails, then GetElementsByTagName is still fine. It will simply return an empty list. So we don't need to do anything here.
 
