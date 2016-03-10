@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SnapRegisters;
 
-namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
+namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI 
 {
     /// <summary>
     /// Interaction logic for AddEmployeePage.xaml
