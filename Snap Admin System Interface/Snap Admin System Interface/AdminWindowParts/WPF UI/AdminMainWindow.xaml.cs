@@ -28,10 +28,8 @@ namespace SnapRegisters
     public partial class AdminMainWindow : Window
     {
         private Employee m_employee = null;
-        private connection_session m_connection = null;
         private DockPanel m_itemPanel = null;
         private DockPanel m_discountList = null;
-
 
         public AdminMainWindow(Employee currentEmployee, connection_session connection)
         {
@@ -43,14 +41,12 @@ namespace SnapRegisters
 
             InitializeComponent();
             m_employee = currentEmployee;
-            m_connection = connection;
+            DBInterface.m_connection = connection;
 
             // set the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
         }
-       
-
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
@@ -93,14 +89,6 @@ namespace SnapRegisters
             NavigationFrame.Navigate(new OptionsPage());
             this.NavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/OptionsPage.xaml", UriKind.Relative));
         }
-        //private void btn_AddEmp(object sender, RoutedEventArgs e)
-        //{
-        //    //NavigationFrame.Navigate(new InventoryPage());
-        //    //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
-
-        //    EmpNavigationFrame.Navigate(new AddEmployeePage());
-        //    this.EmpNavigationFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/AddEmployeePage.xaml", UriKind.Relative));
-        //}
     }
 }
 
