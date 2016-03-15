@@ -33,6 +33,7 @@ namespace SnapRegisters
 
         public AdminMainWindow(Employee currentEmployee, connection_session connection)
         {
+            DBInterface.m_connection = connection;
             // update the clock manually
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -41,7 +42,6 @@ namespace SnapRegisters
 
             InitializeComponent();
             m_employee = currentEmployee;
-            DBInterface.m_connection = connection;
 
             // set the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;

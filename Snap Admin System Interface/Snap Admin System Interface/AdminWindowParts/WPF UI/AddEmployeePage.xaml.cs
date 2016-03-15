@@ -124,29 +124,31 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             return state.Length == 2 && states.IndexOf(state) > 0;
         }
         // submits the input values into the database
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private void Submit_Click( object sender, RoutedEventArgs e )
         {
-            if (textBoxFirstName.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("First name is required. Please enter it.");
-            else if (textBoxUsername.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("Username is required. Please enter it.");
-            else if (textBoxPassword.Password == string.Empty)
-                System.Windows.Forms.MessageBox.Show("Password is required. Please enter it.");
-            else if (textBoxPhone.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("Phone number is required. Please enter it.");
-            else if (textBoxAuthorization.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("Authorization level is required. Please select one.");
+            if( textBoxFirstName.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "First name is required. Please enter it." );
+            else if( textBoxUsername.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Username is required. Please enter it." );
+            else if( textBoxPassword.Password == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Password is required. Please enter it." );
+            else if( textBoxPhone.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Phone number is required. Please enter it." );
+            else if( textBoxAuthorization.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Authorization level is required. Please select one." );
             else
             {
-                try
-                {
-                    DBInterface.AddEmployee(textBoxFirstName.Text, textBoxLastName.Text, textBoxUsername.Text, textBoxEmail.Text, textBoxPassword.Password, textBoxAuthorization.Text, DOB.DisplayDate, textBoxPhone.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text);
+                try {
+
+                    DBInterface.AddEmployee( textBoxFirstName.Text, textBoxLastName.Text, textBoxUsername.Text, textBoxEmail.Text, textBoxPassword.Password, textBoxAuthorization.Text, DOB.DisplayDate, textBoxPhone.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text );
+
                 }
-                catch(Exception ex)
+                catch( Exception exp)
                 {
-                    MessageBox.Show(ex.ToString());
+                    System.Windows.Forms.MessageBox.Show( exp.Message);
                 }
             }
         }
+
     }
 }

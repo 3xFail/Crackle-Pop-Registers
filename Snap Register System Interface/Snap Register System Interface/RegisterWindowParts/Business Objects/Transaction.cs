@@ -206,6 +206,9 @@ namespace SnapRegisters
             if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
+            if( m_Coupons.Any( x => x.Barcode == couponID ) )
+                throw new ArgumentException( "Cannot scan the same coupon twice" );
+
             try
             {
                 Coupon coupon = ConstructCoupon( couponID );

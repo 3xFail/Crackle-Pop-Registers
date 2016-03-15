@@ -10,17 +10,17 @@ namespace SnapRegisters
 {
     static class DBInterface
     {
-        public static connection_session m_connection;
+        public static connection_session m_connection { get; set; }
         public static void AddEmployee( string firstName, string lastName, string username,
             string email, string password, string authorizationLevel, DateTime DOB,
             string phoneNumber, string address_1, string address_2, string city, string state, string country,
             string zip)
         {
-            string dob_string = DOB == null ? string.Empty : DOB.ToString();
+            string dob_string = DOB == null ? null : DOB.ToString();
 
-            password = PasswordHash.Hash(username, password);
+            //password = PasswordHash.Hash(username, password);
 
-            m_connection.write(string.Format("AddUser \"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\" \"{5}\" \"{6}\" \"{7}\" \"{8}\" \"{9}\" \"{10}\" \"{11}\" \"{12}\" \"{13}\" \"{14}\" ",
+            m_connection.write(string.Format("AddUser \"{0}\",\"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\", \"{6}\", \"{7}\", \"{8}\", \"{9}\", \"{10}\", \"{11}\", \"{12}\", \"{13}\", \"{14}\" ",
                 firstName, lastName, username, password, phoneNumber, authorizationLevel, "1", dob_string, address_1, address_2, city, state, country, zip, email));
 
             if (m_connection.Response[0].Get("UserID") == "-1") //otherwise the UserID returned is the ID of the account just created
@@ -30,7 +30,7 @@ namespace SnapRegisters
         public static void AddItem( string name, string price, string barcode)
         {
 
-            m_connection.write(string.Format("AddItem \"{0}\" \"{1}\" \"{2}\" \"{3}\" ", name, price, barcode, "1"));
+            m_connection.write(string.Format("AddItem \"{0}\", \"{1}\", \"{2}\", \"{3}\" ", name, price, barcode, "1"));
 
             if (m_connection.Response[0].Get("ProductID") == "-1")
                 throw new InvalidOperationException("Item with barcode \"" + barcode + "\" already exists.");
@@ -42,7 +42,7 @@ namespace SnapRegisters
         {
             string dob_string = DOB == null ? string.Empty : DOB.ToString();
 
-            m_connection.write(string.Format("AddCust \"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\" \"{5}\" \"{6}\" \"{7}\" \"{8}\" \"{9}\" \"{10}\" \"{11}\" \"{12}\" ",
+            m_connection.write(string.Format("AddCust \"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", \"{5}\", \"{6}\", \"{7}\", \"{8}\", \"{9}\", \"{10}\", \"{11}\", \"{12}\" ",
                 firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, "NULL", "1", dob_string));
 
             if (m_connection.Response[0].Get("UserID") == "-1")
