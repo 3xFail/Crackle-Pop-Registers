@@ -205,9 +205,6 @@
     <Content Include="..\..\SharedResources\Server\SocketsServer.exe">
       <Link>SharedResources\Server\SocketsServer.exe</Link>
     </Content>
-    <Content Include="sv_ip.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\..\SharedResources\Images\Emblem.png">

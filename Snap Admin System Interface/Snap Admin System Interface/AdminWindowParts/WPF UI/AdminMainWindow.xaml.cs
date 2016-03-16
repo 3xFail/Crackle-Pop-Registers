@@ -31,7 +31,7 @@ namespace SnapRegisters
         private DockPanel m_itemPanel = null;
         private DockPanel m_discountList = null;
 
-        public AdminMainWindow(Employee currentEmployee, connection_session connection)
+        public AdminMainWindow(Employee currentEmployee, ConnectionSession connection)
         {
             DBInterface.m_connection = connection;
             // update the clock manually
