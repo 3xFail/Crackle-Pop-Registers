@@ -74,7 +74,7 @@ namespace SnapRegisters
 
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
-        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, connection_session session)
+        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -117,7 +117,7 @@ namespace SnapRegisters
         //Modifies the item price given by the sales that are assigned to the item in the database
         public DiscountList GetSales(Item new_item)
         {
-            m_connection.write(string.Format("GetSale_ProdID \"{0}\"", new_item.ID));
+            m_connection.Write( "GetSale_ProdID @0", new_item.ID );
 
             DiscountList Discounts = new DiscountList();
             foreach (XmlNode sale in m_connection.Response)
@@ -161,7 +161,7 @@ namespace SnapRegisters
             if( coupon_list.Length != 0 )
             {
                 coupon_list.Length--;
-                m_connection.write( string.Format( "CheckItem_list \"{0}\", \"{1}\"", coupon_list.ToString(), item.ID ) );
+                m_connection.Write("CheckItem_list @0, @1", coupon_list.ToString(), item.ID );
 
                 foreach( XmlNode node in m_connection.Response )
                 {
@@ -249,7 +249,7 @@ namespace SnapRegisters
 
 		private Item ConstructItem(string itemID)
 		{
-            m_connection.write( string.Format( "GetItem \"{0}\"", itemID ) );
+            m_connection.Write( "GetItem @0", itemID );
 
             try
             {
@@ -274,7 +274,7 @@ namespace SnapRegisters
 
         private Coupon ConstructCoupon(string coupon_id)
         {
-            m_connection.write(string.Format("GetCoupon_ID \"{0}\"", coupon_id));
+            m_connection.Write( "GetCoupon_ID @0", coupon_id);
 
             try
             {
@@ -295,7 +295,7 @@ namespace SnapRegisters
                 if( item_list.Length != 0 )
                 {
                     item_list.Length--;
-                    m_connection.write( string.Format( "CheckCoupons_list \"{0}\", \"{1}\"", item_list.ToString(), coupon_id ) ); //product ID
+                    m_connection.Write( "CheckCoupons_list @0, @1", item_list.ToString(), coupon_id ); //product ID
 
                     foreach( XmlNode node in m_connection.Response )
                         coupon.AddRelatedID( int.Parse( node.Get( "ProductID" ) ) );
@@ -315,6 +315,6 @@ namespace SnapRegisters
 		private List<Item> m_Items = null;
         private List<Coupon> m_Coupons = null;
 		private Employee m_Employee = null;
-        private connection_session m_connection = null;
+        private ConnectionSession m_connection = null;
 	}
 }

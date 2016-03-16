@@ -22,7 +22,7 @@ namespace SnapRegisters
     public partial class LoginMainWindow : Window
     {
         private bool _isLoggedIn = false;
-        private connection_session _connection;
+        private ConnectionSession _connection;
         private Employee _loggedIn = null;
         private LoginDetails _lastAttempt;
 
@@ -98,19 +98,16 @@ namespace SnapRegisters
             _isLoggedIn = false;
             try
             {
-                _connection = new connection_session(File.ReadAllText("sv_ip.txt"), 6119, attempt.Username, attempt.Password);
-
-                _connection.write(string.Format("GetEmployee_Username \"{0}\"", attempt.Username));
+                _connection = new ConnectionSession( attempt.Username, attempt.Password );
 
                 XmlNode item = _connection.Response[0];
 
                 long permissions = long.Parse(item.Get("PermissionsGroup"));
                 string phone = item.Get("PhoneNumber");
                 int id = Int32.Parse(item.Get("UserID"));
-                string username = item.Get("FName") + ' ' + item.Get("LName");
-                //string Address = item.Get( "Address" );
+                string name = item.Get("FName") + ' ' + item.Get("LName");
 
-                _loggedIn = new Employee(id, username, null, phone, new DateTime(1, 1, 1), permissions);
+                _loggedIn = new Employee(id, name, null, phone, new DateTime(1, 1, 1), permissions);
 
                 _isLoggedIn = true;
             }

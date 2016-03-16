@@ -96,7 +96,7 @@ namespace SnapRegisters
     //*************************************************************************************************************
     public partial class RegisterMainWindow : Window
     {
-        public RegisterMainWindow(Employee currentEmployee, connection_session session)
+        public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
 
@@ -167,7 +167,7 @@ namespace SnapRegisters
             Total.Text = m_totalTotal.ToString("C");
         }
 
-        private connection_session m_connection = null;
+        private ConnectionSession m_connection = null;
         private Transaction m_transaction = null;
         private Employee m_employee = null;
         private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
