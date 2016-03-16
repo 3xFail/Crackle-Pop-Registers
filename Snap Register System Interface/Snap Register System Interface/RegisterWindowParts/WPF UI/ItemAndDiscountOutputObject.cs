@@ -84,7 +84,6 @@ namespace SnapRegisters
 					m_stackOfCoupons.Children.Clear();
 
 				m_noDiscounts = false;
-				m_item.AddDiscount(discount);
 				CouponDisplayBox newDiscount = new CouponDisplayBox(discount);
 				newDiscount.Height = boxHeight;
 				m_stackOfCoupons.Children.Add(newDiscount);
