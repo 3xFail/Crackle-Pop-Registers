@@ -65,14 +65,4 @@ namespace CSharpClient
         public XmlNodeList Response { get; set; }
         private bool Authed = false;
     }
-
-    public static class ExtensionMethods
-    {
-        public static SqlParameter AddNullable( this SqlParameterCollection _params, string param_name, object param_val )
-        {
-            if( param_val.ToString() != string.Empty )
-                return _params.AddWithValue( param_name, param_val );
-            else return _params.AddWithValue( param_name, DBNull.Value );
-        }
-    }
 }
