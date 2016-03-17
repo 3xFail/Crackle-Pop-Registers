@@ -136,7 +136,10 @@
     <Compile Include="AdminWindowParts\WPF UI\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\InventoryPage.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\CatalogInventoryPage.xaml.cs">
+      <DependentUpon>CatalogInventoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\OptionsPage.xaml.cs">
@@ -168,7 +171,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\InventoryPage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\InventoryPages\CatalogInventoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\InventoryPages\InventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

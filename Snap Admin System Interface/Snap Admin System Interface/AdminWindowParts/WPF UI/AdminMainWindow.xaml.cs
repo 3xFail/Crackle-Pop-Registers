@@ -19,6 +19,7 @@ using System.Device;
 using System.Windows.Threading;
 using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI;
 using CSharpClient;
+using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages;
 
 namespace SnapRegisters
 {
