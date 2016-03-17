@@ -4,19 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="CatalogInventoryPage">
+      mc:Ignorable="d"
+      Title="CatalogInventoryPage" Width="692" Height="376">
 
     <Grid>
-        <DataGrid SelectionChanged="DataGrid_SelectionChanged">
-            x:Name="Catalog" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="300" 
-            HeaderVisibility = "Column" CanUserSortColumns="True"
-            AlternatingRowBackground="Gainsboro"  AlternationCount="2"
-            SelectionMode="Extended" SelectionUnit="Row"
+        <DataGrid x:Name="Catalog" HorizontalAlignment="Left" Height="378" VerticalAlignment="Top" Width="693" 
+                  CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"  AlternationCount="2" Margin="0,0,-393,-78">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ProductID" CanUserSort="True" />
+                <DataGridTextColumn Header="Name" CanUserSort="True"/>
+                <DataGridTextColumn Header="Price" CanUserSort="True"/>
+                <DataGridTextColumn Header="Barcode" CanUserSort="True" CanUserResize="False"/>
+                <DataGridCheckBoxColumn Header="Active" CanUserSort="True" CanUserResize="False"/>
+            </DataGrid.Columns>
         </DataGrid>
-                  
-        
-
     </Grid>
 </Page>

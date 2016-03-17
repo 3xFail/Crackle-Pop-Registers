@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CSharpClient;
+using System.Xml;
 
 namespace SnapRegisters
 {
@@ -55,5 +56,13 @@ namespace SnapRegisters
         //{
         //    throw new NotImplementedException();
         //}
+
+        public static void GetAllProducts()
+        {
+            // no passins on this one
+            m_connection.Write("GetAllItemsInProducts");
+        }
+        public static XmlNodeList Response { get { return m_connection.Response; } }
+
     }
 }
