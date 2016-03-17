@@ -7,9 +7,9 @@ namespace CSharpClient
     public class ConnectionSession
     {
         private readonly string ConnectionString = @"Data Source=aura.students.cset.oit.edu;Initial Catalog=snap;User ID=snap_admin;Password=snap_admin;";
-        public ConnectionSession( string username, string password ) //Constructor needs similar code to 'Write' but not the same because of authed check and whatnot.
+        public ConnectionSession( string username, string password )
         {
-            QueryDB( "GetEmployee_UsernamePassword @0, @1", username, password );
+            QueryDB( "GetEmployee_UsernamePassword @0, @1", username, PasswordHash.Hash(username, password ) );
 
             Authed = Response.Count == 1;
             if( !Authed )

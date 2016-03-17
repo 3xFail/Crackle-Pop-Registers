@@ -56,7 +56,8 @@
     <Reference Include="AccessLibrary">
       <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CSharpClient">
+    <Reference Include="CSharpClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -94,11 +95,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\AddCustomerPage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\CustomerPages\AddCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\AddEmployeePage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\EmployeePages\AddEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,10 +121,10 @@
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>
     <Compile Include="AdminWindowParts\Business Objects\DBInterface.cs" />
-    <Compile Include="AdminWindowParts\WPF UI\AddCustomerPage.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\CustomerPages\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\AddEmployeePage.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\AddEmployeePage.xaml.cs">
       <DependentUpon>AddEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\AnalysisPage.xaml.cs">
@@ -144,7 +145,7 @@
     <Compile Include="AdminWindowParts\WPF UI\SalesPage.xaml.cs">
       <DependentUpon>SalesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\SearchEmployeePage.xaml.cs">
+    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\SearchEmployeePage.xaml.cs">
       <DependentUpon>SearchEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -179,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\SearchEmployeePage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\EmployeePages\SearchEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,7 +32,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             // navigate to the add employee page
             CustFrame.Navigate(new AddCustomerPage());
-            CustFrame.Navigate(new Uri("/AdminWindowParts/WPF UI/AddCustomerPage.xaml", UriKind.Relative));
         }
     }
 }

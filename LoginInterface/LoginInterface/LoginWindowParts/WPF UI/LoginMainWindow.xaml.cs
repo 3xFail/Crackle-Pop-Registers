@@ -21,7 +21,7 @@ namespace SnapRegisters
     // Document me.
     public partial class LoginMainWindow : Window
     {
-        private bool _isLoggedIn = false;
+        private bool _isLoggedIn { get; set; } = false;
         private ConnectionSession _connection;
         private Employee _loggedIn = null;
         private LoginDetails _lastAttempt;
@@ -58,10 +58,6 @@ namespace SnapRegisters
                     OpenInterfaceWindow(_loggedIn);
                     this.Close();
                 }
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
@@ -104,16 +100,12 @@ namespace SnapRegisters
 
                 long permissions = long.Parse(item.Get("PermissionsGroup"));
                 string phone = item.Get("PhoneNumber");
-                int id = Int32.Parse(item.Get("UserID"));
+                int id = int.Parse(item.Get("UserID"));
                 string name = item.Get("FName") + ' ' + item.Get("LName");
 
                 _loggedIn = new Employee(id, name, null, phone, new DateTime(1, 1, 1), permissions);
 
                 _isLoggedIn = true;
-            }
-            catch (InvalidOperationException)
-            {
-                MessageBox.Show("Invalid username or password");
             }
             catch (Exception ee)
             {
@@ -197,7 +189,5 @@ namespace SnapRegisters
         {
             passwordField.SelectAll();
         }
-
-
     }
 }
