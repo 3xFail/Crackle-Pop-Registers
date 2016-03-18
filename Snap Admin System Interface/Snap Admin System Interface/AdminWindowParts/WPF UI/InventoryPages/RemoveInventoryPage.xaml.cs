@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnapRegisters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,12 +28,12 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void SubmitButton_Click( object sender, RoutedEventArgs e )
         {
-
+            DBInterface.RemoveProducts(ItemIDBox.Text);
         }
 
         private void ResetButton_Click( object sender, RoutedEventArgs e )
         {
-
+            ItemIDBox.Clear();
         }
     }
 }

@@ -57,6 +57,11 @@ namespace SnapRegisters
             // no passins on this one
             m_connection.Write("GetAllItemsInProducts");
         }
+
+        public static void RemoveProducts(string id)
+        {
+            m_connection.Write( "RemoveItem_ProductID @0", id );
+        }
         public static XmlNodeList Response { get { return m_connection.Response; } }
 
     }

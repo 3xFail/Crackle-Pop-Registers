@@ -34,7 +34,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            InvFrame.Navigate( new RemoveInventoryPage() );
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
