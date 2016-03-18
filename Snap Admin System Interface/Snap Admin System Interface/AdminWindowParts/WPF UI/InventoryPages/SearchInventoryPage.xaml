@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="SearchInventoryPage">
+      Title="SearchInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 
     <Grid>
