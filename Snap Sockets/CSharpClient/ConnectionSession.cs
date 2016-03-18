@@ -13,8 +13,11 @@ namespace CSharpClient
         public ConnectionSession( string username, string password )
         {
 #if DEBUG
-            File.WriteAllText( "query_output.txt", string.Empty );
+            File.WriteAllText( "query_output.txt", string.Empty ); //empty the query_output file so we can append only queries from this session
 #endif
+            if( username.Length < 8 )
+                throw new ArgumentException( "Invalid Username or Password" ); //if the username is less than 8 characters it can't possibly be correct.
+
             QueryDB( "GetEmployee_UsernamePassword @0, @1", username, PasswordHash.Hash( username, password ) );
 
             Authed = Response.Count == 1;
