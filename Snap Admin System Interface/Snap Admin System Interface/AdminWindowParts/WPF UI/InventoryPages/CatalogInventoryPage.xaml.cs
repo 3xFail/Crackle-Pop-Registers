@@ -45,6 +45,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             Table.Columns.Add( "Name", typeof( string ) );
             Table.Columns.Add( "Price", typeof( double ) );
             Table.Columns.Add( "Barcode", typeof( string ) );
+            //Table.Columns.Add( "Stock", typeof(Int32) );
             Table.Columns.Add( "Active", typeof( bool ) );
 
             //populates the response with the list of item nodes
@@ -58,6 +59,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                                             , node.Get( "Name" )
                                             , double.Parse( node.Get( "Price" ) )
                                             , node.Get( "Barcode" )
+                                            //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
                                             , node.Get( "Active" ) != "1"
                 } );
             }
@@ -68,6 +70,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private void Commit( object sender, RoutedEventArgs e )
         {
             //Todo: Send all changes to the item in the line that the button belonged to, to the datebase
+
+            //does this associate with the individual row or with the whole file?: R
         }
 
         

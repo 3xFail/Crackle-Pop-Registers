@@ -148,6 +148,12 @@
     <Compile Include="AdminWindowParts\WPF UI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\RemoveInventoryPage.xaml.cs">
+      <DependentUpon>RemoveInventoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\SearchInventoryPage.xaml.cs">
+      <DependentUpon>SearchInventoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindowParts\WPF UI\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +192,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\InventoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\InventoryPages\RemoveInventoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\InventoryPages\SearchInventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

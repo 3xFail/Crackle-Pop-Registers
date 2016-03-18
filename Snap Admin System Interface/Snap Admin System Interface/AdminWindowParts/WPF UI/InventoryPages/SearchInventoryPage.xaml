@@ -1,0 +1,31 @@
+﻿<Page x:Class="Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages.SearchInventoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="SearchInventoryPage">
+
+
+    <Grid>
+        <DataGrid x:Name="Catalog" VerticalAlignment="Stretch" 
+                  AutoGenerateColumns="True" CanUserSortColumns="True" 
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2" 
+                  Margin="0,14,0,-2" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Commit" Width="50" Content="Commit">
+
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="Search" HorizontalAlignment="Left" Height="14" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="300" FontFamily="Times New Roman" ForceCursor="True" TextChanged="Search_TextChanged"/>
+    </Grid>
+</Page>
