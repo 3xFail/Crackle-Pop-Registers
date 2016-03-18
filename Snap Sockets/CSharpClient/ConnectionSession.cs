@@ -1,6 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.IO;
 using System.Xml;
-using System;
+using System.Data.SqlClient;
+
 
 namespace CSharpClient
 {
@@ -9,6 +11,9 @@ namespace CSharpClient
         private readonly string ConnectionString = @"Data Source=aura.students.cset.oit.edu;Initial Catalog=snap;User ID=snap_admin;Password=snap_admin;";
         public ConnectionSession( string username, string password )
         {
+#if DEBUG
+            File.WriteAllText( "query_output.txt", string.Empty );
+#endif
             QueryDB( "GetEmployee_UsernamePassword @0, @1", username, PasswordHash.Hash(username, password ) );
 
             Authed = Response.Count == 1;
@@ -47,6 +52,9 @@ namespace CSharpClient
             {
                 try
                 {
+#if DEBUG
+                    File.AppendAllText( "query_output.txt", reader[0] + "\n" );
+#endif
                     doc.LoadXml( @"<root>" + reader[0] + @"</root>" );
                 }
                 catch( XmlException ) { } //do nothing it doesn't matter if the XML is invalid. The doc will just be an empty doc which works fine.
