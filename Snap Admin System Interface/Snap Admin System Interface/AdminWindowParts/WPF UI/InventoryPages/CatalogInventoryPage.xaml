@@ -5,18 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
       mc:Ignorable="d"
-      Title="CatalogInventoryPage" Width="692" Height="376">
+      Title="CatalogInventoryPage" Width="380" Height="450">
 
     <Grid>
-        <DataGrid x:Name="Catalog" HorizontalAlignment="Left" Height="378" VerticalAlignment="Top" Width="693" 
-                  CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"  AlternationCount="2" Margin="0,0,-393,-78">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ProductID" CanUserSort="True" />
-                <DataGridTextColumn Header="Name" CanUserSort="True"/>
-                <DataGridTextColumn Header="Price" CanUserSort="True"/>
-                <DataGridTextColumn Header="Barcode" CanUserSort="True" CanUserResize="False"/>
-                <DataGridCheckBoxColumn Header="Active" CanUserSort="True" CanUserResize="False"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid x:Name="Catalog" Height="450" VerticalAlignment="Top" 
+                  AutoGenerateColumns="True" CanUserSortColumns="True" 
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2" 
+                  Margin="0,0,0,-2" HorizontalAlignment="Stretch" Width="380"/>
     </Grid>
 </Page>
