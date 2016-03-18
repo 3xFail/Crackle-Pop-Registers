@@ -5,12 +5,24 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
       mc:Ignorable="d"
-      Title="CatalogInventoryPage" Width="380" Height="450">
+      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
     <Grid>
-        <DataGrid x:Name="Catalog" Height="450" VerticalAlignment="Top" 
+        <DataGrid x:Name="Catalog" VerticalAlignment="Stretch" 
                   AutoGenerateColumns="True" CanUserSortColumns="True" 
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2" 
-                  Margin="0,0,0,-2" HorizontalAlignment="Stretch" Width="380"/>
+                  Margin="0,0,0,-2" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Commit" Width="50" Content="Commit">
+                        
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

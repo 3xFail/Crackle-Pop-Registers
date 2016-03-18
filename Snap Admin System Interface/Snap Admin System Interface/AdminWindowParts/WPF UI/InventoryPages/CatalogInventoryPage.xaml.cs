@@ -26,35 +26,48 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
     public partial class CatalogInventoryPage : Page
     {
         
+        enum Row
+        {
+            ProductID,
+            Name,
+            Price,
+            Barcode,
+            Active
+        }
+
         public CatalogInventoryPage()
         {
             InitializeComponent();
 
             //creating a table based on the passed values
             DataTable Table = new DataTable("ItemsCatalog");
-            Table.Columns.Add("ProductID", typeof(Int32));
-            Table.Columns.Add("Name", typeof(string));
-            Table.Columns.Add("Price", typeof(double));
-            Table.Columns.Add("Barcode", typeof(string));
-            Table.Columns.Add("Active", typeof(bool));
-
-
+            Table.Columns.Add( "ProductID", typeof( int ) );
+            Table.Columns.Add( "Name", typeof( string ) );
+            Table.Columns.Add( "Price", typeof( double ) );
+            Table.Columns.Add( "Barcode", typeof( string ) );
+            Table.Columns.Add( "Active", typeof( bool ) );
 
             //populates the response with the list of item nodes
             DBInterface.GetAllProducts();
-            XmlNodeList List = DBInterface.Response;
-            //loop though the list Assigning values to each column
-            foreach(XmlNode Node in List)
-            {
-                Table.Rows.Add(new Object[] { 0, Int32.Parse(Node.Get("ProductID")) });
-                Table.Rows.Add(new Object[] { 1, Node.Get("Name") });
-                Table.Rows.Add(new Object[] { 2, double.Parse(Node.Get("Price")) });
-                Table.Rows.Add(new Object[] { 3, Node.Get("Barcode") });
-                Table.Rows.Add(new Object[] { 4, Node.Get("Active") });
 
+            //loop though the list adding each row to the list
+            foreach( XmlNode node in DBInterface.Response )
+            {
+                var row = Table.Rows.Add( new Object[] {
+                                            int.Parse( node.Get( "ProductID" ) )
+                                            , node.Get( "Name" )
+                                            , double.Parse( node.Get( "Price" ) )
+                                            , node.Get( "Barcode" )
+                                            , node.Get( "Active" ) != "1"
+                } );
             }
             //assigning the data from the table to displayed in the grid view
             Catalog.ItemsSource = Table.DefaultView;
+        }
+
+        private void Edit( object sender, RoutedEventArgs e )
+        {
+            //Todo: Send all changes to the item in the line that the button belonged to, to the datebase
         }
 
         

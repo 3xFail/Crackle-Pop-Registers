@@ -47,16 +47,10 @@
             <TextBlock Name="LoggedInAs" TextAlignment="Center" Text="username"/>
         </Viewbox>
 
-
-
-        <!--status bar-->
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Background="LightGray" Margin="0,714.6,0.2,0.4" Grid.RowSpan="2">
-            <TextBlock>Status: Completed</TextBlock>
-        </StackPanel>
-
         <!--section for subsections of each navigational buttons-->
         <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Margin="0.4,0.6,10.2,0.6" Grid.Row="2">
             <Frame x:Name="NavigationFrame" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden" />
         </Border>
+
     </Grid>
 </Window>
