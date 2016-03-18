@@ -39,7 +39,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
-            InvFrame.Navigate( new SearchEmployeePage() );
+            InvFrame.Navigate( new SearchInventoryPage() );
         }
 
         private void CatalogBtn_Click(object sender, RoutedEventArgs e)

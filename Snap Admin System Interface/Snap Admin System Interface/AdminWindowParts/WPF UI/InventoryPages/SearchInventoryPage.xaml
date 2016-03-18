@@ -10,7 +10,7 @@
 
 
     <Grid>
-        <DataGrid x:Name="Catalog" VerticalAlignment="Stretch" 
+        <DataGrid x:Name="SearchCatalog" VerticalAlignment="Stretch" 
                   AutoGenerateColumns="True" CanUserSortColumns="True" 
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2" 
                   Margin="0,14,0,-2" HorizontalAlignment="Stretch">
@@ -26,6 +26,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="Search" HorizontalAlignment="Left" Height="14" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="300" FontFamily="Times New Roman" ForceCursor="True" TextChanged="Search_TextChanged"/>
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="14" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="300" FontFamily="Times New Roman" ForceCursor="True" TextChanged="Search_TextChanged"/>
     </Grid>
 </Page>
