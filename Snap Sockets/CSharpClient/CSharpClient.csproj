@@ -52,7 +52,6 @@
     <Compile Include="message.cs" />
     <Compile Include="PasswordHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlParameterCollectionExtension.cs" />
     <Compile Include="XmlNodeExtension.cs" />
   </ItemGroup>
   <ItemGroup>

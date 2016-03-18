@@ -25,9 +25,9 @@ namespace SnapRegisters
                 firstName, lastName, username, password, phoneNumber, authorizationLevel, "1", dob_string, address_1, address_2, city, state, country, zip, email);
 
             if( m_connection.Response[0].Get( "UserID" ) == "-1" ) //otherwise the UserID returned is the ID of the account just created
-                throw new InvalidOperationException( "Username already exists. Please choose another." );
+                throw new InvalidOperationException( "Username \"" + username + "\" already exists." );
             else if( m_connection.Response[0].Get( "UserID" ) == "-2" )
-                throw new InvalidOperationException( "Phone number already exists. Please choose another." );
+                throw new InvalidOperationException( "User with phone number \"" + phoneNumber + "\" already exists." );
         }
 
         public static void AddItem( string name, string price, string barcode)
@@ -51,11 +51,6 @@ namespace SnapRegisters
             if (m_connection.Response[0].Get("UserID") == "-1")
                 throw new InvalidOperationException("User with phone number \"" + phoneNumber + "\" already exists.");
         }
-
-        //internal static void AddEmployee(object connection, object firstName, object lastName, object username, object email, object password, object )
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public static void GetAllProducts()
         {
