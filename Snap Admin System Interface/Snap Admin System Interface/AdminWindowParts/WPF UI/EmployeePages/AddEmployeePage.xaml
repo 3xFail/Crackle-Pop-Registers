@@ -14,6 +14,10 @@
 
         <!--end Button as a Link button using style-->
         <Grid Margin="0,33,0.4,-3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="390*"/>
+                <ColumnDefinition Width="133*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="252*" />
             </Grid.RowDefinitions>
@@ -23,7 +27,7 @@
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,80,0,0" Name="textBlockUsername" Text="Username" VerticalAlignment="Top" Width="110"/>
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,110,0,0" Name="textBlockEmailId" Text="Email" VerticalAlignment="Top" Width="110" />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,140,0,0" Name="textBlockPassword" Text="Password" VerticalAlignment="Top" Width="110"  />
-            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,170,0,0" Name="textBlockBirthday" Text="Birthday" VerticalAlignment="Top" Width="110" Grid.RowSpan="2" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,170,0,0" Name="textBlockBirthday" Text="Birthday" VerticalAlignment="Top" Width="110" />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,200,0,0" Name="textBlockPhone" Text="Phone" VerticalAlignment="Top" Width="110" />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,230,0,0" Name="textBlockAddress1" Text="Address Line 1" VerticalAlignment="Top" Width="110" />
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,260,0,0" Name="textBlockAddress2" Text="Address Line 2" VerticalAlignment="Top" Width="110" />
@@ -39,19 +43,19 @@
             <TextBox Height="23" HorizontalAlignment="Left" Margin="183,30,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="114" />
             <TextBlock x:Name="FName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="67,53,0,0" Text="First" VerticalAlignment="Top" Width="21"/>
             <TextBlock x:Name="LName" FontSize="10" HorizontalAlignment="Left" Height="17" Margin="183,53,0,0" Text="Last" VerticalAlignment="Top"/>
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,80,0,0" Name="textBoxUsername" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,80,0,0" Name="textBoxUsername" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <!--email address-->
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,110,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,110,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <!--password-->
-            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="183,140,0,0" Name="textBoxPassword" VerticalAlignment="Top" Width="222" /> 
+            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="183,140,0,0" Name="textBoxPassword" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <!--phone number-->
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,200,0,0" Name="textBoxPhone" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,200,0,0" Name="textBoxPhone" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <!--street address-->
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,230,0,0" Name="textBoxAddress1" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,260,0,0" Name="textBoxAddress2" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,290,0,0" Name="textBoxCity" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,230,0,0" Name="textBoxAddress1" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,260,0,0" Name="textBoxAddress2" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,290,0,0" Name="textBoxCity" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <ComboBox HorizontalAlignment="Left" Margin="183,320,0,0" Name="textBoxState" VerticalAlignment="Top" Width="150" Loaded="State_Loaded" SelectionChanged="State_SelectionChanged"/>
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,350,0,0" Name="textBoxZip" VerticalAlignment="Top" Width="222" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,350,0,0" Name="textBoxZip" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2" />
             <ComboBox HorizontalAlignment="Left" Margin="183,380,0,0" Name="textBoxCountry" VerticalAlignment="Top" Width="150" Loaded="Country_Loaded" SelectionChanged="Country_SelectionChanged"/>
             <ComboBox HorizontalAlignment="Left" Margin="183,410,0,0" Name="textBoxAuthorization" VerticalAlignment="Top" Width="150" Loaded="Authorization_Loaded" SelectionChanged="Authorization_SelectionChanged"/>
             <!--birthday information-->
@@ -61,8 +65,8 @@
             <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="123,80,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
             <TextBlock x:Name="PhoneAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="103,200,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
 
-            <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click"/>
-            <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click"/>
+            <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click" Grid.Column="1"/>
+            <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="PasswordAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="120,138,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
         </Grid>
         <TextBlock x:Name="EmailAstrisk_Copy" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="141,441,0,0" Text="*" VerticalAlignment="Top" Width="5"/>

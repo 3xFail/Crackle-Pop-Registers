@@ -1,0 +1,42 @@
+﻿<Page x:Class="Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages.AddItemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
+      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="AddItemPage">
+
+    <Grid Background="White" Margin="0,0,0,0">
+        <TextBox x:Name="BarcodeTextBox" HorizontalAlignment="Left" Height="23" Margin="154,50,-54,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Height="23" Margin="154,77,-154,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="300"/>
+        <Label x:Name="BarcodeLabel" Content="Barcode" HorizontalAlignment="Left" Margin="67,51,0,0" VerticalAlignment="Top" Width="55"/>
+        <Label x:Name="NameLabel" Content="Name" HorizontalAlignment="Left" Margin="67,77,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PriceLabel" Content="Price" HorizontalAlignment="Left" Margin="67,103,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="ItemInformationLabel" Content="Item Information:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="17"/>
+        <TextBlock x:Name="FNameAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="117,51,0,0" Text="*" VerticalAlignment="Top" Width="7" RenderTransformOrigin="10.429,-1.137"/>
+        <Button x:Name="SubmitButton" Content="Submit" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="SubmitButton_Click"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="ResetButton_Click"/>
+        <currency:CurrencyTextBox Name="PriceTextBox"
+                                  Margin="154,107,0,0"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  Number="{Binding Number,
+                                                   UpdateSourceTrigger=PropertyChanged,
+                                                   ValidatesOnDataErrors=True}">
+            <currency:CurrencyTextBox.Style>
+                <Style TargetType="currency:CurrencyTextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="FrameworkElement.ToolTip" Value="{Binding RelativeSource={RelativeSource self}, Path=(Validation.Errors).CurrentItem.ErrorContent}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </currency:CurrencyTextBox.Style>
+        </currency:CurrencyTextBox>
+        <TextBlock x:Name="FNameAstrisk_Copy" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="108,79,0,0" Text="*" VerticalAlignment="Top" Width="7" RenderTransformOrigin="10.429,-1.137"/>
+        <TextBlock x:Name="FNameAstrisk_Copy1" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="100,104,0,0" Text="*" VerticalAlignment="Top" Width="7" RenderTransformOrigin="10.429,-1.137"/>
+    </Grid>
+</Page>

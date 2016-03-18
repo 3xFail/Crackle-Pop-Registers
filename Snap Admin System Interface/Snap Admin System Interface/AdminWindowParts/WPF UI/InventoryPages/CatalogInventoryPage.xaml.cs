@@ -65,7 +65,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             Catalog.ItemsSource = Table.DefaultView;
         }
 
-        private void Edit( object sender, RoutedEventArgs e )
+        private void Commit( object sender, RoutedEventArgs e )
         {
             //Todo: Send all changes to the item in the line that the button belonged to, to the datebase
         }

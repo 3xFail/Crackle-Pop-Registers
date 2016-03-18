@@ -146,7 +146,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 }
                 catch( Exception exp)
                 {
-                    System.Windows.Forms.MessageBox.Show( exp.Message);
+                    System.Windows.Forms.MessageBox.Show( exp.Message );
                 }
             }
         }

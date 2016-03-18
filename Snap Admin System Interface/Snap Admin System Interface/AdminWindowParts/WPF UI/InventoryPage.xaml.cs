@@ -29,7 +29,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            InvFrame.Navigate( new AddItemPage() );
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
