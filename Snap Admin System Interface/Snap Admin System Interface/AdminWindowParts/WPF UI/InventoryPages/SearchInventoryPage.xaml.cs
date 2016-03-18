@@ -27,6 +27,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         public SearchInventoryPage()
         {
 
+            InitializeComponent();
             //InitializeComponent();
             m_table = new DataTable( "SearchCatalog" );
             m_table.Columns.Add( "ProductID", typeof( int ) );
@@ -54,7 +55,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             //this is throwing a null reference exception on SearchCatalog... 
             //THIS IS LITERALLY THE SAME LINE AS IN CATALOG.... DA FAQ
             SearchCatalog.ItemsSource = m_table.DefaultView;
-            InitializeComponent();
         }
 
         private void Commit( object sender, RoutedEventArgs e )
