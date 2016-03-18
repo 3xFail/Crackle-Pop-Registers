@@ -2,6 +2,7 @@
 using SnapRegisters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
     {
         public SearchInventoryPage()
         {
-
             InitializeComponent();
-            //InitializeComponent();
+
             m_table = new DataTable( "SearchCatalog" );
             m_table.Columns.Add( "ProductID", typeof( int ) );
             m_table.Columns.Add( "Name", typeof( string ) );
@@ -52,8 +52,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                                             , node.Get( "Active" ) != "1"
                 } );
             }
-            //this is throwing a null reference exception on SearchCatalog... 
-            //THIS IS LITERALLY THE SAME LINE AS IN CATALOG.... DA FAQ
             SearchCatalog.ItemsSource = m_table.DefaultView;
         }
 
@@ -66,7 +64,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void Search_TextChanged( object sender, TextChangedEventArgs e )
         {
-            m_table.DefaultView.RowFilter = string.Format( "Name LIKE '%{0}%'", SearchBox.Text );
+            //m_table.DefaultView.RowFilter = string.Format( "Name LIKE '%{0}%'", SearchBox.Text );
         }
 
         private DataTable m_table = new DataTable();
