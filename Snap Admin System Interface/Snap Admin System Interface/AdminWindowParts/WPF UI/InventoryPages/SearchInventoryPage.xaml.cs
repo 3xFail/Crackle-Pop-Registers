@@ -67,6 +67,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             m_table.DefaultView.RowFilter = string.Format( "Name LIKE '%{0}%'", SearchBox.Text );
         }
 
-        private DataTable m_table;
+        private DataTable m_table = new DataTable();
     }
 }
