@@ -41,7 +41,7 @@ namespace CSharpClient
                 using( SqlCommand Command = new SqlCommand( proc, Connection ) )
                 {
                     for( int i = 0; i < args.Length; ++i )
-                        Command.Parameters.AddWithValue( "@" + i.ToString(), args[i] );
+                        Command.Parameters.AddWithValue( "@" + i, args[i] );
 
                     LoadResponse( Command.ExecuteXmlReader() );
                 }
