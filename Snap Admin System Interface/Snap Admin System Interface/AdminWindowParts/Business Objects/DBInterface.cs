@@ -66,9 +66,14 @@ namespace SnapRegisters
                 throw new InvalidOperationException( "Item( " + m_connection.Response[0].Get( "Name" ) + " ) with barcode \"" + barcode + "\" already exists." );
         }
 
-        public static void RemoveProducts(string id)
+        public static void RemoveProducts(string ID)
         {
-            m_connection.Write( "RemoveItem_ProductID @0", id );
+            m_connection.Write( "RemoveItem_ProductID @0", ID );
+        }
+
+        public static void RemoveEmployee(string ID)
+        {
+            m_connection.Write( "RemoveEmployee_ID @0", ID);
         }
         public static XmlNodeList Response { get { return m_connection.Response; } }
 
