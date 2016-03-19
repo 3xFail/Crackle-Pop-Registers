@@ -128,8 +128,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             if( textBoxFirstName.Text == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "First name is required. Please enter it." );
-            else if( textBoxUsername.Text.Length < 8 )
-                System.Windows.Forms.MessageBox.Show( "Username is required and must be 8 characters or more. Please enter it." );
+            else if( textBoxUsername.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Username is required. Please enter it." );
             else if( textBoxPassword.Password == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "Password is required. Please enter it." );
             else if( textBoxPhone.Text == string.Empty )

@@ -96,16 +96,22 @@ namespace SnapRegisters
             {
                 _connection = new ConnectionSession( attempt.Username, attempt.Password );
 
-                XmlNode item = _connection.Response[0];
+                XmlNode employee = _connection.Response[0];
 
-                long permissions = long.Parse(item.Get("PermissionsGroup"));
-                string phone = item.Get("PhoneNumber");
-                int id = int.Parse(item.Get("UserID"));
-                string name = item.Get("FName") + ' ' + item.Get("LName");
+                if( employee.Get( "Active" )[0] == '0' )
+                    MessageBox.Show( "This account is inactive." );
+                else
+                {
 
-                _loggedIn = new Employee(id, name, null, phone, new DateTime(1, 1, 1), permissions);
+                    string name = employee.Get( "FName" ) + ' ' + employee.Get( "LName" );
+                    long permissions = long.Parse( employee.Get( "PermissionsGroup" ) );
+                    string phone = employee.Get( "PhoneNumber" );
+                    int id = int.Parse( employee.Get( "UserID" ) );
 
-                _isLoggedIn = true;
+                    _loggedIn = new Employee( id, name, null, phone, new DateTime( 1, 1, 1 ), permissions );
+
+                    _isLoggedIn = true;
+                }
             }
             catch (Exception ee)
             {

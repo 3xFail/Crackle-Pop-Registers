@@ -15,14 +15,20 @@ namespace CSharpClient
 #if DEBUG
             File.WriteAllText( "query_output.txt", string.Empty ); //empty the query_output file so we can append only queries from this session
 #endif
-            if( username.Length < 8 )
-                throw new ArgumentException( "Invalid Username or Password" ); //if the username is less than 8 characters it can't possibly be correct.
 
-            QueryDB( "GetEmployee_UsernamePassword @0, @1", username, PasswordHash.Hash( username, password ) );
+            QueryDB( "GetPass_Username @0", username );
 
             Authed = Response.Count == 1;
             if( !Authed )
                 throw new ArgumentException( "Invalid Username or Password" );
+
+            if( !PasswordHash.ValidatePassword( password, Response[0].Get( "Password" ) ) )
+            {
+                Authed = false;
+                throw new ArgumentException( "Invalid Username or Password" );
+            }
+
+            QueryDB( "GetEmployee_Username @0", username );
         }
 
         public void Write( string proc, params object[] args )

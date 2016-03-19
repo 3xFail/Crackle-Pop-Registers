@@ -19,7 +19,7 @@ namespace SnapRegisters
         {
             string dob_string = DOB == null ? null : DOB.ToString();
 
-            password = PasswordHash.Hash(username, password);
+            password = PasswordHash.HashPassword( password );
 
             m_connection.Write("AddUser @0, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14",
                 firstName, lastName, username, password, phoneNumber, authorizationLevel, "1", dob_string, address_1, address_2, city, state, country, zip, email);

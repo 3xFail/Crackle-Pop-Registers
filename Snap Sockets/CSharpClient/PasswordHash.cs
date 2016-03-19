@@ -6,16 +6,20 @@ namespace CSharpClient
 {
     public sealed class PasswordHash
     {
-        private static readonly int HashBytes = 20;
-        public static string Hash( string username, string pass )
+        private static string GetRandomSalt()
         {
-            byte[] salt = Encoding.ASCII.GetBytes( username );
-            var pbkdf2 = new Rfc2898DeriveBytes( pass, salt, 10000 );
-
-            byte[] hash = pbkdf2.GetBytes( HashBytes );
-
-            return Convert.ToBase64String( hash );
+            return BCrypt.Net.BCrypt.GenerateSalt( 12 );
         }
 
+        public static string HashPassword( string password )
+        {
+            return BCrypt.Net.BCrypt.HashPassword( password, GetRandomSalt() );
+        }
+
+        public static bool ValidatePassword( string password, string correctHash )
+        {
+            return BCrypt.Net.BCrypt.Verify( password, correctHash );
+        }
     }
+
 }
