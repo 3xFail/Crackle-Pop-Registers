@@ -30,7 +30,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
     {
         private string productid;
         private string name;
-        private string price;
+        private decimal price;
         private string barcode;
         private bool active;
 
@@ -51,7 +51,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             get { return name; }
             set { name = value; OnPropertyChanged( "Name" ); }
         }
-        public string Price
+        public decimal Price
         {
             get { return price; }
             set { price = value; OnPropertyChanged( "Price" ); }
@@ -69,8 +69,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
     }
 
-
-
     public partial class CatalogInventoryPage : Page
     {
         public ObservableCollection<Item> data = new ObservableCollection<Item>();
@@ -87,7 +85,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 data.Add( new Item() {
                     ProductID = node.Get( "ProductID" )
                     , Name = node.Get( "Name" )
-                    , Price = node.Get( "Price" )
+                    , Price = decimal.Parse( node.Get( "Price" ) )
                     , Barcode = node.Get( "Barcode" )
                     //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
                     , Active = node.Get( "Active_Use" )[0] == '1'
@@ -100,21 +98,15 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         {
             Item item = ( (FrameworkElement)sender ).DataContext as Item;
 
-            double price;
-            if( double.TryParse( item.Price, out price ) )
+            try
             {
-                try
-                {
-                    DBInterface.ModifyItem( int.Parse( item.ProductID ), item.Name, item.Barcode, price, item.Active );
-                    System.Windows.Forms.MessageBox.Show( "Changes saved to database." );
-                }
-                catch( InvalidOperationException ex )
-                {
-                    System.Windows.Forms.MessageBox.Show( ex.Message );
-                }
+                DBInterface.ModifyItem( int.Parse( item.ProductID ), item.Name, item.Barcode, item.Price, item.Active );
+                MessageBox.Show( "Changes saved to database." );
             }
-            else
-                System.Windows.Forms.MessageBox.Show( "Item price must be a valid number!" );
+            catch( InvalidOperationException ex )
+            {
+                MessageBox.Show( ex.Message );
+            }
         }
 
     }

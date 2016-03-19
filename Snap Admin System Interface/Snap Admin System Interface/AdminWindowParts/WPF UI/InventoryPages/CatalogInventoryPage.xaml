@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
+      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
       mc:Ignorable="d"
       Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
@@ -22,7 +23,14 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<DataGridTextColumn Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <currency:CurrencyTextBox Number="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

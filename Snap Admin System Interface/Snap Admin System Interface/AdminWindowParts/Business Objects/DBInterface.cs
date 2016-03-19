@@ -58,7 +58,7 @@ namespace SnapRegisters
             m_connection.Write("GetAllItemsInProducts");
         }
 
-        public static void ModifyItem( int ID, string name, string barcode, double price, bool active )
+        public static void ModifyItem( int ID, string name, string barcode, decimal price, bool active )
         {
             m_connection.Write( "Modify_Item @0, @1, @2, @3, @4", ID, name, barcode, price, active );
 
