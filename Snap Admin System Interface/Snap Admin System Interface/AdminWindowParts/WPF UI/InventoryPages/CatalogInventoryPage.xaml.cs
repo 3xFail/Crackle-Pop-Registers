@@ -17,36 +17,67 @@ using Snap_Admin_System_Interface.AdminWindowParts;
 using SnapRegisters;
 using System.Xml;
 using CSharpClient;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 {
     /// <summary>
     /// Interaction logic for CatalogInventoryPage.xaml
     /// </summary>
-    public partial class CatalogInventoryPage : Page
+    
+    public class Item: INotifyPropertyChanged
     {
-        
-        enum Row
+        private string productid;
+        private string name;
+        private string price;
+        private string barcode;
+        private bool active;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string ProductID
         {
-            ProductID,
-            Name,
-            Price,
-            Barcode,
-            Active
+            get { return productid; }
+            set { productid = value; OnPropertyChanged( "ProductID" ); }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged( "Name" ); }
+        }
+        public string Price
+        {
+            get { return price; }
+            set { price = value; OnPropertyChanged( "Price" ); }
+        }
+        public string Barcode
+        {
+            get { return barcode; }
+            set { barcode = value; OnPropertyChanged( "Barcode" ); }
+        }
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; OnPropertyChanged( "Active" ); }
         }
 
+        private void OnPropertyChanged( string propertyName )
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if( handler != null )
+                handler( this, new PropertyChangedEventArgs( propertyName ) );
+        }
+    }
+
+
+
+    public partial class CatalogInventoryPage : Page
+    {
+        public ObservableCollection<Item> data = new ObservableCollection<Item>();
         public CatalogInventoryPage()
         {
             InitializeComponent();
-
-            //creating a table based on the passed values
-            DataTable Table = new DataTable("ItemsCatalog");
-            Table.Columns.Add( "ProductID", typeof( int ) );
-            Table.Columns.Add( "Name", typeof( string ) );
-            Table.Columns.Add( "Price", typeof( double ) );
-            Table.Columns.Add( "Barcode", typeof( string ) );
-            //Table.Columns.Add( "Stock", typeof(Int32) );
-            Table.Columns.Add( "Active", typeof( bool ) );
 
             //populates the response with the list of item nodes
             DBInterface.GetAllProducts();
@@ -54,28 +85,38 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             //loop though the list adding each row to the list
             foreach( XmlNode node in DBInterface.Response )
             {
-                var row = Table.Rows.Add( new Object[] {
-                                            int.Parse( node.Get( "ProductID" ) )
-                                            , node.Get( "Name" )
-                                            , double.Parse( node.Get( "Price" ) )
-                                            , node.Get( "Barcode" )
-                                            //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
-                                            , node.Get( "Active" ) != "1"
+                data.Add( new Item() {
+                    ProductID = node.Get( "ProductID" )
+                    , Name = node.Get( "Name" )
+                    , Price = node.Get( "Price" )
+                    , Barcode = node.Get( "Barcode" )
+                    //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
+                    , Active = node.Get( "Active" ) != "1"
                 } );
             }
-            //assigning the data from the table to displayed in the grid view
-            Catalog.ItemsSource = Table.DefaultView;
+            Catalog.ItemsSource = data;
         }
 
         private void Commit( object sender, RoutedEventArgs e )
         {
-            //Todo: Send all changes to the item in the line that the button belonged to, to the datebase
+            Item item = ( (FrameworkElement)sender ).DataContext as Item;
 
-            //does this associate with the individual row or with the whole file?: R
+            double price;
+            if( double.TryParse( item.Price, out price ) )
+            {
+                try
+                {
+                    DBInterface.ModifyItem( int.Parse( item.ProductID ), item.Name, item.Barcode, price, item.Active );
+                    System.Windows.Forms.MessageBox.Show( "Changes saved to database." );
+                }
+                catch( InvalidOperationException ex )
+                {
+                    System.Windows.Forms.MessageBox.Show( ex.Message );
+                }
+            }
+            else
+                System.Windows.Forms.MessageBox.Show( "Item price must be a valid number!" );
         }
 
-        
-
-        
     }
 }

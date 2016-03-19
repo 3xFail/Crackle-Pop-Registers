@@ -33,6 +33,14 @@ namespace CSharpClient
             QueryDB( proc, args );
         }
 
+        public void WriteNoResponse( string proc, params object[] args )
+        {
+            if( !Authed )
+                throw new InvalidOperationException( "Un-Authed user cannot perform this action" );
+
+            QueryDBNoResponse( proc, args );
+        }
+
         private void QueryDB( string proc, params object[] args )
         {
             using( SqlConnection Connection = new SqlConnection( ConnectionString ) )
@@ -46,6 +54,21 @@ namespace CSharpClient
                     LoadResponse( Command.ExecuteXmlReader() );
                 }
                 Connection.Close();
+            }
+        }
+
+        private void QueryDBNoResponse( string proc, params object[] args )
+        {
+            using( SqlConnection Connection = new SqlConnection( ConnectionString ) )
+            {
+                Connection.Open();
+                using( SqlCommand Command = new SqlCommand( proc, Connection ) )
+                {
+                    for( int i = 0; i < args.Length; ++i )
+                        Command.Parameters.AddWithValue( "@" + i, args[i] );
+
+                    Command.ExecuteNonQuery();
+                }
             }
         }
 

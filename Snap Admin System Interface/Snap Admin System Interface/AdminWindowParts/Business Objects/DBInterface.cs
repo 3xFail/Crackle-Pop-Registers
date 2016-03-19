@@ -58,6 +58,14 @@ namespace SnapRegisters
             m_connection.Write("GetAllItemsInProducts");
         }
 
+        public static void ModifyItem( int ID, string name, string barcode, double price, bool active )
+        {
+            m_connection.Write( "Modify_Item @0, @1, @2, @3, @4", ID, name, barcode, price, active );
+
+            if( m_connection.Response[0].Get( "ProductID" ) == "-1" )
+                throw new InvalidOperationException( "Item( " + m_connection.Response[0].Get( "Name" ) + " ) with barcode \"" + barcode + "\" already exists." );
+        }
+
         public static void RemoveProducts(string id)
         {
             m_connection.Write( "RemoveItem_ProductID @0", id );

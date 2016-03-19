@@ -9,19 +9,23 @@
 
     <Grid>
         <DataGrid x:Name="Catalog" VerticalAlignment="Stretch" 
-                  AutoGenerateColumns="True" CanUserSortColumns="True" 
-                  AlternatingRowBackground="Gainsboro"  AlternationCount="2" 
+                  AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2" ItemsSource="{Binding}"
                   Margin="0,0,0,-2" HorizontalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="Commit" Width="50" Content="Commit">
-                        
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
