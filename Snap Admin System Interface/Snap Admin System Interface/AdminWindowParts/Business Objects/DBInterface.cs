@@ -73,7 +73,7 @@ namespace SnapRegisters
 
         public static void RemoveEmployee(string ID)
         {
-            m_connection.Write( "RemoveEmployee_ID", ID);
+            m_connection.Write( "RemoveEmployee_ID @0", ID);
         }
         public static XmlNodeList Response { get { return m_connection.Response; } }
 

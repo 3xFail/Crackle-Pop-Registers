@@ -29,6 +29,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private void SubmitButton_Click( object sender, RoutedEventArgs e )
         {
             DBInterface.RemoveProducts(ItemIDBox.Text);
+            System.Windows.Forms.MessageBox.Show( "Product ID " + ItemIDBox.Text + " has been disabled" );
         }
 
         private void ResetButton_Click( object sender, RoutedEventArgs e )
