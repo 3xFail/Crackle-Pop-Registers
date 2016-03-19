@@ -201,6 +201,10 @@ namespace SnapRegisters
                         UPCField.Clear();
                     }
                 }
+                catch (InvalidOperationException ex )
+                {
+                    System.Windows.Forms.MessageBox.Show( ex.Message );
+                }
                 catch (Exception) //if that fails
                 {
                     try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon

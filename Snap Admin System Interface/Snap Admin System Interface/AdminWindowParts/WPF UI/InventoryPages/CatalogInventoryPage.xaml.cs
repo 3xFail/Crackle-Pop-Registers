@@ -35,6 +35,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private bool active;
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged( string propertyName )
+        {
+            if( PropertyChanged != null )
+                PropertyChanged( this, new PropertyChangedEventArgs( propertyName ) );
+        }
 
         public string ProductID
         {
@@ -62,12 +67,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             set { active = value; OnPropertyChanged( "Active" ); }
         }
 
-        private void OnPropertyChanged( string propertyName )
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if( handler != null )
-                handler( this, new PropertyChangedEventArgs( propertyName ) );
-        }
     }
 
 
@@ -91,7 +90,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                     , Price = node.Get( "Price" )
                     , Barcode = node.Get( "Barcode" )
                     //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
-                    , Active = node.Get( "Active" ) != "1"
+                    , Active = node.Get( "Active_Use" )[0] == '1'
                 } );
             }
             Catalog.ItemsSource = data;
