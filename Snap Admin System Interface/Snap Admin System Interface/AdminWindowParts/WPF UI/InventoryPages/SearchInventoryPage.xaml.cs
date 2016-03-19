@@ -64,7 +64,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void Search_TextChanged( object sender, TextChangedEventArgs e )
         {
-            //m_table.DefaultView.RowFilter = string.Format( "Name LIKE '%{0}%'", SearchBox.Text );
+            m_table.DefaultView.RowFilter = string.Format( "Name LIKE '%{0}%'", SearchBox.Text );
         }
 
         private DataTable m_table = new DataTable();
