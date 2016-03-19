@@ -33,15 +33,16 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.EmployeePages
 
             if(DBInterface.Response[0].Get("UserID") == EmployeeIDBox.Text)
                 System.Windows.Forms.MessageBox.Show( "User account " + EmployeeIDBox.Text + " has been disabled" );
+            /*
+                 there are two errors that can be thrown back by the proc. 
+                 -1 means that the UserID entered is not in the system
+                 -2 means that the active bit is already false for this UserID's Account: R
+            */
             else
-            {
-                /*there are two errors that can be thrown back by the proc. 
-                  -1 means that the UserID entered is not in the system
-                  -2 means that the active bit is already false for this UserID's Account: R
-                */
-                System.Windows.Forms.MessageBox.Show( DBInterface.Response[0].Get( 
-                    "UserID" ) == "-1" ? "UserID (" + EmployeeIDBox.Text + ") does not exist in the database" : "This account (" + EmployeeIDBox.Text + ") is already disabled" );
-            }
+                System.Windows.Forms.MessageBox.Show( DBInterface.Response[0].Get( "UserID" ) == "-1" 
+                    ? "UserID (" + EmployeeIDBox.Text + ") does not exist in the database" : "This account (" + EmployeeIDBox.Text + ") is already disabled" );
+            
+            EmployeeIDBox.Clear();
 
         }
 
