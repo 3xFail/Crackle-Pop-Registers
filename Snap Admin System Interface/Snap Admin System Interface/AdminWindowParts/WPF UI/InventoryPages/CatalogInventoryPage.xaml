@@ -6,15 +6,15 @@
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
       xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
       mc:Ignorable="d"
-      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="481" d:DesignHeight="297">
 
-    <Grid>
-        <DataGrid x:Name="Catalog" VerticalAlignment="Stretch" 
+    <Grid VerticalAlignment="Top">
+        <DataGrid x:Name="Catalog" VerticalAlignment="Bottom" 
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2" ItemsSource="{Binding}"
-                  Margin="0,0,0,-2" HorizontalAlignment="Stretch">
+                  Margin="0,-2,0,0" HorizontalAlignment="Stretch" BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow">
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Commit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Click="Commit" Width="50" Content="Commit"/>
@@ -22,9 +22,8 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
-                <!--<DataGridTextColumn Header="Price" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <DataGridTemplateColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False" />
+                <DataGridTemplateColumn Header="Price">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <currency:CurrencyTextBox Number="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
@@ -32,7 +31,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Active">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
@@ -42,5 +41,14 @@
                 <!--<DataGridTextColumn Header="Active" Binding="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>-->
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="48,-30,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="SearchBox_TextChanged"/>
+        <Label x:Name="NameLabel" Content="Name: " HorizontalAlignment="Left" Margin="0,-33,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="232,-30,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="SearchBox_TextChanged"/>
+        <Label x:Name="BarcodeLabel" Content="Barcode: " HorizontalAlignment="Left" Margin="173,-33,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ActiveComboBox" HorizontalAlignment="Left" Margin="361,-29,-18,0" VerticalAlignment="Top" Width="138" SelectionChanged="comboBox_SelectionChanged" SelectedIndex="0">
+            <ComboBoxItem Name="ShowBoth">Active and Inactive</ComboBoxItem>
+            <ComboBoxItem Name="ShowActive">Active Only</ComboBoxItem>
+            <ComboBoxItem Name="ShowInactive">Inactive Only</ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Page>
