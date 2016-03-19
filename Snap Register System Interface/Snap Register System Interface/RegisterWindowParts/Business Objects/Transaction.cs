@@ -256,7 +256,7 @@ namespace SnapRegisters
                 XmlNode it = m_connection.Response[0];
                 string name = it.Get( "Name" );
 
-                if( it.Get("Active_Use" )[0] == '0' )
+                if( it.Get("Active" )[0] == '0' )
                     throw new InvalidOperationException( "Cannot sell inactive item \"" + name + "\"" );
 
                 float price = float.Parse( it.Get( "Price" ) );
@@ -280,7 +280,7 @@ namespace SnapRegisters
             {
                 XmlNode it = m_connection.Response[0];
 
-                if( it.Get("Active")[0] == '0' )
+                if( it.Get( "Active" )[0] == '0' )
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
                 double discount = double.Parse(it.Get("Discount"));

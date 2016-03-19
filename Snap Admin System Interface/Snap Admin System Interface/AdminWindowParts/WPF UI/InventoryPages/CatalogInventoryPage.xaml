@@ -9,10 +9,10 @@
       Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="481" d:DesignHeight="297">
 
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="Catalog" VerticalAlignment="Bottom" 
+        <DataGrid x:Name="Catalog" VerticalAlignment="Bottom" RowBackground="White"
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
-                  AlternatingRowBackground="Gainsboro"  AlternationCount="2" ItemsSource="{Binding}"
-                  Margin="0,-2,0,0" HorizontalAlignment="Stretch" BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow">
+                  ItemsSource="{Binding}" HorizontalAlignment="Stretch"
+                 BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Commit">
                     <DataGridTemplateColumn.CellTemplate>
@@ -23,22 +23,21 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False" />
-                <DataGridTemplateColumn Header="Price">
+                <DataGridTemplateColumn Header="Price" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <currency:CurrencyTextBox Number="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
+                            <currency:CurrencyTextBox Number="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" Background="#80C8C8C8"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}"/>
-                <DataGridTemplateColumn Header="Active">
+                <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
+                <DataGridTemplateColumn Header="Active" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <!--<DataGridTextColumn Header="Active" Binding="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>-->
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="48,-30,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="SearchBox_TextChanged"/>

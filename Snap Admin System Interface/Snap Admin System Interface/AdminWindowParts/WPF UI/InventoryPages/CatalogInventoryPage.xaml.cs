@@ -103,7 +103,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                     , Price = decimal.Parse( node.Get( "Price" ) )
                     , Barcode = node.Get( "Barcode" )
                     //, int.Parse( node.Get( "Stock" ) ) need to add eventually: R
-                    , Active = node.Get( "Active_Use" )[0] == '1'
+                    , Active = node.Get( "Active" )[0] == '1'
                 } );
             }
             LoadItems();
@@ -116,7 +116,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             if( item == null )
                 return false;
 
-            if( !item.Name.Contains( NameSearchBox.Text ) )
+            if( !item.Name.ToLower().Contains( NameSearchBox.Text.ToLower() ) )
                 return false;
             if( !item.Barcode.Contains( BarcodeSearchBox.Text ) )
                 return false;
@@ -134,7 +134,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             if( data_cv != null )
             {
                 Catalog.ItemsSource = data_cv;
-                data_cv.Filter = ItemFilter;
+                try
+                {
+                    data_cv.Filter = ItemFilter; //can't add a filter when they're editing a column, but that's OK.
+                }
+                catch( Exception ) { }
             }
         }
 
@@ -189,6 +193,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 e.Row.Background = new SolidColorBrush( Color.FromArgb( 128, 255, 0, 0 ) );
             else if( item.WasChanged )
                 e.Row.Background = new SolidColorBrush( Color.FromArgb( 128, 0, 255, 0 ) );
+            else
+                e.Row.Background = new SolidColorBrush( Color.FromArgb( 128, 200, 200, 200 ) );
         }
 
         private void SearchBox_TextChanged( object sender, TextChangedEventArgs e )
