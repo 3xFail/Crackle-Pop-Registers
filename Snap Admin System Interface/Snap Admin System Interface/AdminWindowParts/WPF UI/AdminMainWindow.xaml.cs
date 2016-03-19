@@ -29,8 +29,8 @@ namespace SnapRegisters
     public partial class AdminMainWindow : Window
     {
         private Employee m_employee = null;
-        private DockPanel m_itemPanel = null;
-        private DockPanel m_discountList = null;
+        //private DockPanel m_itemPanel = null;
+        //private DockPanel m_discountList = null;
 
         public AdminMainWindow(Employee currentEmployee, ConnectionSession connection)
         {
