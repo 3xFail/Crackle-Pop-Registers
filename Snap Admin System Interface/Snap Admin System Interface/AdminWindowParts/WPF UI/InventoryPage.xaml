@@ -12,7 +12,6 @@
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="AddBtn" Content="Add" Height="50" Click="AddBtn_Click"/>
             <Button x:Name="RemoveBtn" Content="Remove" Height="50" Click="RemoveBtn_Click"/>
-            <Button x:Name="SearchBtn" Content="Search" Height="50" Click="SearchBtn_Click"/>
             <Button x:Name="CatalogBtn" Content="Catalog" Height="50" Click="CatalogBtn_Click"/>
             <Button x:Name="InvBackBtn" Content="Back" Height="50" Click="InvBackBtn_Click"/>
         </StackPanel>

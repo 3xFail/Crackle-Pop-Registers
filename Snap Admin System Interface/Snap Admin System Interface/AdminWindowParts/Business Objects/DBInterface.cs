@@ -30,7 +30,7 @@ namespace SnapRegisters
                 throw new InvalidOperationException( "User with phone number \"" + phoneNumber + "\" already exists." );
         }
 
-        public static void AddItem( string name, decimal price, string barcode)
+        public static void AddItem( string name, decimal price, string barcode )
         {
 
             m_connection.Write( "AddItem @0, @1, @2, @3", name, price, barcode, "1" );

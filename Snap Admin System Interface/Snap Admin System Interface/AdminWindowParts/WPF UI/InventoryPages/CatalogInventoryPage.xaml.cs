@@ -26,7 +26,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
     /// Interaction logic for CatalogInventoryPage.xaml
     /// </summary>
     
-    public class Item: INotifyPropertyChanged, ICloneable
+    public class Item: INotifyPropertyChanged
     {
         private int productid;
         private string name;
@@ -39,18 +39,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         {
             if( PropertyChanged != null )
                 PropertyChanged( this, new PropertyChangedEventArgs( propertyName ) );
-        }
-
-        public object Clone()
-        {
-            return new Item()
-            {
-                ProductID = this.ProductID
-                , Name = this.Name
-                , Price = this.Price
-                , Barcode = this.Barcode
-                , Active = this.Active
-            };
         }
 
         public int ProductID
