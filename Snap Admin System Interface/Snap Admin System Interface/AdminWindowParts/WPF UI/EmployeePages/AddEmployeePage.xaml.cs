@@ -126,14 +126,15 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         // submits the input values into the database
         private void SubmitButton_Click( object sender, RoutedEventArgs e )
         {
+            long val;
             if( textBoxFirstName.Text == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "First name is required. Please enter it." );
             else if( textBoxUsername.Text == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "Username is required. Please enter it." );
             else if( textBoxPassword.Password == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "Password is required. Please enter it." );
-            else if( textBoxPhone.Text == string.Empty )
-                System.Windows.Forms.MessageBox.Show( "Phone number is required. Please enter it." );
+            else if( textBoxPhone.Text == string.Empty || !long.TryParse( textBoxPhone.Text, out val ) )
+                System.Windows.Forms.MessageBox.Show( "Phone number is required, numbers only. Please enter it." );
             else if( textBoxAuthorization.Text == string.Empty )
                 System.Windows.Forms.MessageBox.Show( "Authorization level is required. Please select one." );
             else

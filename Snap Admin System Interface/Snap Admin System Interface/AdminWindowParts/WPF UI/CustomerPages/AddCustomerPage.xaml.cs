@@ -101,14 +101,38 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             return state.Length == 2 && states.IndexOf(state) > 0;
         }
         // submits the input values into the database
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
-            if (textBoxFirstName.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("First name is required. Please enter it.");
-            else if (textBoxPhone.Text == string.Empty)
-                System.Windows.Forms.MessageBox.Show("Phone number is required. Please enter it.");
+            if( textBoxFirstName.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "First name is required. Please enter it." );
+            else if( textBoxPhone.Text == string.Empty )
+                System.Windows.Forms.MessageBox.Show( "Phone number is required. Please enter it." );
             else
-                DBInterface.AddCust(textBoxFirstName.Text, textBoxLastName.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text, textBoxPhone.Text, textBoxEmail.Text, DOB.DisplayDate);
+            {
+                try
+                {
+                    DBInterface.AddCust( textBoxFirstName.Text, textBoxLastName.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text, textBoxPhone.Text, textBoxEmail.Text, DOB.DisplayDate );
+                }
+                catch( Exception ex )
+                {
+                    MessageBox.Show( ex.Message );
+                }
+            }
+        }
+
+        private void ResetButton_Click( object sender, RoutedEventArgs e )
+        {
+            textBoxFirstName.Clear();
+            textBoxLastName.Clear();
+            textBoxEmail.Clear();
+            DOB.SelectedDate = null;
+            textBoxPhone = null;
+            textBoxAddress1.Clear();
+            textBoxAddress2.Clear();
+            textBoxCity.Clear();
+            textBoxState.SelectedIndex = -1;
+            textBoxZip.Clear();
+            textBoxCountry.SelectedIndex = -1;
         }
     }
 }

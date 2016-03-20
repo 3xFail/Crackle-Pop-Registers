@@ -46,7 +46,7 @@ namespace SnapRegisters
             string dob_string = DOB == null ? string.Empty : DOB.ToString();
 
             m_connection.Write("AddCust @0, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12",
-                firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, null, "1", dob_string);
+                firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, string.Empty, "1", dob_string);
 
             if (m_connection.Response[0].Get("UserID") == "-1")
                 throw new InvalidOperationException("User with phone number \"" + phoneNumber + "\" already exists.");

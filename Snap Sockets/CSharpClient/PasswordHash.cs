@@ -4,6 +4,7 @@ using System.Text;
 
 namespace CSharpClient
 {
+    //https://cmatskas.com/-net-password-hashing-using-pbkdf2/
     public sealed class PasswordHash
     {
         private static string GetRandomSalt()
