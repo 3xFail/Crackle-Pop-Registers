@@ -112,6 +112,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 try
                 {
                     DBInterface.AddCust( textBoxFirstName.Text, textBoxLastName.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text, textBoxPhone.Text, textBoxEmail.Text, DOB.DisplayDate );
+                    MessageBox.Show("Customer \"" + textBoxFirstName.Text + "\" has been added!");
+                    ResetButton_Click(null, null);
                 }
                 catch( Exception ex )
                 {
