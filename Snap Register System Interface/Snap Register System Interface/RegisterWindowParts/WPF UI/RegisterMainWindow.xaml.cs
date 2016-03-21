@@ -96,6 +96,19 @@ namespace SnapRegisters
     //*************************************************************************************************************
     public partial class RegisterMainWindow : Window
     {
+
+        private ConnectionSession m_connection = null;
+        private Transaction m_transaction = null;
+        private Employee m_employee = null;
+        private DateTime m_start { get; set; } = DateTime.Now;
+        private int m_itemssold { get; set; } = 0;
+        private decimal m_totalsales { get; set; } = 0M;
+        private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
+        private decimal m_costTotal = 0;
+        private decimal m_savingsTotal = 0;
+        private decimal m_totalTotal = 0;
+        public static KeyboardHook kh;
+
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
@@ -167,16 +180,6 @@ namespace SnapRegisters
             Total.Text = m_totalTotal.ToString("C");
         }
 
-        private ConnectionSession m_connection = null;
-        private Transaction m_transaction = null;
-        private Employee m_employee = null;
-        private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
-        private double m_costTotal = 0;
-        private double m_savingsTotal = 0;
-        private double m_totalTotal = 0;
-        public static KeyboardHook kh;
-
-
         private void ShortcutKeyPressed(object sender, KeyEventArgs keyPressed)
         {
             // Ctrl-B: Special key combo the scanner inserts before the bar-code.
@@ -233,9 +236,9 @@ namespace SnapRegisters
             // Enter: Enter the cash paid by customer
             if (keyPressed.Key == Key.Enter)
             {
-                if (AmountPaidInCashBox.Text != string.Empty && double.Parse(AmountPaidInCashBox.Text) >= m_totalTotal )
+                if (AmountPaidInCashBox.Text != string.Empty && decimal.Parse(AmountPaidInCashBox.Text) >= m_totalTotal )
                 {
-                    ChangeAmount.Text = (m_totalTotal - double.Parse(AmountPaidInCashBox.Text)).ToString("C");
+                    ChangeAmount.Text = (m_totalTotal - decimal.Parse(AmountPaidInCashBox.Text)).ToString("C");
 
                     cashPaymentPopup.IsOpen = false;
                     cashPaidPopup.IsOpen = true;
@@ -311,6 +314,7 @@ namespace SnapRegisters
         {
             SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
             loginWindow.Show();
+            m_connection.WriteNoResponse( "AddEmployeeSession @0, @1, @2, @3, @4, @5", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales );
             this.Close();
         }
 

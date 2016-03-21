@@ -124,7 +124,7 @@ namespace SnapRegisters
             {
                 string name = sale.Get( "Name" );
                 bool flat = sale.Get( "Flat" )[0] == '1';
-                double amount = double.Parse( sale.Get( "Discount" ) );
+                decimal amount = decimal.Parse( sale.Get( "Discount" ) );
                 Discounts.Add( new Sale( flat, name, amount ) );
             }
             return Discounts;
@@ -178,7 +178,7 @@ namespace SnapRegisters
                     
         }
 
-		public void OverrideCost(string itemID, double newPrice, string reason = "No description")
+		public void OverrideCost(string itemID, decimal newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
 			Item changedItem = m_Items.Find(x => x.Barcode == itemID);
@@ -259,7 +259,7 @@ namespace SnapRegisters
                 if( it.Get("Active" )[0] == '0' )
                     throw new InvalidOperationException( "Cannot sell inactive item \"" + name + "\"" );
 
-                float price = float.Parse( it.Get( "Price" ) );
+                decimal price = decimal.Parse( it.Get( "Price" ) );
                 int product_id = int.Parse( it.Get( "ProductID" ) );
                 
                 return new Item( name, price, itemID, product_id );
@@ -283,7 +283,7 @@ namespace SnapRegisters
                 if( it.Get( "Active" )[0] == '0' )
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
-                double discount = double.Parse(it.Get("Discount"));
+                decimal discount = decimal.Parse( it.Get( "Discount" ) );
                 string name = it.Get("Name");
                 bool flat = it.Get( "Flat" )[0] == '1';
 

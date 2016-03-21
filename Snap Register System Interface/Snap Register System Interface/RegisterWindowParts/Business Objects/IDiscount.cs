@@ -4,8 +4,8 @@
     //Allows both Sales and Coupons to be in the same List contiained in DiscountList
     public interface IDiscount
     {
-        double ChangeAmountTo( double amt );
-        double Discount();
+        decimal ChangeAmountTo( decimal amt );
+        decimal Discount();
         bool IsFlat();
     }
 }

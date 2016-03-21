@@ -33,7 +33,7 @@
 	//*************************************************************************************************************
 	public class Item
 	{
-		public Item(string name, float price, string barcode, int product_id)
+		public Item(string name, decimal price, string barcode, int product_id)
 		{
             ID = product_id;
             Barcode = barcode;
@@ -60,8 +60,8 @@
         public int ID { get; set; } = 0;
         public string Barcode { get; set; } = string.Empty;
         public string ItemName { get; set; } = string.Empty;
-        public double Price { get; set; } = 0.0;
-        public double OriginalPrice { get; private set; } = 0.0;
+        public decimal Price { get; set; } = 0M;
+        public decimal OriginalPrice { get; private set; } = 0M;
         private DiscountList _Discounts = new DiscountList();
         public DiscountList Discounts
         {

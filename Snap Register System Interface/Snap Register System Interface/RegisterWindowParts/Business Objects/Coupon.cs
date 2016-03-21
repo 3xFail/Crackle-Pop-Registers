@@ -32,7 +32,7 @@ namespace SnapRegisters
         //			None.
         //*************************************************************************************************************
         //fun fact, string.Empty is not a compile time constant and thus cannot be used as a default param
-        public Coupon( string barcode, bool flat, string name, double amt )
+        public Coupon( string barcode, bool flat, string name, decimal amt )
         {
             Barcode = barcode;
             Flat = flat;
@@ -51,7 +51,7 @@ namespace SnapRegisters
         }
 
         //Don't let the value go below 0.
-        public double ChangeAmountTo( double amt )
+        public decimal ChangeAmountTo( decimal amt )
         {
             return Flat ? Math.Max( amt - Amount, 0 ) : amt * ( 1 - Amount );
         }
@@ -62,12 +62,12 @@ namespace SnapRegisters
         }
 
         public bool IsFlat() { return Flat; }
-        public double Discount() { return Amount; }
+        public decimal Discount() { return Amount; }
 
         public string Barcode { get; set; } = string.Empty;
         public bool Flat { get; set; } = false;
         public string Name { get; set; } = string.Empty;
-        public double Amount { get; set; } = 0.0;
+        public decimal Amount { get; set; } = 0M;
         private List<int> RelatedIDs { get; set; } = new List<int>();
     }
 }
