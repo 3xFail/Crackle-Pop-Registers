@@ -97,5 +97,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             PopulateList();
         }
+
+        private void RefreshButton_Click( object sender, RoutedEventArgs e )
+        {
+            PopulateList();
+        }
     }
 }

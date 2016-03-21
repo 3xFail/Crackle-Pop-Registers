@@ -33,6 +33,6 @@
         <Label x:Name="DurationLabel" Content="Duration longer than " HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
         <digit:DigitBox x:Name="DurationTextBox" Margin="128,146,-61,-143" VerticalAlignment="Top" HorizontalAlignment="Left" Width="41" />
         <Label x:Name="MinutesLabel" Content="minutes." HorizontalAlignment="Left" Height="24" Margin="169,140,-161,-143" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="21" Margin="10,-29,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Height="21" Margin="0,-29,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
     </Grid>
 </Page>
