@@ -203,7 +203,7 @@ namespace SnapRegisters
                 }
                 catch (InvalidOperationException ex )
                 {
-                    System.Windows.Forms.MessageBox.Show( ex.Message );
+                    MessageBox.Show( ex.Message );
                 }
                 catch (Exception) //if that fails
                 {

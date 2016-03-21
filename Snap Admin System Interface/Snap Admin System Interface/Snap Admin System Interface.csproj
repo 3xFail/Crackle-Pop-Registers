@@ -63,6 +63,9 @@
     <Reference Include="CurrencyTextBoxControl">
       <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
+    <Reference Include="NumberTextBox">
+      <HintPath>..\..\NumberTextBox\NumberTextBox\bin\Debug\NumberTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
@@ -142,17 +145,11 @@
     <Compile Include="AdminWindowParts\WPF UI\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\AddItemPage.xaml.cs">
-      <DependentUpon>AddItemPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AdminWindowParts\WPF UI\InventoryPages\CatalogInventoryPage.xaml.cs">
       <DependentUpon>CatalogInventoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\InventoryPages\RemoveInventoryPage.xaml.cs">
-      <DependentUpon>RemoveInventoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
@@ -187,19 +184,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\InventoryPages\AddItemPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AdminWindowParts\WPF UI\InventoryPages\CatalogInventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\InventoryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AdminWindowParts\WPF UI\InventoryPages\RemoveInventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

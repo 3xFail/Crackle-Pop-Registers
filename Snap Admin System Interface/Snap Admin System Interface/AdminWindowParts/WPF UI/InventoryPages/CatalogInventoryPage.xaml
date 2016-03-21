@@ -5,19 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages"
       xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
+      xmlns:digit="clr-namespace:System.Windows.Controls;assembly=NumberTextBox"
       mc:Ignorable="d"
-      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="481" d:DesignHeight="297">
+      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="754" d:DesignHeight="575">
 
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="Catalog" VerticalAlignment="Bottom" RowBackground="White"
+        <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White"
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
-                  ItemsSource="{Binding}" HorizontalAlignment="Stretch"
-                 BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow">
+                  ItemsSource="{Binding}"
+                 BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow" Margin="296,0,113,0">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Commit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="Commit" Width="50" Content="Commit"/>
+                            <Button Click="Commit_ButtonClick" Width="50" Content="Commit"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -30,24 +31,52 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
-                <DataGridTemplateColumn Header="Active" CanUserResize="False">
+                <DataGridCheckBoxColumn Header="Active" CanUserResize="False" Binding="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="Remove" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Button Content="Remove" Click="Remove_ButtonClick"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="48,-30,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="SearchBox_TextChanged"/>
-        <Label x:Name="NameLabel" Content="Name: " HorizontalAlignment="Left" Margin="0,-33,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="232,-30,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="SearchBox_TextChanged"/>
-        <Label x:Name="BarcodeLabel" Content="Barcode: " HorizontalAlignment="Left" Margin="173,-33,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ActiveComboBox" HorizontalAlignment="Left" Margin="361,-29,-18,0" VerticalAlignment="Top" Width="138" SelectionChanged="comboBox_SelectionChanged" SelectedIndex="0">
+        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="294" Margin="7,26,0,-191" VerticalAlignment="Top" Width="284"/>
+        <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="65,33,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="215"/>
+        <Label x:Name="SearchItemNameLabel" Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,30,0,-4"/>
+        <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="209"/>
+        <Label x:Name="SearchItemBarcodeLabel" Content="Barcode: " HorizontalAlignment="Left" Margin="12,61,0,-35" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ActiveComboBox" HorizontalAlignment="Left" Margin="17,92,0,-62" VerticalAlignment="Top" Width="138" SelectedIndex="0">
             <ComboBoxItem Name="ShowBoth">Active and Inactive</ComboBoxItem>
             <ComboBoxItem Name="ShowActive">Active Only</ComboBoxItem>
             <ComboBoxItem Name="ShowInactive">Inactive Only</ComboBoxItem>
         </ComboBox>
+        <Label x:Name="SearchLabel" Content="Search Criteria:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,-5,0,0" FontSize="17"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="12,325,0,-216" VerticalAlignment="Top" Width="75" Click="SearchButton_Click"/>
+        <Slider x:Name="MinPriceSlider" ValueChanged="MinPriceSlider_ValueChanged" HorizontalAlignment="Left" Margin="26,140,0,-62" VerticalAlignment="Top" Width="189"/>
+        <Label x:Name="MinPriceLabel" Content="Minimum Price" HorizontalAlignment="Left" Margin="12,114,0,-44" VerticalAlignment="Top"/>
+        <currency:CurrencyTextBox x:Name="MinPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,139,0,-62" VerticalAlignment="Top" Width="60" TextChanged="MinPriceTextBox_TextChanged"/>
+        <Slider x:Name="MaxPriceSlider" ValueChanged="MaxPriceSlider_ValueChanged"  HorizontalAlignment="Left" Margin="26,181,0,-70" VerticalAlignment="Top" Width="189"/>
+        <Label x:Name="MaxPriceLabel" Content="Maximum Price" HorizontalAlignment="Left" Margin="12,155,0,-52" VerticalAlignment="Top"/>
+        <currency:CurrencyTextBox x:Name="MaxPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,180,0,-70" VerticalAlignment="Top" Width="60" TextChanged="MaxPriceTextBox_TextChanged"/>
+        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="116" Margin="12,379,0,-366" VerticalAlignment="Top" Width="279"/>
+        <Label x:Name="AddItemLabel" Content="Add Item:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,346,0,-250" FontSize="17"/>
+        <TextBox x:Name="BarcodeAddBox" HorizontalAlignment="Left" Height="23" Margin="67,384,0,-278" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="213"/>
+        <TextBox x:Name="NameAddBox" HorizontalAlignment="Left" Height="23" Margin="54,410,0,-304" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="226"/>
+        <Label x:Name="AddItemBarcodeLabel" Content="Barcode" HorizontalAlignment="Left" Margin="12,384,0,-281" VerticalAlignment="Top" Width="55"/>
+        <Label x:Name="AddItemNameLabel" Content="Name" HorizontalAlignment="Left" Margin="12,410,0,-307" VerticalAlignment="Top"/>
+        <Label x:Name="PriceLabel" Content="Price" HorizontalAlignment="Left" Margin="12,436,0,-333" VerticalAlignment="Top"/>
+        <currency:CurrencyTextBox x:Name="PriceAddBox" Margin="53,436,0,-329" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="12,500,0,-391" VerticalAlignment="Top" Width="75" Click="AddItemButton_Click"/>
+        <Slider x:Name="MinQuantitySlider" ValueChanged="MinQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,250,0,-139" VerticalAlignment="Top" Width="189" SmallChange="1"/>
+        <Label x:Name="MinQuantityLabel" Content="Minimum Quantity" HorizontalAlignment="Left" Margin="12,224,0,-121" VerticalAlignment="Top"/>
+        <Slider x:Name="MaxQuantitySlider" ValueChanged="MaxQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,291,0,-180" VerticalAlignment="Top" Width="189" SmallChange="1"/>
+        <Label x:Name="MaxQuantityLabel" Content="Maximum Quantity" HorizontalAlignment="Left" Margin="12,265,0,-162" VerticalAlignment="Top"/>
+        <digit:DigitBox x:Name="MinQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,245,0,-139" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
+        <digit:DigitBox x:Name="MaxQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,286,0,-180" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
+        <Label x:Name="AddQuantityLabel" Content="Quantity" HorizontalAlignment="Left" Margin="12,460,0,-357" VerticalAlignment="Top"/>
+        <digit:DigitBox x:Name="QuantityAddTextBox" Text="0" HorizontalAlignment="Left" Height="23" Margin="71,463,0,-357" TextWrapping="NoWrap" VerticalAlignment="Top" Width="50" />
     </Grid>
 </Page>
