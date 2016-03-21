@@ -69,6 +69,7 @@
         <Label x:Name="AddItemNameLabel" Content="Name" HorizontalAlignment="Left" Margin="12,410,0,-307" VerticalAlignment="Top"/>
         <Label x:Name="PriceLabel" Content="Price" HorizontalAlignment="Left" Margin="12,436,0,-333" VerticalAlignment="Top"/>
         <currency:CurrencyTextBox x:Name="PriceAddBox" Margin="53,436,0,-329" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <digit:DigitBox x:Name="QuantityAddTextBox" Text="0" HorizontalAlignment="Left" Height="23" Margin="71,463,0,-357" TextWrapping="NoWrap" VerticalAlignment="Top" Width="50" />
         <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="12,500,0,-391" VerticalAlignment="Top" Width="75" Click="AddItemButton_Click"/>
         <Slider x:Name="MinQuantitySlider" ValueChanged="MinQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,250,0,-139" VerticalAlignment="Top" Width="189" SmallChange="1"/>
         <Label x:Name="MinQuantityLabel" Content="Minimum Quantity" HorizontalAlignment="Left" Margin="12,224,0,-121" VerticalAlignment="Top"/>
@@ -77,6 +78,6 @@
         <digit:DigitBox x:Name="MinQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,245,0,-139" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
         <digit:DigitBox x:Name="MaxQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,286,0,-180" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
         <Label x:Name="AddQuantityLabel" Content="Quantity" HorizontalAlignment="Left" Margin="12,460,0,-357" VerticalAlignment="Top"/>
-        <digit:DigitBox x:Name="QuantityAddTextBox" Text="0" HorizontalAlignment="Left" Height="23" Margin="71,463,0,-357" TextWrapping="NoWrap" VerticalAlignment="Top" Width="50" />
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="296,-25,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
     </Grid>
 </Page>

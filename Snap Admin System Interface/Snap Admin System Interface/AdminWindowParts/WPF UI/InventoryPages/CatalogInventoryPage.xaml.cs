@@ -84,7 +84,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         public CatalogInventoryPage()
         {
             InitializeComponent();
+            PopulateList();
+        }
 
+        private void PopulateList()
+        {
             //populates the response with the list of item nodes
             DBInterface.GetAllProducts();
 
@@ -100,7 +104,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 maxprice = Math.Max( price, maxprice );
                 maxquantity = Math.Max( quantity, maxquantity );
 
-                data.Add( new Item() {
+                data.Add( new Item()
+                {
                     ProductID = int.Parse( node.Get( "ProductID" ) )
                     , Name = node.Get( "Name" )
                     , Price = price
@@ -342,5 +347,22 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             }
         }
 
+        private void RefreshButton_Click( object sender, RoutedEventArgs e )
+        {
+            /*
+            BarcodeSearchBox.Clear();
+            NameSearchBox.Clear();
+            ActiveComboBox.SelectedIndex = -1;
+
+            MaxPriceSlider.Value = 0;
+            MinPriceSlider.Value = 0;
+
+            MaxQuantitySlider.Value = 0;
+            MinQuantitySlider.Value = 0;
+            */
+
+            data.Clear();
+            PopulateList();
+        }
     }
 }
