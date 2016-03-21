@@ -6,12 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using CSharpClient;
 using System.Xml;
+using PointOfSales.Users;
 
 namespace SnapRegisters
 {
     static class DBInterface
     {
         public static ConnectionSession m_connection { get; set; }
+        public static Employee m_employee { get; set; }
+
+        public static void Log( string message )
+        {
+            m_connection.WriteNoResponse( "AddLog @0, @1", m_employee.ID, message );
+        }
+
         public static void AddEmployee( string firstName, string lastName, string username,
             string email, string password, string authorizationLevel, DateTime DOB,
             string phoneNumber, string address_1, string address_2, string city, string state, string country,
@@ -28,6 +36,8 @@ namespace SnapRegisters
                 throw new InvalidOperationException( "Username \"" + username + "\" already exists." );
             else if( Response[0].Get( "UserID" ) == "-2" )
                 throw new InvalidOperationException( "User with phone number \"" + phoneNumber + "\" already exists." );
+            else
+                Log( "Added user \"" + username + "\" with authorization level \"" + authorizationLevel + "\"." );
         }
 
         public static void AddItem( string name, decimal price, string barcode, int quantity )
@@ -35,8 +45,10 @@ namespace SnapRegisters
 
             m_connection.Write( "AddItem @0, @1, @2, @3, @4", name, price, barcode, "1", quantity );
 
-            if (Response[0].Get("ProductID") == "-1")
-                throw new InvalidOperationException("Item with barcode \"" + barcode + "\" already exists.");
+            if( Response[0].Get( "ProductID" ) == "-1" )
+                throw new InvalidOperationException( "Item with barcode \"" + barcode + "\" already exists." );
+            else
+                Log( "Added item \"" + name + "\" for \"" + price.ToString( "C2" ) + "\"." );
         }
 
         public static void AddCust( string firstName, string lastName, string address_1, 
@@ -48,8 +60,10 @@ namespace SnapRegisters
             m_connection.Write("AddCust @0, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12",
                 firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, DBNull.Value, "1", dob_string);
 
-            if (Response[0].Get("CustID") == "-1")
-                throw new InvalidOperationException("User with phone number \"" + phoneNumber + "\" already exists.");
+            if( Response[0].Get( "CustID" ) == "-1" )
+                throw new InvalidOperationException( "User with phone number \"" + phoneNumber + "\" already exists." );
+            else
+                Log( "Added customer \"" + firstName + ' ' + lastName + "\" with phone number \"" + phoneNumber + "\"." );
         }
 
         public static void GetAllProducts()
@@ -64,16 +78,8 @@ namespace SnapRegisters
 
             if( Response[0].Get( "ProductID" ) == "-1" )
                 throw new InvalidOperationException( "Item (" + m_connection.Response[0].Get( "Name" ) + ") with barcode \"" + barcode + "\" already exists." );
-        }
-
-        public static void RemoveProducts(string ID)
-        {
-            m_connection.Write( "RemoveItem_ProductID @0", ID );
-        }
-
-        public static void RemoveEmployee(string ID)
-        {
-            m_connection.Write( "RemoveEmployee_ID @0", ID);
+            else
+                Log( "Modified item ID \"" + ID + "\" to have name=\"" + name + "\", price=\"" + price.ToString( "C2" ) + "\", barcode=\"" + barcode + "\", active=\"" + ( active ? "true" : "false" ) + "\", and quantity=\"" + quantity + "\"." );
         }
 
         public static void RemoveItem( int ID )
@@ -83,6 +89,8 @@ namespace SnapRegisters
                 throw new InvalidOperationException( "Item with ID \"" + ID + "\" does not exist." );
             if( Response[0].Get( "Return" ) == "-2" )
                 throw new InvalidOperationException( "Item with ID \"" + ID + "\" has been sold and cannot be removed. Set it inactive instead." );
+            else
+                Log( "Removed item with ID=\"" + ID + "\"." );
         }
         public static void GetItemID( string barcode )
         {

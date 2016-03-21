@@ -35,6 +35,9 @@ namespace SnapRegisters
         public AdminMainWindow(Employee currentEmployee, ConnectionSession connection)
         {
             DBInterface.m_connection = connection;
+            DBInterface.m_employee = currentEmployee;
+
+            DBInterface.Log( "Logged in" );
             // update the clock manually
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
