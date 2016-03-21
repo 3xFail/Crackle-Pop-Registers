@@ -23,7 +23,7 @@ namespace SnapRegisters
         public static void GetLogs( string username, DateTime? start, DateTime? end )
         { //slay me.
             object dbnull = DBNull.Value;
-            m_connection.Write( "GetLogs_UserID @0, @1, @2", username ?? dbnull, start ?? dbnull, end ?? dbnull );
+            m_connection.Write( "GetLogs_Username @0, @1, @2", username ?? dbnull, start ?? dbnull, end ?? dbnull );
         }
 
         public static void AddEmployee( string firstName, string lastName, string username,
