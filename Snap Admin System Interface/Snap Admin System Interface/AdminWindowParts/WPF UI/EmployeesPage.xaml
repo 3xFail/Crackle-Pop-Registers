@@ -11,9 +11,8 @@
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50"/>
-            <Button x:Name="EmpRemoveBtn" Content="Remove" Height="50" Click="EmpRemoveBtn_Click"/>
-            <Button x:Name="EmpSearchBtn" Content="Search" Click="btn_SearchEmp" Height="50"/>
-            <Button x:Name="EmpBackBtn" Content="Back" Height="50"/>
+            <Button x:Name="EmpUsageBtn" Content="Usage" Click="EmpUsageBtn_Click" Height="50"/>
+            <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50"/>
         </StackPanel>
 
         <!--<Grid>

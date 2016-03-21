@@ -11,7 +11,6 @@
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="CatalogBtn" Content="Catalog" Height="50" Click="CatalogBtn_Click"/>
-            <Button x:Name="InvBackBtn" Content="Back" Height="50" Click="InvBackBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>

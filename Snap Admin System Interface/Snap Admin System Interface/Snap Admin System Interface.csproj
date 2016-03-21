@@ -139,8 +139,8 @@
     <Compile Include="AdminWindowParts\WPF UI\CustomersPage.xaml.cs">
       <DependentUpon>CustomersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\RemoveEmployeePage.xaml.cs">
-      <DependentUpon>RemoveEmployeePage.xaml</DependentUpon>
+    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\UsageEmployeePage.xaml.cs">
+      <DependentUpon>UsageEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\EmployeesPage.xaml.cs">
       <DependentUpon>EmployeesPage.xaml</DependentUpon>
@@ -157,8 +157,8 @@
     <Compile Include="AdminWindowParts\WPF UI\SalesPage.xaml.cs">
       <DependentUpon>SalesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\SearchEmployeePage.xaml.cs">
-      <DependentUpon>SearchEmployeePage.xaml</DependentUpon>
+    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml.cs">
+      <DependentUpon>CatalogEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -176,7 +176,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\EmployeePages\RemoveEmployeePage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\EmployeePages\UsageEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminWindowParts\WPF UI\EmployeePages\SearchEmployeePage.xaml">
+    <Page Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

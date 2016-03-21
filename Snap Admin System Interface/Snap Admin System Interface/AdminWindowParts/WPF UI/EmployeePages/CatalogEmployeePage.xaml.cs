@@ -13,17 +13,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SnapRegisters;
+using System.Collections.ObjectModel;
+using System.Xml;
+using CSharpClient;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
+
     /// <summary>
     /// Interaction logic for SearchEmployeePage.xaml
     /// </summary>
     public partial class SearchEmployeePage : Page
     {
+        public ObservableCollection<UsageData> data = new ObservableCollection<UsageData>();
         public SearchEmployeePage()
         {
             InitializeComponent();
+            PopulateList();
+        }
+
+        private void PopulateList()
+        {
+            //DBInterface.GetAllUsers(); //TODO: IMPLIMENT
+
+            foreach( XmlNode node in DBInterface.Response )
+            {
+
+            }
+
+            
         }
     }
 }

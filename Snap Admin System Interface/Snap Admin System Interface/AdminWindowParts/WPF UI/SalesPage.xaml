@@ -14,7 +14,6 @@
             <Button x:Name="CouponsBtn" Content="Coupons" Height="50"/>
             <Button x:Name="ListSalesBtn" Content="List of Sales" Height="50"/>
             <Button x:Name="ListCouponsBtn" Content="List of Coupons" Height="50"/>
-            <Button x:Name="SalesBackBtn" Content="Back" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>

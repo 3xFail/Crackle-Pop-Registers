@@ -13,7 +13,6 @@
             <Button x:Name="CustAddBtn" Content="Add" Click="btn_AddCust" Height="50"/>
             <Button x:Name="CustRemoveBtn" Content="Remove" Height="50"/>
             <Button x:Name="CustSearchBtn" Content="Search" Height="50"/>
-            <Button x:Name="CustBackBtn" Content="Back" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -167,7 +167,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             }
         }
 
-
         private void Commit_ButtonClick( object sender, RoutedEventArgs e )
         {
             

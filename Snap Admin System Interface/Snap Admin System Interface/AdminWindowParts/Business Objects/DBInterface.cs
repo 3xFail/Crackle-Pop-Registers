@@ -63,7 +63,7 @@ namespace SnapRegisters
             m_connection.Write( "Modify_Item @0, @1, @2, @3, @4, @5", ID, name, barcode, price, active, quantity );
 
             if( Response[0].Get( "ProductID" ) == "-1" )
-                throw new InvalidOperationException( "Item( " + m_connection.Response[0].Get( "Name" ) + " ) with barcode \"" + barcode + "\" already exists." );
+                throw new InvalidOperationException( "Item (" + m_connection.Response[0].Get( "Name" ) + ") with barcode \"" + barcode + "\" already exists." );
         }
 
         public static void RemoveProducts(string ID)
@@ -87,6 +87,12 @@ namespace SnapRegisters
         public static void GetItemID( string barcode )
         {
             m_connection.Write( "GetItemID_Barcode @0", barcode );
+        }
+
+        public static void GetUsageStatistics( DateTime? start, DateTime? end )
+        {
+            //If start is null, we get the statistics from one month ago to one day from now
+            m_connection.Write( "GetUsageStatistics @0, @1", start ?? DateTime.Now.AddMonths( -1 ), end ?? DateTime.Now.AddDays( 1 ) );
         }
 
         public static XmlNodeList Response { get { return m_connection.Response; } }

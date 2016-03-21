@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI;
-using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.EmployeePages;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
@@ -34,17 +33,15 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             // navigate to the add employee page
             EmpFrame.Navigate(new AddEmployeePage());
         }
-        // navigate to search employee page
-        private void btn_SearchEmp(object sender, RoutedEventArgs e)
+
+        private void EmpCatalog_Click( object sender, RoutedEventArgs e )
         {
-            // navigate to the search employee page
-            EmpFrame.Navigate(new SearchEmployeePage());
+
         }
-        //navigate to a remove page
-        private void EmpRemoveBtn_Click( object sender, RoutedEventArgs e )
+
+        private void EmpUsageBtn_Click( object sender, RoutedEventArgs e )
         {
-            //navigate to a remove page
-            EmpFrame.Navigate(new RemoveEmployeePage());
+            EmpFrame.Navigate( new UsageEmployeePage() );
         }
     }
 }

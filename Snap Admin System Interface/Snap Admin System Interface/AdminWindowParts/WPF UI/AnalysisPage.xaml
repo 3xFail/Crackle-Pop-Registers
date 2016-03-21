@@ -12,7 +12,6 @@
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="GrossBtn" Content="Gross Earnings" Height="50"/>
             <Button x:Name="ProductBtn" Content="Product Losses" Height="50"/>
-            <Button x:Name="AnalyBackBtn" Content="Back" Height="50"/>
         </StackPanel>
     </Grid>
 </Page>
