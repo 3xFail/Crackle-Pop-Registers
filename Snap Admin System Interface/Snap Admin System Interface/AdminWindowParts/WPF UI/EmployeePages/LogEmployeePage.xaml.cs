@@ -52,7 +52,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 data.Add( new LogData()
                 {
                     Username = node.Get( "Username" )
-                    , ID = int.Parse( node.Get( "UserID") )
                     , Time = DateTime.Parse( node.Get( "Time" ) )
                     , Event = node.Get( "Event" )
                 } );
