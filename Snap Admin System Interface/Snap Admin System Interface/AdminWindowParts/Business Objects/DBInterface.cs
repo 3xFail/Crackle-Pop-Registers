@@ -20,6 +20,12 @@ namespace SnapRegisters
             m_connection.WriteNoResponse( "AddLog @0, @1", m_employee.ID, message );
         }
 
+        public static void GetLogs( string username, DateTime? start, DateTime? end )
+        { //slay me.
+            object dbnull = DBNull.Value;
+            m_connection.Write( "GetLogs_UserID @0, @1, @2", username ?? dbnull, start ?? dbnull, end ?? dbnull );
+        }
+
         public static void AddEmployee( string firstName, string lastName, string username,
             string email, string password, string authorizationLevel, DateTime DOB,
             string phoneNumber, string address_1, string address_2, string city, string state, string country,
