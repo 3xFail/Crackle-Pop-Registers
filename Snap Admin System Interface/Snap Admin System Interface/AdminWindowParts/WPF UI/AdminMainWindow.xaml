@@ -8,7 +8,7 @@
         Background="{StaticResource Background}"
         Title="Snap Admininstrator Program" Icon="/SharedResources/Images/Emblem.png"
         
-        WindowState="Maximized" WindowStyle="SingleBorderWindow" Height="840" Width="1293.6">
+        WindowState="Maximized" WindowStyle="SingleBorderWindow" Height="840" Width="1293.6" Closing="Window_Closing">
     <!--Height="350" Width="525">-->
     <!--WindowState="Maximized"  WindowStyle="SingleBorderWindow" d:DesignHeight="843.9" Width="1170.8">-->
 
