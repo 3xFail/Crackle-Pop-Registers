@@ -174,6 +174,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             item.Changed = false;
             item.WasChanged = true;
 
+            Catalog.CommitEdit();
+
             LoadItems();
 
             try
@@ -184,6 +186,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             {
                 MessageBox.Show( ex.Message );
             }
+
         }
 
         Item _EditItem = new Item();
