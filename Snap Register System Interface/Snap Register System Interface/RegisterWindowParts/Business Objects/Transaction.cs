@@ -238,7 +238,11 @@ namespace SnapRegisters
 
         public void Checkout()
 		{
-			// TODO: Insert credit card magic here.
+            m_connection.Write( "CreateOrder @0, @1", DBNull.Value, m_Employee.ID );
+            int OrderID = int.Parse( m_connection.Response[0].Get( "OrderID" ) );
+
+            foreach( Item item in m_Items )
+                m_connection.WriteNoResponse( "AddOrderItem_ProductID @0, @1, @2", item.ID, OrderID, item.Price );
 		}
 
 		private Item ConstructItem(string itemID)

@@ -333,9 +333,9 @@ namespace SnapRegisters
 
         private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
         {
+            m_transaction.Checkout();
             ResetRegister();
             hidePayByCashWindow();
-
         }
 
         //Prevents user from typing anything other than numbers into the cash paid box
