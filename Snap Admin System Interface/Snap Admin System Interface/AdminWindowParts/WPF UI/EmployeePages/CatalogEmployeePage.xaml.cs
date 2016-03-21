@@ -23,10 +23,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     /// <summary>
     /// Interaction logic for SearchEmployeePage.xaml
     /// </summary>
-    public partial class SearchEmployeePage : Page
+    public partial class CatalogEmployeePage : Page
     {
-        public ObservableCollection<UsageData> data = new ObservableCollection<UsageData>();
-        public SearchEmployeePage()
+        public CatalogEmployeePage()
         {
             InitializeComponent();
             PopulateList();
