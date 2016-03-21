@@ -68,10 +68,16 @@ namespace SnapRegisters
     public class Transaction
 	{
 
-		// Delegate for output function
+		// Delegates for output function
 		public delegate void ItemOutputDelegate(Item itemToAdd);
         public delegate void CouponOutputDelegate(Coupon couponToAdd);
 
+        public ItemOutputDelegate m_OutputDelegate { get; set; }
+        public CouponOutputDelegate m_CouponOutputDelegate { get; set; }
+        public List<Item> m_Items { get; private set; } = new List<Item>();
+        private List<Coupon> m_Coupons { get; set; } = new List<Coupon>();
+        private Employee m_Employee { get; set; }
+        private ConnectionSession m_connection { get; set; }
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
         public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
@@ -83,8 +89,6 @@ namespace SnapRegisters
 
             m_connection = session;
 			m_Employee = employee;
-			m_Items = new List<Item>();
-            m_Coupons = new List<Coupon>();
 			m_OutputDelegate = itemToAdd;
             m_CouponOutputDelegate = couponToAdd;
             
@@ -237,16 +241,6 @@ namespace SnapRegisters
 			// TODO: Insert credit card magic here.
 		}
 
-		public List<Item> GetItems()
-		{
-			return m_Items;
-		}
-
-        public List<Coupon> GetCoupons()
-        {
-            return m_Coupons;
-        }
-
 		private Item ConstructItem(string itemID)
 		{
             m_connection.Write( "GetItem @0", itemID );
@@ -309,12 +303,5 @@ namespace SnapRegisters
             }
 
         }
-
-		public ItemOutputDelegate m_OutputDelegate { get; set; }
-        public CouponOutputDelegate m_CouponOutputDelegate { get; set; }
-		private List<Item> m_Items = null;
-        private List<Coupon> m_Coupons = null;
-		private Employee m_Employee = null;
-        private ConnectionSession m_connection = null;
 	}
 }

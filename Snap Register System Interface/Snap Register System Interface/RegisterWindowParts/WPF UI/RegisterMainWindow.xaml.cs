@@ -168,7 +168,7 @@ namespace SnapRegisters
             m_savingsTotal = 0;
             m_totalTotal = 0;
 
-            foreach (Item item in m_transaction.GetItems())
+            foreach (Item item in m_transaction.m_Items)
             {
                 m_costTotal += item.OriginalPrice;
                 m_savingsTotal += item.OriginalPrice - item.Price;
@@ -208,7 +208,7 @@ namespace SnapRegisters
                 {
                     MessageBox.Show( ex.Message );
                 }
-                catch (Exception) //if that fails
+                catch (Exception e ) //if that fails
                 {
                     try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
                     catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
@@ -254,10 +254,13 @@ namespace SnapRegisters
 
         private void ResetRegister()
         {
+            m_itemssold += m_transaction.m_Items.Count;
+            m_totalsales += m_totalTotal;
             m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
             ItemsList.Children.Clear();
             CouponList.Children.Clear();
             m_listOfOutputObjects.Clear();
+
             UpdateTotals();
         }
 
@@ -310,12 +313,17 @@ namespace SnapRegisters
             FocusManager.SetFocusedElement(this, UPCField);
         }
 
-        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        private void Logout()
         {
             SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
             loginWindow.Show();
-            m_connection.WriteNoResponse( "AddEmployeeSession @0, @1, @2, @3, @4, @5", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales );
+            m_connection.WriteNoResponse( "AddEmployeeSession @0, @1, @2, @3, @4", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales );
             this.Close();
+        }
+
+        private void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Logout();
         }
 
         private void ChangeEmployeePermissions(Permissions.SystemPermissions newPermissions)
