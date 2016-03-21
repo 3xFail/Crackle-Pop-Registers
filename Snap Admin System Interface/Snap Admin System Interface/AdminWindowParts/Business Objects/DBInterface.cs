@@ -26,6 +26,34 @@ namespace SnapRegisters
             m_connection.Write( "GetLogs_Username @0, @1, @2", username ?? dbnull, start ?? dbnull, end ?? dbnull );
         }
 
+        public static void GetAllEmployees()
+        {
+            m_connection.Write( "GetAllEmployees" );
+        }
+
+        public static void GetAllPermissions()
+        {
+            m_connection.Write( "GetAllPermissions" );
+        }
+
+        public static void SetUserPassword( int ID, string newpass )
+        {
+            m_connection.WriteNoResponse( "UpdatePassword_Username @0, @1", ID, PasswordHash.HashPassword( newpass ) );
+            Log( "Changed the password of UserID=\"" + ID + "\" to \"" + new string( '*', newpass.Length ) + "\"." );
+        }
+
+        public static void SetUserActivity( int ID, bool active )
+        {
+            m_connection.WriteNoResponse( "SetUserActivity @0, @1", ID, active ? '1' : '0' );
+            Log( "Set the account of UserID=\"" + ID + "\" to \"" + ( active ? "Active" : "Inactive" ) + "\"." );
+        }
+
+        public static void ChangePermissions( int ID, string permission )
+        {
+            m_connection.WriteNoResponse( "ChangePermission_ID_Permission @0, @1", ID, permission );
+            Log( "Set the permissions of UserID=\"" + ID + "\" to \"" + permission + "\"." );
+        }
+
         public static void AddEmployee( string firstName, string lastName, string username,
             string email, string password, string authorizationLevel, DateTime DOB,
             string phoneNumber, string address_1, string address_2, string city, string state, string country,

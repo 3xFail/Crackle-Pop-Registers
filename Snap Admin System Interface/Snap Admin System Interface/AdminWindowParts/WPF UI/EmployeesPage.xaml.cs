@@ -36,7 +36,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void EmpCatalog_Click( object sender, RoutedEventArgs e )
         {
-
+            EmpFrame.Navigate( new CatalogEmployeePage() );
         }
 
         private void EmpUsageBtn_Click( object sender, RoutedEventArgs e )

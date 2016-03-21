@@ -163,6 +163,9 @@
     <Compile Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml.cs">
       <DependentUpon>CatalogEmployeePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\TextPromptPopup.xaml.cs">
+      <DependentUpon>TextPromptPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -208,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\TextPromptPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

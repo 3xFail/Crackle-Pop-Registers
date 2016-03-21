@@ -11,14 +11,10 @@
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50"/>
-            <Button x:Name="EmpUsageBtn" Content="Usage" Click="EmpUsageBtn_Click" Height="50"/>
-            <Button x:Name="EmpLogBtn" Content="Log" Click="EmpLogBtn_Click" Height="50"/>
+            <Button x:Name="EmpUsageBtn" Content="Register Usage" Click="EmpUsageBtn_Click" Height="50"/>
+            <Button x:Name="EmpLogBtn" Content="Admin Logs" Click="EmpLogBtn_Click" Height="50"/>
             <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50"/>
         </StackPanel>
-
-        <!--<Grid>
-            <Frame x:Name="EmpNavigationFrame" NavigationUIVisibility="Hidden" />
-        </Grid>-->
     </Grid>
     
 </Page>

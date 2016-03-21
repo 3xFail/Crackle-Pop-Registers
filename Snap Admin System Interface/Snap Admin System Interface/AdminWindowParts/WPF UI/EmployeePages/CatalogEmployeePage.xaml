@@ -9,6 +9,33 @@
       Title="SearchEmployeePage">
 
     <Grid>
-        <Button Background="LightGray" Height="23" Name="seach_btn" Content="Search" VerticalAlignment="Top" Margin="10,65,162,0" Grid.Row="1"/>
+        <DataGrid x:Name="EmployeeGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="UserID" IsReadOnly="True" Binding="{Binding Path=UserID}"/>
+                <DataGridTextColumn Header="Username" IsReadOnly="True" Binding="{Binding Path=Username}"/>
+                <DataGridTemplateColumn Header="Usergroup">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox DropDownOpened="PermissionGroup_Open" DropDownClosed="PermissionGroup_Close" ItemsSource="{Binding Path=PermissionsGroups}" SelectedItem="{Binding Path=PermissionsGroup, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Reset Password">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Reset Password" Click="ResetPasswordButton_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Active">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}" Click="Active_Toggle" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Background="LightGray" Height="23" Name="seach_btn" Content="Search" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,11,0,0"/>
     </Grid>
 </Page>

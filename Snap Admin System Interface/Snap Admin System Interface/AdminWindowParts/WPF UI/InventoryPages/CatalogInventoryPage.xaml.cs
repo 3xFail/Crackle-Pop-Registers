@@ -210,7 +210,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 e.Row.Background = new SolidColorBrush( Color.FromArgb( 128, 255, 0, 0 ) );
                 item.Changed = true;
 
-
                 //Update Maximums if the item changed changed the new max for either price or quantity
                 int newmax = (int)Math.Max( MaxPriceSlider.Maximum, (double)item.Price ) + 1;
 

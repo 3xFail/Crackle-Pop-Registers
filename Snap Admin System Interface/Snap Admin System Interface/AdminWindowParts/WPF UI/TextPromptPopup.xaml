@@ -1,0 +1,20 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Class="Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.PromptDialog"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
+    WindowStartupLocation="CenterScreen" 
+    SizeToContent="WidthAndHeight"
+    MinWidth="300"
+    MinHeight="100"
+    WindowStyle="SingleBorderWindow"
+    ResizeMode="CanMinimize">
+    <StackPanel Margin="5">
+        <TextBlock Name="txtQuestion" Margin="5"/>
+        <TextBox Name="txtResponse" Margin="5"/>
+        <PasswordBox Name="txtPasswordResponse" />
+        <StackPanel Orientation="Horizontal" Margin="0,5,5,5" HorizontalAlignment="Right" Width="100">
+            <Button Content="_Ok" IsDefault="True" Margin="5" x:Name="btnOk" Click="btnOk_Click" Width="40" />
+            <Button Content="_Cancel" IsCancel="True" Margin="5" x:Name="btnCancel" Click="btnCancel_Click" Width="40" />
+        </StackPanel>
+    </StackPanel>
+</Window>
