@@ -10,7 +10,7 @@
       Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="754" d:DesignHeight="575">
 
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White"
+        <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White" SelectionMode="Single"
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   ItemsSource="{Binding}"
                  BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow" Margin="296,0,113,0">

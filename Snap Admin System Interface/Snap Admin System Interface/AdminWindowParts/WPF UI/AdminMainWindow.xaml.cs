@@ -51,7 +51,7 @@ namespace SnapRegisters
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new InventoryPage());
+            NavigationFrame.Navigate(new CatalogInventoryPage());
             //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
 
             InventoryPage.InvFrame = NavigationFrame;
