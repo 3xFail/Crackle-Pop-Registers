@@ -8,8 +8,8 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="SearchEmployeePage">
 
-    <Grid>
-        <DataGrid x:Name="EmployeeGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top">
+    <Grid Margin="0,0,-101,0">
+        <DataGrid x:Name="EmployeeGrid" SelectionMode="Single" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="391">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="UserID" IsReadOnly="True" Binding="{Binding Path=UserID}"/>
                 <DataGridTextColumn Header="Username" IsReadOnly="True" Binding="{Binding Path=Username}"/>
@@ -36,6 +36,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Background="LightGray" Height="23" Name="seach_btn" Content="Search" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,11,0,0"/>
     </Grid>
 </Page>

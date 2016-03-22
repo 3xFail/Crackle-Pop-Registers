@@ -20,7 +20,7 @@ using System.ComponentModel;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
-    public class UserData
+    public class User
     {
         public int UserID { get; set; }
         public string Username { get; set; }
@@ -28,12 +28,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         public bool Active { get; set; }
         public List<string> PermissionsGroups { get; set; }
     }
-    /// <summary>
-    /// Interaction logic for SearchEmployeePage.xaml
-    /// </summary>
+
     public partial class CatalogEmployeePage : Page
     {
-        private ObservableCollection<UserData> data = new ObservableCollection<UserData>();
+        private ObservableCollection<User> data = new ObservableCollection<User>();
         public CatalogEmployeePage()
         {
             InitializeComponent();
@@ -54,7 +52,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             DBInterface.GetAllEmployees();
             foreach( XmlNode node in DBInterface.Response )
             {
-                data.Add( new UserData()
+                data.Add( new User()
                 {
                     UserID = int.Parse( node.Get( "UserID" ) )
                     , Username = node.Get( "Username" )
@@ -75,7 +73,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void ResetPasswordButton_Click( object sender, RoutedEventArgs e )
         {
-            UserData user = ( (FrameworkElement)sender ).DataContext as UserData;
+            User user = ( (FrameworkElement)sender ).DataContext as User;
 
             string resp = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
 
@@ -88,13 +86,13 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         string oldgroup;
         private void PermissionGroup_Open( object sender, EventArgs e )
         {
-            UserData user = ( (FrameworkElement)sender ).DataContext as UserData;
+            User user = ( (FrameworkElement)sender ).DataContext as User;
             oldgroup = user.PermissionsGroup;
         }
 
         private void PermissionGroup_Close( object sender, EventArgs e )
         {
-            UserData user = ( (FrameworkElement)sender ).DataContext as UserData;
+            User user = ( (FrameworkElement)sender ).DataContext as User;
             if( user.PermissionsGroup != oldgroup )
             {
                 DBInterface.ChangePermissions( user.UserID, user.PermissionsGroup );
@@ -103,7 +101,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void Active_Toggle( object sender, RoutedEventArgs e )
         {
-            UserData user = ( (FrameworkElement)sender ).DataContext as UserData;
+            User user = ( (FrameworkElement)sender ).DataContext as User;
             DBInterface.SetUserActivity( user.UserID, user.Active );
         }
     }

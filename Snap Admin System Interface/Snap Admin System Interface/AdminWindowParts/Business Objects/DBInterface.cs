@@ -48,6 +48,19 @@ namespace SnapRegisters
             Log( "Set the account of UserID=\"" + ID + "\" to \"" + ( active ? "Active" : "Inactive" ) + "\"." );
         }
 
+        public static void ModifyCustomer( string firstName, string lastName, string address_1,
+            string address_2, string city, string state, string country, string zip, string phoneNumber, string email,
+            DateTime DOB, bool active )
+        {
+            m_connection.Write( "ModifyCust @0, @1, @2, @3, @4, @5, @6, @7, @8, @10, @11, @12",
+                firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, active, DOB );
+        }
+
+        public static void GetAllCustomers()
+        {
+            m_connection.Write( "GetAllCustomers" );
+        }
+
         public static void ChangePermissions( int ID, string permission )
         {
             m_connection.WriteNoResponse( "ChangePermission_ID_Permission @0, @1", ID, permission );

@@ -105,6 +105,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminWindowParts\WPF UI\CustomerPages\CatalogCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminWindowParts\WPF UI\EmployeePages\AddEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +133,9 @@
     <Compile Include="AdminWindowParts\Business Objects\DBInterface.cs" />
     <Compile Include="AdminWindowParts\WPF UI\CustomerPages\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\CustomerPages\CatalogCustomerPage.xaml.cs">
+      <DependentUpon>CatalogCustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminWindowParts\WPF UI\EmployeePages\AddEmployeePage.xaml.cs">
       <DependentUpon>AddEmployeePage.xaml</DependentUpon>

@@ -33,5 +33,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             // navigate to the add employee page
             CustFrame.Navigate(new AddCustomerPage());
         }
+
+        private void CustCatalogBtn_Click( object sender, RoutedEventArgs e )
+        {
+            CustFrame.Navigate( new CatalogCustomerPage() );
+        }
     }
 }

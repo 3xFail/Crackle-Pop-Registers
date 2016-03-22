@@ -25,5 +25,6 @@
         <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="23" Margin="63,59,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="153"/>
         <Label x:Name="UsernameLabel" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,55,0,0"/>
         <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="0,94,0,0" Click="SearchButton_Click"/>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="228,-25,0,0" Click="RefreshButton_Click"/>
     </Grid>
 </Page>

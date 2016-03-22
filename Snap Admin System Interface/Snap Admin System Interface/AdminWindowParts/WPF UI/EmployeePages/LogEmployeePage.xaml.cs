@@ -17,6 +17,7 @@ using System.Xml;
 using CSharpClient;
 using SnapRegisters;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
@@ -39,24 +40,42 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             StartDatePicker.SelectedDate = DateTime.Now.AddMonths( -1 );
             EndDatePicker.SelectedDate = DateTime.Now.AddDays( 1 );
             PopulateList();
+
+            //Sort the grid by the time of the event
+            var column = LogGrid.Columns[1];
+            LogGrid.Items.SortDescriptions.Clear();
+            LogGrid.Items.SortDescriptions.Add( new SortDescription( column.SortMemberPath, ListSortDirection.Descending ) );
+            foreach( var col in LogGrid.Columns )
+            {
+                col.SortDirection = null;
+            }
+            column.SortDirection = ListSortDirection.Ascending;
+            LogGrid.Items.Refresh();
         }
 
         private void PopulateList()
         {
             data.Clear();
 
-            DBInterface.GetLogs( UsernameTextBox.Text == string.Empty ? null : UsernameTextBox.Text, StartDatePicker.SelectedDate, EndDatePicker.SelectedDate);
-
-            foreach( XmlNode node in DBInterface.Response )
+            try
             {
-                data.Add( new LogData()
+                DBInterface.GetLogs( UsernameTextBox.Text == string.Empty ? null : UsernameTextBox.Text, StartDatePicker.SelectedDate, EndDatePicker.SelectedDate );
+
+                foreach( XmlNode node in DBInterface.Response )
                 {
-                    Username = node.Get( "Username" )
-                    , Time = DateTime.Parse( node.Get( "Time" ) )
-                    , Event = node.Get( "Event" )
-                } );
+                    data.Add( new LogData()
+                    {
+                        Username = node.Get( "Username" )
+                        , Time = DateTime.Parse( node.Get( "Time" ) )
+                        , Event = node.Get( "Event" )
+                    } );
+                }
+                LoadItems();
             }
-            LoadItems();
+            catch( SqlTypeException )
+            {
+                MessageBox.Show( "Selected dates must be between 1/1/1753 and 12/31/9999" );
+            }
         }
 
         private void LoadItems()
@@ -67,6 +86,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         }
 
         private void SearchButton_Click( object sender, RoutedEventArgs e )
+        {
+            PopulateList();
+        }
+
+        private void RefreshButton_Click( object sender, RoutedEventArgs e )
         {
             PopulateList();
         }
