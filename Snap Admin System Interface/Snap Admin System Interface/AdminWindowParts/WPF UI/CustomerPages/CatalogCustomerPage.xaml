@@ -5,19 +5,69 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="1000"
       Title="CatalogCustomerPage">
 
     <Grid>
-        <DataGrid x:Name="CustomerGrid" HorizontalAlignment="Left" Margin="123,10,0,0" VerticalAlignment="Top" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" BeginningEdit="CustomerGrid_BeginningEdit" CellEditEnding="CustomerGrid_CellEditEnding">
+        <DataGrid x:Name="CustomerGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="123,10,0,0" VerticalAlignment="Top" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" CanUserResizeRows="False" BeginningEdit="CustomerGrid_BeginningEdit" CellEditEnding="CustomerGrid_CellEditEnding">
+            <DataGrid.Resources>
+                <Style x:Key="ErrorStyle" TargetType="{x:Type TextBox}">
+                    <Setter Property="Padding" Value="-2"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" 
+                                Value="{Binding RelativeSource={RelativeSource Self},
+                                  Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Commit">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="Commit" Click="CommitButton_Click" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="First name" Binding="{Binding Path=FirstName}"/>
+                <DataGridTextColumn Header="Last name" Binding="{Binding Path=LastName}"/>
+                <DataGridTextColumn Header="Address 1" Binding="{Binding Path=Address1}"/>
+                <DataGridTextColumn Header="Address 2" Binding="{Binding Path=Address2}"/>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=City}"/>
+                <DataGridTextColumn Header="State" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="State" ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <local:StateValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Country" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Country" ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <local:CountryValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Zipcode" Binding="{Binding Path=Zip}"/>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding Path=Email}"/>
+                <DataGridTextColumn Header="Phone number" Binding="{Binding Path=PhoneNumber}"/>
+                <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Path=DateOfBirth}"/>
+                <DataGridTextColumn Header="Attached Username" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="AttachedUserName" ValidatesOnExceptions="True">
+                            <Binding.ValidationRules>
+                                <local:UsernameValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

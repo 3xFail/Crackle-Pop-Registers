@@ -18,9 +18,41 @@ using CSharpClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using SnapRegisters;
+using System.Globalization;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
+    internal class UsernameValidationRule: ValidationRule
+    {
+        public override ValidationResult Validate( object value, CultureInfo cultureInfo )
+        {
+            if( value != null && value.ToString() != string.Empty && !DBInterface.UserExists( value.ToString() ) )
+                return new ValidationResult( false, value.ToString() + " is not an existing user." );
+            return ValidationResult.ValidResult;
+        }
+    }
+
+    internal class StateValidationRule: ValidationRule
+    {
+
+        public override ValidationResult Validate( object value, CultureInfo cultureInfo )
+        {
+            if( value != null && value.ToString() != string.Empty && !AddCustomerPage.isStateAbbreviation( value.ToString() ) )
+                return new ValidationResult( false, value.ToString() + " is not a state abbreviation." );
+            return ValidationResult.ValidResult;
+        }
+    }
+
+    internal class CountryValidationRule: ValidationRule
+    {
+        public override ValidationResult Validate( object value, CultureInfo cultureInfo )
+        {
+            if( value != null && value.ToString() != string.Empty && !AddCustomerPage.countries.Contains( value.ToString() ) )
+                return new ValidationResult( false, value.ToString() + " is not a country." );
+            return ValidationResult.ValidResult;
+        }
+    }
+
     public class Customer: IEquatable<Customer>
     {
         public string FirstName { get; set; }
@@ -33,18 +65,15 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         public string Country { get; set; }
         public string Zip { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
         public bool Active { get; set; }
         public string DateOfBirth { get; set; }
-        public string AttachedUserName { get; private set; }
-        public Customer( string Username )
-        {
-            AttachedUserName = Username;
-        }
+        public string AttachedUserName { get; set; }
 
         public Customer Clone()
         {
-            Customer c = new Customer( this.AttachedUserName );
+            Customer c = new Customer();
+            c.AttachedUserName = this.AttachedUserName;
             c.Active = this.Active;
             c.Address1 = this.Address1;
             c.Address2 = this.Address2;
@@ -73,7 +102,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
     public partial class CatalogCustomerPage :Page
     {
-        ObservableCollection<Customer> data = new ObservableCollection<Customer>();
+        public ObservableCollection<Customer> data = new ObservableCollection<Customer>();
         public CatalogCustomerPage()
         {
             InitializeComponent();
@@ -83,6 +112,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         private void PopulateList()
         {
             data.Clear();
+            CustomerGrid.Items.Clear();
 
             DBInterface.GetAllCustomers();
 
@@ -95,7 +125,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 }
                 catch( Exception ) { }
 
-                data.Add( new Customer( node.Get( "Username" )  )
+                data.Add( new Customer()
                 {
                     FirstName = node.Get( "FName" ),
                     LastName = node.Get( "LName" ),
@@ -106,9 +136,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     Country = node.Get( "Country" ),
                     Zip = node.Get( "Zip" ),
                     Email = node.Get( "Email" ),
-                    PhoneNumber = node.Get( "PhoneNumber" ),
+                    PhoneNumber = long.Parse( node.Get( "PhoneNumber" ) ),
                     Active = node.Get( "Active" )[0] == '1',
                     DateOfBirth = dob?.Date.ToShortDateString(),
+                    AttachedUserName = node.Get( "Username" )
                 } );
             }
             LoadItems();
@@ -118,6 +149,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             ICollectionView data_cv = CollectionViewSource.GetDefaultView( data );
             if( data_cv != null )
             {
+                //CustomerGrid.Items.Clear();
                 CustomerGrid.ItemsSource = data_cv;
                 try
                 {
@@ -138,6 +170,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             Customer cust = ( (FrameworkElement)sender ).DataContext as Customer;
             CustomerGrid.CommitEdit();
 
+            
             //DBInterface.ModifyCustomer();
         }
 
@@ -152,22 +185,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         private void CustomerGrid_CellEditEnding( object sender, DataGridCellEditEndingEventArgs e )
         {
             Customer cust = e.Row.Item as Customer;
-
-            if( (string)e.Column.Header == "PhoneNumber" ) //If it's the PhoneNumber column
-            {
-                var tb = e.EditingElement as TextBox;
-                int i;
-                if( !int.TryParse( tb.Text, out i ) )
-                {
-                    new Task( () => ResetPhoneNumber( ref cust, cust.PhoneNumber ) ).Start();   
-                }
-            }
-        }
-
-        private void ResetPhoneNumber( ref Customer cust, string pn )
-        {
-            Thread.Sleep( 50 );
-            cust.PhoneNumber = pn;
         }
     }
 }

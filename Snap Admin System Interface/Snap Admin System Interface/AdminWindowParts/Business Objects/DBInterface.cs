@@ -36,6 +36,12 @@ namespace SnapRegisters
             m_connection.Write( "GetAllPermissions" );
         }
 
+        public static bool UserExists( string username )
+        {
+            m_connection.Write( "GetPass_Username @0", username );
+            return Response.Count != 0;
+        }
+
         public static void SetUserPassword( int ID, string newpass )
         {
             m_connection.WriteNoResponse( "UpdatePassword_Username @0, @1", ID, PasswordHash.HashPassword( newpass ) );
