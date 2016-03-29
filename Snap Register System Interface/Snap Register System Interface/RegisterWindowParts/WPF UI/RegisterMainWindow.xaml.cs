@@ -18,6 +18,7 @@ using System.Device;
 using CSharpClient;
 using System.Windows.Threading;
 using System.Text.RegularExpressions;
+using Snap_Register_System_Interface.RegisterWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -109,6 +110,9 @@ namespace SnapRegisters
         private decimal m_totalTotal = 0;
         public static KeyboardHook kh;
 
+
+        private PaymentWindow m_pay_window;
+
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
@@ -126,6 +130,9 @@ namespace SnapRegisters
 
             //Initialize window after the clock is ticked
             InitializeComponent();
+
+            m_pay_window = new PaymentWindow();
+            m_pay_window.Hide();
 
             m_employee = currentEmployee;
             m_connection = session;
@@ -224,7 +231,9 @@ namespace SnapRegisters
             {
                 try
                 {
-                    showPayByCashWindow();
+                    // showPayByCashWindow();
+                    m_pay_window.Show();
+                    
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); } //Catches exception if no items to pay for
                 catch (Exception ex) { MessageBox.Show(ex.Message); } //catches any other exceptions

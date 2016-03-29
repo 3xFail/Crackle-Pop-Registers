@@ -103,6 +103,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml.cs">
       <DependentUpon>ItemDisplayBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\PaymentWindow.xaml.cs">
+      <DependentUpon>PaymentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
       <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\PaymentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,13 +200,18 @@
     <Content Include="..\..\SharedResources\AccessLibrary.dll">
       <Link>SharedResources\AccessLibrary.dll</Link>
     </Content>
+    <Resource Include="SharedResources\Images\giftcardimage.png" />
+    <Resource Include="SharedResources\Images\moneyimage.jpg" />
+    <Resource Include="SharedResources\Images\creditimage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\..\SharedResources\Images\Emblem.png">
       <Link>SharedResources\Images\Emblem.png</Link>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SharedResources\Server\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

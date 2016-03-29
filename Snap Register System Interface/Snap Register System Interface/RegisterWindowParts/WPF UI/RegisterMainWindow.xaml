@@ -8,8 +8,8 @@
 		WindowStyle="None"
 		WindowState="Maximized"
 		ResizeMode="NoResize"
-		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked"
-        >
+		Title="MainWindow" Height="350" Width="525" MouseDown="WindowClicked">
+
 
     <Window.InputBindings>
         <KeyBinding Modifiers="Alt" Key="F4" Command="local:CustomCommands.doNothing" />
@@ -152,6 +152,7 @@
         </Grid>
         <!--<Button Content="Manager" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.PayByCash" HorizontalAlignment="Right" Margin="20" />-->
         <!--<Button Command="local:CustomCommands.Exit" Content="Exit" Width="90" Height="40" VerticalAlignment="Top" Margin="20"/>-->
+        <!--Payment-->
         <StackPanel>
             <Popup AllowsTransparency="True" Height="150" Name="cashPaymentPopup" 
                         PlacementTarget="{Binding ElementName=MainPanel}"
