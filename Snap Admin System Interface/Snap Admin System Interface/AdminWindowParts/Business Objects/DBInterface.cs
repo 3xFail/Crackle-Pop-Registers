@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CSharpClient;
 using System.Xml;
 using PointOfSales.Users;
+using PointOfSales.Permissions;
 
 namespace SnapRegisters
 {

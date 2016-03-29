@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Xml;
 using CSharpClient;
 using System.ComponentModel;
+using PointOfSales.Permissions;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
@@ -73,36 +74,59 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void ResetPasswordButton_Click( object sender, RoutedEventArgs e )
         {
-            User user = ( (FrameworkElement)sender ).DataContext as User;
-
-            string resp = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
-
-            if( !string.IsNullOrEmpty( resp ) )
+            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
             {
-                DBInterface.SetUserPassword( user.UserID, resp );
-                MessageBox.Show( "Password for \"" + user.Username + "\" has been updated." );
+                User user = ( (FrameworkElement)sender ).DataContext as User;
+
+                string resp = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
+
+                if( !string.IsNullOrEmpty( resp ) )
+                {
+                    DBInterface.SetUserPassword( user.UserID, resp );
+                    MessageBox.Show( "Password for \"" + user.Username + "\" has been updated." );
+                }
+            }
+            else
+            {
+                MessageBox.Show( "You do not have permission to add/modify an employee." );
             }
         }
-        string oldgroup;
+
+        private string oldgroup;
         private void PermissionGroup_Open( object sender, EventArgs e )
         {
+
             User user = ( (FrameworkElement)sender ).DataContext as User;
             oldgroup = user.PermissionsGroup;
         }
 
         private void PermissionGroup_Close( object sender, EventArgs e )
         {
-            User user = ( (FrameworkElement)sender ).DataContext as User;
-            if( user.PermissionsGroup != oldgroup )
+            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
             {
-                DBInterface.ChangePermissions( user.UserID, user.PermissionsGroup );
+                User user = ( (FrameworkElement)sender ).DataContext as User;
+                if( user.PermissionsGroup != oldgroup )
+                {
+                    DBInterface.ChangePermissions( user.UserID, user.PermissionsGroup );
+                }
+            }
+            else
+            {
+                MessageBox.Show( "You do not have permission to add/modify an employee." );
             }
         }
 
         private void Active_Toggle( object sender, RoutedEventArgs e )
         {
-            User user = ( (FrameworkElement)sender ).DataContext as User;
-            DBInterface.SetUserActivity( user.UserID, user.Active );
+            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+            {
+                User user = ( (FrameworkElement)sender ).DataContext as User;
+                DBInterface.SetUserActivity( user.UserID, user.Active );
+            }
+            else
+            {
+                MessageBox.Show( "You do not have permission to add/modify an employee." );
+            }
         }
     }
 }

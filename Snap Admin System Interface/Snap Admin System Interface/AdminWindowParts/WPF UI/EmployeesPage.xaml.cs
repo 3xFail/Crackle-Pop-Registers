@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI;
+using SnapRegisters;
+using PointOfSales.Permissions;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
@@ -30,13 +32,18 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         // navigate to add employee page
         private void btn_AddEmp(object sender, RoutedEventArgs e)
         {
-            // navigate to the add employee page
-            EmpFrame.Navigate(new AddEmployeePage());
+            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+                EmpFrame.Navigate( new AddEmployeePage() );
+            else
+                MessageBox.Show( "You do not have permissions to add/modify employees." );
         }
 
         private void EmpCatalog_Click( object sender, RoutedEventArgs e )
         {
-            EmpFrame.Navigate( new CatalogEmployeePage() );
+            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.VIEW_EMPLOYEE_DATABASE ) )
+                EmpFrame.Navigate( new CatalogEmployeePage() );
+            else
+                MessageBox.Show( "You do not have permissions to view the employee catalog." );
         }
 
         private void EmpUsageBtn_Click( object sender, RoutedEventArgs e )
