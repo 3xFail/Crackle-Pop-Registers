@@ -46,9 +46,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             LogGrid.Items.SortDescriptions.Clear();
             LogGrid.Items.SortDescriptions.Add( new SortDescription( column.SortMemberPath, ListSortDirection.Descending ) );
             foreach( var col in LogGrid.Columns )
-            {
                 col.SortDirection = null;
-            }
             column.SortDirection = ListSortDirection.Ascending;
             LogGrid.Items.Refresh();
         }

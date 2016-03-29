@@ -43,6 +43,15 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             StartDatePicker.SelectedDate = DateTime.Now.AddMonths( -1 );
             EndDatePicker.SelectedDate = DateTime.Now.AddDays( 1 );
             PopulateList();
+
+            //Sort the grid by the time of the event
+            var column = UsageGrid.Columns[3];
+            UsageGrid.Items.SortDescriptions.Clear();
+            UsageGrid.Items.SortDescriptions.Add( new SortDescription( column.SortMemberPath, ListSortDirection.Descending ) );
+            foreach( var col in UsageGrid.Columns )
+                col.SortDirection = null;
+            column.SortDirection = ListSortDirection.Ascending;
+            UsageGrid.Items.Refresh();
         }
 
         private void PopulateList()
