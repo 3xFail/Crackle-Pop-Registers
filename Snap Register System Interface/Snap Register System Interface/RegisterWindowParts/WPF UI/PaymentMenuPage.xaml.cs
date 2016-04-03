@@ -10,33 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 {
     /// <summary>
-    /// Interaction logic for PaymentWindow.xaml
+    /// Interaction logic for PaymentMenuPage.xaml
     /// </summary>
-    public partial class PaymentWindow :Window
+    public partial class PaymentMenuPage : Page
     {
-        public PaymentWindow()
+        public PaymentMenuPage()
         {
             InitializeComponent();
-        }
-
-        private void Cash_Button_Click( object sender, RoutedEventArgs e )
-        {
-
-        }
-
-        private void Credit_Button_Click( object sender, RoutedEventArgs e )
-        {
-
-        }
-
-        private void GiftCard_Button_Click( object sender, RoutedEventArgs e )
-        {
-
         }
     }
 }

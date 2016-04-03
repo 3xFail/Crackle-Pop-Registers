@@ -111,7 +111,7 @@ namespace SnapRegisters
         public static KeyboardHook kh;
 
 
-        private PaymentWindow m_pay_window;
+        //private PaymentWindow m_pay_window;
 
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
@@ -131,8 +131,8 @@ namespace SnapRegisters
             //Initialize window after the clock is ticked
             InitializeComponent();
 
-            m_pay_window = new PaymentWindow();
-            m_pay_window.Hide();
+            //m_pay_window = new PaymentWindow();
+            //m_pay_window.Hide();
 
             m_employee = currentEmployee;
             m_connection = session;
@@ -232,7 +232,7 @@ namespace SnapRegisters
                 try
                 {
                     // showPayByCashWindow();
-                    m_pay_window.Show();
+                    Payment_Frame.Navigate(new PaymentMenuPage());
                     
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); } //Catches exception if no items to pay for
