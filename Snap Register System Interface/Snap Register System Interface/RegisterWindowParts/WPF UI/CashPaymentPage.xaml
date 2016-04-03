@@ -1,4 +1,4 @@
-﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CashPaymentWindow"
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CashPaymentPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

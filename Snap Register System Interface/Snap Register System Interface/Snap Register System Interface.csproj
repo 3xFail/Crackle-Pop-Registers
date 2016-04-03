@@ -85,8 +85,8 @@
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
-    <Compile Include="RegisterWindowParts\WPF UI\CashPaymentWindow.xaml.cs">
-      <DependentUpon>CashPaymentWindow.xaml</DependentUpon>
+    <Compile Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml.cs">
+      <DependentUpon>CashPaymentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
@@ -127,7 +127,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="RegisterWindowParts\WPF UI\CashPaymentWindow.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,9 +18,9 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     /// <summary>
     /// Interaction logic for CashPaymentWindow.xaml
     /// </summary>
-    public partial class CashPaymentWindow : Page
+    public partial class CashPaymentPage: Page
     {
-        public CashPaymentWindow()
+        public CashPaymentPage()
         {
             InitializeComponent();
         }
