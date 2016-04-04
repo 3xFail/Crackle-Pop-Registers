@@ -90,10 +90,20 @@ namespace SnapRegisters
         {
             NavigationFrame.Navigate(new OptionsPage());
         }
-
         private void Window_Closing( object sender, System.ComponentModel.CancelEventArgs e )
         {
             DBInterface.Log( "Logged out" );
+        }
+        private void Logout()
+        {
+            SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
+            loginWindow.Show();
+            this.Close();
+        }
+        // logs out of the system
+        private void btn_Logout(object sender, RoutedEventArgs e)
+        {
+            Logout();
         }
     }
 }

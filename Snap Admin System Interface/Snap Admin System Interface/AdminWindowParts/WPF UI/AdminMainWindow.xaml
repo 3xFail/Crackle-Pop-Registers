@@ -8,7 +8,7 @@
         Background="{StaticResource Background}"
         Title="Snap Admininstrator Program" Icon="/SharedResources/Images/Emblem.png"
         
-        WindowState="Maximized" WindowStyle="SingleBorderWindow" Height="840" Width="1293.6" Closing="Window_Closing">
+        WindowState="Maximized" WindowStyle="None"  Height="840" Width="1293.6" Closing="Window_Closing">
     <!--Height="350" Width="525">-->
     <!--WindowState="Maximized"  WindowStyle="SingleBorderWindow" d:DesignHeight="843.9" Width="1170.8">-->
 
@@ -35,6 +35,8 @@
                 <Button x:Name="Customers_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80">Customers</Button>
                 <Button x:Name="Sales_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80">Sales</Button>
                 <Button x:Name="Options_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Opt" Height="80">Options</Button>
+                <!--logout button-->
+                <Button x:Name="Logout_btn" FontSize="20" BorderBrush="Black" Click="btn_Logout" Height="60" Width="100" VerticalAlignment="Bottom" Margin="0,80">Logout</Button>
             </StackPanel>
         </DockPanel>
 
