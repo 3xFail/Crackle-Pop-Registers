@@ -14,13 +14,13 @@ namespace PointOfSales.Users
 			: base()
 		{ }
 
-		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, long permissions)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, ulong permissions)
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{
 			m_employeePermissions = permissions;
 		}
 
-		public long GetEmployeePermissions()
+		public ulong GetEmployeePermissions()
 		{
 			return m_employeePermissions;
 		}
@@ -28,7 +28,7 @@ namespace PointOfSales.Users
 
 		// Employees by default are allowed to use the register.
 		// See PointOfSales.Permissions for details.
-		private long m_employeePermissions = 0;
+		private ulong m_employeePermissions = 0;
 
 
 	}

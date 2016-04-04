@@ -337,7 +337,7 @@ namespace SnapRegisters
 
         private void ChangeEmployeePermissions(Permissions.SystemPermissions newPermissions)
         {
-            m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, (long)newPermissions);
+            //m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, (ulong)newPermissions);
         }
 
         private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)

@@ -27,5 +27,13 @@ namespace AccessLibraryTest
 			Permissions.RemovePermissions(SallySue, SallySue, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE);
 			Permissions.AddPermission(SallySue, SallySue, Permissions.SystemPermissions.LOG_IN_REGISTER);
 		}
+
+        [TestMethod]
+        public void HasPermissionCheck()
+        {
+            ulong permission = 0;
+            Permissions.SetPermission( ref permission, true, Permissions.SystemPermissions.CAN_PROCESS_REFUNDS );
+            Assert.IsTrue( Permissions.CheckPermissions( permission, Permissions.SystemPermissions.CAN_PROCESS_REFUNDS ) );
+        }
     }
 }

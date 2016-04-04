@@ -56,67 +56,57 @@ namespace PointOfSales.Permissions
             // Register Permissions (NEW)
 
             // Allows the employee to log into the register system
-            LOG_IN_REGISTER = 1,
+            LOG_IN_REGISTER = 0,
 
             // Allows employee to put a cashier's station into 'override mode' 
             /// *for the duration of the current transaction?*
-            CAN_OVERRIDE_REGISTER = 2, 
+            CAN_OVERRIDE_REGISTER = 1, 
 
             // Allows the employee to void items from the sale
-            CAN_VOID_ITEM = 4, 
+            CAN_VOID_ITEM = 2, 
 
             // Allows the employee to void coupons from the sale
-            CAN_VOID_COUPON = 8, 
+            CAN_VOID_COUPON = 3, 
 
             // Allows the employee to void the entire sale
-            CAN_VOID_SALE = 16,
+            CAN_VOID_SALE = 4,
 
             // Allows the employee to add discounts to items.
-            CAN_DISCOUNT_ITEMS = 32, 
+            CAN_DISCOUNT_ITEMS = 5, 
 
             // Allows the employee to process refunds.
-            CAN_PROCESS_REFUNDS = 64, 
+            CAN_PROCESS_REFUNDS = 6,
 
             // Allows the employee to generate invoices.
             ///Don't know if needed yet 
-            CAN_GENERATE_INVOICE = 128,
+            CAN_GENERATE_INVOICE = 7,
 
             // Allows the employee to close either the register or admin programs on the station they are physically at.
-            CAN_EXIT_CRACKLE_POP_INTERFACE = 256,
+            CAN_EXIT_CRACKLE_POP_INTERFACE = 8,
 
             // Allows the employee to restart the entire station, including the OS. 
-            CAN_RESTART_STATION = 512,
+            CAN_RESTART_STATION = 9,
 
             // Allows the employee to use the register after normal business hours (configured separately).
-            AFTER_HOURS_REGISTER_ACCESS = 1024, 
-
+            AFTER_HOURS_REGISTER_ACCESS = 10, 
 
 
             // Admin Console Permission (NEW)
 
             // Allows the employee to log into the admin console.
-            LOG_IN_ADMIN_CONSOLE = 2048, 
+            LOG_IN_ADMIN_CONSOLE = 11, 
 
             // Allows the employee to view the list of employees and their information.
-            VIEW_EMPLOYEE_DATABASE = 4096, 
+            VIEW_EMPLOYEE_DATABASE = 12, 
 
             // Allows the employee to change the information of other employees. 
             ///Who's information can be changed is based on management level, can only change those below you. 
-            CHANGE_EMPLOYEE_DATABASE = 8192,
+            CHANGE_EMPLOYEE_DATABASE = 13,
 
 
             // Temporary permission to test manager functions, will be removed later
             ///TO REMOVE
-            IS_OWNER = 16384,
-
-
-
-            
-
-
-
-
-
+            IS_OWNER = 14,
 
 		}
 
@@ -130,7 +120,7 @@ namespace PointOfSales.Permissions
 		}
 
 		// Removes a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
-		public static void RemovePermissions(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, SystemPermissions PermissionToRemove)
+		public static void RemovePermissions( Users.Employee User, Users.Employee EmployeeToModify, SystemPermissions PermissionToRemove)
 		{
 			if (!CheckPermissions(User, SystemPermissions.CHANGE_EMPLOYEE_DATABASE))
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
@@ -139,13 +129,43 @@ namespace PointOfSales.Permissions
 		}
 
 		// Checks if the user EmployeeToCheck has the required permissions to perform a given operation.
-		public static bool CheckPermissions(PointOfSales.Users.Employee EmployeeToCheck, SystemPermissions PermissionToCheck)
+		public static bool CheckPermissions( Users.Employee EmployeeToCheck, SystemPermissions PermissionToCheck)
 		{
-			return ((EmployeeToCheck.GetEmployeePermissions() & (int)PermissionToCheck) != 0);
+			return ((EmployeeToCheck.GetEmployeePermissions() & (ulong)PermissionToCheck) != 0);
 		}
+        
+        public static bool CheckPermissions( ulong PermissionsFlags, SystemPermissions PermissionToCheck )
+        {
+            return GetBit( (int)PermissionToCheck, PermissionsFlags );
+        }
 
+        public static void SetPermission( ref ulong PermissionsFlags, bool value, SystemPermissions PermissionToSet )
+        {
+            SetBit( (int)PermissionToSet, value, ref PermissionsFlags );
+        }
 
+        public static void TogglePermission( ref ulong PermissionsFlags, SystemPermissions PermissionToToggle )
+        {
+            ToggleBit( (int)PermissionToToggle, ref PermissionsFlags );
+        }
 
+        private static bool GetBit( int idx, ulong flags )
+        {
+            return ( ( flags >> idx ) & 1 ) != 0;
+        }
+
+        private static void SetBit( int idx, bool value, ref ulong flags )
+        {
+            if( value ) //if true set the bit to 1
+                flags |= (ulong)1 << idx;
+            else //if false set the bit to 0
+                flags &= ~( (ulong)1 << idx );
+        }
+
+        private static void ToggleBit( int idx, ref ulong flags )
+        {
+            flags ^= (ulong)1 << idx; //flip the bit. If 1 set to 0, if 0 set to 1
+        }
 
     }
 }

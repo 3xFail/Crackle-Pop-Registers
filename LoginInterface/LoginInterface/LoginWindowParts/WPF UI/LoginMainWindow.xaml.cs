@@ -104,7 +104,7 @@ namespace SnapRegisters
                 {
 
                     string name = employee.Get( "FName" ) + ' ' + employee.Get( "LName" );
-                    long permissions = long.Parse( employee.Get( "PermissionsGroup" ) );
+                    ulong permissions = ulong.Parse( employee.Get( "PermissionsGroup" ) );
                     string phone = employee.Get( "PhoneNumber" );
                     int id = int.Parse( employee.Get( "UserID" ) );
 

@@ -55,5 +55,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             EmpFrame.Navigate( new LogEmployeePage() );
         }
+
+        private void EmpPermissions_Click( object sender, RoutedEventArgs e )
+        {
+            EmpFrame.Navigate( new PermissionsPage() );
+        }
     }
 }
