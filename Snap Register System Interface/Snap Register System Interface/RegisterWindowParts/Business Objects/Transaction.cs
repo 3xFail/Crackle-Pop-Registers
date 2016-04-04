@@ -84,7 +84,7 @@ namespace SnapRegisters
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
-			if (!Permissions.CheckPermissions(employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+			if ( !employee.HasPermisison( Permissions.RegisterLogIn ) )
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
             m_connection = session;
@@ -96,7 +96,7 @@ namespace SnapRegisters
 
 		public void AddItem(string itemID)
 		{
-			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before adding it to the list.
@@ -136,7 +136,7 @@ namespace SnapRegisters
 
 		public void RemoveItem(string itemID)
 		{
-			if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before removing it from the list.
@@ -190,24 +190,14 @@ namespace SnapRegisters
 			if (changedItem == null)
 				throw new InvalidOperationException("Item specified is not in sale.");
 
-			if (reason == "No description")
-			{
-				if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.CAN_DISCOUNT_ITEMS))
-					throw new InvalidOperationException("A reason must be specified for this action.");
-				else
-					changedItem.Price = newPrice;
-			}
+			if (!m_Employee.HasPermisison( Permissions.CanDiscountItems ) )
+				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 			else
-			{
-				if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.CAN_DISCOUNT_ITEMS))
-					throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
-				else
-					changedItem.Price = newPrice;
-			}
+				changedItem.Price = newPrice;
 		}
 		public void AddCoupon(string couponID)
 		{
-            if (!Permissions.CheckPermissions(m_Employee, Permissions.SystemPermissions.LOG_IN_REGISTER))
+            if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
             if( m_Coupons.Any( x => x.Barcode == couponID ) )

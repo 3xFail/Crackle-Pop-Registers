@@ -15,8 +15,7 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Height="100" Margin="114,24,0,0" VerticalAlignment="Top" Width="100">
-            <CheckBox Content="IsOwner" IsChecked="{Binding IsOwner}" />
+        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="114,24,0,0" VerticalAlignment="Top">
         </StackPanel>
 
     </Grid>

@@ -10,48 +10,22 @@ namespace PointOfSales.Permissions
 	public static class Permissions
 	{
 
-		public enum SystemPermissions
+        public static readonly string RegisterLogIn = "RegisterLogIn";
+        public static readonly string RegisterOverride = "RegisterOverride";
+        public static readonly string CanVoidItem = "CanVoidItem";
+        public static readonly string CanVoidCoupon = "CanVoidCoupon";
+        public static readonly string CanVoidSale = "CanVoidSale";
+        public static readonly string CanDiscountItems = "CanDiscountItems";
+        public static readonly string CanProcessRefunds = "CanProcessRefunds";
+        public static readonly string CanGenerateInvoice = "CanGenerateInvoice";
+        public static readonly string CanExitInterface = "CanExitInterface";
+        public static readonly string CanRestartStation = "CanRestartStation";
+        public static readonly string AfterHoursLogin = "AfterHoursLogin";
+        public static readonly string AdminLogIn = "AdminLogIn";
+        public static readonly string ViewEmployeeCatalog = "ViewEmployeeCatalog";
+        public static readonly string ChangeEmployeeCatalog = "ChangeEmployeeCatalog";
+        public enum SystemPermissions
 		{
-
-            ///***********************
-            /// Deprecated Permissions
-            ///***********************
-
-            //// Allows the user to use a register to scan items.
-            //UseRegister = 1,
-
-            //// Allows the user to process a payment for the transaction.
-            //ProcessPayment = 2,
-
-            //// Allows the user to apply a coupon to the sale.
-            //ApplyCoupon = 4,
-
-            //// Allows the user to override predefined prices with an entered value, A reason must be entered as to why the price was changed.
-            //PriceOverride = 8,
-
-            //// Allows the user to change the stored amount of an item.
-            //ChangeAStockQuantity = 16,
-
-            //// Allows the addition or removal of store products.
-            //AddRemoveAProduct = 32,
-
-            //// Allows the user to change the price/brand/etc. of a product.
-            //ChangeProductDetails = 64,
-
-            //// Allows the user to change the value of transactions that have happened in the past.
-            //ModifyTransaction = 128,
-
-            //// Allows the user to change other users' permissions.
-            //ChangePermissions = 256,
-
-            //// Allows the user to override predefined prices with an entered value.
-            //PriceOverrideNoReason = 512,
-
-            //// Allows the employee to use Manager functions at the login window
-            //UseLoginWindowManagerFunctions = 1024,
-
-
-
 
             // Register Permissions (NEW)
 
@@ -110,43 +84,62 @@ namespace PointOfSales.Permissions
 
 		}
 
+        public static readonly List<string> _Permissions = new List<string>()
+        {
+            RegisterLogIn,
+            RegisterOverride,
+            CanVoidItem,
+            CanVoidCoupon,
+            CanVoidSale,
+            CanDiscountItems,
+            CanProcessRefunds,
+            CanGenerateInvoice,
+            CanExitInterface,
+            CanRestartStation,
+            AfterHoursLogin,
+            AdminLogIn,
+            ViewEmployeeCatalog,
+            ChangeEmployeeCatalog
+
+        };
+
 		// Adds a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
-		public static void AddPermission(PointOfSales.Users.Employee User, PointOfSales.Users.Employee EmployeeToModify, SystemPermissions PermissionToAdd)
+		public static void AddPermission( Users.Employee User, Users.Employee EmployeeToModify, string PermissionToAdd)
 		{
-			if (!CheckPermissions(User, SystemPermissions.CHANGE_EMPLOYEE_DATABASE))
+            if( !CheckPermissions( User, ChangeEmployeeCatalog ) ) 
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			// TODO: Connect to the database, change permissions and rebuild the employee class.
 		}
 
 		// Removes a permission from the employee EmployeeToModify. If the user User does not have permissions to do this, instead throws an exception.
-		public static void RemovePermissions( Users.Employee User, Users.Employee EmployeeToModify, SystemPermissions PermissionToRemove)
+		public static void RemovePermissions( Users.Employee User, Users.Employee EmployeeToModify, string PermissionToRemove)
 		{
-			if (!CheckPermissions(User, SystemPermissions.CHANGE_EMPLOYEE_DATABASE))
+			if (!CheckPermissions( User, ChangeEmployeeCatalog ) )
 				throw new InvalidOperationException("User " + User.name + " Does not have permissions for this operation.");
 
 			// TODO: Connect to the database, change permissions and rebuild the employee class.
 		}
 
 		// Checks if the user EmployeeToCheck has the required permissions to perform a given operation.
-		public static bool CheckPermissions( Users.Employee EmployeeToCheck, SystemPermissions PermissionToCheck)
+		public static bool CheckPermissions( Users.Employee EmployeeToCheck, string PermissionToCheck )
 		{
-			return ((EmployeeToCheck.GetEmployeePermissions() & (ulong)PermissionToCheck) != 0);
+            return GetBit( _Permissions.IndexOf( PermissionToCheck ), EmployeeToCheck.Permissions );
 		}
         
-        public static bool CheckPermissions( ulong PermissionsFlags, SystemPermissions PermissionToCheck )
+        public static bool CheckPermissions( ulong PermissionsFlags, string PermissionToCheck )
         {
-            return GetBit( (int)PermissionToCheck, PermissionsFlags );
+            return GetBit( _Permissions.IndexOf( PermissionToCheck ), PermissionsFlags );
         }
 
-        public static void SetPermission( ref ulong PermissionsFlags, bool value, SystemPermissions PermissionToSet )
+        public static void SetPermission( ref ulong PermissionsFlags, bool value, string PermissionToSet )
         {
-            SetBit( (int)PermissionToSet, value, ref PermissionsFlags );
+            SetBit( _Permissions.IndexOf( PermissionToSet ), value, ref PermissionsFlags );
         }
 
-        public static void TogglePermission( ref ulong PermissionsFlags, SystemPermissions PermissionToToggle )
+        public static void TogglePermission( ref ulong PermissionsFlags, string PermissionToToggle )
         {
-            ToggleBit( (int)PermissionToToggle, ref PermissionsFlags );
+            ToggleBit( _Permissions.IndexOf( PermissionToToggle ), ref PermissionsFlags );
         }
 
         private static bool GetBit( int idx, ulong flags )

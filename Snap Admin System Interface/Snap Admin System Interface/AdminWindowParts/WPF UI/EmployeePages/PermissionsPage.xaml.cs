@@ -20,16 +20,13 @@ using SnapRegisters;
 using System.Globalization;
 using System.Data;
 using PointOfSales.Permissions;
-using SystemPermissions = PointOfSales.Permissions.Permissions.SystemPermissions;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
     public class PermissionGroup
     {
         public string Name { get; set; } = string.Empty;
-        public ulong Flags { get; set; } = 0;
-        public bool LogIntoRegister { set { LogIntoRegister = value; } get { return Permissions.CheckPermissions( Flags, SystemPermissions.LOG_IN_REGISTER ); } }
-        public bool IsOwner { set {  } get { return Permissions.CheckPermissions( Flags, SystemPermissions.IS_OWNER ); } }
+        public ulong Flags = 0;
     }
 
     public partial class PermissionsPage :Page
@@ -39,6 +36,16 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             InitializeComponent();
             PopulateList();
+            for( int i = 0; i < Permissions._Permissions.Count; ++i )
+            {
+                CheckBoxSP.Children.Add( new CheckBox()
+                {
+                    Content = Permissions._Permissions[i]
+                } );
+
+                ( (CheckBox)CheckBoxSP.Children[i] ).Checked += CheckBox_Toggle;
+                ( (CheckBox)CheckBoxSP.Children[i] ).Unchecked += CheckBox_Toggle;
+            }
         }
 
         private void PopulateList()
@@ -60,15 +67,38 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             PermissionsGrid.ItemsSource = data;
         }
 
+        PermissionGroup _group = null;
         private void PermissionsGrid_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             try
             {
                 PermissionGroup group = (PermissionGroup)e.AddedItems[0];
+                _group = group;
 
-                CheckBoxSP.DataContext = group;
+                foreach( var child in CheckBoxSP.Children )
+                {
+                    CheckBox cb = (CheckBox)child;
+
+                    cb.Checked -= CheckBox_Toggle;
+                    cb.Unchecked -= CheckBox_Toggle;
+
+                    cb.IsChecked = Permissions.CheckPermissions( group.Flags, (string)cb.Content );
+
+                    cb.Checked += CheckBox_Toggle;
+                    cb.Unchecked += CheckBox_Toggle;
+                }
             }
             catch { }
+        }
+
+        private void CheckBox_Toggle( object sender, RoutedEventArgs e )
+        {
+            if( _group != null )
+            {
+                CheckBox cb = (CheckBox)sender;
+                Permissions.SetPermission( ref _group.Flags, cb.IsChecked == true, (string)cb.Content );
+                DBInterface.ModifyPermissionValue( _group.Name, (long)_group.Flags, (string)cb.Content, cb.IsChecked == true );
+            }
         }
     }
 }

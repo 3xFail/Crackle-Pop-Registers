@@ -72,12 +72,12 @@ namespace SnapRegisters
         {
 
 #if ADMIN
-                if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.SystemPermissions.LOG_IN_ADMIN_CONSOLE))
+                if (!employeeLoggedIn.HasPermisison( Permissions.AdminLogIn) )
                     throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
                 SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
                 MainAdminWindow.Show();
 #elif REGISTER
-            if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.SystemPermissions.LOG_IN_REGISTER))
+            if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.RegisterLogIn))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
             SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, _connection);
             MainRegisterWindow.Show();
@@ -124,7 +124,7 @@ namespace SnapRegisters
             e.CanExecute = false;
             if (_isLoggedIn)
             {
-                if (Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.CAN_EXIT_CRACKLE_POP_INTERFACE))
+                if( _loggedIn.HasPermisison( Permissions.CanExitInterface ) )
                 {
                     e.CanExecute = true;
                 }
@@ -146,7 +146,7 @@ namespace SnapRegisters
 
             ConnectToServer(_lastAttempt);
 
-            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.SystemPermissions.CAN_EXIT_CRACKLE_POP_INTERFACE))
+            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.CanExitInterface ))
             {
                 btnShowPopup_Click(sender, e);
                 passwordField.Clear();
