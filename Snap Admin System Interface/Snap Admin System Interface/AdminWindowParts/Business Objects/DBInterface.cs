@@ -43,6 +43,15 @@ namespace SnapRegisters
             m_connection.WriteNoResponse( "AddPermission @0", name );
         }
 
+        public static void RemovePermission( string name )
+        {
+            Log( $"Removed group \"{name}\"." );
+            m_connection.Write( "RemovePermissionGroup @0", name );
+
+            if( Response[0].Get( "Return" ) == "-1" )
+                throw new ArgumentException( "There are users currently in this group, it cannot be removed." );
+        }
+
         public static void ModifyPermissionValue( string permission_group, long value, string permission_name, bool new_value )
         {
             if( new_value )

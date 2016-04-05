@@ -9,7 +9,7 @@
       Title="PermissionsPage">
 
     <Grid>
-        <DataGrid x:Name="PermissionsGrid" SelectionMode="Single" SelectionChanged="PermissionsGrid_SelectionChanged" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserResizeRows="False" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" CellEditEnding="PermissionsGrid_CellEditEnding" BeginningEdit="PermissionsGrid_BeginningEdit">
+        <DataGrid x:Name="PermissionsGrid" SelectionMode="Single" SelectionChanged="PermissionsGrid_SelectionChanged" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserResizeRows="False" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" CellEditEnding="PermissionsGrid_CellEditEnding" BeginningEdit="PermissionsGrid_BeginningEdit" PreviewKeyDown="PermissionsGrid_PreviewKeyDown">
             <DataGrid.Resources>
                 <Style x:Key="ErrorStyle" TargetType="{x:Type TextBox}">
                     <Setter Property="Padding" Value="-2"/>

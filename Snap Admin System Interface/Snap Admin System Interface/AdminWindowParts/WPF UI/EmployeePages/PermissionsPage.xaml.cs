@@ -162,5 +162,27 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 }
             }
         }
+
+        private void PermissionsGrid_PreviewKeyDown( object sender, KeyEventArgs e )
+        {
+            if( Key.Delete == e.Key )
+            {
+                try
+                {
+                    foreach( var row in PermissionsGrid.SelectedItems )
+                    {
+                        PermissionGroup group = row as PermissionGroup;
+                        DBInterface.RemovePermission( group.Name );
+                        data.Remove( group );
+                    }
+                }
+                catch( ArgumentException ex )
+                {
+                    System.Windows.Forms.MessageBox.Show( ex.Message );
+                    e.Handled = true;
+                }
+                catch { }
+            }
+        }
     }
 }
