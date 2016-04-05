@@ -27,12 +27,14 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     {
         public override ValidationResult Validate( object value, CultureInfo cultureInfo )
         {
-            value = value ?? string.Empty;
+            if( value != null )
+            {
                 DBInterface.GetAllPermissions();
 
                 foreach( XmlNode node in DBInterface.Response )
-                    if( node.Get( "PermissionsGroup") == value.ToString() )
+                    if( node.Get( "PermissionsGroup" ) == value.ToString() )
                         return new ValidationResult( false, value.ToString() + " is already an existing group." );
+            }
             return ValidationResult.ValidResult;
         }
     }
@@ -132,18 +134,18 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             PermissionGroup group = e.Row.DataContext as PermissionGroup;
             TextBox t = e.EditingElement as TextBox;
-            if( group != null && t?.Text != oldname )
+            if( group != null && t?.Text != oldname && t?.Text != string.Empty )
             {
                 if( oldname == string.Empty )
                 {
                     try
                     {
                         DBInterface.AddPermission( t.Text );
-                        System.Windows.Forms.MessageBox.Show( $"Successfully added group {t.Text}" );
+                        MessageBox.Show( $"Successfully added group {t.Text}" );
                     }
                     catch
                     {
-                        System.Windows.Forms.MessageBox.Show( "Could not create group." );
+                        MessageBox.Show( "Could not create group." );
                         t.Text = oldname;
                     }
                 }
@@ -156,7 +158,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     }
                     catch
                     {
-                        System.Windows.Forms.MessageBox.Show( "Could not rename group." );
+                        MessageBox.Show( "Could not rename group." );
                         t.Text = oldname;
                     }
                 }
@@ -172,8 +174,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     foreach( var row in PermissionsGrid.SelectedItems )
                     {
                         PermissionGroup group = row as PermissionGroup;
-                        DBInterface.RemovePermission( group.Name );
-                        data.Remove( group );
+                        if( group.Name != string.Empty )
+                        {
+                            DBInterface.RemovePermission( group.Name );
+                            data.Remove( group );
+                        }
                     }
                 }
                 catch( ArgumentException ex )
