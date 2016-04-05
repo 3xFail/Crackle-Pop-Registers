@@ -20,7 +20,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     /// </summary>
     public partial class PaymentMenuPage : Page
     {
-        public static Frame m_payment_frame; 
+        public static Frame m_payment_menu_frame; 
         public PaymentMenuPage()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Cash_Button_Click(object sender, RoutedEventArgs e)
         {
-            m_payment_frame.Navigate( new CashPaymentPage() );
+            m_payment_menu_frame.Navigate( new CashPaymentPage() );
         }
 
         private void Credit_Button_Click(object sender, RoutedEventArgs e)
@@ -44,6 +44,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             //needs to close the frame view... not sure how todo that
+            //m_payment_menu_frame.ClearValue;
         }
     }
 }

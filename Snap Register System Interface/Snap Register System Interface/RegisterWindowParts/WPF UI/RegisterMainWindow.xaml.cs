@@ -233,6 +233,8 @@ namespace SnapRegisters
                 {
                     // showPayByCashWindow();
                     Payment_Frame.Navigate(new PaymentMenuPage());
+
+                    PaymentMenuPage.m_payment_menu_frame = Payment_Frame;
                     
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); } //Catches exception if no items to pay for

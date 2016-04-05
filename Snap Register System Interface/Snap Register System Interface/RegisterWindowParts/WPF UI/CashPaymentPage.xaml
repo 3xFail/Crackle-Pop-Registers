@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
       mc:Ignorable="d" 
       d:DesignHeight="360" d:DesignWidth="300"
-      Title="CashPaymentWindow"
+      Title="CashPaymentPage"
       >
 
     <Grid Background="{StaticResource Background }">
