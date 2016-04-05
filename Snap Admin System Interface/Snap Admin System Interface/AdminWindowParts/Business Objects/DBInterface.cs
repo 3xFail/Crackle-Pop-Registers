@@ -37,6 +37,12 @@ namespace SnapRegisters
             m_connection.Write( "GetAllPermissions" );
         }
 
+        public static void AddPermission( string name )
+        {
+            Log( $"Added group \"{name}\"." );
+            m_connection.WriteNoResponse( "AddPermission @0", name );
+        }
+
         public static void ModifyPermissionValue( string permission_group, long value, string permission_name, bool new_value )
         {
             if( new_value )
@@ -44,6 +50,12 @@ namespace SnapRegisters
             else
                 Log( $"Removed \"{permission_name}\" from group \"{permission_group}\"." );
             m_connection.WriteNoResponse( "ModifyPermissionValue @0, @1", permission_group, value );
+        }
+
+        public static void RenamePermissionlevel( string new_name, string old_name, long value )
+        {
+            Log( $"Renamed group \"{old_name}\" to \"{new_name}\"." );
+            m_connection.WriteNoResponse( "RenamePermissionLevel @0, @1, @2", new_name, old_name, value );
         }
 
         public static bool UserExists( string username )

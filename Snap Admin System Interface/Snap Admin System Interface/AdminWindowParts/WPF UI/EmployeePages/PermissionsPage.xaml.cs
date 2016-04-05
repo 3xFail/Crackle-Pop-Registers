@@ -23,9 +23,29 @@ using PointOfSales.Permissions;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 {
+    internal class GroupNameValidationRule: ValidationRule
+    {
+        public override ValidationResult Validate( object value, CultureInfo cultureInfo )
+        {
+            value = value ?? string.Empty;
+                DBInterface.GetAllPermissions();
+
+                foreach( XmlNode node in DBInterface.Response )
+                    if( node.Get( "PermissionsGroup") == value.ToString() )
+                        return new ValidationResult( false, value.ToString() + " is already an existing group." );
+            return ValidationResult.ValidResult;
+        }
+    }
+
     public class PermissionGroup
     {
-        public string Name { get; set; } = string.Empty;
+
+        private string name = string.Empty;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
         public ulong Flags = 0;
     }
 
@@ -98,6 +118,48 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 CheckBox cb = (CheckBox)sender;
                 Permissions.SetPermission( ref _group.Flags, cb.IsChecked == true, (string)cb.Content );
                 DBInterface.ModifyPermissionValue( _group.Name, (long)_group.Flags, (string)cb.Content, cb.IsChecked == true );
+            }
+        }
+
+        string oldname;
+        private void PermissionsGrid_BeginningEdit( object sender, DataGridBeginningEditEventArgs e )
+        {
+            PermissionGroup group = e.Row.Item as PermissionGroup;
+            oldname = group.Name;
+        }
+
+        private void PermissionsGrid_CellEditEnding( object sender, DataGridCellEditEndingEventArgs e )
+        {
+            PermissionGroup group = e.Row.DataContext as PermissionGroup;
+            TextBox t = e.EditingElement as TextBox;
+            if( group != null && t?.Text != oldname )
+            {
+                if( oldname == string.Empty )
+                {
+                    try
+                    {
+                        DBInterface.AddPermission( t.Text );
+                        System.Windows.Forms.MessageBox.Show( $"Successfully added group {t.Text}" );
+                    }
+                    catch
+                    {
+                        System.Windows.Forms.MessageBox.Show( "Could not create group." );
+                        t.Text = oldname;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        DBInterface.RenamePermissionlevel( t.Text, oldname, (long)group.Flags );
+                        System.Windows.Forms.MessageBox.Show( $"Successfully renamed {oldname} to {t.Text}!" );
+                    }
+                    catch
+                    {
+                        System.Windows.Forms.MessageBox.Show( "Could not rename group." );
+                        t.Text = oldname;
+                    }
+                }
             }
         }
     }

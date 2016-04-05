@@ -9,14 +9,32 @@
       Title="PermissionsPage">
 
     <Grid>
-        <DataGrid x:Name="PermissionsGrid" SelectionMode="Single" SelectionChanged="PermissionsGrid_SelectionChanged" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserResizeRows="False" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top">
+        <DataGrid x:Name="PermissionsGrid" SelectionMode="Single" SelectionChanged="PermissionsGrid_SelectionChanged" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserResizeRows="False" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" CellEditEnding="PermissionsGrid_CellEditEnding" BeginningEdit="PermissionsGrid_BeginningEdit">
+            <DataGrid.Resources>
+                <Style x:Key="ErrorStyle" TargetType="{x:Type TextBox}">
+                    <Setter Property="Padding" Value="-2"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" 
+                                Value="{Binding RelativeSource={RelativeSource Self},
+                                  Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}">
+                <DataGridTextColumn Header="Name" >
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Name" ValidatesOnExceptions="True" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <!--<local:GroupNameValidationRule/>-->
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="114,24,0,0" VerticalAlignment="Top">
-        </StackPanel>
-
+        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="114,24,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
