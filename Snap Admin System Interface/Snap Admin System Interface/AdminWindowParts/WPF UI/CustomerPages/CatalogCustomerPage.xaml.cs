@@ -26,7 +26,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     {
         public override ValidationResult Validate( object value, CultureInfo cultureInfo )
         {
-            if( value != null && !DBInterface.UserExists( value.ToString() ) )
+            if( value != null && value.ToString() != string.Empty && !DBInterface.UserExists( value.ToString() ) )
                 return new ValidationResult( false, value.ToString() + " is not an existing user." );
             return ValidationResult.ValidResult;
         }
