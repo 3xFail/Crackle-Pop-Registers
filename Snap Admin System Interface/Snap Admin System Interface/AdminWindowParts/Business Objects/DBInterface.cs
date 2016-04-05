@@ -37,6 +37,15 @@ namespace SnapRegisters
             m_connection.Write( "GetAllPermissions" );
         }
 
+        public static void ModifyPermissionValue( string permission_group, long value, string permission_name, bool new_value )
+        {
+            if( new_value )
+                Log( $"Gave \"{permission_name}\" to group \"{permission_group}\"." );
+            else
+                Log( $"Removed \"{permission_name}\" from group \"{permission_group}\"." );
+            m_connection.WriteNoResponse( "ModifyPermissionValue @0, @1", permission_group, value );
+        }
+
         public static bool UserExists( string username )
         {
             m_connection.Write( "GetPass_Username @0", username );

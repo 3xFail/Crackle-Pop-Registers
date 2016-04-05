@@ -149,6 +149,9 @@
     <Compile Include="AdminWindowParts\WPF UI\EmployeePages\LogEmployeePage.xaml.cs">
       <DependentUpon>LogEmployeePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\EmployeePages\PermissionsPage.xaml.cs">
+      <DependentUpon>PermissionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindowParts\WPF UI\EmployeePages\UsageEmployeePage.xaml.cs">
       <DependentUpon>UsageEmployeePage.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\EmployeePages\LogEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\EmployeePages\PermissionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

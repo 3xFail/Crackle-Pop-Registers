@@ -13,6 +13,7 @@
             <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50"/>
             <Button x:Name="EmpUsageBtn" Content="Register Usage" Click="EmpUsageBtn_Click" Height="50"/>
             <Button x:Name="EmpLogBtn" Content="Admin Logs" Click="EmpLogBtn_Click" Height="50"/>
+            <Button x:Name="EmpPermissions" Content="Permissions" Click="EmpPermissions_Click" Height="50"/>
             <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50"/>
         </StackPanel>
     </Grid>

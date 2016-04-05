@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Device.Location;
+using PointOfSales.Permissions;
 
 namespace PointOfSales.Users
 {
@@ -14,22 +15,30 @@ namespace PointOfSales.Users
 			: base()
 		{ }
 
-		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, long permissions)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, ulong permissions)
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{
-			m_employeePermissions = permissions;
+            Permissions = permissions;
 		}
 
-		public long GetEmployeePermissions()
-		{
-			return m_employeePermissions;
-		}
+        public bool HasPermisison( string permission )
+        {
+            return PointOfSales.Permissions.Permissions.CheckPermissions( this, permission );
+        }
+
+        public void SetPermission( string permission, bool value )
+        {
+            PointOfSales.Permissions.Permissions.SetPermission( ref Permissions, value, permission );
+        }
+
+        public void TogglePermisison( string permission )
+        {
+            PointOfSales.Permissions.Permissions.TogglePermission( ref Permissions, permission );
+        }
 
 
 		// Employees by default are allowed to use the register.
 		// See PointOfSales.Permissions for details.
-		private long m_employeePermissions = 0;
-
-
+		public ulong Permissions = 0;
 	}
 }

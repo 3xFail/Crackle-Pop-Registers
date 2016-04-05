@@ -74,7 +74,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void ResetPasswordButton_Click( object sender, RoutedEventArgs e )
         {
-            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
             {
                 User user = ( (FrameworkElement)sender ).DataContext as User;
 
@@ -102,7 +102,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void PermissionGroup_Close( object sender, EventArgs e )
         {
-            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
             {
                 User user = ( (FrameworkElement)sender ).DataContext as User;
                 if( user.PermissionsGroup != oldgroup )
@@ -118,7 +118,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void Active_Toggle( object sender, RoutedEventArgs e )
         {
-            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
             {
                 User user = ( (FrameworkElement)sender ).DataContext as User;
                 DBInterface.SetUserActivity( user.UserID, user.Active );

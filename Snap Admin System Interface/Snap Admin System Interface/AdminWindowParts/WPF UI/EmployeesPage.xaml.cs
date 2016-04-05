@@ -32,7 +32,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         // navigate to add employee page
         private void btn_AddEmp(object sender, RoutedEventArgs e)
         {
-            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.CHANGE_EMPLOYEE_DATABASE ) )
+            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
                 EmpFrame.Navigate( new AddEmployeePage() );
             else
                 MessageBox.Show( "You do not have permissions to add/modify employees." );
@@ -40,7 +40,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void EmpCatalog_Click( object sender, RoutedEventArgs e )
         {
-            if( Permissions.CheckPermissions( DBInterface.m_employee, Permissions.SystemPermissions.VIEW_EMPLOYEE_DATABASE ) )
+            if( DBInterface.m_employee.HasPermisison( Permissions.ViewEmployeeCatalog ) )
                 EmpFrame.Navigate( new CatalogEmployeePage() );
             else
                 MessageBox.Show( "You do not have permissions to view the employee catalog." );
@@ -54,6 +54,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         private void EmpLogBtn_Click( object sender, RoutedEventArgs e )
         {
             EmpFrame.Navigate( new LogEmployeePage() );
+        }
+
+        private void EmpPermissions_Click( object sender, RoutedEventArgs e )
+        {
+            EmpFrame.Navigate( new PermissionsPage() );
         }
     }
 }
