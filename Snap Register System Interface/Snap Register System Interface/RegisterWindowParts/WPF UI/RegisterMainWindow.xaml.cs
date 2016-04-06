@@ -100,10 +100,10 @@ namespace SnapRegisters
 
         private ConnectionSession m_connection = null;
         private Transaction m_transaction = null;
-        private Employee m_employee = null;
-        private DateTime m_start { get; set; } = DateTime.Now;
-        private int m_itemssold { get; set; } = 0;
-        private decimal m_totalsales { get; set; } = 0M;
+        public Employee m_employee { get; private set; } = null;
+        public DateTime m_start { get; private set; } = DateTime.Now;
+        public int m_itemssold { get; set; } = 0;
+        public decimal m_totalsales { get; set; } = 0M;
         private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
         private decimal m_costTotal = 0;
         private decimal m_savingsTotal = 0;
@@ -335,7 +335,7 @@ namespace SnapRegisters
         private void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
             //Logout();
-            Main_Frame.Navigate(new OptionsPage());
+            Main_Frame.Navigate(new OptionsPage(this));
             OptionsPage.Options_Frame = Main_Frame;
         }
 
