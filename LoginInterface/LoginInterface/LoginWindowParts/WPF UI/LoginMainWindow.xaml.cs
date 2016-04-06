@@ -124,7 +124,7 @@ namespace SnapRegisters
             e.CanExecute = false;
             if (_isLoggedIn)
             {
-                //if( _loggedIn.HasPermisison( Permissions.CanExitInterface ) )
+                if( _loggedIn.HasPermisison( Permissions.CanExitInterface ) )
                 {
                     e.CanExecute = true;
                 }

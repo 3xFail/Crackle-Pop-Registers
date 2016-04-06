@@ -65,7 +65,7 @@ namespace SnapRegisters
 	//					Changes the permissions of the logged in employee and closes this window.
 	//		PERMISSIONS:
 	//*************************************************************************************************************
-	public delegate void AssignPermissionsDelegate(Permissions.SystemPermissions permissionsToAssign);
+	public delegate void AssignPermissionsDelegate(ulong permissionsToAssign);
 	public partial class ManagerOverrideMenu : Window
 	{
 		public ManagerOverrideMenu(AssignPermissionsDelegate permissionsOutput)
@@ -76,13 +76,13 @@ namespace SnapRegisters
 		}
 		public void GetPermissions(string employeeIDCode)
 		{
-			//TODO: Replace this with getting actual permissions.
-			m_scannedPermissions = Permissions.SystemPermissions.IS_OWNER;
+            //TODO: Replace this with getting actual permissions.
+            m_scannedPermissions = ulong.MaxValue;
 		}
 
 
 		private AssignPermissionsDelegate m_permissionsOutput;
-		private Permissions.SystemPermissions m_scannedPermissions;
+		private ulong m_scannedPermissions;
 		private void KeyPressed(object sender, KeyEventArgs keyPressed)
 		{
 			if (keyPressed.Key == Key.B && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
