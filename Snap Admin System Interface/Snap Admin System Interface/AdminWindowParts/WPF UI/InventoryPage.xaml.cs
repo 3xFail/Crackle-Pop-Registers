@@ -29,7 +29,14 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void CatalogBtn_Click(object sender, RoutedEventArgs e)
         {
-            InvFrame.Navigate(new CatalogInventoryPage());
+            try
+            {
+                InvFrame.Navigate( new CatalogInventoryPage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
 
         private void InvBackBtn_Click(object sender, RoutedEventArgs e)

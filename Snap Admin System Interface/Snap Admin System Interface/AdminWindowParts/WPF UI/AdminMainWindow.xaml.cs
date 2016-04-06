@@ -54,41 +54,82 @@ namespace SnapRegisters
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new CatalogInventoryPage());
-            //this.NavigationFrame.Navigate(new Uri("InventoryPage.xaml", UriKind.Relative));
+            try
+            {
+                NavigationFrame.Navigate( new CatalogInventoryPage() );
 
-            InventoryPage.InvFrame = NavigationFrame;
+                InventoryPage.InvFrame = NavigationFrame;
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         // opens the analysis page
         private void btn_Anal(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new AnalysisPage());
+            try
+            {
+                NavigationFrame.Navigate( new AnalysisPage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         // opens the employees page
         private void btn_Emp(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new EmployeesPage());
+            try
+            {
+                NavigationFrame.Navigate( new EmployeesPage() );
 
-            // reference the AdminMainWindow frame
-            EmployeesPage.EmpFrame = NavigationFrame;
+                // reference the AdminMainWindow frame
+                EmployeesPage.EmpFrame = NavigationFrame;
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         // opens the customers page
         private void btn_Cust(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new CustomersPage());
+            try
+            {
+                NavigationFrame.Navigate( new CustomersPage() );
 
-            // reference the AdminMainWindow frame
-            CustomersPage.CustFrame = NavigationFrame;
+                // reference the AdminMainWindow frame
+                CustomersPage.CustFrame = NavigationFrame;
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         // opens the sales page
         private void btn_Sales(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new SalesPage());
+            try
+            {
+                NavigationFrame.Navigate( new SalesPage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         // opens the options page
         private void btn_Opt(object sender, RoutedEventArgs e)
         {
-            NavigationFrame.Navigate(new OptionsPage());
+            try
+            {
+                NavigationFrame.Navigate( new OptionsPage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
         private void Window_Closing( object sender, System.ComponentModel.CancelEventArgs e )
         {

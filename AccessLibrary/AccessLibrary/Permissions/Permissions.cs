@@ -85,6 +85,7 @@ namespace PointOfSales.Permissions
             { ChangeItemCatalog, "You do not have permission to modify item information" },
             { ChangeItemQuantity, "You do not have permission to modify item quantity" },
             { ViewAdminLogs, "You do not have permission to view the admin logs" },
+            { ViewRegisterLogs, "You do not have permission to view the register logs" },
             { ViewPermissions, "You do not have permission to view permissions" },
             { ModifyPermissions, "You do not have permission to modify permissions" },
             { ViewCustomerCatalog, "You do not have permission to view the customer catalog" },

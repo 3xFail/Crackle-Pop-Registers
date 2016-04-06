@@ -32,33 +32,62 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         // navigate to add employee page
         private void btn_AddEmp(object sender, RoutedEventArgs e)
         {
-            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
+            try
+            {
                 EmpFrame.Navigate( new AddEmployeePage() );
-            else
-                MessageBox.Show( "You do not have permissions to add/modify employees." );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
 
         private void EmpCatalog_Click( object sender, RoutedEventArgs e )
         {
-            if( DBInterface.m_employee.HasPermisison( Permissions.ViewEmployeeCatalog ) )
+            try
+            {
                 EmpFrame.Navigate( new CatalogEmployeePage() );
-            else
-                MessageBox.Show( "You do not have permissions to view the employee catalog." );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
 
         private void EmpUsageBtn_Click( object sender, RoutedEventArgs e )
         {
-            EmpFrame.Navigate( new UsageEmployeePage() );
+            try
+            {
+                EmpFrame.Navigate( new UsageEmployeePage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
 
         private void EmpLogBtn_Click( object sender, RoutedEventArgs e )
         {
-            EmpFrame.Navigate( new LogEmployeePage() );
+            try
+            {
+                EmpFrame.Navigate( new LogEmployeePage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
 
         private void EmpPermissions_Click( object sender, RoutedEventArgs e )
         {
-            EmpFrame.Navigate( new PermissionsPage() );
+            try
+            {
+                EmpFrame.Navigate( new PermissionsPage() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
     }
 }
