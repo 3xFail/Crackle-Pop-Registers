@@ -107,7 +107,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 User user = ( (FrameworkElement)sender ).DataContext as User;
                 if( user.PermissionsGroup != oldgroup )
                 {
-                    DBInterface.ChangePermissions( user.UserID, user.PermissionsGroup );
+                    DBInterface.ChangePermissions( user.Username, user.UserID, user.PermissionsGroup );
                 }
             }
             else

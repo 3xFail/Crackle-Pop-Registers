@@ -63,7 +63,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 {
                     data.Add( new LogData()
                     {
-                        Username = node.Get( "Username" )
+                        Username = node.Get( "Username" ) + " (" + node.Get( "FName" ) + ' ' + node.Get( "LName" ) + ")"
                         , Time = DateTime.Parse( node.Get( "Time" ) )
                         , Event = node.Get( "Event" )
                     } );
