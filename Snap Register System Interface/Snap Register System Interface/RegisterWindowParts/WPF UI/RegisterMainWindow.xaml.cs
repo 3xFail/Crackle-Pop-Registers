@@ -324,7 +324,7 @@ namespace SnapRegisters
             FocusManager.SetFocusedElement(this, UPCField);
         }
 
-        private void Logout()
+        public void Logout()
         {
             SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
             loginWindow.Show();

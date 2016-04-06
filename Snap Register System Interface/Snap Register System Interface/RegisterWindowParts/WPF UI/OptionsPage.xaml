@@ -22,8 +22,8 @@
                 <Button x:Name="Override_Button" Height="92" Content="Override" Click="Override_Button_Click"/>
                 <Button x:Name="Remove_Coupon_Button" Height="92" Content="Remove Coupon" Click="Remove_Coupon_Button_Click"/>
                 <Button x:Name="Add_Discount_Button" Height="92" Content="Add Discount" Click="Add_Discount_Button_Click"/>
+                <Button x:Name="Add_Cust_Button" Height="92" Content="Add Customer" Click="Add_Cust_Button_Click_1" />
                 <Button x:Name="Logout_Button" Content="Logout" Height="92" Click="Logout_Button_Click"/>
-                <Button x:Name="Shutdown_Button" Content="Shutdown" Height="92" Click="Shutdown_Button_Click"/>
             </StackPanel>
             <TextBlock x:Name="statsBlock" FontSize="16" HorizontalAlignment="Left" Height="462" Margin="642,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
         </Grid>
