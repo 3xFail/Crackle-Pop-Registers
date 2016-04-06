@@ -1,0 +1,31 @@
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.OptionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="900"
+      Title="OptionsPage">
+
+    <Border BorderBrush="Black" BorderThickness="4">
+        <Grid Background= "{StaticResource Background}">
+
+            <StackPanel Margin="10,10,576,10">
+                <Button x:Name="Catalog_Button" Height="92" Content="Catalog" Click="Catalog_Button_Click"/>
+                <Button x:Name="Remove_Item_Button" Height="92" Content="Remove Item" Click="Remove_Item_Button_Click"/>
+                <Button x:Name="Remove_Discount_Button" Height="92" Content="Remove Discount" Click="Remove_Discount_Button_Click"/>
+                <Button x:Name="Payment_Button" Content="Pay" Height="92" Click="Payment_Button_Click"/>
+                <Button x:Name="Close_Button" Content="Close" Height="92" Click="Close_Button_Click"/>
+            </StackPanel>
+            <StackPanel Margin="321,10,255,10" >
+                <Button x:Name="Override_Button" Height="92" Content="Override" Click="Override_Button_Click"/>
+                <Button x:Name="Remove_Coupon_Button" Height="92" Content="Remove Coupon" Click="Remove_Coupon_Button_Click"/>
+                <Button x:Name="Add_Discount_Button" Height="92" Content="Add Discount" Click="Add_Discount_Button_Click"/>
+                <Button x:Name="Logout_Button" Content="Logout" Height="92" Click="Logout_Button_Click"/>
+                <Button x:Name="Shutdown_Button" Content="Shutdown" Height="92" Click="Shutdown_Button_Click"/>
+            </StackPanel>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="462" Margin="642,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
+        </Grid>
+    </Border>
+</Page>

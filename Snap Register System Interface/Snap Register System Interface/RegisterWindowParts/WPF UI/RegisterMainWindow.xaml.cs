@@ -232,9 +232,9 @@ namespace SnapRegisters
                 try
                 {
                     // showPayByCashWindow();
-                    Payment_Frame.Navigate(new PaymentMenuPage());
+                    Main_Frame.Navigate(new PaymentMenuPage());
 
-                    PaymentMenuPage.m_payment_menu_frame = Payment_Frame;
+                    PaymentMenuPage.m_payment_menu_frame = Main_Frame;
                     
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); } //Catches exception if no items to pay for
@@ -334,7 +334,9 @@ namespace SnapRegisters
 
         private void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Logout();
+            //Logout();
+            Main_Frame.Navigate(new OptionsPage());
+            OptionsPage.Options_Frame = Main_Frame;
         }
 
         private void ChangeEmployeePermissions(Permissions.SystemPermissions newPermissions)

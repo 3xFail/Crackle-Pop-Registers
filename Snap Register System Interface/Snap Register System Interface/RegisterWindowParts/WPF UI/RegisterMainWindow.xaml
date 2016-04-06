@@ -216,6 +216,6 @@
             </Popup>
             
         </StackPanel>
-        <Frame x:Name="Payment_Frame" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="Main_Frame" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
