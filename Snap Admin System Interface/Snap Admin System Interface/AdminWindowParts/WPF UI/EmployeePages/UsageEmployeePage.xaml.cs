@@ -30,6 +30,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         public int ItemsSold { get; set; }
         public string ItemsMin { get; set; }
         public string TotalValue { get; set; }
+        public string user { get; set; }
     }
     /// <summary>
     /// Interaction logic for UsageEmployeePage.xaml
@@ -69,6 +70,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 data.Add( new UsageData()
                 {
                     Username = node.Get( "Username" ) + " (" + node.Get( "FName" ) + ' ' + node.Get( "LName" ) + ')'
+                    , user = node.Get( "Username" )
                     , StartTime = start
                     , Duration = duration.ToString( @"hh\:mm\:ss" )
                     , Duration_TimeSpan = duration
@@ -95,7 +97,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             UsageData data = o as UsageData;
 
-            if( !data.Username.Contains( UsernameSearchTextBox.Text ) )
+            if( !data.user.Contains( UsernameSearchTextBox.Text ) )
                 return false;
             if( DurationTextBox.Text != string.Empty && data.Duration_TimeSpan.TotalMinutes < int.Parse( DurationTextBox.Text ) )
                 return false;
