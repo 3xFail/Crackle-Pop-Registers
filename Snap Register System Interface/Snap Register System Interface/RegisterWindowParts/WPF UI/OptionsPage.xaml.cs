@@ -35,12 +35,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Shutdown_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            //Shutdown();
         }
 
         private void Payment_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            Options_Frame.Navigate(new PaymentMenuPage());
         }
 
         private void Add_Discount_Button_Click( object sender, RoutedEventArgs e )

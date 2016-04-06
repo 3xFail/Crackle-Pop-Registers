@@ -43,8 +43,9 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
-            //needs to close the frame view... not sure how todo that
-            //m_payment_menu_frame.ClearValue;
+            //used to close the frame view
+            m_payment_menu_frame.Navigate(string.Empty);
+            
         }
     }
 }
