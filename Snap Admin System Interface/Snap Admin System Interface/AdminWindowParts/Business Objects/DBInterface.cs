@@ -76,11 +76,11 @@ namespace SnapRegisters
         {
             if( m_employee.HasPermisison( Permissions.ModifyPermissions ) )
             {
+                m_connection.WriteNoResponse( "ModifyPermissionValue @0, @1", permission_group, value );
                 if( new_value )
                     Log( $"Gave \"{permission_name}\" to group \"{permission_group}\"." );
                 else
                     Log( $"Removed \"{permission_name}\" from group \"{permission_group}\"." );
-                m_connection.WriteNoResponse( "ModifyPermissionValue @0, @1", permission_group, value );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyPermissions ) );
         }
@@ -106,7 +106,7 @@ namespace SnapRegisters
             if( m_employee.HasPermisison( Permissions.ResetEmployeePassword ) )
             {
                 m_connection.WriteNoResponse( "UpdatePassword_Username @0, @1", ID, PasswordHash.HashPassword( newpass ) );
-                Log( "Changed the password of UserID=\"" + ID + "\" to \"" + new string( '*', newpass.Length ) + "\"." );
+                Log( $"Changed the password of UserID=\"{ID }\" to \"{new string( '*', newpass.Length )}\"." );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ResetEmployeePassword ) );
         }
@@ -116,7 +116,7 @@ namespace SnapRegisters
             if( m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
             {
                 m_connection.WriteNoResponse( "SetUserActivity @0, @1", ID, active ? '1' : '0' );
-                Log( "Set the account of UserID=\"" + ID + "\" to \"" + ( active ? "Active" : "Inactive" ) + "\"." );
+                Log( $"Set the account of UserID=\"{ID}\" to \"{( active ? "Active" : "Inactive" )}\"." );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ChangeEmployeeCatalog ) );
         }
@@ -167,11 +167,11 @@ namespace SnapRegisters
                     firstName, lastName, username, password, phoneNumber, authorizationLevel, "1", dob_string, address_1, address_2, city, state, country, zip, email );
 
                 if( Response[0].Get( "UserID" ) == "-1" ) //otherwise the UserID returned is the ID of the account just created
-                    throw new InvalidOperationException( "Username \"" + username + "\" already exists." );
+                    throw new InvalidOperationException( $"Username \"{username}\" already exists." );
                 else if( Response[0].Get( "UserID" ) == "-2" )
-                    throw new InvalidOperationException( "User with phone number \"" + phoneNumber + "\" already exists." );
+                    throw new InvalidOperationException( $"User with phone number \"{phoneNumber}\" already exists." );
                 else
-                    Log( "Added user \"" + username + "\" with authorization level \"" + authorizationLevel + "\"." );
+                    Log( $"Added user \"{username}\" with authorization level \"{authorizationLevel}\"." );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ChangeEmployeeCatalog ) );
         }
@@ -185,7 +185,7 @@ namespace SnapRegisters
                 if( Response[0].Get( "ProductID" ) == "-1" )
                     throw new InvalidOperationException( $"Item with barcode \"{barcode}\" already exists." );
                 else
-                    Log( "Added item \"" + name + "\" for \"" + price.ToString( "C2" ) + "\"." );
+                    Log( $"Added item \"{name}\" for {price.ToString( "C2" )}." );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ChangeItemCatalog ) );
         }

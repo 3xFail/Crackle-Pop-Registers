@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LoginInterface</RootNamespace>
     <AssemblyName>LoginInterface</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -127,15 +127,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\SharedResources\Server\cppdb.dll">
-      <Link>SharedResources\Server\cppdb.dll</Link>
-    </Content>
-    <Resource Include="..\..\SharedResources\Server\database_connection_info.txt">
-      <Link>SharedResources\Server\database_connection_info.txt</Link>
-    </Resource>
-    <Content Include="..\..\SharedResources\Server\SocketsServer.exe">
-      <Link>SharedResources\Server\SocketsServer.exe</Link>
-    </Content>
     <Content Include="..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll">
       <Link>SharedResources\CSharpClient.dll</Link>
     </Content>

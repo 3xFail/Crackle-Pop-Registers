@@ -68,6 +68,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 ( (CheckBox)CheckBoxSP.Children[i] ).Checked += CheckBox_Toggle;
                 ( (CheckBox)CheckBoxSP.Children[i] ).Unchecked += CheckBox_Toggle;
             }
+
+            PermissionsGrid.SelectedIndex = 0;
         }
 
         private void PopulateList()
@@ -118,8 +120,34 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             if( _group != null )
             {
                 CheckBox cb = (CheckBox)sender;
-                Permissions.SetPermission( ref _group.Flags, cb.IsChecked == true, (string)cb.Content );
-                DBInterface.ModifyPermissionValue( _group.Name, (long)_group.Flags, (string)cb.Content, cb.IsChecked == true );
+                try
+                {
+                    string permission = (string)cb.Content;
+                    bool state = cb.IsChecked == true;
+
+                    Permissions.SetPermission( ref _group.Flags, state, permission );
+                    DBInterface.ModifyPermissionValue( _group.Name, (long)_group.Flags, permission, state );
+
+                    if( DBInterface.m_employee.PermissionGroup == _group.Name )
+                    {
+                        if( DBInterface.m_employee.HasPermisison( permission ) )
+                            Permissions.RemovePermissions( DBInterface.m_employee, permission );
+                        else
+                            Permissions.AddPermission( DBInterface.m_employee, permission );
+                    }
+                }
+                catch( UnauthorizedAccessException ex )
+                {
+                    System.Windows.Forms.MessageBox.Show( ex.Message );
+
+                    cb.Checked -= CheckBox_Toggle;
+                    cb.Unchecked -= CheckBox_Toggle;
+
+                    cb.IsChecked = !cb.IsChecked; //otherwise we infinite loop...
+
+                    cb.Checked += CheckBox_Toggle;
+                    cb.Unchecked += CheckBox_Toggle;
+                }
             }
         }
 
@@ -143,6 +171,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                         DBInterface.AddPermission( t.Text );
                         MessageBox.Show( $"Successfully added group {t.Text}" );
                     }
+                    catch( UnauthorizedAccessException ex )
+                    {
+                        System.Windows.Forms.MessageBox.Show( ex.Message );
+                    }
                     catch
                     {
                         MessageBox.Show( "Could not create group." );
@@ -154,7 +186,12 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     try
                     {
                         DBInterface.RenamePermissionlevel( t.Text, oldname, (long)group.Flags );
+                        DBInterface.m_employee.PermissionGroup = t.Text;
                         System.Windows.Forms.MessageBox.Show( $"Successfully renamed {oldname} to {t.Text}!" );
+                    }
+                    catch( UnauthorizedAccessException ex )
+                    {
+                        System.Windows.Forms.MessageBox.Show( ex.Message );
                     }
                     catch
                     {
@@ -176,8 +213,16 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                         PermissionGroup group = row as PermissionGroup;
                         if( group.Name != string.Empty )
                         {
-                            DBInterface.RemovePermission( group.Name );
-                            data.Remove( group );
+                            try
+                            {
+                                DBInterface.RemovePermission( group.Name );
+                                data.Remove( group );
+                            }
+                            catch( UnauthorizedAccessException ex )
+                            {
+                                System.Windows.Forms.MessageBox.Show( ex.Message );
+                                e.Handled = true;
+                            }
                         }
                     }
                 }

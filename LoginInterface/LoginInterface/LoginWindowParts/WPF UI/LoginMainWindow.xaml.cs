@@ -104,11 +104,12 @@ namespace SnapRegisters
                 {
 
                     string name = employee.Get( "FName" ) + ' ' + employee.Get( "LName" );
-                    ulong permissions = ulong.Parse( employee.Get( "PermissionsGroup" ) );
+                    ulong permissions = ulong.Parse( employee.Get( "PermissionsID" ) );
+                    string group = employee.Get( "PermissionsGroup" );
                     string phone = employee.Get( "PhoneNumber" );
                     int id = int.Parse( employee.Get( "UserID" ) );
 
-                    _loggedIn = new Employee( id, name, null, phone, new DateTime( 1, 1, 1 ), permissions );
+                    _loggedIn = new Employee( id, name, null, phone, new DateTime( 1, 1, 1 ), permissions, group );
 
                     _isLoggedIn = true;
                 }

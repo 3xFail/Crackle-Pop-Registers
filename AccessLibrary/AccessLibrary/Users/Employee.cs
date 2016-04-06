@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +15,11 @@ namespace PointOfSales.Users
 			: base()
 		{ }
 
-		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, ulong permissions)
+		public Employee(int id, string Name, CivicAddress Address, string PhoneNumber, DateTime Birthday, ulong permissions, string permission_group)
 			: base(id, Name, Address, PhoneNumber, Birthday)
 		{
             Permissions = permissions;
+            PermissionGroup = permission_group;
 		}
 
         public bool HasPermisison( string permission )
@@ -39,6 +40,7 @@ namespace PointOfSales.Users
 
 		// Employees by default are allowed to use the register.
 		// See PointOfSales.Permissions for details.
-		public ulong Permissions = 0;
+		public ulong Permissions;
+        public string PermissionGroup { get; set; }
 	}
 }
