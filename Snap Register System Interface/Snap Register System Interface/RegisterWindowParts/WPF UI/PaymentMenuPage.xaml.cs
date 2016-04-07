@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnapRegisters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,16 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     /// </summary>
     public partial class PaymentMenuPage : Page
     {
-        public static Frame m_payment_menu_frame; 
+        public static Frame m_payment_menu_frame;
+        private RegisterMainWindow m_win;
         public PaymentMenuPage()
         {
             InitializeComponent();
+        }
+        public PaymentMenuPage(RegisterMainWindow win)
+        {
+            InitializeComponent();
+            m_win = win;
         }
 
         private void Cash_Button_Click(object sender, RoutedEventArgs e)
