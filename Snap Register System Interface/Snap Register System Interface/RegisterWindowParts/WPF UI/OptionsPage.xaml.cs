@@ -47,6 +47,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         private void Payment_Button_Click( object sender, RoutedEventArgs e )
         {
             Options_Frame.Navigate(new PaymentMenuPage());
+            PaymentMenuPage.m_payment_menu_frame = Options_Frame;
         }
 
         private void Add_Discount_Button_Click( object sender, RoutedEventArgs e )
