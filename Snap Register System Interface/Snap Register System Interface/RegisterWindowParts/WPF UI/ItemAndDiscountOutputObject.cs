@@ -37,17 +37,20 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	class ItemAndDiscountOutputObject
 	{
-		public ItemAndDiscountOutputObject(Item newItem, double heightOfEachBox, StackPanel itemOutputPanel, StackPanel couponOutputPanel)
+		public delegate void UpdateTotals();
+		public ItemAndDiscountOutputObject(Item newItem, Transaction transaction, double heightOfEachBox, StackPanel itemOutputPanel, StackPanel couponOutputPanel, UpdateTotals updateFunction)
 		{
 			m_item = newItem;
+			m_transaction = transaction;
 			boxHeight = heightOfEachBox;
 			m_itemOutputPanel = itemOutputPanel;
 			m_couponOutputPanel = couponOutputPanel;
 
 			m_stackOfCoupons = new StackPanel();
 
-			
-			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item);
+			m_updateFunction = updateFunction;
+
+			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item, m_transaction, RemoveItem, UpdateItemDetails);
 			itemDisplayBox.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 			itemDisplayBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			itemDisplayBox.Height = boxHeight;
@@ -110,16 +113,28 @@ namespace SnapRegisters
 			ItemDisplayBox output = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
 			output.NameField.Text = m_item.ItemName.ToString();
 			output.AmountField.Text = m_item.Price.ToString();
+			m_updateFunction();
 		}
+
+		private void RemoveItem()
+		{
+			m_itemOutputPanel.Children.Remove(m_itemDescriptionBox);
+			m_couponOutputPanel.Children.Remove(m_stackOfCoupons);
+			m_updateFunction();
+		}
+
 
 		public double boxHeight { get; set; }
 
 		private StackPanel m_itemOutputPanel;
 		private StackPanel m_couponOutputPanel;
+		private Transaction m_transaction;
 		private bool m_noDiscounts;
 
 		private Grid m_itemDescriptionBox;
 		private StackPanel m_stackOfCoupons;
 		private Item m_item;
+
+		private UpdateTotals m_updateFunction;
 	}
 }

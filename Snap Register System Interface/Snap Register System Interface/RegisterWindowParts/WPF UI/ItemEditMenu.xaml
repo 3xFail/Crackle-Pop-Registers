@@ -25,7 +25,7 @@
 				 VerticalAlignment="Bottom">
                 <Button x:Name="RemoveItemButton" Content="Remove Item" 
 					Height="70" Width="280"
-					Margin="8"/>
+					Margin="8" Click="RemoveItemButtonClicked"/>
             </Viewbox>
             <Viewbox Grid.Column="1"
 				 VerticalAlignment="Bottom">

@@ -40,29 +40,46 @@ namespace SnapRegisters
 	//*************************************************************************************************************
 	public partial class ItemDisplayBox : UserControl
 	{
+		public delegate void RemoveItemFromDisplay();
+		public delegate void UpdateItemDisplay();
 		// Construct with an item.
-		public ItemDisplayBox(Item sourceItem)
+		public ItemDisplayBox(Item itemInTransaction, Transaction transaction, RemoveItemFromDisplay removeFunction, UpdateItemDisplay updateFunction)
 		{
 			InitializeComponent();
 
-			m_sourceItem = sourceItem;
+			SourceItem = itemInTransaction;
+			m_transaction = transaction;
+			m_removeFunction = removeFunction;
+			m_updateFunction = updateFunction;
+			NameField.Text = itemInTransaction.ItemName.Substring(0, Math.Min(itemInTransaction.ItemName.Length, 40));
 
-			NameField.Text = sourceItem.ItemName.Substring(0, Math.Min(sourceItem.ItemName.Length, 40));
-
-			AmountField.Text = m_sourceItem.OriginalPrice.ToString( "C" );
+			AmountField.Text = SourceItem.OriginalPrice.ToString( "C" );
 
 			PreviewMouseLeftButtonDown += DisplayItemClickedEvent;
 		}
 
 		private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-
 			//EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
-			Popup editMenu = new Popup();
-			editMenu.Child = new ItemEditMenu(m_sourceItem);
-			editMenu.IsOpen = true;
+			EditMenu = new Popup();
+			EditMenu.Child = new ItemEditMenu(this, m_transaction, CloseEditMenu);
+			EditMenu.IsOpen = true;
 		}
 
-		private Item m_sourceItem;
+		private void CloseEditMenu()
+		{
+			EditMenu.IsOpen = false;
+			if (((ItemEditMenu)EditMenu.Child).RemoveItem)
+				m_removeFunction();
+			else
+
+			EditMenu = null;
+		}
+
+		public Item SourceItem { get; }
+		public Popup EditMenu { get; set; }
+		private Transaction m_transaction;
+		private RemoveItemFromDisplay m_removeFunction;
+		private UpdateItemDisplay m_updateFunction;
 	}
 }

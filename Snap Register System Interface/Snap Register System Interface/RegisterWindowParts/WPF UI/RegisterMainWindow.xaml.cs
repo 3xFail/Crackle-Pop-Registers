@@ -151,7 +151,7 @@ namespace SnapRegisters
         private void AddItemToOutputPanels(Item item)
         {
             // Update the documentation once you have this finished.
-            ItemAndDiscountOutputObject itemOutput = new ItemAndDiscountOutputObject(item, 60, ItemsList, CouponList);
+            ItemAndDiscountOutputObject itemOutput = new ItemAndDiscountOutputObject(item, m_transaction, 60, ItemsList, CouponList, UpdateTotals);
             m_listOfOutputObjects.Add(itemOutput);
 
             ItemScroll.ScrollToBottom();

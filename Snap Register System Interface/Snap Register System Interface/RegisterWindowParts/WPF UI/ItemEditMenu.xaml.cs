@@ -20,15 +20,28 @@ namespace SnapRegisters
 	/// </summary>
 	public partial class ItemEditMenu : UserControl
 	{
-		public ItemEditMenu(Item itemToModify)
+		public delegate void CloseEditMenu();
+
+		public ItemEditMenu(ItemDisplayBox itemToModify, Transaction transaction, CloseEditMenu closeFunction)
 		{
 			InitializeComponent();
 
-			m_item = itemToModify;
-
-			ItemNameBox.Text = m_item.ItemName.ToString();
+			m_itemBox = itemToModify;
+			m_transaction = transaction;
+			m_closeFunction = closeFunction;
+			ItemNameBox.Text = m_itemBox.SourceItem.ItemName.ToString();
+			RemoveItem = false;
 		}
 
-		private Item m_item;
+		private ItemDisplayBox m_itemBox;
+		private Transaction m_transaction;
+		private CloseEditMenu m_closeFunction;
+		public bool RemoveItem { get; set; }
+		private void RemoveItemButtonClicked(object sender, RoutedEventArgs e)
+		{
+			RemoveItem = true;
+			m_transaction.RemoveItem(m_itemBox.SourceItem);
+			m_closeFunction();
+		}
 	}
 }
