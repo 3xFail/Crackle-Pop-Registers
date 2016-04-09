@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -55,8 +56,11 @@ namespace SnapRegisters
 
 		private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
-			editMenu.Show();
+
+			//EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
+			Popup editMenu = new Popup();
+			editMenu.Child = new ItemEditMenu(m_sourceItem);
+			editMenu.IsOpen = true;
 		}
 
 		private Item m_sourceItem;

@@ -35,10 +35,10 @@ namespace SnapRegisters
     //				except for discounts instead.
     //			public void AddItem(int itemID)
     //				Adds an item to the current transaction. Displays this item to the outputs.
-    //			public void RemoveItem(int itemID)
-    //				Removes the item with the ID matching "itemID" from the transaction. removes it from the
-    //				output.
-    //			public void OverrideCost(string itemID, double newPrice, string reason = "No description")
+    //			public void RemoveItem(Item item)
+    //				Removes the first item that matches the item passed in, This does not use the barcode
+	//				as several copies of an item with different data could exist (e.g. coupons).
+    //			public void OverrideCost(Item item, double newPrice, string reason = "No description")
     //				Overrides the cost of the item specified with the new price specified with "newPrice".
     //				"reason" is the reason the employee chose to override the price.
     //			public void ApplyCoupon(string couponID)
@@ -134,7 +134,7 @@ namespace SnapRegisters
             return Discounts;
         }
 
-		public void RemoveItem(string itemID)
+		public void RemoveItem(Item item)
 		{
 			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -142,7 +142,7 @@ namespace SnapRegisters
 			// Checks to make sure the item was valid before removing it from the list.
 			try
 			{
-				m_Items.RemoveAll(x => x.Barcode == itemID);
+				m_Items.Remove(item);
 			}
 			catch (InvalidOperationException e)
 			{

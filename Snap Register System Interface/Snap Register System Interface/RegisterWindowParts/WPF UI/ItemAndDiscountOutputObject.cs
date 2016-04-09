@@ -47,7 +47,7 @@ namespace SnapRegisters
 			m_stackOfCoupons = new StackPanel();
 
 			
-			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(newItem);
+			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item);
 			itemDisplayBox.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 			itemDisplayBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			itemDisplayBox.Height = boxHeight;
@@ -55,7 +55,7 @@ namespace SnapRegisters
 			m_itemDescriptionBox = new Grid();
 			m_itemDescriptionBox.Children.Add(itemDisplayBox);
 
-			if (newItem.Discounts.Count() == 0)
+			if (m_item.Discounts.Count() == 0)
 			{
 				Grid blankCoupon = new Grid();
 				blankCoupon.Height = boxHeight;
@@ -65,7 +65,7 @@ namespace SnapRegisters
 			else
 			{
 				m_noDiscounts = false;
-				foreach (IDiscount discount in newItem.Discounts)
+				foreach (IDiscount discount in m_item.Discounts)
 				{
 					CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
 					autoAppliedDiscount.Height = boxHeight;
@@ -103,6 +103,13 @@ namespace SnapRegisters
 				m_itemDescriptionBox.Height = boxHeight;
 			else
 				m_itemDescriptionBox.Height = m_stackOfCoupons.Children.Count * boxHeight;
+		}
+
+		private void UpdateItemDetails()
+		{
+			ItemDisplayBox output = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
+			output.NameField.Text = m_item.ItemName.ToString();
+			output.AmountField.Text = m_item.Price.ToString();
 		}
 
 		public double boxHeight { get; set; }

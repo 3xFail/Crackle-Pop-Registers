@@ -10,28 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SnapRegisters
 {
 	/// <summary>
-	/// Interaction logic for EditItemMenu.xaml
+	/// Interaction logic for ItemEditMenu.xaml
 	/// </summary>
-	public partial class EditItemMenu : Window
+	public partial class ItemEditMenu : UserControl
 	{
-		public EditItemMenu(Item itemToEdit)
+		public ItemEditMenu(Item itemToModify)
 		{
 			InitializeComponent();
 
-			m_sourceItem = itemToEdit;
-			ItemNameBox.Text = m_sourceItem.ItemName;
+			m_item = itemToModify;
+
+			ItemNameBox.Text = m_item.ItemName.ToString();
 		}
 
-		private Item m_sourceItem = null;
-
-		private void ItemWindowDeactivated(object sender, EventArgs e)
-		{
-			this.Close();
-		}
+		private Item m_item;
 	}
 }

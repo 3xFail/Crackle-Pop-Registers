@@ -40,8 +40,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SharedResources\AccessLibrary.dll</HintPath>
     </Reference>
-    <Reference Include="CSharpClient">
-      <HintPath>..\..\Snap Sockets\CSharpClient\bin\Debug\CSharpClient.dll</HintPath>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedResources\BCrypt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="CSharpClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedResources\CSharpClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,6 +94,9 @@
       <DependentUpon>CashPaymentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml.cs">
+      <DependentUpon>ItemEditMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -98,9 +106,6 @@
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
       <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml.cs">
-      <DependentUpon>EditItemMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Item.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml.cs">
@@ -134,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,10 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RegisterWindowParts\WPF UI\EditItemMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +218,12 @@
   <ItemGroup>
     <Content Include="..\..\SharedResources\AccessLibrary.dll">
       <Link>SharedResources\AccessLibrary.dll</Link>
+    </Content>
+    <Content Include="..\..\SharedResources\BCrypt.Net.dll">
+      <Link>SharedResources\BCrypt.Net.dll</Link>
+    </Content>
+    <Content Include="..\..\SharedResources\CSharpClient.dll">
+      <Link>SharedResources\CSharpClient.dll</Link>
     </Content>
     <Resource Include="SharedResources\Images\giftcardimage.png" />
     <Resource Include="SharedResources\Images\moneyimage.jpg" />
