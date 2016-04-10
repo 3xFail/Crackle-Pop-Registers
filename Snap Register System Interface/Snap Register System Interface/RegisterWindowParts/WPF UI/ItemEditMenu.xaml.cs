@@ -37,10 +37,17 @@ namespace SnapRegisters
 		private Transaction m_transaction;
 		private CloseEditMenu m_closeFunction;
 		public bool RemoveItem { get; set; }
+		public bool PriceOverride { get; set; }
 		private void RemoveItemButtonClicked(object sender, RoutedEventArgs e)
 		{
 			RemoveItem = true;
 			m_transaction.RemoveItem(m_itemBox.SourceItem);
+			m_closeFunction();
+		}
+
+		private void ChangePriceButtonClicked(object sender, RoutedEventArgs e)
+		{
+			PriceOverride = true;
 			m_closeFunction();
 		}
 	}

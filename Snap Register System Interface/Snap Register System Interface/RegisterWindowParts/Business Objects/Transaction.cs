@@ -182,10 +182,10 @@ namespace SnapRegisters
                     
         }
 
-		public void OverrideCost(string itemID, decimal newPrice, string reason = "No description")
+		public void OverrideCost(Item item, decimal newPrice, string reason = "No description")
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = m_Items.Find(x => x.Barcode == itemID);
+			Item changedItem = m_Items.Find(x => x == item);
 
 			if (changedItem == null)
 				throw new InvalidOperationException("Item specified is not in sale.");

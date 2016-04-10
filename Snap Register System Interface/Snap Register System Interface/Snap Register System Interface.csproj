@@ -117,9 +117,6 @@
     <Compile Include="RegisterWindowParts\WPF UI\PaymentMenuPage.xaml.cs">
       <DependentUpon>PaymentMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
-      <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Transaction.cs" />
     <Page Include="..\..\LoginInterface\LoginInterface\LoginWindowParts\WPF UI\LoginMainWindow.xaml">
       <Link>LoginWindowParts\WPF UI\LoginMainWindow.xaml</Link>
@@ -181,6 +178,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
+      <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\RegisterMainWindow.xaml.cs">
       <DependentUpon>RegisterMainWindow.xaml</DependentUpon>

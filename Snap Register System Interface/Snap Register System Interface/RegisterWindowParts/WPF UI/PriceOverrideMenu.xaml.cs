@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SnapRegisters
@@ -17,11 +18,38 @@ namespace SnapRegisters
 	/// <summary>
 	/// Interaction logic for PriceOverrideMenu.xaml
 	/// </summary>
-	public partial class PriceOverrideMenu : Window
+	public partial class PriceOverrideMenu : UserControl
 	{
-		public PriceOverrideMenu()
+		public delegate void ClosePriceOverrideMenu();
+		public PriceOverrideMenu(ItemDisplayBox itemToModify, Transaction transaction, ClosePriceOverrideMenu closeFunction)
 		{
 			InitializeComponent();
+
+			m_itemBox = itemToModify;
+			m_transaction = transaction;
+			m_closeFunction = closeFunction;
+
+			OriginalPriceField.Text = "Original Price: " + m_itemBox.SourceItem.OriginalPrice.ToString();
+		}
+
+		private void ChangePriceButtonClicked(object sender, RoutedEventArgs e)
+		{
+			decimal newPrice = 0;
+
+			if (decimal.TryParse(NewPriceField.Text, out newPrice))
+			{
+				m_transaction.OverrideCost(m_itemBox.SourceItem, newPrice);
+				m_closeFunction();
+			}
+		}
+
+		private ItemDisplayBox m_itemBox;
+		private Transaction m_transaction;
+		private ClosePriceOverrideMenu m_closeFunction;
+
+		private void CancelButtonClick(object sender, RoutedEventArgs e)
+		{
+			m_closeFunction();
 		}
 	}
 }

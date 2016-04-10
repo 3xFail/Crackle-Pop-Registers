@@ -1,24 +1,52 @@
-﻿<Window x:Class="SnapRegisters.PriceOverrideMenu"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SnapRegisters"
-        mc:Ignorable="d"
-        Title="PriceOverrideMenu" Height="400" Width="600"
-		WindowStyle="None"
-		ResizeMode="NoResize">
-    <Grid>
+﻿<UserControl x:Class="SnapRegisters.PriceOverrideMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+             mc:Ignorable="d" 
+             d:Height="200" Width="600">
+    <Grid Height="200" Width="600" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
-        <Viewbox Grid.Row="0" HorizontalAlignment="Left">
-			<TextBlock x:Name="ItemName" Text="Item Name"
-					   Margin="10,10,10,10"
-					   HorizontalAlignment="Left"
-					   VerticalAlignment="Center"/>
-		</Viewbox>
+        <!--Item Name-->
+        <Viewbox Margin="30" HorizontalAlignment="Left">
+            <TextBlock x:Name="ItemNameBox" Text="Item"/>
+        </Viewbox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" Margin="8,55,8,8" HorizontalAlignment="Left">
+                <TextBox x:Name="NewPriceField" Width="180"/>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Margin="8,8,8,55" HorizontalAlignment="Left">
+                <TextBlock x:Name="OriginalPriceField" Width="180" Text="Original Price: 0.00"/>
+            </Viewbox>
+            <!--Buttons-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
+				<Viewbox Grid.Column="0"
+					 VerticalAlignment="Bottom">
+					<Button x:Name="ChangePriceButton" Content="Change Price" 
+						Height="100" Width="160"
+						Margin="8" Click="ChangePriceButtonClicked"/>
+				</Viewbox>
+                <Viewbox Grid.Column="1"
+					 VerticalAlignment="Bottom">
+                    <Button x:Name="CancelButton" Content="Cancel" 
+						Height="100" Width="160"
+						Margin="8" Click="CancelButtonClick"/>
+                </Viewbox>
+            </Grid>
+        </Grid>
     </Grid>
-</Window>
+</UserControl>
+

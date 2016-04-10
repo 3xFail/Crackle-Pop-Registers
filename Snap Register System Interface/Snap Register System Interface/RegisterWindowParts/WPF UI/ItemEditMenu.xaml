@@ -31,7 +31,7 @@
 				 VerticalAlignment="Bottom">
                 <Button x:Name="ChangePriceButton" Content="Change Price" 
 					Height="70" Width="280"
-					Margin="8"/>
+					Margin="8" Click="ChangePriceButtonClicked"/>
             </Viewbox>
 
         </Grid>

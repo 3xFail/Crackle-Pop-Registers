@@ -68,16 +68,33 @@ namespace SnapRegisters
 
 		private void CloseEditMenu()
 		{
-			EditMenu.IsOpen = false;
-			if (((ItemEditMenu)EditMenu.Child).RemoveItem)
+			ItemEditMenu menu = (ItemEditMenu)EditMenu.Child;
+
+            EditMenu.IsOpen = false;
+
+			if (menu.RemoveItem)
 				m_removeFunction();
-			else
+			else if (menu.PriceOverride)
+			{
+				PriceMenu = new Popup();
+				PriceMenu.Child = new PriceOverrideMenu(this, m_transaction, ClosePriceMenu);
+				PriceMenu.IsOpen = true;
+			}
 
 			EditMenu = null;
 		}
 
+		private void ClosePriceMenu()
+		{
+			PriceMenu.IsOpen = false;
+			PriceMenu = null;
+
+			m_updateFunction();
+		}
+
 		public Item SourceItem { get; }
 		public Popup EditMenu { get; set; }
+		public Popup PriceMenu { get; set; }
 		private Transaction m_transaction;
 		private RemoveItemFromDisplay m_removeFunction;
 		private UpdateItemDisplay m_updateFunction;
