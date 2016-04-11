@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+             xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
              mc:Ignorable="d" 
              d:Height="200" Width="600">
     <Grid Height="200" Width="600" Background="{StaticResource Background}">
@@ -22,7 +23,7 @@
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" Margin="8,55,8,8" HorizontalAlignment="Left">
-                <TextBox x:Name="NewPriceField" Width="180"/>
+                <currency:CurrencyTextBox x:Name="NewPriceField" Width="180"/>
             </Viewbox>
             <Viewbox Grid.Column="0" Margin="8,8,8,55" HorizontalAlignment="Left">
                 <TextBlock x:Name="OriginalPriceField" Width="180" Text="Original Price: 0.00"/>

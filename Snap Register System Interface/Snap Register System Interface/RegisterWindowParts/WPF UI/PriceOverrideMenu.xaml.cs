@@ -29,18 +29,13 @@ namespace SnapRegisters
 			m_transaction = transaction;
 			m_closeFunction = closeFunction;
 
-			OriginalPriceField.Text = "Original Price: " + m_itemBox.SourceItem.OriginalPrice.ToString();
+			OriginalPriceField.Text = "Original Price: " + m_itemBox.SourceItem.OriginalPrice.ToString( "C" );
 		}
 
 		private void ChangePriceButtonClicked(object sender, RoutedEventArgs e)
 		{
-			decimal newPrice = 0;
-
-			if (decimal.TryParse(NewPriceField.Text, out newPrice))
-			{
-				m_transaction.OverrideCost(m_itemBox.SourceItem, newPrice);
-				m_closeFunction();
-			}
+			m_transaction.OverrideCost(m_itemBox.SourceItem, NewPriceField.Number);
+			m_closeFunction();
 		}
 
 		private ItemDisplayBox m_itemBox;

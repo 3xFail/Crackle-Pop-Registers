@@ -112,7 +112,7 @@ namespace SnapRegisters
 		{
 			ItemDisplayBox output = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
 			output.NameField.Text = m_item.ItemName.ToString();
-			output.AmountField.Text = m_item.Price.ToString();
+			output.AmountField.Text = m_item.Price.ToString( "C" );
 			m_updateFunction();
 		}
 
