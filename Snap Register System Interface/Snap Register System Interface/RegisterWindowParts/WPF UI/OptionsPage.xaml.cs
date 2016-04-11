@@ -23,7 +23,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     {
 
         public static Frame Options_Frame;
-        public string m_stats_template = "{0} current stats\n\nTime logged in (minutes): {1}\n\nTotal Sales this login: {2}\n\nTotal number of items sold: {3}\n\nCurrent items per minute:{4}\n";
+        public string m_stats_template = "{0} current stats\n\nTime logged in: {1}\n\nTotal Sales this login: {2}\n\nTotal number of items sold: {3}\n\nCurrent items per minute:{4}\n";
         private RegisterMainWindow m_win;
         public OptionsPage()
         {
@@ -36,7 +36,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             InitializeComponent();
             m_win = win;
             TimeSpan shift = ( DateTime.Now - m_win.m_start );
-            statsBlock.Text = string.Format(m_stats_template, m_win.m_employee.name, (int)shift.TotalMinutes, m_win.m_totalsales, m_win.m_itemssold, (m_win.m_itemssold / shift.TotalMinutes));
+            statsBlock.Text = string.Format(m_stats_template, m_win.m_employee.name, shift.ToString( @"hh\:mm" ), m_win.m_totalsales.ToString( "C" ), m_win.m_itemssold, (m_win.m_itemssold / shift.TotalMinutes));
         }
 
         private void Logout_Button_Click( object sender, RoutedEventArgs e )
