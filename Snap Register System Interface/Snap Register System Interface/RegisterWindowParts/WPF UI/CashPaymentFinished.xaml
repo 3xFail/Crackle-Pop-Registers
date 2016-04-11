@@ -8,6 +8,7 @@
       Height="360" Width="300"
       Title="CashPaymentFinished">
 
+    <Border BorderBrush="Black" BorderThickness="5">
     <Grid Name="mainGrid" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height=".125*"/>
@@ -57,4 +58,5 @@
         </Grid>
         <Button Grid.Row="3" Content="Reset Register" Name="ResetRegisterButton" Click="ResetRegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40"/>
     </Grid>
+    </Border>
 </Page>

@@ -7,23 +7,24 @@
       mc:Ignorable="d" 
       Height="360" Width="300"
       Title="GiftCardPaymentPage">
+    <Border BorderBrush="Black" BorderThickness="5">
+        <Grid Background="{StaticResource Background}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".25*"/>
+                <RowDefinition Height=".50*"/>
+                <RowDefinition Height=".25*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Swipe or Enter Gift Card Number" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+            <TextBox Grid.Row="1" Name="GiftCardNumberInputBox" Width="200" Height="20" MaxLines="1" MaxLength="30"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.Row="4" Name="Gift_Card_Entry_Next" Content="Next" Height="40" Width="100" Click="Gift_Card_Entry_Next_Click"/>
+                <Button Grid.Column="1" Grid.Row="4" Name="Gift_Card_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="Gift_Card_Entry_Cancel_Click"/>
 
-    <Grid Background="{StaticResource Background}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height=".25*"/>
-            <RowDefinition Height=".50*"/>
-            <RowDefinition Height=".25*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Swipe or Enter Gift Card Number" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-        <TextBox Grid.Row="1" Name="GiftCardNumberInputBox" Width="200" Height="20" MaxLines="1" MaxLength="30"/>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".5*"/>
-                <ColumnDefinition Width=".5*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="4" Name="Gift_Card_Entry_Next" Content="Next" Height="40" Width="100" Click="Gift_Card_Entry_Next_Click"/>
-            <Button Grid.Column="1" Grid.Row="4" Name="Gift_Card_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="Gift_Card_Entry_Cancel_Click"/>
-
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Page>
