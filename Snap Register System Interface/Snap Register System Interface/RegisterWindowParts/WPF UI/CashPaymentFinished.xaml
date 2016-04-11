@@ -1,0 +1,60 @@
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CashPaymentFinished"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+      mc:Ignorable="d" 
+      Height="360" Width="300"
+      Title="CashPaymentFinished">
+
+    <Grid Name="mainGrid" Background="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".125*"/>
+            <RowDefinition Height=".125*"/>
+            <RowDefinition Height=".50*"/>
+            <RowDefinition Height=".25*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Name="ChangeTitle" Text="Change:" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Name="ChangeTotal" Text="changetotal" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="2" Name="ChangeDisplayGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*"/>
+                <ColumnDefinition Width=".2*"/>
+                <ColumnDefinition Width=".2*"/>
+                <ColumnDefinition Width=".2*"/>
+                <ColumnDefinition Width=".2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".25*"/>
+                <RowDefinition Height=".25*"/>
+                <RowDefinition Height=".25*"/>
+                <RowDefinition Height=".25*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Hundreds"/>
+            <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Twenties"/>
+            <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Tens"/>
+            <TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Fives"/>
+            <TextBlock Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ones"/>
+            <!--Coins-->
+            <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="1/2 Dollars"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Quarters"/>
+            <TextBlock Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Dimes"/>
+            <TextBlock Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nickels"/>
+            <TextBlock Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Pennies"/>
+            <!--Number of each bill/coin go here-->
+            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Name="hundreds" Text="100s"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Name="twenties" Text="20s"/>
+            <TextBlock Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Name="tens" Text="10s"/>
+            <TextBlock Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" Name="fives" Text="5s"/>
+            <TextBlock Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" Name="ones" Text="1s"/>
+            <!--Coins-->
+            <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" Name="halfdollars" Text=".50s"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Name="quarters" Text=".25s"/>
+            <TextBlock Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" Name="dimes" Text=".10s"/>
+            <TextBlock Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Name="nickels" Text=".05"/>
+            <TextBlock Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" Name="pennies" Text=".01s"/>
+        </Grid>
+        <Button Grid.Row="3" Content="Reset Register" Name="ResetRegisterButton" Click="ResetRegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40"/>
+    </Grid>
+</Page>

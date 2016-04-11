@@ -1,0 +1,83 @@
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CC_Manual_Entry_Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+      mc:Ignorable="d" 
+      Height="360" Width="300"
+      Title="CC_Manual_Entry_Page">
+
+    <Grid Background="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".60*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Card Number" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="0" Grid.Row="1"  MaxLines="1" Height="16" VerticalAlignment="Top" MaxLength="18"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="Expiration Date" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <!--Month Selection-->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".25*"/>
+                <ColumnDefinition Width=".75*"/>
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Column="0" Height="20" Width="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0">
+                <MenuItem Header="mm" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <MenuItem Header="01"/>
+                    <MenuItem Header="02"/>
+                    <MenuItem Header="03"/>
+                    <MenuItem Header="04"/>
+                    <MenuItem Header="05"/>
+                    <MenuItem Header="06"/>
+                    <MenuItem Header="07"/>
+                    <MenuItem Header="08"/>
+                    <MenuItem Header="09"/>
+                    <MenuItem Header="10"/>
+                    <MenuItem Header="11"/>
+                    <MenuItem Header="12"/>
+                </MenuItem>
+            </Menu>
+            <!--Year Selection-->
+            <Menu Grid.Column="1" Height="20" Width="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0">
+                <MenuItem Header="yyyy" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <MenuItem Header="2016"/>
+                    <MenuItem Header="2017"/>
+                    <MenuItem Header="2018"/>
+                    <MenuItem Header="2019"/>
+                    <MenuItem Header="2020"/>
+                    <MenuItem Header="2021"/>
+                    <MenuItem Header="2022"/>
+                    <MenuItem Header="2023"/>
+                    <MenuItem Header="2024"/>
+                    <MenuItem Header="2025"/>
+                    <MenuItem Header="2026"/>
+                    <MenuItem Header="2027"/>
+                    <MenuItem Header="2028"/>
+                    <MenuItem Header="2029"/>
+                    <MenuItem Header="2030"/>
+                    <MenuItem Header="2031"/>
+                    <MenuItem Header="2032"/>
+                    <MenuItem Header="2033"/>
+                    <MenuItem Header="2034"/>
+                    <MenuItem Header="2035"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name on Card" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="0" Grid.Row="2"  MaxLines="1" Height="16" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Zip Code" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="0" Grid.Row="3"  MaxLines="1" MaxLength="5" Width="50" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="CVV" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="5, 0, 0, 0" MaxLines="1" MaxLength="3" Width="30" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top"/>
+        <Button Grid.Column="0" Grid.Row="4" Name="CC_Manual_Entry_Next" Content="Next" Height="40" Width="100" Click="CC_Manual_Entry_Next_Click"/>
+        <Button Grid.Column="1" Grid.Row="4" Name="CC_Manual_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="CC_Manual_Entry_Cancel_Click"/>
+    </Grid>
+</Page>
