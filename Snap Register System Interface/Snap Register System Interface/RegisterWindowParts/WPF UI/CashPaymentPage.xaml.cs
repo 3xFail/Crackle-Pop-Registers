@@ -30,7 +30,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         public CashPaymentPage(RegisterMainWindow win)
         {
             m_win = win;
-            _priceOfItems = win.m_costTotal;
+            _priceOfItems = win.m_totalTotal;
             InitializeComponent();
             initCurrencyTextBox();
         }

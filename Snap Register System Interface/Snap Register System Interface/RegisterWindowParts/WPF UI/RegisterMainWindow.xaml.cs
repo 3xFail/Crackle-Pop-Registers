@@ -107,7 +107,7 @@ namespace SnapRegisters
         private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
         public decimal m_costTotal { get; private set; } = 0;
         private decimal m_savingsTotal = 0;
-        private decimal m_totalTotal = 0;
+        public decimal m_totalTotal { get; set; } = 0;
         public static KeyboardHook kh;
 
 
