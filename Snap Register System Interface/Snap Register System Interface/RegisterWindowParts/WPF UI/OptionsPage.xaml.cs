@@ -21,6 +21,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     /// </summary>
     public partial class OptionsPage :Page
     {
+
         public static Frame Options_Frame;
         public string m_stats_template = "{0} current stats\n\nTime logged in (minutes): {1}\n\nTotal Sales this login: {2}\n\nTotal number of items sold: {3}\n\nCurrent items per minute:{4}\n";
         private RegisterMainWindow m_win;
@@ -46,7 +47,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Payment_Button_Click( object sender, RoutedEventArgs e )
         {
-            Options_Frame.Navigate(new PaymentMenuPage());
+            Options_Frame.Navigate(new PaymentMenuPage(m_win));
             PaymentMenuPage.m_payment_menu_frame = Options_Frame;
         }
 

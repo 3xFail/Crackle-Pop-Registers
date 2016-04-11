@@ -12,17 +12,47 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using CurrencyTextBoxControl;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+using SnapRegisters;
 namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 {
+
     /// <summary>
     /// Interaction logic for CashPaymentWindow.xaml
     /// </summary>
-    public partial class CashPaymentPage: Page
+    public partial class CashPaymentPage : Page
     {
-        public CashPaymentPage()
+        private RegisterMainWindow m_win;
+        private decimal _priceOfItems;
+
+        CurrencyTextBox moneyAccepted = new CurrencyTextBox();
+        public CashPaymentPage(RegisterMainWindow win)
         {
+            m_win = win;
+            _priceOfItems = win.m_costTotal;
             InitializeComponent();
+            initCurrencyTextBox();
+        }
+
+
+        private void initCurrencyTextBox()
+        {
+            moneyAccepted.HorizontalAlignment = HorizontalAlignment.Center;
+            moneyAccepted.VerticalAlignment = VerticalAlignment.Center;
+            moneyAccepted.FontSize = 20;
+            mainGrid.Children.Add(moneyAccepted);
+            Grid.SetRow(moneyAccepted, 1);
+
+        }
+
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            Change theChange = new Change(moneyAccepted.Number - _priceOfItems);
+
+
+            NavigationService.Navigate(new CashPaymentFinished(theChange, m_win));
         }
     }
 }

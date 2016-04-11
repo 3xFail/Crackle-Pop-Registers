@@ -105,7 +105,7 @@ namespace SnapRegisters
         public int m_itemssold { get; set; } = 0;
         public decimal m_totalsales { get; set; } = 0M;
         private List<ItemAndDiscountOutputObject> m_listOfOutputObjects;
-        private decimal m_costTotal = 0;
+        public decimal m_costTotal { get; private set; } = 0;
         private decimal m_savingsTotal = 0;
         private decimal m_totalTotal = 0;
         public static KeyboardHook kh;
@@ -232,13 +232,14 @@ namespace SnapRegisters
                 try
                 {
                     // showPayByCashWindow();
-                    Main_Frame.Navigate(new PaymentMenuPage());
+                    Main_Frame.Navigate(new PaymentMenuPage(this));
 
                     PaymentMenuPage.m_payment_menu_frame = Main_Frame;
-                    
+
                 }
                 catch (InvalidOperationException ex) { MessageBox.Show(ex.Message); } //Catches exception if no items to pay for
                 catch (Exception ex) { MessageBox.Show(ex.Message); } //catches any other exceptions
+
             }
         }
 
@@ -263,7 +264,7 @@ namespace SnapRegisters
 
 
 
-        private void ResetRegister()
+        public void ResetRegister()
         {
             m_itemssold += m_transaction.m_Items.Count;
             m_totalsales += m_totalTotal;
@@ -273,6 +274,7 @@ namespace SnapRegisters
             m_listOfOutputObjects.Clear();
 
             UpdateTotals();
+            Main_Frame.Navigate(string.Empty);
         }
 
         //Cash payment popup functions
@@ -344,8 +346,9 @@ namespace SnapRegisters
             m_employee = new Employee( m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, newPermissions, m_employee.PermissionGroup );
         }
 
-        private void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
+        public void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)
         {
+            //TODO TESTING, REMOVE COMMENT AFTER DONE
             m_transaction.Checkout();
             ResetRegister();
             hidePayByCashWindow();

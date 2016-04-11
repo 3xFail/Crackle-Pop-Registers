@@ -90,11 +90,24 @@
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\Business Objects\Change.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\CashPaymentFinished.xaml.cs">
+      <DependentUpon>CashPaymentFinished.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml.cs">
       <DependentUpon>CashPaymentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\CC_Manual_Entry_Page.xaml.cs">
+      <DependentUpon>CC_Manual_Entry_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\CreditCardPaymentPage.xaml.cs">
+      <DependentUpon>CreditCardPaymentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\GiftCardPaymentPage.xaml.cs">
+      <DependentUpon>GiftCardPaymentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml.cs">
@@ -135,7 +148,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="RegisterWindowParts\WPF UI\CashPaymentFinished.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\CC_Manual_Entry_Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\CreditCardPaymentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\GiftCardPaymentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +267,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="External Parts\" />
     <Folder Include="SharedResources\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

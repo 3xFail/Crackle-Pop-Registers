@@ -23,29 +23,28 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
     {
         public static Frame m_payment_menu_frame;
         private RegisterMainWindow m_win;
-        public PaymentMenuPage()
-        {
-            InitializeComponent();
-        }
+
         public PaymentMenuPage(RegisterMainWindow win)
         {
             InitializeComponent();
             m_win = win;
         }
 
+
         private void Cash_Button_Click(object sender, RoutedEventArgs e)
         {
-            m_payment_menu_frame.Navigate( new CashPaymentPage() );
+            m_payment_menu_frame.Navigate( new CashPaymentPage(m_win));
+            
         }
 
         private void Credit_Button_Click(object sender, RoutedEventArgs e)
         {
-            //m_payment_frame.Navigate();
+            m_payment_menu_frame.Navigate(new CreditCardPaymentPage(m_win));
         }
 
         private void GiftCard_Button_Click(object sender, RoutedEventArgs e)
         {
-            //m_payment_frame.Navigate();
+            m_payment_menu_frame.Navigate(new GiftCardPaymentPage(m_win));
         }
 
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
