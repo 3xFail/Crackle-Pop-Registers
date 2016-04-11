@@ -49,10 +49,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Change theChange = new Change(moneyAccepted.Number - _priceOfItems);
-
-
-            NavigationService.Navigate(new CashPaymentFinished(theChange, m_win));
+            decimal diff = moneyAccepted.Number - _priceOfItems;
+            if( diff > 0 )
+            {
+                Change theChange = new Change( diff );
+                NavigationService.Navigate( new CashPaymentFinished( theChange, m_win ) );
+            }
         }
     }
 }

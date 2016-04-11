@@ -268,6 +268,7 @@ namespace SnapRegisters
         {
             m_itemssold += m_transaction.m_Items.Count;
             m_totalsales += m_totalTotal;
+            m_transaction.Checkout();
             m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
             ItemsList.Children.Clear();
             CouponList.Children.Clear();
