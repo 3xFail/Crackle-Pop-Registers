@@ -39,27 +39,21 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             ones = Convert.ToInt32(changeToConvert) / 1;
             changeToConvert -= ones * 1;
 
-            halfdollars = Convert.ToInt32(changeToConvert / Convert.ToDecimal(.50));
-            changeToConvert -= halfdollars * Convert.ToDecimal(.50);
+            halfdollars = Convert.ToInt32(changeToConvert / .50M);
+            changeToConvert -= halfdollars * .50M );
 
-            quarters = Convert.ToInt32(changeToConvert / Convert.ToDecimal(.25));
-            changeToConvert -= quarters * Convert.ToDecimal(.25);
+            quarters = Convert.ToInt32(changeToConvert / .25M );
+            changeToConvert -= quarters * .25M;
 
             //TODO: WHY DOES THIS ALWAYS MESS UP AT DIMES
-            dimes = Convert.ToInt32(changeToConvert / Convert.ToDecimal(.10));
-            changeToConvert -= dimes * Convert.ToDecimal(.10);
+            dimes = Convert.ToInt32(changeToConvert / .10M );
+            changeToConvert -= dimes * .10M;
 
-            nickels = Convert.ToInt32(changeToConvert / Convert.ToDecimal(.05));
-            changeToConvert -= nickels * Convert.ToDecimal(.05);
+            nickels = Convert.ToInt32(changeToConvert / .05M );
+            changeToConvert -= nickels * .05M;
 
-            pennies = Convert.ToInt32(changeToConvert / Convert.ToDecimal(.01));
-            changeToConvert -= pennies * Convert.ToDecimal(.01);
-
-
-
-
-
-
+            pennies = Convert.ToInt32(changeToConvert / .01M );
+            changeToConvert -= pennies * .01M ;
         }
 
 
