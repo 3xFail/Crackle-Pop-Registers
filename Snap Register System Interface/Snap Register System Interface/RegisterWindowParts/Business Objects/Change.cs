@@ -18,11 +18,11 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         public int dimes { get; }
         public int nickels { get; }
         public int pennies { get; }
-        public decimal total { get; }
+        public string total { get; }
 
         public Change(decimal changeToConvert)
         {
-            total = changeToConvert;
+            total = changeToConvert.ToString("#.##");
 
             hundreds = Convert.ToInt32(changeToConvert) / 100;
             changeToConvert -= hundreds * 100;

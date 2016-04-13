@@ -196,8 +196,7 @@ namespace SnapRegisters
             // F8: Opens the manager override options menu.
             if (keyPressed.Key == Key.F8)
             {
-                ManagerOverrideMenu overrideMenu = new ManagerOverrideMenu(ChangeEmployeePermissions);
-                overrideMenu.Show();
+                Main_Frame.Navigate(new ManagerOverrideMenu(this, ChangeEmployeePermissions));
             }
 
             // Enter: Enter a bar-code from UPCField
