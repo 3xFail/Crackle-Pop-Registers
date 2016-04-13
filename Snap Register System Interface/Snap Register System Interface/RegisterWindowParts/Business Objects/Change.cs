@@ -22,7 +22,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
 
         public Change(decimal changeToConvert)
         {
-            total = changeToConvert.ToString("#.##");
+            total = changeToConvert.ToString("C");
 
             hundreds = Convert.ToInt32(changeToConvert) / 100;
             changeToConvert -= hundreds * 100;
