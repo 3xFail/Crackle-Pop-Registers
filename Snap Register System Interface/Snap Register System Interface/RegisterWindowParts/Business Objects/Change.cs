@@ -40,7 +40,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             changeToConvert -= ones * 1;
 
             halfdollars = Convert.ToInt32(changeToConvert / .50M);
-            changeToConvert -= halfdollars * .50M );
+            changeToConvert -= halfdollars * .50M ;
 
             quarters = Convert.ToInt32(changeToConvert / .25M );
             changeToConvert -= quarters * .25M;
