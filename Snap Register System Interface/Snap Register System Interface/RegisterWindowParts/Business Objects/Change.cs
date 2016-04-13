@@ -46,8 +46,8 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             changeToConvert -= quarters * .25M;
 
             //TODO: WHY DOES THIS ALWAYS MESS UP AT DIMES
-            dimes = Convert.ToInt32(changeToConvert / .10M );
-            changeToConvert -= dimes * .10M;
+            dimes = Convert.ToInt32(changeToConvert / .10M >= 1 ? Convert.ToInt32(changeToConvert / .10M) : 0);
+            changeToConvert -= Convert.ToDecimal(dimes * .10);
 
             nickels = Convert.ToInt32(changeToConvert / .05M );
             changeToConvert -= nickels * .05M;
