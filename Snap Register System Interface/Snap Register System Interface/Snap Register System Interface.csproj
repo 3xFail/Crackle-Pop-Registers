@@ -100,6 +100,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml.cs">
       <DependentUpon>CashPaymentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\CatalogPage.xaml.cs">
+      <DependentUpon>CatalogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\CC_Manual_Entry_Page.xaml.cs">
       <DependentUpon>CC_Manual_Entry_Page.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\CashPaymentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\CatalogPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

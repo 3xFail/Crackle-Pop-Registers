@@ -1,0 +1,18 @@
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CatalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="CatalogPage">
+
+    <Border BorderBrush="Black">
+        <Grid Background="{StaticResource Background}">
+            <DataGrid x:Name="Catalog_Grid" ItemsSource="{Binding item_table}" HorizontalAlignment="Left" Height="241" Margin="10,30,0,0" VerticalAlignment="Top" Width="280" AlternatingRowBackground="Gainsboro"  AlternationCount="2"/>
+            <Button x:Name="Close_Button" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="215,276,0,0" Click="Close_Button_Click"/>
+
+        </Grid>
+    </Border>
+</Page>
