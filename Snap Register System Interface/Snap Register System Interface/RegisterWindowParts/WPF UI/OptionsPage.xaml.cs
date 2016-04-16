@@ -88,7 +88,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Add_Cust_Button_Click_1( object sender, RoutedEventArgs e )
         {
-
+            Options_Frame.Navigate(new AddCustomerPage(m_win));
         }
     }
 }
