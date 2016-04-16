@@ -63,12 +63,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Override_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            Options_Frame.Navigate(new ManagerOverrideMenu(m_win, m_win.ChangeEmployeePermissions));
         }
 
         private void Catalog_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            Options_Frame.Navigate(new CatalogPage(m_win));
         }
 
         private void Remove_Item_Button_Click( object sender, RoutedEventArgs e )

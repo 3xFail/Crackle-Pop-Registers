@@ -98,7 +98,7 @@ namespace SnapRegisters
     public partial class RegisterMainWindow : Window
     {
 
-        private ConnectionSession m_connection = null;
+        public ConnectionSession m_connection = null;
         private Transaction m_transaction = null;
         public Employee m_employee { get; private set; } = null;
         public DateTime m_start { get; private set; } = DateTime.Now;
@@ -341,7 +341,7 @@ namespace SnapRegisters
             OptionsPage.Options_Frame = Main_Frame;
         }
 
-        private void ChangeEmployeePermissions(ulong newPermissions)
+        public void ChangeEmployeePermissions(ulong newPermissions)
         {
             m_employee = new Employee( m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, newPermissions, m_employee.PermissionGroup );
         }
