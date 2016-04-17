@@ -34,10 +34,7 @@ namespace SnapRegisters
 
 			NameField.Text = discount.ToString().Substring(0, Math.Min(discount.ToString().Length, 40));
 
-			if (SourceDiscount.IsFlat())
-				Discount = SourceDiscount.Discount().ToString("C");
-			else
-				Discount = ((int)(SourceDiscount.Discount() * 100)).ToString() + '%'; //multiply discount amount by 100 then remove decimals then convert to string and add % => .10 becomes "10%"
+			UpdateDiscountString();
 
 			AmountField.Text = Discount;
 
