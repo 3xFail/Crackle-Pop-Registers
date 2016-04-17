@@ -44,9 +44,9 @@ namespace SnapRegisters
 			m_transaction = transaction;
 			boxHeight = heightOfEachBox;
 			m_itemOutputPanel = itemOutputPanel;
-			m_couponOutputPanel = couponOutputPanel;
+			m_discountOutputPanel = couponOutputPanel;
 
-			m_stackOfCoupons = new StackPanel();
+			m_stackOfDiscounts = new StackPanel();
 
 			m_updateFunction = updateFunction;
 
@@ -62,7 +62,7 @@ namespace SnapRegisters
 			{
 				Grid blankCoupon = new Grid();
 				blankCoupon.Height = boxHeight;
-				m_stackOfCoupons.Children.Add(blankCoupon);
+				m_stackOfDiscounts.Children.Add(blankCoupon);
 				m_noDiscounts = true;
 			}
 			else
@@ -70,9 +70,9 @@ namespace SnapRegisters
 				m_noDiscounts = false;
 				foreach (IDiscount discount in m_item.Discounts)
 				{
-					CouponDisplayBox autoAppliedDiscount = new CouponDisplayBox(discount);
+					DiscountDisplayBox autoAppliedDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
 					autoAppliedDiscount.Height = boxHeight;
-					m_stackOfCoupons.Children.Add(autoAppliedDiscount);
+					m_stackOfDiscounts.Children.Add(autoAppliedDiscount);
 				}
 			}
 			UpdateHeight();
@@ -84,12 +84,12 @@ namespace SnapRegisters
 			if (discount.AppliesTo(m_item))
 			{
 				if (m_noDiscounts)
-					m_stackOfCoupons.Children.Clear();
+					m_stackOfDiscounts.Children.Clear();
 
 				m_noDiscounts = false;
-				CouponDisplayBox newDiscount = new CouponDisplayBox(discount);
+				DiscountDisplayBox newDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
 				newDiscount.Height = boxHeight;
-				m_stackOfCoupons.Children.Add(newDiscount);
+				m_stackOfDiscounts.Children.Add(newDiscount);
 				UpdateHeight();
 			}
 		}
@@ -97,42 +97,55 @@ namespace SnapRegisters
 		public void  OutputItem()
 		{
 			m_itemOutputPanel.Children.Add(m_itemDescriptionBox);
-			m_couponOutputPanel.Children.Add(m_stackOfCoupons);
+			m_discountOutputPanel.Children.Add(m_stackOfDiscounts);
 		}
 
 		public void UpdateHeight()
 		{
-			if (m_stackOfCoupons.Children.Count < 2 )
+			if (m_stackOfDiscounts.Children.Count < 2 )
 				m_itemDescriptionBox.Height = boxHeight;
 			else
-				m_itemDescriptionBox.Height = m_stackOfCoupons.Children.Count * boxHeight;
+				m_itemDescriptionBox.Height = m_stackOfDiscounts.Children.Count * boxHeight;
 		}
 
 		private void UpdateItemDetails()
 		{
-			ItemDisplayBox output = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
-			output.NameField.Text = m_item.ItemName.ToString();
-			output.AmountField.Text = m_item.Price.ToString( "C" );
+			ItemDisplayBox item = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
+
+			item.AmountField.Text = item.SourceItem.Price.ToString("C");
+
+			foreach(object discountObject in m_stackOfDiscounts.Children)
+			{
+				DiscountDisplayBox discount = (DiscountDisplayBox)discountObject;
+				discount.UpdateDiscountString();
+				discount.AmountField.Text = discount.Discount;
+			}
+
 			m_updateFunction();
 		}
 
 		private void RemoveItem()
 		{
 			m_itemOutputPanel.Children.Remove(m_itemDescriptionBox);
-			m_couponOutputPanel.Children.Remove(m_stackOfCoupons);
+			m_discountOutputPanel.Children.Remove(m_stackOfDiscounts);
 			m_updateFunction();
 		}
 
+		private void RemoveDiscount(DiscountDisplayBox discountToRemove)
+		{
+			m_discountOutputPanel.Children.Remove(discountToRemove);
+			m_updateFunction();
+		}
 
 		public double boxHeight { get; set; }
 
 		private StackPanel m_itemOutputPanel;
-		private StackPanel m_couponOutputPanel;
+		private StackPanel m_discountOutputPanel;
 		private Transaction m_transaction;
 		private bool m_noDiscounts;
 
 		private Grid m_itemDescriptionBox;
-		private StackPanel m_stackOfCoupons;
+		private StackPanel m_stackOfDiscounts;
 		private Item m_item;
 
 		private UpdateTotals m_updateFunction;

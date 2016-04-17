@@ -16,35 +16,35 @@ using System.Windows.Shapes;
 namespace SnapRegisters
 {
 	/// <summary>
-	/// Interaction logic for PriceOverrideMenu.xaml
+	/// Interaction logic for DiscountOverrideMenu.xaml
 	/// </summary>
-	public partial class PriceOverrideMenu : UserControl
+	public partial class DiscountOverrideMenu : UserControl
 	{
 		public delegate void ClosePriceOverrideMenu();
-		public PriceOverrideMenu(ItemDisplayBox itemToModify, Transaction transaction, ClosePriceOverrideMenu closeFunction)
+		public DiscountOverrideMenu(DiscountDisplayBox discountToModify, Transaction transaction, ClosePriceOverrideMenu closeFunction)
 		{
 			InitializeComponent();
 
-			m_itemBox = itemToModify;
+			m_discountBox = discountToModify;
 			m_transaction = transaction;
 			m_closeFunction = closeFunction;
 
-			OriginalPriceField.Text = "Original Price: " + m_itemBox.SourceItem.OriginalPrice.ToString( "C" );
+			OriginalAmountField.Text = "Original Amount: " + m_discountBox.Discount;
 		}
 
-		private void ChangePriceButtonClicked(object sender, RoutedEventArgs e)
+		private void ChangeDiscountButtonClick(object sender, RoutedEventArgs e)
 		{
-			m_transaction.OverrideCost(m_itemBox.SourceItem, NewPriceField.Number);
+			m_transaction.OverrideDiscount(m_discountBox.PossessingItem, m_discountBox.SourceDiscount, NewAmountField.Number);
 			m_closeFunction();
 		}
-
-		private ItemDisplayBox m_itemBox;
-		private Transaction m_transaction;
-		private ClosePriceOverrideMenu m_closeFunction;
 
 		private void CancelButtonClick(object sender, RoutedEventArgs e)
 		{
 			m_closeFunction();
 		}
+
+		private DiscountDisplayBox m_discountBox;
+		private Transaction m_transaction;
+		private ClosePriceOverrideMenu m_closeFunction;
 	}
 }

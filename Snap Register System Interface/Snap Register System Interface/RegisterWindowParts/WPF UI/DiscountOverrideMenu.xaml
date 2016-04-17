@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="SnapRegisters.DiscountOverrideMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+			 xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="600">
+    <Grid Height="200" Width="600" Background="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"/>
+            <RowDefinition Height=".5*"/>
+        </Grid.RowDefinitions>
+        <!--Item Name-->
+        <Viewbox Margin="30" HorizontalAlignment="Left">
+            <TextBlock x:Name="DiscountNameBox" Text="Discount"/>
+        </Viewbox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="0" Margin="8,8,8,55" HorizontalAlignment="Left">
+                <TextBlock x:Name="OriginalAmountField" Width="180" Text="Original Price: 0.00"/>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Margin="8,55,8,8" HorizontalAlignment="Left">
+                <currency:CurrencyTextBox x:Name="NewAmountField" Width="180"/>
+            </Viewbox>
+            <!--Buttons-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0"
+					 VerticalAlignment="Bottom">
+                    <Button x:Name="ChangeDiscountButton" Content="Change Discount" 
+						Height="100" Width="160"
+						Margin="8" Click="ChangeDiscountButtonClick"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1"
+					 VerticalAlignment="Bottom">
+                    <Button x:Name="CancelButton" Content="Cancel" 
+						Height="100" Width="160"
+						Margin="8" Click="CancelButtonClick"/>
+                </Viewbox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

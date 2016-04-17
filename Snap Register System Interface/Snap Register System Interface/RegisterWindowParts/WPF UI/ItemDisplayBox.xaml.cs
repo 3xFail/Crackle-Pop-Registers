@@ -60,7 +60,6 @@ namespace SnapRegisters
 
 		private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			//EditItemMenu editMenu = new EditItemMenu(m_sourceItem);
 			EditMenu = new Popup();
 			EditMenu.Child = new ItemEditMenu(this, m_transaction, CloseEditMenu);
 			EditMenu.IsOpen = true;
@@ -77,7 +76,7 @@ namespace SnapRegisters
 			else if (menu.PriceOverride)
 			{
 				PriceMenu = new Popup();
-				PriceMenu.Child = new PriceOverrideMenu(this, m_transaction, ClosePriceMenu);
+				PriceMenu.Child = new ItemOverrideMenu(this, m_transaction, ClosePriceMenu);
 				PriceMenu.IsOpen = true;
 			}
 

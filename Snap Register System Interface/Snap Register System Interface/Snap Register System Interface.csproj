@@ -109,6 +109,12 @@
     <Compile Include="RegisterWindowParts\WPF UI\CreditCardPaymentPage.xaml.cs">
       <DependentUpon>CreditCardPaymentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\DiscountEditMenu.xaml.cs">
+      <DependentUpon>DiscountEditMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml.cs">
+      <DependentUpon>DiscountOverrideMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\GiftCardPaymentPage.xaml.cs">
       <DependentUpon>GiftCardPaymentPage.xaml</DependentUpon>
     </Compile>
@@ -120,11 +126,8 @@
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Coupon.cs" />
-    <Compile Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml.cs">
-      <DependentUpon>CouponDisplayBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml.cs">
-      <DependentUpon>EditDiscountMenu.xaml</DependentUpon>
+    <Compile Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.xaml.cs">
+      <DependentUpon>DiscountDisplayBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Item.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemDisplayBox.xaml.cs">
@@ -171,6 +174,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RegisterWindowParts\WPF UI\DiscountEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterWindowParts\WPF UI\GiftCardPaymentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,11 +194,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegisterWindowParts\WPF UI\CouponDisplayBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RegisterWindowParts\WPF UI\EditDiscountMenu.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\DiscountDisplayBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,7 +210,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml">
+    <Page Include="RegisterWindowParts\WPF UI\ItemOverrideMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,8 +225,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RegisterWindowParts\WPF UI\PriceOverrideMenu.xaml.cs">
-      <DependentUpon>PriceOverrideMenu.xaml</DependentUpon>
+    <Compile Include="RegisterWindowParts\WPF UI\ItemOverrideMenu.xaml.cs">
+      <DependentUpon>ItemOverrideMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\RegisterMainWindow.xaml.cs">
       <DependentUpon>RegisterMainWindow.xaml</DependentUpon>
