@@ -94,6 +94,9 @@
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
+    <Compile Include="RegisterWindowParts\WPF UI\AddCustomerPage.xaml.cs">
+      <DependentUpon>AddCustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\CashPaymentFinished.xaml.cs">
       <DependentUpon>CashPaymentFinished.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
     <Page Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\AddCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\CashPaymentFinished.xaml">
       <SubType>Designer</SubType>
