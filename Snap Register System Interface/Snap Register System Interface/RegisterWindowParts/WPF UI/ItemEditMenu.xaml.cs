@@ -30,7 +30,9 @@ namespace SnapRegisters
 			m_transaction = transaction;
 			m_closeFunction = closeFunction;
 			ItemNameBox.Text = m_itemBox.SourceItem.ItemName.ToString();
+
 			RemoveItem = false;
+			PriceOverride = false;
 		}
 
 		private ItemDisplayBox m_itemBox;

@@ -50,6 +50,18 @@ namespace SnapRegisters
             // set the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
+
+            //dynamically draw the emblem 
+            System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
+            
+            System.Windows.Forms.PictureBox lePictureBox = new System.Windows.Forms.PictureBox();
+            //lePictureBox.Width = 200;
+            lePictureBox.Image = leEmblem;
+
+            windowsFormsHost2.Child = lePictureBox;
+
+
+
         }
         // opens the inventory page
         private void btn_Inv(object sender, RoutedEventArgs e)

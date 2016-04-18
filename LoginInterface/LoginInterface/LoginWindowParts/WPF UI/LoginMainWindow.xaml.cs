@@ -15,6 +15,12 @@ using SnapRegisters;
 
 using System.Security.Cryptography;
 using System.Xml;
+using System.Windows.Media;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+//using System.Windows.Forms;
+using System.Drawing;
+
 
 namespace SnapRegisters
 {
@@ -30,7 +36,65 @@ namespace SnapRegisters
         {
             InitializeComponent();
             FocusManager.SetFocusedElement(this, usernameField);
+
+
+
+            try
+            {
+
+                _connection = new ConnectionSession("s", "1234");
+
+                XmlNode employee = _connection.Response[0];
+                if (employee.Get("Active")[0] == '0')
+                    MessageBox.Show("This account is inactive.");
+                else
+                {
+
+                   
+
+
+
+                    DBInterface.m_connection = _connection;
+
+                   
+                    DBInterface.GetAllLogos();
+                    string theNewImageString = DBInterface.Response[0].Get("LogoImage");
+
+                    System.Drawing.Image newImage = LogoOperations.StringToImage(theNewImageString);
+
+                    newImage.Save("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+
+
+            System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
+
+
+
+            System.Windows.Forms.PictureBox lePictureBox = new System.Windows.Forms.PictureBox();
+            lePictureBox.Width = 200;
+            lePictureBox.Image = leEmblem;
+
+
+
+            windowsFormsHost1.Child = lePictureBox;
+
+
+
+
+
+
+
         }
+        
+
 
         private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -72,10 +136,10 @@ namespace SnapRegisters
         {
 
 #if ADMIN
-                if (!employeeLoggedIn.HasPermisison( Permissions.AdminLogIn) )
-                    throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
-                SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
-                MainAdminWindow.Show();
+            if (!employeeLoggedIn.HasPermisison(Permissions.AdminLogIn))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+            SnapRegisters.AdminMainWindow MainAdminWindow = new SnapRegisters.AdminMainWindow(employeeLoggedIn, _connection);
+            MainAdminWindow.Show();
 #elif REGISTER
             if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.RegisterLogIn))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -94,22 +158,22 @@ namespace SnapRegisters
             _isLoggedIn = false;
             try
             {
-                _connection = new ConnectionSession( attempt.Username, attempt.Password );
+                _connection = new ConnectionSession(attempt.Username, attempt.Password);
 
                 XmlNode employee = _connection.Response[0];
 
-                if( employee.Get( "Active" )[0] == '0' )
-                    MessageBox.Show( "This account is inactive." );
+                if (employee.Get("Active")[0] == '0')
+                    MessageBox.Show("This account is inactive.");
                 else
                 {
 
-                    string name = employee.Get( "FName" ) + ' ' + employee.Get( "LName" );
-                    ulong permissions = ulong.Parse( employee.Get( "PermissionsID" ) );
-                    string group = employee.Get( "PermissionsGroup" );
-                    string phone = employee.Get( "PhoneNumber" );
-                    int id = int.Parse( employee.Get( "UserID" ) );
+                    string name = employee.Get("FName") + ' ' + employee.Get("LName");
+                    ulong permissions = ulong.Parse(employee.Get("PermissionsID"));
+                    string group = employee.Get("PermissionsGroup");
+                    string phone = employee.Get("PhoneNumber");
+                    int id = int.Parse(employee.Get("UserID"));
 
-                    _loggedIn = new Employee( id, name, null, phone, new DateTime( 1, 1, 1 ), permissions, group );
+                    _loggedIn = new Employee(id, name, null, phone, new DateTime(1, 1, 1), permissions, group);
 
                     _isLoggedIn = true;
                 }
@@ -125,7 +189,7 @@ namespace SnapRegisters
             e.CanExecute = false;
             if (_isLoggedIn)
             {
-                if( _loggedIn.HasPermisison( Permissions.CanExitInterface ) )
+                if (_loggedIn.HasPermisison(Permissions.CanExitInterface))
                 {
                     e.CanExecute = true;
                 }
@@ -147,7 +211,7 @@ namespace SnapRegisters
 
             ConnectToServer(_lastAttempt);
 
-            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.CanExitInterface ))
+            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.CanExitInterface))
             {
                 btnShowPopup_Click(sender, e);
                 passwordField.Clear();

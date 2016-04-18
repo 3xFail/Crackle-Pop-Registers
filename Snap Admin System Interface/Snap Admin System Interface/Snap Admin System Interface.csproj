@@ -234,6 +234,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginWindowParts\Business Objects\LogoOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
