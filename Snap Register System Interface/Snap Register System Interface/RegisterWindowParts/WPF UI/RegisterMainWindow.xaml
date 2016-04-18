@@ -110,16 +110,17 @@
                     </Viewbox>
                 </Grid>
                 <!--Company Logo Button-->
-                <Viewbox Grid.Row="0" Grid.Column="1" Margin="10,0,0,0"
+                <Viewbox Name="OptionsViewBox" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0"
 						 VerticalAlignment="Top" HorizontalAlignment="Right">
 
                     <Button x:Name="OptionsButton"  
 							Margin="0,0,0,0"
 							Width="80" Height="80" Background="{StaticResource Background}" Click="OptionsButton_Click">
-                        <Image Source="/SharedResources/Images/Emblem.png" Width="76" Height="76"/>
+                        
+                        <!--<Image Source="/SharedResources/Images/Emblem.png" Width="76" Height="76"/>-->
                     </Button>
                 </Viewbox>
-
+                
                 <!--Totals Area-->
 
 

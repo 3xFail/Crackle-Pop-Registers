@@ -144,6 +144,24 @@ namespace SnapRegisters
             //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
 
+
+            //dynamically draw the emblem
+            //Image leEmblem = new Image();
+            //leEmblem.Source = new BitmapImage(new Uri("..//..//..//..//SharedResources/Images/Emblem.png", UriKind.Relative));
+
+            //OptionsButton.Content = leEmblem;
+            
+            ImageBrush brush = new ImageBrush();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri("..//..//..//..//SharedResources/Images/Emblem.png", UriKind.Relative);
+            bitmap.EndInit();
+            brush.ImageSource = bitmap;
+            OptionsButton.Background = brush;
+
+
+
+
             //Experimental - Not working yet
             //This code is supposed to lock the keyboard to this application
             //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
@@ -210,11 +228,11 @@ namespace SnapRegisters
                         UPCField.Clear();
                     }
                 }
-                catch (InvalidOperationException ex )
+                catch (InvalidOperationException ex)
                 {
-                    MessageBox.Show( ex.Message );
+                    MessageBox.Show(ex.Message);
                 }
-                catch (Exception ) //if that fails
+                catch (Exception) //if that fails
                 {
                     try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
                     catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
@@ -247,7 +265,7 @@ namespace SnapRegisters
             // Enter: Enter the cash paid by customer
             if (keyPressed.Key == Key.Enter)
             {
-                if (AmountPaidInCashBox.Text != string.Empty && decimal.Parse(AmountPaidInCashBox.Text) >= m_totalTotal )
+                if (AmountPaidInCashBox.Text != string.Empty && decimal.Parse(AmountPaidInCashBox.Text) >= m_totalTotal)
                 {
                     ChangeAmount.Text = (m_totalTotal - decimal.Parse(AmountPaidInCashBox.Text)).ToString("C");
 
@@ -330,7 +348,7 @@ namespace SnapRegisters
         {
             SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
             loginWindow.Show();
-            m_connection.WriteNoResponse( "AddEmployeeSession @0, @1, @2, @3, @4", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales );
+            m_connection.WriteNoResponse("AddEmployeeSession @0, @1, @2, @3, @4", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales);
             this.Close();
         }
 
@@ -343,7 +361,7 @@ namespace SnapRegisters
 
         public void ChangeEmployeePermissions(ulong newPermissions)
         {
-            m_employee = new Employee( m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, newPermissions, m_employee.PermissionGroup );
+            m_employee = new Employee(m_employee.ID, m_employee.name, m_employee.address, m_employee.phoneNumber, m_employee.birthday, newPermissions, m_employee.PermissionGroup);
         }
 
         public void CashPaidResetRegister_Clicked(object sender, RoutedEventArgs e)

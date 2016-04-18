@@ -300,5 +300,24 @@ namespace SnapRegisters
 
         public static XmlNodeList Response { get { return m_connection.Response; } }
 
+
+
+        public static void GetAllLogos()
+        {
+            m_connection.Write("GetAllLogos");
+
+        }
+
+        public static void AddLogo (string logoString)
+        {
+
+            m_connection.Write("AddLogo @0", logoString);
+        }
+
+        public static void ChangeLogo(int ID, string logoString)
+        {
+            m_connection.WriteNoResponse("ChangeLogo @0, @1", ID, logoString);
+        }
+
     }
 }

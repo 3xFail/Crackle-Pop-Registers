@@ -68,6 +68,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -86,6 +87,12 @@
     </Compile>
     <Compile Include="..\..\SharedResources\Keyboard.cs">
       <Link>SharedResources\Keyboard.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Snap Admin System Interface\Snap Admin System Interface\AdminWindowParts\Business Objects\DBInterface.cs">
+      <Link>LoginWindowParts\Business Objects\DBInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Snap Admin System Interface\Snap Admin System Interface\LoginWindowParts\Business Objects\LogoOperations.cs">
+      <Link>LoginWindowParts\Business Objects\LogoOperations.cs</Link>
     </Compile>
     <Compile Include="LoginWindowParts\WPF UI\ManagerFunctionsPopup.xaml.cs">
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>

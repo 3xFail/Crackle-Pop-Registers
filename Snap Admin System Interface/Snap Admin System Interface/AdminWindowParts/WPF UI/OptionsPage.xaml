@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
             <Button x:Name="MngBtn" Content="Manage Registers" Height="50"/>
-            <Button x:Name="LogoBtn" Content="Change Logo" Height="50"/>
+            <Button x:Name="LogoBtn" Content="Change Logo" Height="50" Click="LogoBtn_Click"/>
             <Button x:Name="ColorBtn" Content="Change Color Scheme" Height="50"/>
         </StackPanel>
     </Grid>
