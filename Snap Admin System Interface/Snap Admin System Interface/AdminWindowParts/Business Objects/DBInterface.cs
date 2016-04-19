@@ -31,6 +31,15 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewAdminLogs ) );
         }
 
+        public static void GetAllSales()
+        {
+            //if( m_employee.HasPermisison( Permissions.ViewSaleCatalog ) )
+            {
+                m_connection.Write( "GetAllSales" );
+            }
+            //else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewSaleCatalog ) );
+        }
+
         public static void GetAllCoupons()
         {
             if( m_employee.HasPermisison( Permissions.ViewCouponCatalog ) )

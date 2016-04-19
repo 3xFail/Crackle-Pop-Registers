@@ -37,5 +37,17 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 System.Windows.Forms.MessageBox.Show( ex.Message );
             }
         }
+
+        private void SalesBtn_Click( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                SalesFrame.Navigate( new SaleCatalog() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
+        }
     }
 }
