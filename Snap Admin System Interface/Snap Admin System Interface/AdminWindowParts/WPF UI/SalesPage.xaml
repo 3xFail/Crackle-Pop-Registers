@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-            <Button x:Name="SalesBtn" Content="Sales Catalog" Height="50"/>
+            <Button x:Name="SalesBtn" Content="Sales Catalog" Height="50" Click="SalesBtn_Click"/>
             <Button x:Name="CouponsBtn" Content="Coupons Catalog" Height="50" Click="CouponsBtn_Click"/>
         </StackPanel>
     </Grid>
