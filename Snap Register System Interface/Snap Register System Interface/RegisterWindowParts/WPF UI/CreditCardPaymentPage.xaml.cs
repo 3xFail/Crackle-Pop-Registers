@@ -34,7 +34,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Swipe_Entry_CC_Button_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

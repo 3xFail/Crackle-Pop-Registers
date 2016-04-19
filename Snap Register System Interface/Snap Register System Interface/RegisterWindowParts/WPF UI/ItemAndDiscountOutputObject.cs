@@ -116,9 +116,12 @@ namespace SnapRegisters
 
 			foreach(object discountObject in m_stackOfDiscounts.Children)
 			{
-				DiscountDisplayBox discount = (DiscountDisplayBox)discountObject;
-				discount.UpdateDiscountString();
-				discount.AmountField.Text = discount.Discount;
+				if (!m_noDiscounts)
+				{
+					DiscountDisplayBox discount = (DiscountDisplayBox)discountObject;
+					discount.UpdateDiscountString();
+					discount.AmountField.Text = discount.Discount;
+				}
 			}
 
 			m_updateFunction();

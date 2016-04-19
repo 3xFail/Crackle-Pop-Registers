@@ -30,7 +30,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void CC_Manual_Entry_Next_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void CC_Manual_Entry_Cancel_Click(object sender, RoutedEventArgs e)

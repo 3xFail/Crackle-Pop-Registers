@@ -49,7 +49,7 @@
       <HintPath>..\..\SharedResources\CSharpClient.dll</HintPath>
     </Reference>
     <Reference Include="CurrencyTextBoxControl">
-      <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
+      <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Release\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
