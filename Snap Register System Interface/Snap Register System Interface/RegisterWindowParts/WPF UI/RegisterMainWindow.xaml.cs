@@ -346,7 +346,7 @@ namespace SnapRegisters
 
         public void Logout()
         {
-            SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
+            SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow(false);
             loginWindow.Show();
             m_connection.WriteNoResponse("AddEmployeeSession @0, @1, @2, @3, @4", m_employee.ID, m_start, DateTime.Now, m_itemssold, m_totalsales);
             this.Close();

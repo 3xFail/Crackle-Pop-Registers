@@ -32,46 +32,47 @@ namespace SnapRegisters
         private Employee _loggedIn = null;
         private LoginDetails _lastAttempt;
 
-        public LoginMainWindow()
+        public LoginMainWindow(bool firstStartup = true)
         {
             InitializeComponent();
             FocusManager.SetFocusedElement(this, usernameField);
 
-
-
-            try
+            
+            if (firstStartup)
             {
-
-                _connection = new ConnectionSession("s", "1234");
-
-                XmlNode employee = _connection.Response[0];
-                if (employee.Get("Active")[0] == '0')
-                    MessageBox.Show("This account is inactive.");
-                else
+                try
                 {
 
-                   
+                    _connection = new ConnectionSession("s", "1234");
+
+                    XmlNode employee = _connection.Response[0];
+                    if (employee.Get("Active")[0] == '0')
+                        MessageBox.Show("This account is inactive.");
+                    else
+                    {
 
 
 
-                    DBInterface.m_connection = _connection;
-
-                   
-                    DBInterface.GetAllLogos();
-                    string theNewImageString = DBInterface.Response[0].Get("LogoImage");
-
-                    System.Drawing.Image newImage = LogoOperations.StringToImage(theNewImageString);
-
-                    newImage.Save("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
 
 
+                        DBInterface.m_connection = _connection;
+
+
+                        DBInterface.GetAllLogos();
+                        string theNewImageString = DBInterface.Response[0].Get("LogoImage");
+
+                        System.Drawing.Image newImage = LogoOperations.StringToImage(theNewImageString);
+
+                        newImage.Save("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
+
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
                 }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-
 
 
             System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
@@ -93,7 +94,7 @@ namespace SnapRegisters
 
 
         }
-        
+
 
 
         private void Login_CanExecute(object sender, CanExecuteRoutedEventArgs e)
