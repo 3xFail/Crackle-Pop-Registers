@@ -31,13 +31,13 @@ namespace SnapRegisters
         private ConnectionSession _connection;
         private Employee _loggedIn = null;
         private LoginDetails _lastAttempt;
-
-        public LoginMainWindow(bool firstStartup = true)
+        public static bool firstStartup = true;
+        public LoginMainWindow()
         {
             InitializeComponent();
             FocusManager.SetFocusedElement(this, usernameField);
 
-            
+
             if (firstStartup)
             {
                 try
@@ -72,7 +72,9 @@ namespace SnapRegisters
                 {
                     MessageBox.Show(e.Message);
                 }
+                firstStartup = false;
             }
+
 
 
             System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
