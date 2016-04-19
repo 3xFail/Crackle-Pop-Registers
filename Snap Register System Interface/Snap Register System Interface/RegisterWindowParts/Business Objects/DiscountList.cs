@@ -33,6 +33,15 @@ namespace SnapRegisters
             Discounts.Add( discount );
         }
 
+		public void Remove(IDiscount discount)
+		{
+			Discounts.Remove(discount);
+		}
+
+		public IDiscount Find(Predicate<IDiscount> match)
+		{
+			return Discounts.Find(match);
+		}
         //Overload so we can foreach
         public IEnumerator<IDiscount> GetEnumerator()
         {

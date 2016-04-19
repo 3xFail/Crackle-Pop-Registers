@@ -1,0 +1,29 @@
+﻿<Page x:Class="Snap_Register_System_Interface.RegisterWindowParts.WPF_UI.CatalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
+      mc:Ignorable="d"
+      Title="CatalogPage" Height="437.859" Width="367.363">
+
+    <Border BorderBrush="Black" BorderThickness="5" Margin="0,0,-23,-6">
+        <Grid Background="{StaticResource Background}" Margin="0,0,1,0">
+            <DataGrid x:Name="Catalog"  HorizontalAlignment="Left" Height="346" Margin="10,40,0,0" VerticalAlignment="Top" Width="354" 
+                      AlternatingRowBackground="Gainsboro"  AlternationCount="2" SelectionMode="Single"
+                      AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+                      ItemsSource="{Binding}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" CanUserResize="False" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="Close_Button" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="289,393,0,0" Click="Close_Button_Click"/>
+            <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="25" Margin="68,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="224"/>
+            <Label x:Name="Search_Label" Content="Search:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="58" Height="25"/>
+            <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="159,393,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
+            <Button x:Name="Search_Button" Content="Search" HorizontalAlignment="Left" Margin="297,10,0,0" VerticalAlignment="Top" Width="67" Height="25" Click="Search_Button_Click"/>
+
+        </Grid>
+    </Border>
+</Page>

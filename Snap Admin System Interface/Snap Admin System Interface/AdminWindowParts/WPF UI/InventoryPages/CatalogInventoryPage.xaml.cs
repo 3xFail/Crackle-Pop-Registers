@@ -94,6 +94,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
             decimal maxprice = 0;
             int maxquantity = 0;
+            int minquantity = 0;
 
             //loop though the list adding each row to the list
             foreach( XmlNode node in DBInterface.Response )
@@ -123,6 +124,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
             MaxQuantitySlider.Maximum = maxquantity + 1;
             MinQuantitySlider.Maximum = maxquantity + 1;
+            MinQuantitySlider.Minimum = minquantity - 1;
+            MaxQuantitySlider.Minimum = minquantity - 1;
             MaxQuantityTextBox.Text = MinQuantityTextBox.Text = "0";
         }
 

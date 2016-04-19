@@ -66,15 +66,24 @@ namespace SnapRegisters
 	//		PERMISSIONS:
 	//*************************************************************************************************************
 	public delegate void AssignPermissionsDelegate(ulong permissionsToAssign);
-	public partial class ManagerOverrideMenu : Window
+	public partial class ManagerOverrideMenu : Page
 	{
+        RegisterMainWindow m_win;
 		public ManagerOverrideMenu(AssignPermissionsDelegate permissionsOutput)
 		{
 			InitializeComponent();
 			m_permissionsOutput = permissionsOutput;
 			m_scannedPermissions = 0;
 		}
-		public void GetPermissions(string employeeIDCode)
+
+        public ManagerOverrideMenu(RegisterMainWindow win,AssignPermissionsDelegate permissionsOutput)
+        {
+            InitializeComponent();
+            m_permissionsOutput = permissionsOutput;
+            m_scannedPermissions = 0;
+            m_win = win;
+        }
+        public void GetPermissions(string employeeIDCode)
 		{
             //TODO: Replace this with getting actual permissions.
             m_scannedPermissions = ulong.MaxValue;
@@ -109,11 +118,8 @@ namespace SnapRegisters
 		private void Override_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			m_permissionsOutput(m_scannedPermissions);
-			this.Close();
-		}
+            m_win.Main_Frame.Navigate(string.Empty);
+        }
 
-		private void WindowDeactivated(object sender, EventArgs e)
-		{
-		}
 	}
 }

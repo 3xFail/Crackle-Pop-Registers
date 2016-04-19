@@ -25,7 +25,8 @@
             <ColumnDefinition Width="507*"/>
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="Logo" Source="/SharedResources/Images/Emblem.png" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" />
+        <WindowsFormsHost HorizontalAlignment="Center" Name="windowsFormsHost2" Grid.RowSpan="2" />
+        <!--<Image x:Name="Logo" Source="/SharedResources/Images/Emblem.png" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" />-->
         <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >
             <StackPanel>

@@ -40,7 +40,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             nickels.Text = changeToGive.nickels.ToString();
             pennies.Text = changeToGive.pennies.ToString();
 
-            ChangeTotal.Text = "$" + changeToGive.total;
+            ChangeTotal.Text = changeToGive.total;
 
         }
 

@@ -1,4 +1,4 @@
-﻿<Window x:Class="SnapRegisters.ManagerOverrideMenu"
+﻿<Page x:Class="SnapRegisters.ManagerOverrideMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:SnapRegisters"
         mc:Ignorable="d"
         Title="ManagerOverrideMenu" Height="100" Width="300"
-		WindowStyle="None"
-		ResizeMode="NoResize" KeyDown="KeyPressed" Deactivated="WindowDeactivated">
-    <Window.CommandBindings>
+		>
+    <Page.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="Override_Executed" CanExecute="Override_CanExecute"/>
-    </Window.CommandBindings>
-    <Grid>
+    </Page.CommandBindings>
+    <Grid Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
@@ -33,5 +32,6 @@
 				</Viewbox>
 			</Button.Content>
         </Button>
+        
     </Grid>
-</Window>
+</Page>

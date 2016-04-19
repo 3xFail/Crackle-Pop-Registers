@@ -43,6 +43,10 @@ namespace SnapRegisters
     //				"reason" is the reason the employee chose to override the price.
     //			public void ApplyCoupon(string couponID)
     //				Applies a coupon to the sale.
+	//			public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
+	//				Removes the given discount from the given item.
+	//			public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal newAmount)
+	//				Changes the value of a discount to the given amount.
     //			public void Checkout()
     //				Finishes the transaction and begins processing payment.
     //			public List<Item> GetItems()
@@ -226,6 +230,43 @@ namespace SnapRegisters
 
         }
 
+		public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
+		{
+			if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
+				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+
+			// Checks to make sure the item was valid before removing it from the list.
+			try
+			{
+				Item containingItem = m_Items.Find(x => x == itemToRemoveFrom);
+
+				containingItem.Discounts.Remove(discountToRemove);
+			}
+			catch (InvalidOperationException e)
+			{
+				throw e;
+			}
+		}
+
+		public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal amount)
+		{
+			if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
+				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+
+			// Checks to make sure the item was valid before removing it from the list.
+			try
+			{
+				Item containingItem = m_Items.Find(x => x == itemToChange);
+
+				IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
+
+				discount.ChangeAmountTo(amount);
+			}
+			catch (InvalidOperationException e)
+			{
+				throw e;
+			}
+		}
         public void Checkout()
 		{
             m_connection.Write( "CreateOrder @0, @1", DBNull.Value, m_Employee.ID );
