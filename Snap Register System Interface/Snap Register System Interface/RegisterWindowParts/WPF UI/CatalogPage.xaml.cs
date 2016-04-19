@@ -100,6 +100,14 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             
             return true;
         }
+
+        private void Row_DoubleClick( object sender, MouseButtonEventArgs e )
+        {
+            DataGridRow row = sender as DataGridRow;
+            Item item = ( sender as DataGridRow ).Item as Item;
+
+            m_win.m_transaction.AddItem(item.Barcode);
+        }
     }
 
     public class Item 

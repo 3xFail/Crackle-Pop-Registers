@@ -99,7 +99,7 @@ namespace SnapRegisters
     {
 
         public ConnectionSession m_connection = null;
-        private Transaction m_transaction = null;
+        public Transaction m_transaction = null;
         public Employee m_employee { get; private set; } = null;
         public DateTime m_start { get; private set; } = DateTime.Now;
         public int m_itemssold { get; set; } = 0;
