@@ -20,9 +20,22 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     /// </summary>
     public partial class SalesPage : Page
     {
+        public static Frame SalesFrame;
         public SalesPage()
         {
             InitializeComponent();
+        }
+
+        private void CouponsBtn_Click( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                SalesFrame.Navigate( new CouponCatalog() );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
     public partial class CustomersPage : Page
     {
         // frame to reference the frame in the AdminMainWindow
-        public static Frame CustFrame;
+        public static Frame CustFrame { get; set; }
 
         public CustomersPage()
         {

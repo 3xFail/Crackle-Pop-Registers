@@ -34,6 +34,8 @@ namespace PointOfSales.Permissions
         public static readonly string ModifyPermissions = "Modify Permissions";
         public static readonly string ViewCustomerCatalog = "View Customer Catalog";
         public static readonly string ChangeCustomerCatalog = "Modify Customer Information";
+        public static readonly string ViewCouponCatalog = "View Coupon Catalog";
+        public static readonly string ChangeCouponCatalog = "Change Coupon Catalog";
 
         public static readonly List<string> _Permissions = new List<string>()
         {
@@ -60,7 +62,9 @@ namespace PointOfSales.Permissions
             ViewPermissions,
             ModifyPermissions,
             ViewCustomerCatalog,
-            ChangeCustomerCatalog
+            ChangeCustomerCatalog,
+            ViewCouponCatalog,
+            ChangeCouponCatalog
 
         };
 
@@ -89,7 +93,9 @@ namespace PointOfSales.Permissions
             { ViewPermissions, "You do not have permission to view permissions" },
             { ModifyPermissions, "You do not have permission to modify permissions" },
             { ViewCustomerCatalog, "You do not have permission to view the customer catalog" },
-            { ChangeCustomerCatalog, "You do not have permission to modify customer information" }
+            { ChangeCustomerCatalog, "You do not have permission to modify customer information" },
+            { ViewCouponCatalog, "You do not have permission to view the coupon catalog" },
+            { ChangeCouponCatalog, "You do not have permission to change the coupon catalog" }
         };
 
         public static string ErrorMessage( string permission )

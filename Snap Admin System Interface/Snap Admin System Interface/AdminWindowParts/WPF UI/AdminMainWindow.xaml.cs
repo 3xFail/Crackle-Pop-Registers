@@ -113,6 +113,7 @@ namespace SnapRegisters
             try
             {
                 NavigationFrame.Navigate( new SalesPage() );
+                SalesPage.SalesFrame = NavigationFrame;
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -137,7 +138,7 @@ namespace SnapRegisters
         }
         private void Logout()
         {
-            SnapRegisters.LoginMainWindow loginWindow = new SnapRegisters.LoginMainWindow();
+            LoginMainWindow loginWindow = new LoginMainWindow();
             loginWindow.Show();
             this.Close();
         }
