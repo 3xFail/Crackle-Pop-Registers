@@ -220,7 +220,7 @@ namespace SnapRegisters
                     firstName, lastName, address_1, address_2, city, state, country, zip, phoneNumber, email, DBNull.Value, "1", dob_string );
 
                 if( Response[0].Get( "CustID" ) == "-1" )
-                    throw new InvalidOperationException( $"User with phone number \"{phoneNumber}\" already exists." );
+                    throw new InvalidOperationException( $"User with phone number {phoneNumber} already exists." );
                 else
                     Log( $"Added customer \"{firstName}  {lastName}\" with phone number \"{phoneNumber}\"." );
             }
@@ -241,7 +241,7 @@ namespace SnapRegisters
             m_connection.Write( "GetItem_ID @0", ID );
 
             if( Response.Count != 1 )
-                throw new ArgumentException( $"Item with ID=\"{ID}\" does not exist" );
+                throw new ArgumentException( $"Item with ID= {ID} does not exist" );
 
             string old_name = Response[0].Get( "Name" );
             string old_barcode = Response[0].Get( "Barcode" );
@@ -271,7 +271,7 @@ namespace SnapRegisters
                 Log( $"Modified item ID=\"{ID}\"s barcode from \"{old_barcode}\" to \"{barcode}\"" );
 
             if( old_active != active )
-                Log( $"Modified item ID=\"{ID}\"s active state from \"{( old_active ? "Active" : "Inactive" )}\" to \"{( active ? "Active" : "Inactive" )}\"" );
+                Log( $"Modified item ID=\"{ID}\"s active state from {( old_active ? "Active" : "Inactive" )} to {( active ? "Active" : "Inactive" )}" );
 
             if( old_quantity != quantity )
                 Log( $"Modified item ID=\"{ID}\"s quantity from {old_quantity} to {quantity}" );
@@ -281,9 +281,9 @@ namespace SnapRegisters
         {
             m_connection.Write( "RemoveItem_ProductID @0", ID );
             if( Response[0].Get( "Return" ) == "-1" )
-                throw new InvalidOperationException( $"Item with ID \"{ID}\" does not exist." );
+                throw new InvalidOperationException( $"Item with ID {ID} does not exist." );
             if( Response[0].Get( "Return" ) == "-2" )
-                throw new InvalidOperationException( $"Item with ID \"{ID}\" has been sold and cannot be removed. Set it inactive instead." );
+                throw new InvalidOperationException( $"Item with ID {ID} has been sold and cannot be removed. Set it inactive instead." );
             else
                 Log( $"Removed item with ID=\"{ID}\"." );
         }
@@ -306,10 +306,6 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewRegisterLogs ) );
         }
 
-        public static XmlNodeList Response { get { return m_connection.Response; } }
-
-
-
         public static void GetAllLogos()
         {
             m_connection.Write("GetAllLogos");
@@ -325,5 +321,6 @@ namespace SnapRegisters
             m_connection.WriteNoResponse("ChangeLogo @0, @1", ID, logoString);
         }
 
+        public static XmlNodeList Response { get { return m_connection.Response; } }
     }
 }
