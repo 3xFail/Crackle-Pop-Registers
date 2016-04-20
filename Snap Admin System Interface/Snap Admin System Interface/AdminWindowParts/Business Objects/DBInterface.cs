@@ -256,35 +256,25 @@ namespace SnapRegisters
                 if( !m_employee.HasPermisison( Permissions.ChangeItemCatalog ) )
                     throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ChangeItemCatalog ) );
 
-            StringBuilder diff = new StringBuilder( string.Empty );
+            m_connection.Write( "Modify_Item @0, @1, @2, @3, @4, @5", ID, name, barcode, price, active, quantity );
+
+            if( Response[0].Get( "ProductID" ) == "-1" )
+                throw new InvalidOperationException( $"Item ({m_connection.Response[0].Get( "Name" )}) with barcode \"{barcode}\" already exists." );
 
             if( old_name != name )
-                diff.Append( $"name from \"{old_name}\" to \"{name}\", " );
+                Log( $"Modified item ID=\"{ID}\"s name from \"{old_name}\" to \"{name}\"" );
 
             if( old_price != price )
-                diff.Append( $"price from \"{old_price}\" to \"{price}\", " );
+                Log( $"Modified item ID=\"{ID}\"s price from {old_price.ToString( "C" )} to {price.ToString( "C" )}" );
 
             if( old_barcode != barcode )
-                diff.Append( $"barcode from \"{old_barcode}\" to \"{barcode}\", " );
+                Log( $"Modified item ID=\"{ID}\"s barcode from \"{old_barcode}\" to \"{barcode}\"" );
 
             if( old_active != active )
-                diff.Append( $"active state from \"{( old_active ? "Active" : "Inactive" )}\" to \"{( active ? "Active" : "Inactive" )}\", " );
+                Log( $"Modified item ID=\"{ID}\"s active state from \"{( old_active ? "Active" : "Inactive" )}\" to \"{( active ? "Active" : "Inactive" )}\"" );
 
             if( old_quantity != quantity )
-                diff.Append( $"quantity from \"{old_quantity}\" to \"{quantity}\", " );
-
-            if( diff.ToString() != string.Empty )
-            {
-                diff.Length -= 2; //remove last space and comma
-
-                m_connection.Write( "Modify_Item @0, @1, @2, @3, @4, @5", ID, name, barcode, price, active, quantity );
-
-                if( Response[0].Get( "ProductID" ) == "-1" )
-                    throw new InvalidOperationException( $"Item ({m_connection.Response[0].Get( "Name" )}) with barcode \"{barcode}\" already exists." );
-
-                Log( $"Modified item ID=\"{ID}\"s {diff.ToString()}" );
-            }
-
+                Log( $"Modified item ID=\"{ID}\"s quantity from {old_quantity} to {quantity}" );
         }
 
         public static void RemoveItem( int ID )
@@ -323,12 +313,10 @@ namespace SnapRegisters
         public static void GetAllLogos()
         {
             m_connection.Write("GetAllLogos");
-
         }
 
         public static void AddLogo (string logoString)
         {
-
             m_connection.Write("AddLogo @0", logoString);
         }
 

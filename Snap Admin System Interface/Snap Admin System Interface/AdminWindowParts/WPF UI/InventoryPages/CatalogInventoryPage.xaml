@@ -22,7 +22,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="ProductID" Binding="{Binding Path=ProductID, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False" />
                 <DataGridTemplateColumn Header="Price" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
