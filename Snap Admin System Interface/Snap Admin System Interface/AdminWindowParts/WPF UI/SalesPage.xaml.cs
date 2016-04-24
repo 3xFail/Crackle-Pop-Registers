@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.SalesPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             {
                 System.Windows.Forms.MessageBox.Show( ex.Message );
             }
+        }
+
+        private void OrderCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            SalesFrame.Navigate(new OrdersCatalogPage());
         }
     }
 }

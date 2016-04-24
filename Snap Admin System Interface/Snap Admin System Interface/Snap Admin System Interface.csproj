@@ -173,6 +173,9 @@
     <Compile Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml.cs">
       <DependentUpon>CatalogEmployeePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminWindowParts\WPF UI\SalesPages\OrdersCatalogPage.xaml.cs">
+      <DependentUpon>OrdersCatalogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminWindowParts\WPF UI\SalesPages\SaleCatalogPage.xaml.cs">
       <DependentUpon>SaleCatalogPage.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminWindowParts\WPF UI\EmployeePages\CatalogEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminWindowParts\WPF UI\SalesPages\OrdersCatalogPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
