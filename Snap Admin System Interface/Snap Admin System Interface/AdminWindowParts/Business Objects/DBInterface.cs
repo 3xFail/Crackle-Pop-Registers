@@ -337,6 +337,16 @@ namespace SnapRegisters
             m_connection.WriteNoResponse("ChangeLogo @0, @1", ID, logoString);
         }
 
+        public static void GetOrdersCatalog()
+        {
+            m_connection.Write("GetOrdersInfo ");
+        }
+
+        public static void GetCustomer(string phone)
+        {
+            m_connection.Write("GetCustomer_Phone @0", phone);
+        }
+
         public static XmlNodeList Response { get { return m_connection.Response; } }
     }
 }
