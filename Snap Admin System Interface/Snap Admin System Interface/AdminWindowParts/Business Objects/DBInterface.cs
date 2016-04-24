@@ -77,6 +77,17 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyPermissions ) );
         }
 
+        internal static void RemoveCouponRelation( int iD, int itemid )
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void AddCouponRelation( string coupon_name, string item_name, int ID, int itemid )
+        {
+            m_connection.Write( "AddCouponRef_ProductID @0, @1", ID, itemid );
+            Log( $"Set coupon \"{coupon_name}\" to apply to \"{item_name}\"." );
+        }
+
         public static void RemovePermission( string name )
         {
             if( m_employee.HasPermisison( Permissions.ModifyPermissions ) )
@@ -88,6 +99,11 @@ namespace SnapRegisters
                     throw new ArgumentException( "There are users currently in this group, it cannot be removed." );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyPermissions ) );
+        }
+
+        internal static void GetAppliedCoupons()
+        {
+            m_connection.Write( "GetAllAppliedCoupons" );
         }
 
         public static void ModifyPermissionValue( string permission_group, long value, string permission_name, bool new_value )

@@ -9,7 +9,7 @@
       Title="CouponCatalog">
 
     <Grid>
-        <DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="10,10,0,0" VerticalAlignment="Top">
+        <DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="10,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
@@ -17,6 +17,6 @@
                 <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="302,10,-102,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>
