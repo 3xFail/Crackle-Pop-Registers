@@ -1,24 +1,15 @@
-﻿using System;
+﻿using CSharpClient;
+using PointOfSales.Users;
+using Snap_Register_System_Interface.RegisterWindowParts.WPF_UI;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using PointOfSales.Users;
-using PointOfSales.Permissions;
-using System.Device;
-using CSharpClient;
 using System.Windows.Threading;
-using System.Text.RegularExpressions;
-using Snap_Register_System_Interface.RegisterWindowParts.WPF_UI;
 
 namespace SnapRegisters
 {
@@ -101,6 +92,7 @@ namespace SnapRegisters
         public ConnectionSession m_connection = null;
         public Transaction m_transaction = null;
         public Employee m_employee { get; private set; } = null;
+        public Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer m_customer { get; set; } = null;
         public DateTime m_start { get; private set; } = DateTime.Now;
         public int m_itemssold { get; set; } = 0;
         public decimal m_totalsales { get; set; } = 0M;
@@ -136,7 +128,7 @@ namespace SnapRegisters
 
             m_employee = currentEmployee;
             m_connection = session;
-            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
+            m_transaction = new Transaction(m_employee, m_customer, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
             m_listOfOutputObjects = new List<ItemAndDiscountOutputObject>();
 
             FocusManager.SetFocusedElement(this, UPCField);
@@ -258,6 +250,13 @@ namespace SnapRegisters
                 catch (Exception ex) { MessageBox.Show(ex.Message); } //catches any other exceptions
 
             }
+
+            //F5: Opens Customer phone number window
+            if(keyPressed.Key == Key.F5)
+            {
+                //dodo put page option for here
+                Main_Frame.Navigate(new GetCustomerPage(this));
+            } 
         }
 
         private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
@@ -286,7 +285,8 @@ namespace SnapRegisters
             m_itemssold += m_transaction.m_Items.Count;
             m_totalsales += m_totalTotal;
             m_transaction.Checkout();
-            m_transaction = new Transaction(m_employee, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
+            m_customer = null;
+            m_transaction = new Transaction(m_employee, m_customer, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
             ItemsList.Children.Clear();
             CouponList.Children.Clear();
             m_listOfOutputObjects.Clear();

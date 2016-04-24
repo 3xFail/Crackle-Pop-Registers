@@ -8,6 +8,7 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
+using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
@@ -81,10 +82,11 @@ namespace SnapRegisters
         public List<Item> m_Items { get; private set; } = new List<Item>();
         private List<Coupon> m_Coupons { get; set; } = new List<Coupon>();
         private Employee m_Employee { get; set; }
+        public Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer m_customer { get; set; }
         private ConnectionSession m_connection { get; set; }
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
-        public Transaction(Employee employee, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
+        public Transaction(Employee employee, Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer cust, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
 		{
 			if (employee == null)
 				throw new InvalidOperationException("Invalid Employee Credentials.");
@@ -93,6 +95,7 @@ namespace SnapRegisters
 
             m_connection = session;
 			m_Employee = employee;
+            m_customer = cust;
 			m_OutputDelegate = itemToAdd;
             m_CouponOutputDelegate = couponToAdd;
             
@@ -269,7 +272,7 @@ namespace SnapRegisters
 		}
         public void Checkout()
 		{
-            m_connection.Write( "CreateOrder @0, @1", DBNull.Value, m_Employee.ID );
+            m_connection.Write( "CreateOrder @0, @1", m_customer.cust_id, m_Employee.ID );
             int OrderID = int.Parse( m_connection.Response[0].Get( "OrderID" ) );
 
             foreach( Item item in m_Items )

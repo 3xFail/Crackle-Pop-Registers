@@ -98,6 +98,7 @@
       <DependentUpon>ManagerFunctionsPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\Business Objects\Change.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\Customer.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
@@ -124,6 +125,9 @@
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml.cs">
       <DependentUpon>DiscountOverrideMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\GetCustomerPage.xaml.cs">
+      <DependentUpon>GetCustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\GiftCardPaymentPage.xaml.cs">
       <DependentUpon>GiftCardPaymentPage.xaml</DependentUpon>
@@ -193,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\GetCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
