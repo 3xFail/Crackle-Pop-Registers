@@ -347,6 +347,11 @@ namespace SnapRegisters
             m_connection.Write("GetCustomer_Phone @0", phone);
         }
 
+
+        public static void GetEmp(string ID)
+        {
+            m_connection.Write("GetEmp_UserID @0", ID);
+        }
         public static XmlNodeList Response { get { return m_connection.Response; } }
     }
 }
