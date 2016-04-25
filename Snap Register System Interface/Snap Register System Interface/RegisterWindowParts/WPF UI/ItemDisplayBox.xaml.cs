@@ -42,8 +42,9 @@ namespace SnapRegisters
 	{
 		public delegate void RemoveItemFromDisplay();
 		public delegate void UpdateItemDisplay();
+		public delegate void AddDiscountToDisplay(IDiscount discount);
 		// Construct with an item.
-		public ItemDisplayBox(Item itemInTransaction, Transaction transaction, RemoveItemFromDisplay removeFunction, UpdateItemDisplay updateFunction)
+		public ItemDisplayBox(Item itemInTransaction, Transaction transaction, RemoveItemFromDisplay removeFunction, UpdateItemDisplay updateFunction, AddDiscountToDisplay addDiscountFunction)
 		{
 			InitializeComponent();
 
@@ -51,6 +52,7 @@ namespace SnapRegisters
 			m_transaction = transaction;
 			m_removeFunction = removeFunction;
 			m_updateFunction = updateFunction;
+			m_addDiscountFunction = addDiscountFunction;
 			NameField.Text = itemInTransaction.ItemName.Substring(0, Math.Min(itemInTransaction.ItemName.Length, 40));
 
 			AmountField.Text = SourceItem.OriginalPrice.ToString( "C" );
@@ -86,9 +88,9 @@ namespace SnapRegisters
 		private void ClosePriceMenu()
 		{
 			PriceMenu.IsOpen = false;
-			PriceMenu = null;
-
+			m_addDiscountFunction(((ItemOverrideMenu)PriceMenu.Child).ChangedPrice);
 			m_updateFunction();
+			PriceMenu = null;
 		}
 
 		public Item SourceItem { get; }
@@ -97,5 +99,6 @@ namespace SnapRegisters
 		private Transaction m_transaction;
 		private RemoveItemFromDisplay m_removeFunction;
 		private UpdateItemDisplay m_updateFunction;
+		private AddDiscountToDisplay m_addDiscountFunction;
 	}
 }

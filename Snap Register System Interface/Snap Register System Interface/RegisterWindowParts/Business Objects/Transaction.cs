@@ -44,6 +44,8 @@ namespace SnapRegisters
     //				"reason" is the reason the employee chose to override the price.
     //			public void ApplyCoupon(string couponID)
     //				Applies a coupon to the sale.
+	//			public void AddCustomCoupon(Item itemToApplyTo, decimal amount);
+	//				Applies a custom flat coupon to the item specified.
 	//			public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
 	//				Removes the given discount from the given item.
 	//			public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal newAmount)
@@ -59,16 +61,6 @@ namespace SnapRegisters
     //              returns a copy of all the coupons applied to items in the transaction
     //          private Coupon ConstructCoupon(string coupon_id)
     //              Contacts the database and constructs an coupon from a given coupon_id
-    //
-    //
-    //
-    //		PERMISSIONS:
-    //			AddItem						- UseRegister
-    //			RemoveItem					- UseRegister
-    //			OverrideCost				- PriceOverride, PriceOverrideNoReason
-    //			ApplyCoupon					- ApplyCoupon
-    //			Checkout					- ProcessPayment
-    //			GetItems					- None
     //*************************************************************************************************************
     public class Transaction
 	{
@@ -189,7 +181,7 @@ namespace SnapRegisters
                     
         }
 
-		public void OverrideCost(Item item, decimal newPrice, string reason = "No description")
+		public void OverrideCost(Item item, decimal newPrice)
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
 			Item changedItem = m_Items.Find(x => x == item);
@@ -201,6 +193,21 @@ namespace SnapRegisters
 				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
 			else
 				changedItem.Price = newPrice;
+		}
+		public void AddCustomCoupon(Item item, decimal amount)
+		{
+			// Find the item to change the price of in the list assign changedItem these values.
+			Item changedItem = m_Items.Find(x => x == item);
+
+			if (changedItem == null)
+				throw new InvalidOperationException("Item specified is not in sale.");
+
+			if (!m_Employee.HasPermisison(Permissions.CanDiscountItems))
+				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
+			else
+			{
+				item.AddDiscount(new ManagerOverrideDiscount(item.OriginalPrice - amount));
+			}
 		}
 		public void AddCoupon(string couponID)
 		{
@@ -218,9 +225,11 @@ namespace SnapRegisters
                     if( coupon.AppliesTo( item ) )
                         item.AddDiscount( coupon );
 
+				m_Coupons.Add(coupon);
+
 				m_CouponOutputDelegate(coupon);
 
-                m_Coupons.Add(coupon);
+                
             }
             catch( InvalidOperationException e)
             {

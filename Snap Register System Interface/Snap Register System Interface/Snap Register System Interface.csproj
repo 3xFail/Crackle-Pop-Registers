@@ -100,6 +100,7 @@
     <Compile Include="RegisterWindowParts\Business Objects\Change.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Customer.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\ManagerOverrideDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\AddCustomerPage.xaml.cs">
