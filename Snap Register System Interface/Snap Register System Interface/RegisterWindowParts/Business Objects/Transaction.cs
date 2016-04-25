@@ -244,6 +244,7 @@ namespace SnapRegisters
 				Item containingItem = m_Items.Find(x => x == itemToRemoveFrom);
 
 				containingItem.Discounts.Remove(discountToRemove);
+				containingItem.Price += discountToRemove.Discount();
 			}
 			catch (InvalidOperationException e)
 			{

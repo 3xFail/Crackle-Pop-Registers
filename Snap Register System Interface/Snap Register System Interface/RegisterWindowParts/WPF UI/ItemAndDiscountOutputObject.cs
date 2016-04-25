@@ -89,6 +89,7 @@ namespace SnapRegisters
 				m_noDiscounts = false;
 				DiscountDisplayBox newDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
 				newDiscount.Height = boxHeight;
+				m_stackOfDiscounts.Children.RemoveAt(0);
 				m_stackOfDiscounts.Children.Add(newDiscount);
 				UpdateHeight();
 			}
@@ -136,7 +137,16 @@ namespace SnapRegisters
 
 		private void RemoveDiscount(DiscountDisplayBox discountToRemove)
 		{
-			m_discountOutputPanel.Children.Remove(discountToRemove);
+			m_stackOfDiscounts.Children.Remove(discountToRemove);
+
+			if (m_stackOfDiscounts.Children.Count == 0)
+			{
+				m_noDiscounts = true;
+				Grid blankCoupon = new Grid();
+				blankCoupon.Height = boxHeight;
+				m_stackOfDiscounts.Children.Add(blankCoupon);
+				m_noDiscounts = true;
+			}
 			m_updateFunction();
 		}
 
