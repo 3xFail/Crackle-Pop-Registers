@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Snap_Register_System_Interface.RegisterWindowParts.WPF_UI"
              mc:Ignorable="d" 
-             d:Height="200" Width="600">
+             Height="200" Width="600">
     <Grid Height="200" Width="600" Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>

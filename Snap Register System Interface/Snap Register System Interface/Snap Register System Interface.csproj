@@ -100,6 +100,7 @@
     <Compile Include="RegisterWindowParts\Business Objects\Change.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Customer.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\IDiscount.cs" />
+    <Compile Include="RegisterWindowParts\Business Objects\ManagerOverrideDiscount.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\Sale.cs" />
     <Compile Include="RegisterWindowParts\Business Objects\DiscountList.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\AddCustomerPage.xaml.cs">
@@ -135,6 +136,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml.cs">
       <DependentUpon>ItemEditMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideBox.xaml.cs">
+      <DependentUpon>ManagerOverrideBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
@@ -209,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ManagerOverrideBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

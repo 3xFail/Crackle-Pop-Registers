@@ -34,14 +34,15 @@ namespace SnapRegisters
 
 		private void ChangePriceButtonClicked(object sender, RoutedEventArgs e)
 		{
-			m_transaction.OverrideCost(m_itemBox.SourceItem, NewPriceField.Number);
+			ChangedPrice = new ManagerOverrideDiscount(m_itemBox.SourceItem.OriginalPrice - NewPriceField.Number);
+			m_transaction.AddCustomCoupon(m_itemBox.SourceItem, NewPriceField.Number);
 			m_closeFunction();
 		}
 
 		private ItemDisplayBox m_itemBox;
 		private Transaction m_transaction;
 		private ClosePriceOverrideMenu m_closeFunction;
-
+		public IDiscount ChangedPrice { get; set; }
 		private void CancelButtonClick(object sender, RoutedEventArgs e)
 		{
 			m_closeFunction();

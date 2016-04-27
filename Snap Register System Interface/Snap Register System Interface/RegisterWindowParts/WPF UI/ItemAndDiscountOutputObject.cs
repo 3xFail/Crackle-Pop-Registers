@@ -50,7 +50,7 @@ namespace SnapRegisters
 
 			m_updateFunction = updateFunction;
 
-			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item, m_transaction, RemoveItem, UpdateItemDetails);
+			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item, m_transaction, RemoveItem, UpdateItemDetails, AddDiscount);
 			itemDisplayBox.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 			itemDisplayBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			itemDisplayBox.Height = boxHeight;
@@ -79,19 +79,16 @@ namespace SnapRegisters
 			OutputItem();
 		}
 
-		public void AddDiscount(Coupon discount)
+		public void AddDiscount(IDiscount discount)
 		{
-			if (discount.AppliesTo(m_item))
-			{
-				if (m_noDiscounts)
-					m_stackOfDiscounts.Children.Clear();
+			if (m_noDiscounts)
+				m_stackOfDiscounts.Children.Clear();
 
 				m_noDiscounts = false;
 				DiscountDisplayBox newDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
 				newDiscount.Height = boxHeight;
 				m_stackOfDiscounts.Children.Add(newDiscount);
 				UpdateHeight();
-			}
 		}
 
 		public void  OutputItem()
@@ -112,7 +109,7 @@ namespace SnapRegisters
 		{
 			ItemDisplayBox item = (ItemDisplayBox)m_itemDescriptionBox.Children[0];
 
-			item.AmountField.Text = item.SourceItem.Price.ToString("C");
+			item.AmountField.Text = item.SourceItem.OriginalPrice.ToString("C");
 
 			foreach(object discountObject in m_stackOfDiscounts.Children)
 			{
@@ -136,7 +133,16 @@ namespace SnapRegisters
 
 		private void RemoveDiscount(DiscountDisplayBox discountToRemove)
 		{
-			m_discountOutputPanel.Children.Remove(discountToRemove);
+			m_stackOfDiscounts.Children.Remove(discountToRemove);
+
+			if (m_stackOfDiscounts.Children.Count == 0)
+			{
+				m_noDiscounts = true;
+				Grid blankCoupon = new Grid();
+				blankCoupon.Height = boxHeight;
+				m_stackOfDiscounts.Children.Add(blankCoupon);
+				m_noDiscounts = true;
+			}
 			m_updateFunction();
 		}
 

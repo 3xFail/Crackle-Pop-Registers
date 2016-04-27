@@ -107,19 +107,24 @@ namespace SnapRegisters
 					UPCField.Clear();
 				}
 		}
-		private void Override_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = m_scannedPermissions != 0;
-			if (e.CanExecute)
-				UPCField.Text = "Override Login";
-			else
-				UPCField.Text = "Scan Override Code";
+        private void Override_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = m_scannedPermissions != 0;
+            if (e.CanExecute)
+                UPCField.Text = "Override Login";
+            else
+                UPCField.Text = "Scan Override Code";
         }
-		private void Override_Executed(object sender, ExecutedRoutedEventArgs e)
-		{
-			m_permissionsOutput(m_scannedPermissions);
+        private void Override_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            m_permissionsOutput(m_scannedPermissions);
             m_win.Main_Frame.Navigate(string.Empty);
         }
 
-	}
+        private void Override_Click(object sender, RoutedEventArgs e)
+        {
+            //prompt for manager override code
+            this.NavigationService.Navigate(new ManagerOverrideBox());
+        }
+    }
 }

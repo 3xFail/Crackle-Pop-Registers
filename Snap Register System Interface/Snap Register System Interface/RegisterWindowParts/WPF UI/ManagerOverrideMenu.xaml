@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="ManagerOverrideMenu" Height="100" Width="300"
 		>
-    <Page.CommandBindings>
+    <!--<Page.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="Override_Executed" CanExecute="Override_CanExecute"/>
-    </Page.CommandBindings>
+    </Page.CommandBindings>-->
     <Grid Background="{StaticResource Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -21,8 +21,8 @@
         </Viewbox>
 		<TextBox Name="UPCField" Width="0" Height="0"/>
         <Button Name="Override" Grid.Row="1"
-				Command="ApplicationCommands.New"
 				Margin="10"
+                Click="Override_Click"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Button.Content>
                 <Viewbox>
@@ -32,6 +32,8 @@
 				</Viewbox>
 			</Button.Content>
         </Button>
-        
+
+        <Frame x:Name="Override_Frame" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Page>
