@@ -131,6 +131,8 @@
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>
     <Compile Include="AdminWindowParts\Business Objects\DBInterface.cs" />
+    <Compile Include="AdminWindowParts\Business Objects\SettingsFileCreator.cs" />
+    <Compile Include="AdminWindowParts\Business Objects\ProgramSettings.cs" />
     <Compile Include="AdminWindowParts\WPF UI\CustomerPages\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
     </Compile>
