@@ -136,6 +136,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml.cs">
       <DependentUpon>ItemEditMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideBox.xaml.cs">
+      <DependentUpon>ManagerOverrideBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideMenu.xaml.cs">
       <DependentUpon>ManagerOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ManagerOverrideBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -145,7 +145,7 @@ namespace SnapRegisters
             MainAdminWindow.Show();
 #elif REGISTER
             if (!Permissions.CheckPermissions(employeeLoggedIn, Permissions.RegisterLogIn))
-                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+                throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.RegisterLogIn)); //InvalidOperationException("User does not have sufficient permissions to use this machine.");
             SnapRegisters.RegisterMainWindow MainRegisterWindow = new SnapRegisters.RegisterMainWindow(employeeLoggedIn, _connection);
             MainRegisterWindow.Show();
 
