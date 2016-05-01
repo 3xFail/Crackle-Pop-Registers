@@ -37,7 +37,7 @@ namespace SnapRegisters
                     {
                         //check if a valid manager code
                         DBInterface.GetEmp(Override.Text);
-                        string EmpID = DBInterface.Response[0].Get("PermissionsID");
+                        DBInterface.Response[0].Get("PermissionsID");
                         Override.Clear();
                     }
                 }
@@ -45,10 +45,9 @@ namespace SnapRegisters
                 {
                     MessageBox.Show(ex.Message);
                 }
-                catch (Exception) //if that fails
+                catch (Exception _ex) //if that fails
                 {
-                    //try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
-                    //catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
+                    MessageBox.Show(_ex.Message);//if both of those fail show the error message
                     UPCField.Clear();
                 }
             }
