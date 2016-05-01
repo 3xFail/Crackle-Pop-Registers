@@ -7,5 +7,7 @@
         decimal ChangeAmountTo( decimal amt );
         decimal Discount();
         bool IsFlat();
+
+		decimal Amount { get; set; }
     }
 }

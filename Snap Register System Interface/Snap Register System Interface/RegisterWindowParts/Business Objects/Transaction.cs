@@ -272,7 +272,9 @@ namespace SnapRegisters
 
 				IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
 
-				discount.ChangeAmountTo(amount);
+				// This function does not appear to do what it's name implies.
+				//discount.ChangeAmountTo(amount);
+				discount.Amount = amount;
 			}
 			catch (InvalidOperationException e)
 			{
