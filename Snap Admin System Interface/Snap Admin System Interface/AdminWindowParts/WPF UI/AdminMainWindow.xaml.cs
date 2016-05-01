@@ -61,6 +61,8 @@ namespace SnapRegisters
             windowsFormsHost2.Child = lePictureBox;
 
 
+            //Do not use until all permissions groups have settings pages.
+            //ProgramSettings.getInstance(currentEmployee).Download();
 
         }
         // opens the inventory page

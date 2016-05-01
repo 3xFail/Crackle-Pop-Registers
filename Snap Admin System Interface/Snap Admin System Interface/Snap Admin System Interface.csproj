@@ -64,7 +64,7 @@
       <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
     <Reference Include="NumberTextBox">
-      <HintPath>..\..\NumberTextBox\NumberTextBox\bin\Release\NumberTextBox.dll</HintPath>
+      <HintPath>..\..\NumberTextBox\NumberTextBox\bin\Debug\NumberTextBox.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -131,6 +131,8 @@
       <Link>SharedResources\ApplicationStyle.cs</Link>
     </Compile>
     <Compile Include="AdminWindowParts\Business Objects\DBInterface.cs" />
+    <Compile Include="AdminWindowParts\Business Objects\SettingsFileCreator.cs" />
+    <Compile Include="AdminWindowParts\Business Objects\ProgramSettings.cs" />
     <Compile Include="AdminWindowParts\WPF UI\CustomerPages\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
     </Compile>

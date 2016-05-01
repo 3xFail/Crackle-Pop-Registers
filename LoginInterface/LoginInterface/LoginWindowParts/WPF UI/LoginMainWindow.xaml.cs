@@ -134,6 +134,7 @@ namespace SnapRegisters
             passwordField.Clear();
         }
 
+        
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {

@@ -52,7 +52,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.SalesPages
                     ,
                     product_name = node.Get("Name")
                     ,
-                    final_price = node.Get("FinalPrice")
+                    final_price = decimal.Parse( node.Get("FinalPrice") ).ToString( "C" )
                 });
             }
             LoadItems();
@@ -77,11 +77,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.SalesPages
             Item item = o as Item;
 
             if (item == null)
-                return false;
-
-            //if (!item.cashier_name.ToLower().Contains(NameSearchBox.Text.ToLower()))
-                //return false;
-            
+                return false;   
 
             return true;
         }
