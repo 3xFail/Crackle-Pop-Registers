@@ -180,6 +180,7 @@ namespace SnapRegisters
                     
         }
 
+		// Deprecated.
 		public void OverrideCost(Item item, decimal newPrice)
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
@@ -274,7 +275,11 @@ namespace SnapRegisters
 
 				// This function does not appear to do what it's name implies.
 				//discount.ChangeAmountTo(amount);
+
+				itemToChange.Price += discount.Amount - amount;
 				discount.Amount = amount;
+
+
 			}
 			catch (InvalidOperationException e)
 			{
