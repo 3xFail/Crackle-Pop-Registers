@@ -8,7 +8,6 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
-using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
