@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       xmlns:digit="clr-namespace:System.Windows.Controls;assembly=NumberTextBox"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="482" d:DesignWidth="574"
+      Background="{StaticResource Base}"
       Title="LogEmployeePage">
 
     <Grid>
@@ -17,7 +18,7 @@
                 <DataGridTextColumn Header="Event" Binding="{Binding Path=Event}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border Background="Gray" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="223"/>
+        <Border Background="{StaticResource Background}" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="89" VerticalAlignment="Top" Width="223"/>
         <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="84,1,0,0" VerticalAlignment="Top" Width="132"/>
         <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Width="138"/>
         <Label x:Name="DateBetweenLabel" Content="Date between" HorizontalAlignment="Left" VerticalAlignment="Top"/>

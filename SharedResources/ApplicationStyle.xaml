@@ -36,6 +36,7 @@
 			This is the background color for the main forum
 	-->
 	<SolidColorBrush x:Key="Background" Color="#add8e6"/>
+    <SolidColorBrush x:Key="Base" Color="White"/>
     <!--
 	Name:
 		ThinBorderThickness

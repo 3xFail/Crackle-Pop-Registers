@@ -7,10 +7,11 @@
       xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
       xmlns:digit="clr-namespace:System.Windows.Controls;assembly=NumberTextBox"
       mc:Ignorable="d"
-      Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="754" d:DesignHeight="575">
+      Background="{StaticResource Base}"
+    Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="754" d:DesignHeight="575">
 
     <Grid VerticalAlignment="Top">
-        <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White" SelectionMode="Single"
+        <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White" SelectionMode="Single" 
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   ItemsSource="{Binding}"
                  BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow" Margin="296,0,113,0">
@@ -42,7 +43,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="294" Margin="7,26,0,-191" VerticalAlignment="Top" Width="284"/>
+        <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="294" Margin="7,26,0,-191" VerticalAlignment="Top" Width="284"/>
         <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="65,33,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="215"/>
         <Label x:Name="SearchItemNameLabel" Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,30,0,-4"/>
         <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="209"/>
@@ -60,7 +61,7 @@
         <Slider x:Name="MaxPriceSlider" ValueChanged="MaxPriceSlider_ValueChanged"  HorizontalAlignment="Left" Margin="26,181,0,-70" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="MaxPriceLabel" Content="Maximum Price" HorizontalAlignment="Left" Margin="12,155,0,-52" VerticalAlignment="Top"/>
         <currency:CurrencyTextBox x:Name="MaxPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,180,0,-70" VerticalAlignment="Top" Width="60" TextChanged="MaxPriceTextBox_TextChanged"/>
-        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="116" Margin="12,379,0,-366" VerticalAlignment="Top" Width="279"/>
+        <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="116" Margin="12,379,0,-366" VerticalAlignment="Top" Width="279"/>
         <Label x:Name="AddItemLabel" Content="Add Item:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,346,0,-250" FontSize="17"/>
         <TextBox x:Name="BarcodeAddBox" HorizontalAlignment="Left" Height="23" Margin="67,384,0,-278" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="213"/>
         <TextBox x:Name="NameAddBox" HorizontalAlignment="Left" Height="23" Margin="54,410,0,-304" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="226"/>
