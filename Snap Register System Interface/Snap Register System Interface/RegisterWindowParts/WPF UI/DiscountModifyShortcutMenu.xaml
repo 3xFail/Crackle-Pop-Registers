@@ -36,13 +36,13 @@
 					 VerticalAlignment="Bottom">
                     <Button x:Name="ModifyButton" Content="Remove" 
 						Height="100" Width="160"
-						Margin="8" Click="ModifyButton_Click"/>
+						Margin="8"/>
                 </Viewbox>
                 <Viewbox Grid.Column="1"
 					 VerticalAlignment="Bottom">
                     <Button x:Name="CancelButton" Content="Cancel" 
 						Height="100" Width="160"
-						Margin="8" Click="CancelButton_Click"/>
+						Margin="8"/>
                 </Viewbox>
             </Grid>
         </Grid>
