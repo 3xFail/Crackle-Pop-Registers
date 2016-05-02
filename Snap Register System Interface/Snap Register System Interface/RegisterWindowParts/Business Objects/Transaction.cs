@@ -134,18 +134,22 @@ namespace SnapRegisters
 
 		public void RemoveItem(Item item)
 		{
-			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+            //if (m_Employee.HasPermisison(Permissions.CanVoidItem))
+                //throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidItem)); //("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before removing it from the list.
-			try
-			{
-				m_Items.Remove(item);
-			}
-			catch (InvalidOperationException e)
-			{
-				throw e;
-			}
+			//try
+			//{
+                if (m_Employee.HasPermisison(Permissions.CanVoidItem))
+                    m_Items.Remove(item);
+                else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+            //}
+			//catch (InvalidOperationException e)
+            //{
+				//throw e;
+            //}
+            //else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+
 		}
 
         public void ApplyItemToExistingCoupons( ref Item item )
