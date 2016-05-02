@@ -127,7 +127,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             textBoxLastName.Clear();
             textBoxEmail.Clear();
             DOB.SelectedDate = null;
-            textBoxPhone = null;
+            textBoxPhone.Clear();
             textBoxAddress1.Clear();
             textBoxAddress2.Clear();
             textBoxCity.Clear();

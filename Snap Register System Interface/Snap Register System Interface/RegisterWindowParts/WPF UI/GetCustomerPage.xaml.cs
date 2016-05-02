@@ -43,7 +43,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
             XmlNode it = m_win.m_connection.Response[0];
 
-            m_win.m_customer = new Customer(it.Get("FName"), it.Get("LName"), it.Get("PhoneNmber"), int.Parse(it.Get("RewardsID")), int.Parse(it.Get("RewardsPoints")), int.Parse(it.Get("CustID")));
+            m_win.m_customer = new Customer( it.Get( "FName" ), it.Get( "LName" ), it.Get( "PhoneNmber" ), it.Get( "Email" ), int.Parse(it.Get("RewardsID")), int.Parse(it.Get("RewardsPoints")), int.Parse(it.Get("CustID")));
 
             m_win.m_transaction.m_customer = m_win.m_customer;
 

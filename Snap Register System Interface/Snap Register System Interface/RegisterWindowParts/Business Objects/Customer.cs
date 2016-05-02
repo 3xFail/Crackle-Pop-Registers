@@ -14,11 +14,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             fname = null;
             lname = null;
             phone_number = null;
+            email = null;
             rewards_id = 0;
             cust_id = 0;
         }
 
-        public Customer(string first_name, string last_name, string phone, int rew_id, int rew_points, int customer_id)
+        public Customer(string first_name, string last_name, string phone, string cust_email, int rew_id, int rew_points, int customer_id)
         {
             fname = first_name;
             lname = last_name;
@@ -26,6 +27,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             rewards_id = rew_id;
             rewards_points = rew_points;
             cust_id = customer_id;
+            email = cust_email;
         }
 
         public string fname { get; set; } = null;
@@ -34,6 +36,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         public int rewards_id { get; set; }
         public int rewards_points { get; set; }
         public int cust_id { get; set; }
+        public string email { get; set; }
         
     }
 }
