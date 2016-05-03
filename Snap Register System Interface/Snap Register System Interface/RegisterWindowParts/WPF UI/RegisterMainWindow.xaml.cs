@@ -101,6 +101,7 @@ namespace SnapRegisters
         private decimal m_savingsTotal = 0;
         public decimal m_totalTotal { get; set; } = 0;
         public static KeyboardHook kh;
+        public Email m_email_reciept;
 
 
         //private PaymentWindow m_pay_window;
@@ -285,6 +286,7 @@ namespace SnapRegisters
             m_itemssold += m_transaction.m_Items.Count;
             m_totalsales += m_totalTotal;
             m_transaction.Checkout();
+            m_email_reciept = new Email( m_customer, this );
             m_customer = null;
             m_transaction = new Transaction(m_employee, m_customer, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
             ItemsList.Children.Clear();

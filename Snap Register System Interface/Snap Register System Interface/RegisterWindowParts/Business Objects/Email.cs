@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnapRegisters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
 {
-    class Email
+    public class Email
     {
         private string sender_email = "snapregisters@gmail.com";
 
@@ -15,7 +16,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         {
 
         }
-        Email(Customer receiver)
+        public Email(Customer receiver, RegisterMainWindow win)
         {
             if( receiver.email.Length < 8)
             {
@@ -25,6 +26,9 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
             {
                 SmtpClient client = new SmtpClient( );
                 client.Port = 35;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "smtp.gmail.com";
                 // Specify the e-mail sender.
                 // Create a mailing address that includes a UTF8 character
                 // in the display name.

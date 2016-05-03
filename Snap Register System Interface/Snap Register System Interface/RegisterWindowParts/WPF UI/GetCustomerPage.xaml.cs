@@ -39,15 +39,29 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void submit_button_Click(object sender, RoutedEventArgs e)
         {
-            DBInterface.GetCustomer(Phone_Number_Box.Text);
+            try {
+                DBInterface.m_connection = m_win.m_connection;
 
-            XmlNode it = m_win.m_connection.Response[0];
+                DBInterface.GetCustomer( Phone_Number_Box.Text );
 
-            m_win.m_customer = new Customer( it.Get( "FName" ), it.Get( "LName" ), it.Get( "PhoneNmber" ), it.Get( "Email" ), int.Parse(it.Get("RewardsID")), int.Parse(it.Get("RewardsPoints")), int.Parse(it.Get("CustID")));
+                XmlNode it = m_win.m_connection.Response[0];
 
-            m_win.m_transaction.m_customer = m_win.m_customer;
+                m_win.m_customer = new Customer( it.Get( "FName" ), 
+                    it.Get( "LName" ), 
+                    it.Get( "PhoneNumber" ), 
+                    it.Get( "Email" ), 
+                    int.Parse( it.Get( "RewardsID" ) ), 
+                    int.Parse( it.Get( "RewardsPoints" ) ), 
+                    int.Parse( it.Get( "CustID" ) ) );
 
-            System.Windows.Forms.MessageBox.Show( "Good to see you again " + m_win.m_customer.fname + "!" );
+                m_win.m_transaction.m_customer = m_win.m_customer;
+
+                System.Windows.Forms.MessageBox.Show( "Good to see you again " + m_win.m_customer.fname + "!" );
+            }
+            catch (NullReferenceException)
+            {
+                System.Windows.Forms.MessageBox.Show( "There is not a customer with that number" );
+            }
 
         }
 
