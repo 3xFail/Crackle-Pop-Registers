@@ -20,64 +20,52 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
         public int pennies { get; }
         public string total { get; }
 
-        public Change(decimal changeToConvert)
+        public Change( decimal changeToConvert )
         {
-            total = changeToConvert.ToString("C");
+            total = changeToConvert.ToString( "C" );
 
-            hundreds = Convert.ToInt32(changeToConvert) / 100;
+            hundreds = (int)changeToConvert / 100;
             changeToConvert -= hundreds * 100;
 
-            twenties = Convert.ToInt32(changeToConvert) / 20;
+            twenties = (int)changeToConvert / 20;
             changeToConvert -= twenties * 20;
 
-            tens = Convert.ToInt32(changeToConvert) / 10;
+            tens = (int)changeToConvert / 10;
             changeToConvert -= tens * 10;
 
-            fives = Convert.ToInt32(changeToConvert) / 5;
+            fives = (int)changeToConvert / 5;
             changeToConvert -= fives * 5;
 
-            ones = Convert.ToInt32(changeToConvert) / 1;
+            ones = (int)changeToConvert / 1;
             changeToConvert -= ones * 1;
 
+            int cents = (int)( changeToConvert * 100M );
 
+            if( cents == 0 ) return;
 
-            changeToConvert *= 100;
+            halfdollars = cents / 50;
+            cents -= halfdollars * 50;
 
-            halfdollars = Convert.ToInt32(changeToConvert) / 50;
-            changeToConvert -= halfdollars * 50;
+            if( cents == 0 ) return;
 
-            quarters = Convert.ToInt32(changeToConvert) / 25;
-            changeToConvert -= quarters * 25;
+            quarters = cents / 25;
+            cents -= quarters * 25;
 
-            dimes = Convert.ToInt32(changeToConvert) / 10;
-            changeToConvert -= dimes * 10;
+            if( cents == 0 ) return;
 
-            nickels = Convert.ToInt32(changeToConvert) / 5;
-            changeToConvert -= nickels * 5;
+            dimes = cents / 10;
+            cents -= dimes * 10;
 
-            pennies = Convert.ToInt32(changeToConvert) / 1;
-            changeToConvert -= pennies * 1;
+            if( cents == 0 ) return;
 
+            nickels = cents / 5;
+            cents -= nickels * 5;
 
+            if( cents == 0 ) return;
 
-
-            //    halfdollars = Convert.ToInt32(changeToConvert / .50M);
-            //    changeToConvert -= halfdollars * .50M ;
-
-            //    quarters = Convert.ToInt32(changeToConvert / .25M );
-            //    changeToConvert -= quarters * .25M;
-
-            //    //TODO: WHY DOES THIS ALWAYS MESS UP AT DIMES
-            //    dimes = Convert.ToInt32(changeToConvert / .10M >= 1 ? Convert.ToInt32(changeToConvert / .10M) : 0);
-            //    changeToConvert -= Convert.ToDecimal(dimes * .10);
-
-            //    nickels = Convert.ToInt32(changeToConvert / .05M );
-            //    changeToConvert -= nickels * .05M;
-
-            //    pennies = Convert.ToInt32(changeToConvert / .01M );
-            //    changeToConvert -= pennies * .01M ;
+            pennies = cents / 1;
+            cents -= pennies * 1;
         }
-
 
     }
 }
