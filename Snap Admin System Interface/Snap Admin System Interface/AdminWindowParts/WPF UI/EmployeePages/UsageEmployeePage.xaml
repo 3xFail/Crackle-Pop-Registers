@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       xmlns:digit="clr-namespace:System.Windows.Controls;assembly=NumberTextBox"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="648" d:DesignWidth="794"
+      Background="{StaticResource Base}"
       Title="UsageEmployeePage">
 
     <Grid Margin="0,0,192,279">
@@ -21,7 +22,7 @@
                 <DataGridTextColumn Header="Total Value" Binding="{Binding Path=TotalValue}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border BorderBrush="Black" Background="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="212" Margin="10,43,0,0" VerticalAlignment="Top" Width="264"/>
+        <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="212" Margin="10,43,0,0" VerticalAlignment="Top" Width="264"/>
         <Label x:Name="SearchCriteriaLebel" Content="Search Criteria:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="17"/>
         <Label x:Name="UsernameSearchLabel" Content="Username" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="UsernameSearchTextBox" HorizontalAlignment="Left" Height="23" Margin="78,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" />

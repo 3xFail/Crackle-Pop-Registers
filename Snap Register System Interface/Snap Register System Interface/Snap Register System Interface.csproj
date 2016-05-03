@@ -125,6 +125,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\DiscountEditMenu.xaml.cs">
       <DependentUpon>DiscountEditMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\DiscountModifyShortcutMenu.xaml.cs">
+      <DependentUpon>DiscountModifyShortcutMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml.cs">
       <DependentUpon>DiscountOverrideMenu.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
     <Compile Include="RegisterWindowParts\WPF UI\ItemAndDiscountOutputObject.cs" />
     <Compile Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml.cs">
       <DependentUpon>ItemEditMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegisterWindowParts\WPF UI\ItemModifyShortcutMenu.xaml.cs">
+      <DependentUpon>ItemModifyShortcutMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterWindowParts\WPF UI\ManagerOverrideBox.xaml.cs">
       <DependentUpon>ManagerOverrideBox.xaml</DependentUpon>
@@ -201,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RegisterWindowParts\WPF UI\DiscountModifyShortcutMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterWindowParts\WPF UI\DiscountOverrideMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RegisterWindowParts\WPF UI\ItemEditMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindowParts\WPF UI\ItemModifyShortcutMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

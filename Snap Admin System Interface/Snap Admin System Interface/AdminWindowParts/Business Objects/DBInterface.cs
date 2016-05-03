@@ -173,7 +173,7 @@ namespace SnapRegisters
             {
                 m_connection.Write("GetAllCustomers");
             }
-            else throw new UnauthorizedAccessException("You do not have permission to view the customer catalog");
+            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ViewCustomerCatalog ));  //("You do not have permission to view the customer catalog");
         }
 
         public static void ChangePermissions(string name, int id, string permission)

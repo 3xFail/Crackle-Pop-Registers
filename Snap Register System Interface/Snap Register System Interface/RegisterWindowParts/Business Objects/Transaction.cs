@@ -8,7 +8,6 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
-using Snap_Register_System_Interface.RegisterWindowParts.Business_Objects;
 
 namespace SnapRegisters
 {
@@ -135,18 +134,22 @@ namespace SnapRegisters
 
 		public void RemoveItem(Item item)
 		{
-			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+            //if (m_Employee.HasPermisison(Permissions.CanVoidItem))
+                //throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidItem)); //("User does not have sufficient permissions to use this machine.");
 
 			// Checks to make sure the item was valid before removing it from the list.
-			try
-			{
-				m_Items.Remove(item);
-			}
-			catch (InvalidOperationException e)
-			{
-				throw e;
-			}
+			//try
+			//{
+                if (m_Employee.HasPermisison(Permissions.CanVoidItem))
+                    m_Items.Remove(item);
+                else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+            //}
+			//catch (InvalidOperationException e)
+            //{
+				//throw e;
+            //}
+            //else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+
 		}
 
         public void ApplyItemToExistingCoupons( ref Item item )
@@ -181,6 +184,7 @@ namespace SnapRegisters
                     
         }
 
+		// Deprecated.
 		public void OverrideCost(Item item, decimal newPrice)
 		{
 			// Find the item to change the price of in the list assign changedItem these values.
@@ -273,7 +277,13 @@ namespace SnapRegisters
 
 				IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
 
-				discount.ChangeAmountTo(amount);
+				// This function does not appear to do what it's name implies.
+				//discount.ChangeAmountTo(amount);
+
+				itemToChange.Price += discount.Amount - amount;
+				discount.Amount = amount;
+
+
 			}
 			catch (InvalidOperationException e)
 			{

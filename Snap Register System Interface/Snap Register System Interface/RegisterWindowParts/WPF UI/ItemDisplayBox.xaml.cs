@@ -88,8 +88,12 @@ namespace SnapRegisters
 		private void ClosePriceMenu()
 		{
 			PriceMenu.IsOpen = false;
-			m_addDiscountFunction(((ItemOverrideMenu)PriceMenu.Child).ChangedPrice);
-			m_updateFunction();
+			if (((ItemOverrideMenu)PriceMenu.Child).Confirmed)
+			{
+				m_addDiscountFunction(((ItemOverrideMenu)PriceMenu.Child).ChangedPrice);
+				m_updateFunction();
+			}
+
 			PriceMenu = null;
 		}
 
