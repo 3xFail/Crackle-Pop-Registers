@@ -73,7 +73,7 @@ namespace SnapRegisters
         public List<Item> m_Items { get; private set; } = new List<Item>();
         private List<Coupon> m_Coupons { get; set; } = new List<Coupon>();
         private Employee m_Employee { get; set; }
-        public Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer m_customer { get; set; }
+        public Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer m_customer { get; set; } = null;
         private ConnectionSession m_connection { get; set; }
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
@@ -292,7 +292,14 @@ namespace SnapRegisters
 		}
         public void Checkout()
 		{
-            m_connection.Write( "CreateOrder @0, @1", m_customer.cust_id, m_Employee.ID );
+            object id;
+
+            if( m_customer == null )
+                id = DBNull.Value;
+            else
+                id = m_customer.cust_id;
+            
+            m_connection.Write( "CreateOrder @0, @1", id, m_Employee.ID );
             int OrderID = int.Parse( m_connection.Response[0].Get( "OrderID" ) );
 
             foreach( Item item in m_Items )

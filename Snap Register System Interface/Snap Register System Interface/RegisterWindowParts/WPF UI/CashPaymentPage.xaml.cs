@@ -50,7 +50,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
             decimal diff = moneyAccepted.Number - _priceOfItems;
-            if( diff > 0 )
+            if( diff >= 0 )
             {
                 Change theChange = new Change( diff );
                 NavigationService.Navigate( new CashPaymentFinished( theChange, m_win ) );
