@@ -51,6 +51,9 @@
     <Reference Include="CurrencyTextBoxControl">
       <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Release\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
+    <Reference Include="NumberTextBox">
+      <HintPath>..\..\NumberTextBox\NumberTextBox\bin\Release\NumberTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
