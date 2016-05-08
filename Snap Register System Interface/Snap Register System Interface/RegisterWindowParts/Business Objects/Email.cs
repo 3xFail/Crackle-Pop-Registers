@@ -30,24 +30,41 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
                 client.Port = 587;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;              
-                
-                MailAddress from = new MailAddress( sender_email );
-                MailAddress to = new MailAddress( receiver.email ); 
-                MailMessage message = new MailMessage( from, to );
-                message.Body = "This is a test e-mail message sent by an application.";
-                message.Subject = "test message";
                 client.Credentials = new NetworkCredential( sender_email, "snap_admin" );
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
+                string form = " {0,-15} {1, -12} {2,-12}";
+
+                MailMessage msg = new MailMessage();
+
+                msg.From = new MailAddress( sender_email );
+                msg.To.Add( new MailAddress( receiver.email ));
+
+                msg.Body = "Hi " + win.m_customer.fname.ToString() + ",\n"; 
+                msg.Body += "Thank you for using Snap's Crackle Pop registers!\nHere is your reciept for your transaction.\n\n";
+                msg.Body += '\t' +string.Format( form, "Name" , "Original Price" , "Final Price") + '\n';
+
+                foreach(Item item in win.m_transaction.m_Items)
+                {
+                    msg.Body += '\t' + string.Format(form, item.ItemName.ToString() , item.OriginalPrice.ToString( "C" ), item.Price.ToString( "C" )) + '\n';
+                }
+
+                msg.Body += "\t\t\nTotal before discounts:  " + win.m_costTotal.ToString("C")
+                    + "\n\t\t\nTotal discounts:            " + win.m_savingsTotal.ToString( "C" )
+                    + "\n\t\t\nTotal after discounts:     " + win.m_totalTotal.ToString( "C" )
+                    + '\n';
+
+                msg.Subject = "Snap Registers Order: " + DateTime.UtcNow.ToString("d");
+                
                 try
                 {
-                    client.Send( message );
+                    client.Send( msg );
                 }
                 catch(Exception e)
                 {
                     System.Windows.Forms.MessageBox.Show( e.ToString() );
                 }
-                message.Dispose();
+                msg.Dispose();
             }
         }
     }
