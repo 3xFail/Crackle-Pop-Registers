@@ -298,6 +298,7 @@ namespace SnapRegisters
 
             UpdateTotals();
             Main_Frame.Navigate(string.Empty);
+            UPCField.Focus();
         }
 
         //Cash payment popup functions

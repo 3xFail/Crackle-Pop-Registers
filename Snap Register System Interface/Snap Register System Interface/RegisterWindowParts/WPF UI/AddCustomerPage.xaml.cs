@@ -30,11 +30,13 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         public AddCustomerPage()
         {
             InitializeComponent();
+            textBoxFirstName.Focus();
         }
         public AddCustomerPage(RegisterMainWindow win)
         {
             InitializeComponent();
             m_win = win;
+            textBoxFirstName.Focus();
         }
 
         // changing date to selected date
@@ -120,6 +122,8 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
                         textBoxFirstName.Text, textBoxLastName.Text, textBoxAddress1.Text, textBoxAddress2.Text, textBoxCity.Text, textBoxState.Text, textBoxCountry.Text, textBoxZip.Text, textBoxPhone.Text, textBoxEmail.Text, DBNull.Value, "1" , DOB.DisplayDate);
                     MessageBox.Show("Customer \"" + textBoxFirstName.Text + "\" has been added!");
                     ResetButton_Click(null, null);
+                    m_win.Main_Frame.Navigate( string.Empty );
+                    m_win.UPCField.Focus();
                 }
                 catch (Exception ex)
                 {
@@ -141,11 +145,13 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             textBoxState.SelectedIndex = -1;
             textBoxZip.Clear();
             textBoxCountry.SelectedIndex = -1;
+            textBoxFirstName.Focus();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             m_win.Main_Frame.Navigate(string.Empty);
+            m_win.UPCField.Focus();
         }
     }
 }

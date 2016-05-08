@@ -25,6 +25,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         {
             m_win = win;
             InitializeComponent();
+            Manual_Entry_CC_Button.Focus();
         }
 
         private void Manual_Entry_CC_Button_Click(object sender, RoutedEventArgs e)
@@ -34,7 +35,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Swipe_Entry_CC_Button_Click(object sender, RoutedEventArgs e)
         {
-            //throw new NotImplementedException();
+            System.Windows.Forms.MessageBox.Show( "This is not currently implemented" );
         }
     }
 }

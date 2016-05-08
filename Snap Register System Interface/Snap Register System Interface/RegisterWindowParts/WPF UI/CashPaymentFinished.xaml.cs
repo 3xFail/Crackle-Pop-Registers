@@ -41,6 +41,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             pennies.Text = changeToGive.pennies.ToString();
 
             ChangeTotal.Text = changeToGive.total;
+            ResetRegisterButton.Focus();
 
         }
 

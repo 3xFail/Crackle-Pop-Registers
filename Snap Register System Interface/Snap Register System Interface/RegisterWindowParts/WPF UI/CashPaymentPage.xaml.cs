@@ -33,6 +33,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             _priceOfItems = win.m_totalTotal;
             InitializeComponent();
             initCurrencyTextBox();
+            moneyAccepted.Focus();
         }
 
 

@@ -37,6 +37,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             m_win = win;
             TimeSpan shift = ( DateTime.Now - m_win.m_start );
             statsBlock.Text = string.Format(m_stats_template, m_win.m_employee.name, shift.ToString( @"hh\:mm" ), m_win.m_totalsales.ToString( "C" ), m_win.m_itemssold, (m_win.m_itemssold / shift.TotalMinutes));
+            Catalog_Button.Focus();
         }
 
         private void Logout_Button_Click( object sender, RoutedEventArgs e )
@@ -53,12 +54,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Add_Discount_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            System.Windows.Forms.MessageBox.Show( "This is not currently implemented" );
         }
 
         private void Remove_Coupon_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            System.Windows.Forms.MessageBox.Show( "This is not currently implemented" );
         }
 
         private void Override_Button_Click( object sender, RoutedEventArgs e )
@@ -73,17 +74,18 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
         private void Remove_Item_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            System.Windows.Forms.MessageBox.Show( "This is not currently implemented" );
         }
 
         private void Remove_Discount_Button_Click( object sender, RoutedEventArgs e )
         {
-
+            System.Windows.Forms.MessageBox.Show( "This is not currently implemented" );
         }
 
         private void Close_Button_Click( object sender, RoutedEventArgs e )
         {
             Options_Frame.Navigate(string.Empty);
+            m_win.UPCField.Focus();
         }
 
         private void Add_Cust_Button_Click_1( object sender, RoutedEventArgs e )

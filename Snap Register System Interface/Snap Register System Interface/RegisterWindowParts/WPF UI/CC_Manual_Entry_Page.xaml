@@ -21,7 +21,7 @@
                 <ColumnDefinition Width=".5*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Card Number" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Column="0" Grid.Row="1"  MaxLines="1" Height="16" VerticalAlignment="Top" MaxLength="18"/>
+            <TextBox x:Name="CardNumBox" Grid.Column="0" Grid.Row="1"  MaxLines="1" Height="16" VerticalAlignment="Top" MaxLength="18"/>
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Expiration Date" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             <!--Month Selection-->
             <Grid Grid.Column="1" Grid.Row="1">

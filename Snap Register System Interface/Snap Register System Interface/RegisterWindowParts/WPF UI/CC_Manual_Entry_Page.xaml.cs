@@ -26,6 +26,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         {
             m_win = win;
             InitializeComponent();
+            CardNumBox.Focus();
         }
 
         private void CC_Manual_Entry_Next_Click(object sender, RoutedEventArgs e)
@@ -36,6 +37,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         private void CC_Manual_Entry_Cancel_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(string.Empty);
+            m_win.UPCField.Focus();
         }
     }
 }

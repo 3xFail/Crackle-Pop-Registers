@@ -37,17 +37,21 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             InitializeComponent();
             m_win = win;
             CreateList();
+            SearchBox.Focus();
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             m_win.Main_Frame.Navigate(string.Empty);
+            m_win.UPCField.Focus();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
             SearchBox.Clear();
+            data.Clear();
             CreateList();
+            SearchBox.Focus();
         }
         
         private void CreateList()

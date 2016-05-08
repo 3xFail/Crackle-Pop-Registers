@@ -28,6 +28,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         {
             InitializeComponent();
             m_win = win;
+            Cash_Button.Focus();
         }
 
 
@@ -51,6 +52,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         {
             //used to close the frame view
             m_payment_menu_frame.Navigate(string.Empty);
+            m_win.UPCField.Focus();
             
         }
     }

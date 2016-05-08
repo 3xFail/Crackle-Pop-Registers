@@ -34,6 +34,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         {
             InitializeComponent();
             m_win = win;
+            Phone_Number_Box.Focus();
         }
 
 
@@ -57,6 +58,9 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
                 m_win.m_transaction.m_customer = m_win.m_customer;
 
                 System.Windows.Forms.MessageBox.Show( "Good to see you again " + m_win.m_customer.fname + "!" );
+
+                m_win.Main_Frame.Navigate( string.Empty );
+                m_win.UPCField.Focus();
             }
             catch (NullReferenceException)
             {
@@ -68,6 +72,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
         private void cancel_button_Click(object sender, RoutedEventArgs e)
         {
             m_win.Main_Frame.Navigate(string.Empty);
+            m_win.UPCField.Focus();
         }
     }
 }
