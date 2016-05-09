@@ -20,6 +20,8 @@ using CSharpClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PointOfSales.Permissions;
+using System.Windows.Threading;
+using Scale;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 {
@@ -35,6 +37,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private int quantity;
         private string barcode;
         private bool active;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged( string propertyName )
@@ -86,6 +89,27 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         {
             InitializeComponent();
             PopulateList();
+
+            Scale.Scale theScale = new Scale.Scale();
+
+
+            //Update the weight constantly
+            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 100),
+                                DispatcherPriority.Normal,
+                                delegate
+                                {
+
+                                    string theWeight = theScale.GetWeightAsString();
+                                    if (theWeight == "null")
+                                        this.ItemWeight.Text = theWeight;
+                                    else if (theWeight == "neg")
+                                        this.ItemWeight.Text = theWeight;
+                                    else
+                                        this.ItemWeight.Text = Math.Round(Convert.ToDouble(theScale.GetWeightAsDecimal()), 2).ToString();
+
+
+                                },
+                                this.Dispatcher);
         }
 
         private void PopulateList()
