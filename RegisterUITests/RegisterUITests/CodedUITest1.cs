@@ -47,6 +47,56 @@ namespace RegisterUITests
 			this.UIMap.checkTotalsForMultipleItems();
 
 		}
+
+		[TestMethod]
+		public void AddItemWithSale()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.CheckSaleTotalsAmount();
+
+		}
+
+		[TestMethod]
+		public void AddCoupon()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.addCouponTo3ds();
+			this.UIMap.checkTotalsForSingle3DSWithCoupon();
+
+		}
+
+		[TestMethod]
+		public void RemoveSale()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.RemoveSale();
+			this.UIMap.checkTotalsRemoveSaleFrom3DS();
+		}
+
+		[TestMethod]
+		public void RemoveCoupon()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.addCouponTo3ds();
+			this.UIMap.RemoveCouponFrom3DS();
+			this.UIMap.checkTotalsAfterRemovingCouponFrom3DSWithSale();
+
+		}
+
+		[TestMethod]
+		public void RemoveCouponAndSale()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.addCouponTo3ds();
+			this.UIMap.RemoveCouponFrom3DS();
+			this.UIMap.RemoveSale();
+			this.UIMap.checkTotalsRemoveSaleFrom3DS();
+		}
 		#region Additional test attributes
 
 		// You can use the following additional attributes as you write your tests:
