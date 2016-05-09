@@ -50,6 +50,8 @@ artifacts/
 *.obj
 *.pch
 *.pdb
+!Scale.pdb #Except for Scale.pdb
+!HidLibrary.pdb #Except for HidLibrary.pdb
 *.pgc
 *.pgd
 *.rsp
