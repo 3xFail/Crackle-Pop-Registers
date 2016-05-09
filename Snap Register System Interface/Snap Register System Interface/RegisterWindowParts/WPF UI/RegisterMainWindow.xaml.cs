@@ -102,7 +102,7 @@ namespace SnapRegisters
         public decimal m_totalTotal { get; set; } = 0;
         public static KeyboardHook kh;
         public Email m_email_reciept;
-
+        public Scale.Scale m_scale;
 
         //private PaymentWindow m_pay_window;
 
@@ -116,21 +116,21 @@ namespace SnapRegisters
                                                         delegate { this.dateText.Text = DateTime.Now.ToString("hh:mm tt"); },
                                                         this.Dispatcher);
 
-            Scale.Scale theScale = new Scale.Scale();
+            m_scale = new Scale.Scale();
 
             //Updates the weight constantly
-            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 100),
+            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 300),
                                             DispatcherPriority.Normal,
                                             delegate
                                             {
 
-                                                string theWeight = theScale.GetWeightAsString();
+                                                string theWeight = m_scale.GetWeightAsString();
                                                 if (theWeight == "null")
                                                     this.weightText.Text = theWeight;
                                                 else if (theWeight == "neg")
                                                     this.weightText.Text = theWeight;
                                                 else
-                                                    this.weightText.Text = Math.Round(Convert.ToDouble(theScale.GetWeightAsDecimal()), 2).ToString() + " Lb";
+                                                    this.weightText.Text = Math.Round(Convert.ToDouble(m_scale.GetWeightAsDecimal()), 2).ToString() + " Lb";
 
 
                                             },
@@ -238,9 +238,16 @@ namespace SnapRegisters
             {
                 try
                 {
+                    //TODO: Use weight to determine price of item if needed.
+                    //Another possibility: use weight to verify that the items
+                    //scanned or entered are really what is entered into the system. 
+                    decimal? weight = null;
+                    weight = m_scale.GetWeightAsDecimal();
+
+
                     if (UPCField.Text != string.Empty)
                     {
-                        m_transaction.AddItem(UPCField.Text); //try constructing an item
+                        m_transaction.AddItem(UPCField.Text, weight); //try constructing an item
                         UPCField.Clear();
                     }
                 }

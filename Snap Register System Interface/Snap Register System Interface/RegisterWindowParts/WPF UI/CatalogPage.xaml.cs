@@ -110,7 +110,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             DataGridRow row = sender as DataGridRow;
             Item item = ( sender as DataGridRow ).Item as Item;
 
-            m_win.m_transaction.AddItem(item.Barcode);
+            m_win.m_transaction.AddItem(item.Barcode, m_win.m_scale.GetWeightAsDecimal());
         }
     }
 

@@ -93,7 +93,7 @@ namespace SnapRegisters
             
 		}
 
-		public void AddItem(string itemID)
+        public void AddItem(string itemID, decimal? weight)
 		{
 			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
 				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
