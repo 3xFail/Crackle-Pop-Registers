@@ -54,21 +54,16 @@
             <ComboBoxItem Name="ShowInactive">Inactive Only</ComboBoxItem>
         </ComboBox>
         <Label x:Name="SearchLabel" Content="Search Criteria:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="7,-5,0,0" FontSize="17"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="12,325,0,-216" VerticalAlignment="Top" Width="75" Click="SearchButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="12,325,0,-216" VerticalAlignment="Top" Width="75" Click="SearchButton_Click"/>
         <Slider x:Name="MinPriceSlider" ValueChanged="MinPriceSlider_ValueChanged" HorizontalAlignment="Left" Margin="26,140,0,-62" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="MinPriceLabel" Content="Minimum Price" HorizontalAlignment="Left" Margin="12,114,0,-44" VerticalAlignment="Top"/>
         <currency:CurrencyTextBox x:Name="MinPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,139,0,-62" VerticalAlignment="Top" Width="60" TextChanged="MinPriceTextBox_TextChanged"/>
         <Slider x:Name="MaxPriceSlider" ValueChanged="MaxPriceSlider_ValueChanged"  HorizontalAlignment="Left" Margin="26,181,0,-70" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="MaxPriceLabel" Content="Maximum Price" HorizontalAlignment="Left" Margin="12,155,0,-52" VerticalAlignment="Top"/>
         <currency:CurrencyTextBox x:Name="MaxPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,180,0,-70" VerticalAlignment="Top" Width="60" TextChanged="MaxPriceTextBox_TextChanged"/>
-        <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="116" Margin="12,379,0,-366" VerticalAlignment="Top" Width="279"/>
+        <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="141" Margin="12,379,0,-391" VerticalAlignment="Top" Width="279">
+            <TextBlock x:Name="ItemWeight" Text="N/A" Margin="0,114,184,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="38"/>
+        </Border>
         <Label x:Name="AddItemLabel" Content="Add Item:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,346,0,-250" FontSize="17"/>
         <TextBox x:Name="BarcodeAddBox" HorizontalAlignment="Left" Height="23" Margin="67,384,0,-278" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="213"/>
         <TextBox x:Name="NameAddBox" HorizontalAlignment="Left" Height="23" Margin="54,410,0,-304" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="226"/>
@@ -77,14 +72,7 @@
         <Label x:Name="PriceLabel" Content="Price" HorizontalAlignment="Left" Margin="12,436,0,-333" VerticalAlignment="Top"/>
         <currency:CurrencyTextBox x:Name="PriceAddBox" Margin="53,436,0,-329" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <digit:DigitBox x:Name="QuantityAddTextBox" Text="0" HorizontalAlignment="Left" Height="23" Margin="71,463,0,-357" TextWrapping="NoWrap" VerticalAlignment="Top" Width="50" />
-        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="12,500,0,-391" VerticalAlignment="Top" Width="75" Click="AddItemButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="AddItemButton" Content="Add Item" HorizontalAlignment="Left" Margin="12,525,0,-416" VerticalAlignment="Top" Width="75" Click="AddItemButton_Click"/>
         <Slider x:Name="MinQuantitySlider" ValueChanged="MinQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,250,0,-139" VerticalAlignment="Top" Width="189" SmallChange="1"/>
         <Label x:Name="MinQuantityLabel" Content="Minimum Quantity" HorizontalAlignment="Left" Margin="12,224,0,-121" VerticalAlignment="Top"/>
         <Slider x:Name="MaxQuantitySlider" ValueChanged="MaxQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,291,0,-180" VerticalAlignment="Top" Width="189" SmallChange="1"/>
@@ -92,13 +80,9 @@
         <digit:DigitBox x:Name="MinQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,245,0,-139" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
         <digit:DigitBox x:Name="MaxQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,286,0,-180" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
         <Label x:Name="AddQuantityLabel" Content="Quantity" HorizontalAlignment="Left" Margin="12,460,0,-357" VerticalAlignment="Top"/>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="12,525,0,-416" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="296,-25,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
+        <Label x:Name="WeightLabel" Content="Weight" HorizontalAlignment="Left" Margin="12,489,0,-386" VerticalAlignment="Top"/>
+        <Label x:Name="LbLabel" Content="Lb" HorizontalAlignment="Left" Margin="90,489,0,-386" VerticalAlignment="Top"/>
+
     </Grid>
 </Page>

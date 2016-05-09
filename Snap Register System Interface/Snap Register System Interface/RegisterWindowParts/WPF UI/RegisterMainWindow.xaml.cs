@@ -111,10 +111,33 @@ namespace SnapRegisters
 
 
             //Updates the clock constantly
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1),
+            DispatcherTimer clockUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 1),
                                                         DispatcherPriority.Normal,
                                                         delegate { this.dateText.Text = DateTime.Now.ToString("hh:mm tt"); },
                                                         this.Dispatcher);
+
+            Scale.Scale theScale = new Scale.Scale();
+
+            //Updates the weight constantly
+            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 100),
+                                            DispatcherPriority.Normal,
+                                            delegate
+                                            {
+
+                                                string theWeight = theScale.GetWeightAsString();
+                                                if (theWeight == "null")
+                                                    this.weightText.Text = theWeight;
+                                                else if (theWeight == "neg")
+                                                    this.weightText.Text = theWeight;
+                                                else
+                                                    this.weightText.Text = Math.Round(Convert.ToDouble(theScale.GetWeightAsDecimal()), 2).ToString() + " Lb";
+
+
+                                            },
+                                            this.Dispatcher);
+
+
+
             //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second).
             //Doesn't delay the in debug mode for quicker development
 #if !DEBUG
@@ -143,7 +166,7 @@ namespace SnapRegisters
             //leEmblem.Source = new BitmapImage(new Uri("..//..//..//..//SharedResources/Images/Emblem.png", UriKind.Relative));
 
             //OptionsButton.Content = leEmblem;
-            
+
             ImageBrush brush = new ImageBrush();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
@@ -253,11 +276,11 @@ namespace SnapRegisters
             }
 
             //F5: Opens Customer phone number window
-            if(keyPressed.Key == Key.F5)
+            if (keyPressed.Key == Key.F5)
             {
                 //dodo put page option for here
                 Main_Frame.Navigate(new GetCustomerPage(this));
-            } 
+            }
         }
 
         private void ShortcutKeyPressedPayByCash(object sender, KeyEventArgs keyPressed)
@@ -286,9 +309,9 @@ namespace SnapRegisters
             m_itemssold += m_transaction.m_Items.Count;
             m_totalsales += m_totalTotal;
             m_transaction.Checkout();
-            if(m_customer != null)
+            if (m_customer != null)
             {
-                m_email_reciept = new Email( m_customer, this );
+                m_email_reciept = new Email(m_customer, this);
             }
             m_customer = null;
             m_transaction = new Transaction(m_employee, m_customer, AddItemToOutputPanels, ShowApplicationOfCouponToSale, m_connection);
