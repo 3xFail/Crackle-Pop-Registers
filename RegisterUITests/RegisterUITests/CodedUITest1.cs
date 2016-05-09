@@ -66,6 +66,15 @@ namespace RegisterUITests
 			this.UIMap.checkTotalsForSingle3DSWithCoupon();
 
 		}
+
+		[TestMethod]
+		public void RemoveSale()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.RemoveSale();
+			this.UIMap.checkTotalsRemoveSaleFrom3DS();
+		}
 		#region Additional test attributes
 
 		// You can use the following additional attributes as you write your tests:

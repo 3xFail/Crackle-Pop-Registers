@@ -283,6 +283,48 @@ namespace RegisterUITests
             Assert.AreEqual(this.checkTotalsForSingle3DSWithCouponExpectedValues.UIItem099Text1DisplayText, uIItem099Text11.DisplayText, "Total not $100.00");
         }
         
+        /// <summary>
+        /// Removes the automatic sale from the 3ds at the top of the transaction.
+        /// </summary>
+        public void RemoveSale()
+        {
+            #region Variable Declarations
+            WpfText uISale50ofanewdsxlText = this.UIMainWindowWindow.UICouponScrollPane.UISale50ofanewdsxlText;
+            WpfButton uIRemoveDiscountButton = this.UIWpfWindow.UIItemCustom.UIRemoveDiscountButton;
+            #endregion
+
+            // Click 'Sale: $50 of a new ds xl' label
+            Mouse.Click(uISale50ofanewdsxlText, new Point(121, 19));
+
+            // Click 'Remove Discount' button
+            Mouse.Click(uIRemoveDiscountButton, new Point(103, 36));
+        }
+        
+        /// <summary>
+        /// Checks the totals for a 3ds that has had it's automatic sale removed.
+        /// </summary>
+        public void checkTotalsRemoveSaleFrom3DS()
+        {
+            #region Variable Declarations
+            WpfText uIItem099Text = this.UIMainWindowWindow.UIItemScrollPane.UIItem099Text;
+            WpfText uIItem099Text1 = this.UIMainWindowWindow.UIItem099Text;
+            WpfText uIItem000Text = this.UIMainWindowWindow.UIItem000Text;
+            WpfText uIItem099Text11 = this.UIMainWindowWindow.UIItem099Text1;
+            #endregion
+
+            // Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+            Assert.AreEqual(this.checkTotalsRemoveSaleFrom3DSExpectedValues.UIItem099TextDisplayText, uIItem099Text.DisplayText, "3DS not priced at $200.00");
+
+            // Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+            Assert.AreEqual(this.checkTotalsRemoveSaleFrom3DSExpectedValues.UIItem099TextDisplayText1, uIItem099Text1.DisplayText, "Total cost not $200.00");
+
+            // Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+            Assert.AreEqual(this.checkTotalsRemoveSaleFrom3DSExpectedValues.UIItem000TextDisplayText, uIItem000Text.DisplayText, "Savings not $0.00");
+
+            // Verify that the 'ControlType' property of '$0.99' label equals 'Text'
+            Assert.AreEqual(this.checkTotalsRemoveSaleFrom3DSExpectedValues.UIItem099Text1ControlType, uIItem099Text11.ControlType.ToString(), "Total not $200.00");
+        }
+        
         #region Properties
         public virtual loginCorrectUserPassParams loginCorrectUserPassParams
         {
@@ -416,6 +458,18 @@ namespace RegisterUITests
             }
         }
         
+        public virtual checkTotalsRemoveSaleFrom3DSExpectedValues checkTotalsRemoveSaleFrom3DSExpectedValues
+        {
+            get
+            {
+                if ((this.mcheckTotalsRemoveSaleFrom3DSExpectedValues == null))
+                {
+                    this.mcheckTotalsRemoveSaleFrom3DSExpectedValues = new checkTotalsRemoveSaleFrom3DSExpectedValues();
+                }
+                return this.mcheckTotalsRemoveSaleFrom3DSExpectedValues;
+            }
+        }
+        
         public UIMainWindowWindow UIMainWindowWindow
         {
             get
@@ -437,6 +491,18 @@ namespace RegisterUITests
                     this.mUIItemWindow = new UIItemWindow();
                 }
                 return this.mUIItemWindow;
+            }
+        }
+        
+        public UIWpfWindow UIWpfWindow
+        {
+            get
+            {
+                if ((this.mUIWpfWindow == null))
+                {
+                    this.mUIWpfWindow = new UIWpfWindow();
+                }
+                return this.mUIWpfWindow;
             }
         }
         #endregion
@@ -464,9 +530,13 @@ namespace RegisterUITests
         
         private checkTotalsForSingle3DSWithCouponExpectedValues mcheckTotalsForSingle3DSWithCouponExpectedValues;
         
+        private checkTotalsRemoveSaleFrom3DSExpectedValues mcheckTotalsRemoveSaleFrom3DSExpectedValues;
+        
         private UIMainWindowWindow mUIMainWindowWindow;
         
         private UIItemWindow mUIItemWindow;
+        
+        private UIWpfWindow mUIWpfWindow;
         #endregion
     }
     
@@ -775,6 +845,36 @@ namespace RegisterUITests
         /// Verify that the 'DisplayText' property of '$0.99' label equals '$100.00'
         /// </summary>
         public string UIItem099Text1DisplayText = "$100.00";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'checkTotalsRemoveSaleFrom3DS'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class checkTotalsRemoveSaleFrom3DSExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+        /// </summary>
+        public string UIItem099TextDisplayText = "$200.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+        /// </summary>
+        public string UIItem099TextDisplayText1 = "$200.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+        /// </summary>
+        public string UIItem000TextDisplayText = "$0.00";
+        
+        /// <summary>
+        /// Verify that the 'ControlType' property of '$0.99' label equals 'Text'
+        /// </summary>
+        public string UIItem099Text1ControlType = "Text";
         #endregion
     }
     
@@ -1104,10 +1204,28 @@ namespace RegisterUITests
                 return this.mUIItem5000Text;
             }
         }
+        
+        public WpfText UISale50ofanewdsxlText
+        {
+            get
+            {
+                if ((this.mUISale50ofanewdsxlText == null))
+                {
+                    this.mUISale50ofanewdsxlText = new WpfText(this);
+                    #region Search Criteria
+                    this.mUISale50ofanewdsxlText.SearchProperties[WpfText.PropertyNames.AutomationId] = "NameField";
+                    this.mUISale50ofanewdsxlText.WindowTitles.Add("MainWindow");
+                    #endregion
+                }
+                return this.mUISale50ofanewdsxlText;
+            }
+        }
         #endregion
         
         #region Fields
         private WpfText mUIItem5000Text;
+        
+        private WpfText mUISale50ofanewdsxlText;
         #endregion
     }
     
@@ -1173,6 +1291,70 @@ namespace RegisterUITests
         
         #region Fields
         private WinListItem mUISnapRegisterSystemInListItem;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIWpfWindow : WpfWindow
+    {
+        
+        public UIWpfWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties.Add(new PropertyExpression(WpfWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new UIItemCustom(this);
+                }
+                return this.mUIItemCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemCustom mUIItemCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIItemCustom : WpfCustom
+    {
+        
+        public UIItemCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.DiscountEditMenu";
+            #endregion
+        }
+        
+        #region Properties
+        public WpfButton UIRemoveDiscountButton
+        {
+            get
+            {
+                if ((this.mUIRemoveDiscountButton == null))
+                {
+                    this.mUIRemoveDiscountButton = new WpfButton(this);
+                    #region Search Criteria
+                    this.mUIRemoveDiscountButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "RemoveDiscountButton";
+                    #endregion
+                }
+                return this.mUIRemoveDiscountButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WpfButton mUIRemoveDiscountButton;
         #endregion
     }
 }
