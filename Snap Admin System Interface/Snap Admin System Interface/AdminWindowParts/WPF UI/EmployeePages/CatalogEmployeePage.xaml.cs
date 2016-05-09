@@ -74,8 +74,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void ResetPasswordButton_Click( object sender, RoutedEventArgs e )
         {
-            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
+            try
             {
+                if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ResetEmployeePassword))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ResetEmployeePassword));
+
                 User user = ( (FrameworkElement)sender ).DataContext as User;
 
                 string resp = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
@@ -86,9 +89,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     MessageBox.Show( "Password for \"" + user.Username + "\" has been updated." );
                 }
             }
-            else
+            catch (InvalidOperationException ex)
             {
-                MessageBox.Show( "You do not have permission to add/modify an employee." );
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -102,30 +105,37 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void PermissionGroup_Close( object sender, EventArgs e )
         {
-            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
+            try
             {
                 User user = ( (FrameworkElement)sender ).DataContext as User;
                 if( user.PermissionsGroup != oldgroup )
                 {
+                    if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ChangeEmployeeCatalog))
+                        throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
+
                     DBInterface.ChangePermissions( user.Username, user.UserID, user.PermissionsGroup );
                 }
             }
-            else
+            catch (InvalidOperationException ex)
             {
-                MessageBox.Show( "You do not have permission to add/modify an employee." );
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void Active_Toggle( object sender, RoutedEventArgs e )
         {
-            if( DBInterface.m_employee.HasPermisison( Permissions.ChangeEmployeeCatalog ) )
+            try
             {
+                if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ChangeEmployeeCatalog))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
+
                 User user = ( (FrameworkElement)sender ).DataContext as User;
                 DBInterface.SetUserActivity( user.UserID, user.Active );
             }
-            else
+            catch (InvalidOperationException ex)
             {
-                MessageBox.Show( "You do not have permission to add/modify an employee." );
+                MessageBox.Show(ex.Message);
+                
             }
         }
     }

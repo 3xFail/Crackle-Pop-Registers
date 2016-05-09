@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="1000"
+      d:DesignHeight="920" d:DesignWidth="1072"
       Title="CatalogCustomerPage">
 
     <Grid>

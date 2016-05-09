@@ -10,7 +10,14 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-            <Button x:Name="CatalogBtn" Content="Catalog" Height="50" Click="CatalogBtn_Click"/>
+            <Button x:Name="CatalogBtn" Content="Catalog" Height="50" Click="CatalogBtn_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

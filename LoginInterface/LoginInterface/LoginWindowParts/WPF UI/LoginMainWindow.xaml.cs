@@ -134,7 +134,7 @@ namespace SnapRegisters
             passwordField.Clear();
         }
 
-        
+
 
         private void OpenInterfaceWindow(Employee employeeLoggedIn)
         {
@@ -202,29 +202,33 @@ namespace SnapRegisters
 
         private void Cancel_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+
             Application.Current.Shutdown();
         }
 
         private void Management_Operations_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            _lastAttempt = new LoginDetails()
+            try
             {
-                Password = passwordField.Password,
-                Username = usernameField.Text
-            };
+                _lastAttempt = new LoginDetails()
+                {
+                    Password = passwordField.Password,
+                    Username = usernameField.Text
+                };
 
-            ConnectToServer(_lastAttempt);
+                ConnectToServer(_lastAttempt);
 
-            if (_isLoggedIn && Permissions.CheckPermissions(_loggedIn, Permissions.CanExitInterface))
-            {
+                if (!_isLoggedIn || !Permissions.CheckPermissions(_loggedIn, Permissions.CanAccessManagerFunctions))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanAccessManagerFunctions));
+
                 btnShowPopup_Click(sender, e);
                 passwordField.Clear();
             }
-            else
+            catch (InvalidOperationException ex)
             {
                 _isLoggedIn = false;
                 _loggedIn = null;
-                MessageBox.Show("Access to Manager Functions Denied");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -245,14 +249,34 @@ namespace SnapRegisters
 
         private void Restart_Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("Shutdown", "-r -t 00");
-            btnClosePopup_Click(sender, e);
+            try
+            {
+                if (!_isLoggedIn || !Permissions.CheckPermissions(_loggedIn, Permissions.CanRestartStation))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanRestartStation));
+
+                System.Diagnostics.Process.Start("Shutdown", "-r -t 00");
+                btnClosePopup_Click(sender, e);
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Shutdown_Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("Shutdown", "-s -t 00");
-            btnClosePopup_Click(sender, e);
+            try
+            {
+                if (!_isLoggedIn || !Permissions.CheckPermissions(_loggedIn, Permissions.CanShutdownStation))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanShutdownStation));
+
+                System.Diagnostics.Process.Start("Shutdown", "-s -t 00");
+                btnClosePopup_Click(sender, e);
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Username_Field_Got_Focus(object sender, RoutedEventArgs e)

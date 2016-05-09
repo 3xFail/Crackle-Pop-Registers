@@ -54,8 +54,22 @@
             <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="98,80,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
             <TextBlock x:Name="PhoneAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="103,140,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
 
-            <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click"/>
-            <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click" />
+            <Button Content="Submit" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Content="Reset" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
     </Grid>
 </Page>

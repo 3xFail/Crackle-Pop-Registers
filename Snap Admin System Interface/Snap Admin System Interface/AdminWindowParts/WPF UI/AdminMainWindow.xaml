@@ -9,6 +9,7 @@
         Title="Snap Admininstrator Program" Icon="/SharedResources/Images/Emblem.png"
         
         WindowState="Maximized" WindowStyle="None"  Height="840" Width="1293.6" Closing="Window_Closing">
+    
     <!--Height="350" Width="525">-->
     <!--WindowState="Maximized"  WindowStyle="SingleBorderWindow" d:DesignHeight="843.9" Width="1170.8">-->
 
@@ -25,29 +26,83 @@
             <ColumnDefinition Width="507*"/>
         </Grid.ColumnDefinitions>
 
-        <WindowsFormsHost HorizontalAlignment="Center" Name="windowsFormsHost2" Grid.RowSpan="2" />
+
+        
         <!--<Image x:Name="Logo" Source="/SharedResources/Images/Emblem.png" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" />-->
         <!--panel of main navigational buttons-->
+        <Viewbox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <WindowsFormsHost HorizontalAlignment="Center" x:Name="windowsFormsHost2" Grid.RowSpan="2" />
+        </Viewbox>
+        <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >
-            <StackPanel>
-                <Button x:Name="Inventory_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Inv" Height="80">Inventory</Button>
-                <Button x:Name="Analysis_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80">Analysis</Button>
-                <Button x:Name="Employees_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Emp" Height="80">Employees</Button>
-                <Button x:Name="Customers_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80">Customers</Button>
-                <Button x:Name="Sales_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80">Sales</Button>
-                <Button x:Name="Options_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Opt" Height="80">Options</Button>
+            <StackPanel VerticalAlignment="Bottom">
+                <Button x:Name="Inventory_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Inv" Height="80" Content="Inventory">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.433"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Analysis_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80" Content="Analysis">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.433"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Employees_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Emp" Height="80" Content="Employees">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.4333"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Customers_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80" Content="Customers">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0.4333"/>
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Sales_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80" Content="Sales">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.4333"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Options_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Opt" Height="80" Content="Options">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.4333"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="Logout_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Logout" Height="80" Content="Logout">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.4333"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
                 <!--logout button-->
-                <Button x:Name="Logout_btn" FontSize="20" BorderBrush="Black" Click="btn_Logout" Height="60" Width="100" VerticalAlignment="Bottom" Margin="0,80">Logout</Button>
             </StackPanel>
         </DockPanel>
 
-        <!--time-->
+        <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
         <Viewbox Grid.Column="1" Grid.Row="0">
-            <TextBlock Name="dateText" Text="Time"/>
+            <TextBlock x:Name="dateText" Text="Time"/>
         </Viewbox>
         <!--the user currently logged into the system-->
         <Viewbox Grid.Column="1" Grid.Row="1">
-            <TextBlock Name="LoggedInAs" TextAlignment="Center" Text="username"/>
+            <TextBlock x:Name="LoggedInAs" TextAlignment="Center" Text="username"/>
         </Viewbox>
 
         <!--section for subsections of each navigational buttons-->
