@@ -47,6 +47,25 @@ namespace RegisterUITests
 			this.UIMap.checkTotalsForMultipleItems();
 
 		}
+
+		[TestMethod]
+		public void AddItemWithSale()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.CheckSaleTotalsAmount();
+
+		}
+
+		[TestMethod]
+		public void AddCoupon()
+		{
+			this.UIMap.Login();
+			this.UIMap.addItemWithSale();
+			this.UIMap.addCouponTo3ds();
+			this.UIMap.checkTotalsForSingle3DSWithCoupon();
+
+		}
 		#region Additional test attributes
 
 		// You can use the following additional attributes as you write your tests:
