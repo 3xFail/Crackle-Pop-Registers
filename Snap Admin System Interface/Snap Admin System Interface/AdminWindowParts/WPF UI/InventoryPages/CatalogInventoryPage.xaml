@@ -104,6 +104,8 @@
         </Button>
         <Label x:Name="WeightLabel" Content="Weight" HorizontalAlignment="Left" Margin="12,489,0,-386" VerticalAlignment="Top"/>
         <Label x:Name="LbLabel" Content="Lb" HorizontalAlignment="Left" Margin="90,489,0,-386" VerticalAlignment="Top"/>
+        <CheckBox Name="PriceIsPerLb" Margin="142,496,596,-360" Checked="PriceIsPerLb_Checked" Unchecked="PriceIsPerLb_Unchecked"/>
+        <Label x:Name="label" Content="Price is per Lb" HorizontalAlignment="Left" Margin="156,489,0,-360" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
