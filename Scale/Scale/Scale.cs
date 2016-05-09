@@ -15,7 +15,7 @@ namespace Scale
     //Call GetWeightAsString() or GetWeightAsDecimal() as many times as you want
     //Scale automatically connects as needed. 
     //NOTE: CURRENTLY ONLY COMPATIBLE WITH DYMO M10 & M25 SCALES
-    class Scale
+    public class Scale
     {
 
         private int _VENDOR_ID = 0x0922;

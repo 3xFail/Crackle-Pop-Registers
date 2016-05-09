@@ -116,17 +116,33 @@
                     <Button x:Name="OptionsButton"  
 							Margin="0,0,0,0"
 							Width="80" Height="80" Background="{StaticResource Background}" Click="OptionsButton_Click">
-                        
+
                         <!--<Image Source="/SharedResources/Images/Emblem.png" Width="76" Height="76"/>-->
                     </Button>
                 </Viewbox>
-                
+
                 <!--Totals Area-->
 
 
                 <!--Bar code Box-->
                 <Grid Grid.Row="1">
-                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".5*"/>
+                        <RowDefinition Height=".5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock TextAlignment="Left" Text="Weight:"  Name="WeightLabel" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+                        <Viewbox Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <TextBlock TextAlignment="Center" Text="N/A"  Name="weightText" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Viewbox>
+                    </Grid>
+                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
                         <TextBox x:Name="UPCField" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
                     </Viewbox>
                 </Grid>
@@ -215,7 +231,7 @@
                 </StackPanel>
 
             </Popup>
-            
+
         </StackPanel>
         <Frame x:Name="Main_Frame" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
