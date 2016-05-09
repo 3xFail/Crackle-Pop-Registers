@@ -325,6 +325,52 @@ namespace RegisterUITests
             Assert.AreEqual(this.checkTotalsRemoveSaleFrom3DSExpectedValues.UIItem099Text1ControlType, uIItem099Text11.ControlType.ToString(), "Total not $200.00");
         }
         
+        /// <summary>
+        /// Removes the coupon added to a 3ds.
+        /// </summary>
+        public void RemoveCouponFrom3DS()
+        {
+            #region Variable Declarations
+            WpfText uISale50ofanewdsxlText = this.UIMainWindowWindow.UICouponScrollPane.UISale50ofanewdsxlText;
+            WpfButton uIRemoveDiscountButton = this.UIWpfWindow.UIItemCustom.UIRemoveDiscountButton;
+            #endregion
+
+            // Click 'Sale: $50 of a new ds xl' label
+            Mouse.Click(uISale50ofanewdsxlText, new Point(128, 13));
+
+            // Click 'Remove Discount' button
+            Mouse.Click(uIRemoveDiscountButton, new Point(115, 50));
+        }
+        
+        /// <summary>
+        /// Checks the totals after removing the coupon from a single 3DS to make sure all the math is correct.
+        /// </summary>
+        public void checkTotalsAfterRemovingCouponFrom3DSWithSale()
+        {
+            #region Variable Declarations
+            WpfText uIItem099Text = this.UIMainWindowWindow.UIItemScrollPane.UIItem099Text;
+            WpfText uIItem5000Text = this.UIMainWindowWindow.UICouponScrollPane.UIItem5000Text;
+            WpfText uIItem099Text1 = this.UIMainWindowWindow.UIItem099Text;
+            WpfText uIItem000Text = this.UIMainWindowWindow.UIItem000Text;
+            WpfText uIItem099Text11 = this.UIMainWindowWindow.UIItem099Text1;
+            #endregion
+
+            // Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+            Assert.AreEqual(this.checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues.UIItem099TextDisplayText, uIItem099Text.DisplayText, "3DS price not $200.00");
+
+            // Verify that the 'DisplayText' property of '$50.00' label equals '$50.00'
+            Assert.AreEqual(this.checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues.UIItem5000TextDisplayText, uIItem5000Text.DisplayText, "Sale Not $50.00");
+
+            // Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+            Assert.AreEqual(this.checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues.UIItem099TextDisplayText1, uIItem099Text1.DisplayText, "Cost not $200.00");
+
+            // Verify that the 'DisplayText' property of '$0.00' label equals '$50.00'
+            Assert.AreEqual(this.checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues.UIItem000TextDisplayText, uIItem000Text.DisplayText, "Savings not $50.00");
+
+            // Verify that the 'DisplayText' property of '$0.99' label equals '$150.00'
+            Assert.AreEqual(this.checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues.UIItem099Text1DisplayText, uIItem099Text11.DisplayText, "Total not $150.00");
+        }
+        
         #region Properties
         public virtual loginCorrectUserPassParams loginCorrectUserPassParams
         {
@@ -470,6 +516,18 @@ namespace RegisterUITests
             }
         }
         
+        public virtual checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues
+        {
+            get
+            {
+                if ((this.mcheckTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues == null))
+                {
+                    this.mcheckTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues = new checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues();
+                }
+                return this.mcheckTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues;
+            }
+        }
+        
         public UIMainWindowWindow UIMainWindowWindow
         {
             get
@@ -531,6 +589,8 @@ namespace RegisterUITests
         private checkTotalsForSingle3DSWithCouponExpectedValues mcheckTotalsForSingle3DSWithCouponExpectedValues;
         
         private checkTotalsRemoveSaleFrom3DSExpectedValues mcheckTotalsRemoveSaleFrom3DSExpectedValues;
+        
+        private checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues mcheckTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues;
         
         private UIMainWindowWindow mUIMainWindowWindow;
         
@@ -875,6 +935,41 @@ namespace RegisterUITests
         /// Verify that the 'ControlType' property of '$0.99' label equals 'Text'
         /// </summary>
         public string UIItem099Text1ControlType = "Text";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'checkTotalsAfterRemovingCouponFrom3DSWithSale'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class checkTotalsAfterRemovingCouponFrom3DSWithSaleExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+        /// </summary>
+        public string UIItem099TextDisplayText = "$200.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$50.00' label equals '$50.00'
+        /// </summary>
+        public string UIItem5000TextDisplayText = "$50.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.99' label equals '$200.00'
+        /// </summary>
+        public string UIItem099TextDisplayText1 = "$200.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.00' label equals '$50.00'
+        /// </summary>
+        public string UIItem000TextDisplayText = "$50.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.99' label equals '$150.00'
+        /// </summary>
+        public string UIItem099Text1DisplayText = "$150.00";
         #endregion
     }
     
