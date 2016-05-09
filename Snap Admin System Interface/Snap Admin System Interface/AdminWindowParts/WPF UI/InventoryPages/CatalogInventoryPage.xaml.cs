@@ -19,8 +19,7 @@ using System.Xml;
 using CSharpClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Threading;
-using Scale;
+using PointOfSales.Permissions;
 
 namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 {
@@ -87,27 +86,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         {
             InitializeComponent();
             PopulateList();
-
-            Scale.Scale theScale = new Scale.Scale();
-
-
-            //Update the weight constantly
-            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 100),
-                                DispatcherPriority.Normal,
-                                delegate
-                                {
-
-                                    string theWeight = theScale.GetWeightAsString();
-                                    if (theWeight == "null")
-                                        this.ItemWeight.Text = theWeight;
-                                    else if (theWeight == "neg")
-                                        this.ItemWeight.Text = theWeight;
-                                    else
-                                        this.ItemWeight.Text = Math.Round(Convert.ToDouble(theScale.GetWeightAsDecimal()), 2).ToString();
-
-
-                                },
-                                this.Dispatcher);
         }
 
         private void PopulateList()
@@ -206,6 +184,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
             try
             {
+                if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ChangeItemCatalog))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ChangeItemCatalog));
+
                 DBInterface.ModifyItem( item.ProductID, item.Name, item.Barcode, item.Price, item.Active, item.Quantity );
             }
             catch( InvalidOperationException ex )
@@ -357,6 +338,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             {
                 try
                 {
+                    if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.CanAddNewItem))
+                        throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanAddNewItem));
+
                     DBInterface.AddItem( NameAddBox.Text, PriceAddBox.Number, BarcodeAddBox.Text, 1 );
                     MessageBox.Show( "\"" + NameAddBox.Text + "\" has been added!" );
 
@@ -380,6 +364,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                     BarcodeAddBox.Clear();
                     NameAddBox.Clear();
                     PriceAddBox.Number = 0M;
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
                 catch( Exception ex )
                 {

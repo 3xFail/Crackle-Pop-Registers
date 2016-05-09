@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointOfSales.Permissions;
+using PointOfSales.Users;
 
 namespace SnapRegisters
 {
@@ -22,13 +24,14 @@ namespace SnapRegisters
 	{
 		public delegate void CloseEditMenu();
 
-		public ItemEditMenu(ItemDisplayBox itemToModify, Transaction transaction, CloseEditMenu closeFunction)
+		public ItemEditMenu(ItemDisplayBox itemToModify, Transaction transaction, CloseEditMenu closeFunction, Employee currentUser)
 		{
 			InitializeComponent();
 
 			m_itemBox = itemToModify;
 			m_transaction = transaction;
 			m_closeFunction = closeFunction;
+            m_currentUser = currentUser;
 			ItemNameBox.Text = m_itemBox.SourceItem.ItemName.ToString();
 
 			RemoveItem = false;
@@ -38,11 +41,15 @@ namespace SnapRegisters
 		private ItemDisplayBox m_itemBox;
 		private Transaction m_transaction;
 		private CloseEditMenu m_closeFunction;
+        private Employee m_currentUser;
 		public bool RemoveItem { get; set; }
 		public bool PriceOverride { get; set; }
 		private void RemoveItemButtonClicked(object sender, RoutedEventArgs e)
 		{
-			RemoveItem = true;
+            // check permission
+            if (!Permissions.CheckPermissions(m_currentUser, Permissions.CanVoidItem))
+                throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+            RemoveItem = true;
 			m_transaction.RemoveItem(m_itemBox.SourceItem);
 			m_closeFunction();
 		}

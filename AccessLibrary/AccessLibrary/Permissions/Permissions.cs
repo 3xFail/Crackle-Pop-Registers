@@ -20,6 +20,7 @@ namespace PointOfSales.Permissions
         public static readonly string CanGenerateInvoice = "Can Generate Invoice";
         public static readonly string CanExitInterface = "Can Exit Interface";
         public static readonly string CanRestartStation = "Can Restart Station";
+        public static readonly string CanShutdownStation = "Can Shut Down Station";
         public static readonly string AfterHoursLogin = "After Hours Login";
         public static readonly string AdminLogIn = "Admin Program Login";
         public static readonly string ViewEmployeeCatalog = "View Employee Catalog";
@@ -36,6 +37,8 @@ namespace PointOfSales.Permissions
         public static readonly string ChangeCustomerCatalog = "Modify Customer Information";
         public static readonly string ViewCouponCatalog = "View Coupon Catalog";
         public static readonly string ChangeCouponCatalog = "Change Coupon Catalog";
+        public static readonly string CanAccessManagerFunctions = "Can Access Manager Functions";
+        public static readonly string CanAddNewItem = "Can Add New Item";
 
         public static readonly List<string> _Permissions = new List<string>()
         {
@@ -49,6 +52,7 @@ namespace PointOfSales.Permissions
             CanGenerateInvoice,
             CanExitInterface,
             CanRestartStation,
+            CanShutdownStation,
             AfterHoursLogin,
             AdminLogIn,
             ViewEmployeeCatalog,
@@ -64,7 +68,9 @@ namespace PointOfSales.Permissions
             ViewCustomerCatalog,
             ChangeCustomerCatalog,
             ViewCouponCatalog,
-            ChangeCouponCatalog
+            ChangeCouponCatalog,
+            CanAccessManagerFunctions,
+            CanAddNewItem
 
         };
 
@@ -75,11 +81,12 @@ namespace PointOfSales.Permissions
             { CanVoidItem, "You do not have permission to void items" },
             { CanVoidCoupon, "You do not have permission to void coupons" },
             { CanVoidSale, "You do not have permission to void sales" },
-            { CanDiscountItems, "You do not have permission to void items" },
+            { CanDiscountItems, "You do not have permission to discount items" },
             { CanProcessRefunds, "You do not have permission to process refunds" },
             { CanGenerateInvoice, "You do not have permission to generate an invoice" },
             { CanExitInterface, "You do not have permission to exit the interface" },
             { CanRestartStation, "You do not have permission to restart the station" },
+            { CanShutdownStation, "You do not have permission to shut down the station" },
             { AfterHoursLogin, "You do not have permission to log in after store hours" },
             { AdminLogIn, "You do not have permission to log into the admin program" },
             { ViewEmployeeCatalog, "You do not have permission to view the employee catalog" },
@@ -95,7 +102,9 @@ namespace PointOfSales.Permissions
             { ViewCustomerCatalog, "You do not have permission to view the customer catalog" },
             { ChangeCustomerCatalog, "You do not have permission to modify customer information" },
             { ViewCouponCatalog, "You do not have permission to view the coupon catalog" },
-            { ChangeCouponCatalog, "You do not have permission to change the coupon catalog" }
+            { ChangeCouponCatalog, "You do not have permission to change the coupon catalog" },
+            { CanAccessManagerFunctions, "You do not have permission to access the manager functions" },
+            { CanAddNewItem, "You do not have permission to add a new item to the catalog" }
         };
 
         public static string ErrorMessage( string permission )

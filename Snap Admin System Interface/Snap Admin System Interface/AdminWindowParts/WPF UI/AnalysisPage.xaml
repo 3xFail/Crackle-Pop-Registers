@@ -10,8 +10,22 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-            <Button x:Name="GrossBtn" Content="Gross Earnings" Height="50"/>
-            <Button x:Name="ProductBtn" Content="Product Losses" Height="50"/>
+            <Button x:Name="GrossBtn" Content="Gross Earnings" Height="50">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="ProductBtn" Content="Product Losses" Height="50">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

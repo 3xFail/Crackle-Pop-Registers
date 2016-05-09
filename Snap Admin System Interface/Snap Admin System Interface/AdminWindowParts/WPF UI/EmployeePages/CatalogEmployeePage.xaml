@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn Header="Active">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}" Click="Active_Toggle" />
+                            <CheckBox x:Name="ActiveChecked" IsChecked="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}" Click="Active_Toggle" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

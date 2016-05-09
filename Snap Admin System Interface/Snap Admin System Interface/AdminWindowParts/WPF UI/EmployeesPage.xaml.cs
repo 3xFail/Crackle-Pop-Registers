@@ -46,6 +46,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
+                if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ViewEmployeeCatalog))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ViewEmployeeCatalog));
+
                 EmpFrame.Navigate( new CatalogEmployeePage() );
             }
             catch( UnauthorizedAccessException ex )

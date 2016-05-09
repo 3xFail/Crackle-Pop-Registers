@@ -8,6 +8,7 @@ using PointOfSales.Permissions;
 using System.Device;
 using CSharpClient;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace SnapRegisters
 {
@@ -200,18 +201,23 @@ namespace SnapRegisters
 		}
 		public void AddCustomCoupon(Item item, decimal amount)
 		{
-			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = m_Items.Find(x => x == item);
+            try
+            {
+                // Find the item to change the price of in the list assign changedItem these values.
+                Item changedItem = m_Items.Find(x => x == item);
 
-			if (changedItem == null)
-				throw new InvalidOperationException("Item specified is not in sale.");
+                if (changedItem == null)
+                    throw new InvalidOperationException("Item specified is not in sale.");
 
-			if (!m_Employee.HasPermisison(Permissions.CanDiscountItems))
-				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
-			else
-			{
-				item.AddDiscount(new ManagerOverrideDiscount(item.OriginalPrice - amount));
-			}
+                if (!m_Employee.HasPermisison(Permissions.CanDiscountItems))
+                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanDiscountItems));
+
+                item.AddDiscount(new ManagerOverrideDiscount(item.OriginalPrice - amount));
+            }
+            catch (InvalidOperationException e)
+            {
+                MessageBox.Show(e.Message);
+            }
 		}
 		public void AddCoupon(string couponID)
 		{

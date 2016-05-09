@@ -11,7 +11,11 @@
       Title="LogEmployeePage">
 
     <Grid>
-        <DataGrid x:Name="LogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="228,0,-68,0" VerticalAlignment="Top" IsReadOnly="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="138*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="LogGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="228,0,0,0" VerticalAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Username" Binding="{Binding Path=Username}"/>
                 <DataGridTextColumn Header="Time" Binding="{Binding Path=Time}"/>
@@ -25,7 +29,21 @@
         <Label x:Name="AndLabel" Content="and" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,29,0,0"/>
         <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="23" Margin="63,59,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="153"/>
         <Label x:Name="UsernameLabel" Content="Username" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,55,0,0"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="0,94,0,0" Click="SearchButton_Click"/>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="228,-25,0,0" Click="RefreshButton_Click"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="0,94,0,0" Click="SearchButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.433"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="0,119,0,0" Click="RefreshButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.433"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

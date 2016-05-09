@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointOfSales.Permissions;
+using PointOfSales.Users;
 
 namespace SnapRegisters
 {
@@ -22,14 +24,14 @@ namespace SnapRegisters
 	{
 		public delegate void CloseEditMenu();
 
-		public DiscountEditMenu(DiscountDisplayBox discountToModify, Transaction transaction, CloseEditMenu closefunction)
+		public DiscountEditMenu(DiscountDisplayBox discountToModify, Transaction transaction, CloseEditMenu closefunction, Employee currentUser)
 		{
 			InitializeComponent();
 
 			m_discountBox = discountToModify;
 			m_transaction = transaction;
 			m_closeFunction = closefunction;
-
+            m_currentUser = currentUser;
 			RemoveDiscount = false;
 			AmountOverride = false;
 		}
@@ -37,11 +39,14 @@ namespace SnapRegisters
 		private DiscountDisplayBox m_discountBox;
 		private Transaction m_transaction;
 		private CloseEditMenu m_closeFunction;
+        private Employee m_currentUser;
 		public bool RemoveDiscount { get; set; }
 		public bool AmountOverride { get; set; }
 		private void RemoveDiscountButtonClicked(object sender, RoutedEventArgs e)
 		{
-			RemoveDiscount = true;
+            if (!Permissions.CheckPermissions(m_currentUser, Permissions.CanVoidCoupon))
+                throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidCoupon));
+            RemoveDiscount = true;
 			m_transaction.RemoveDiscount(m_discountBox.PossessingItem, m_discountBox.SourceDiscount);
 			m_closeFunction();
 		}

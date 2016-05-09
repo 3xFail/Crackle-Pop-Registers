@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using PointOfSales.Users;
 
 namespace SnapRegisters
 {
@@ -38,19 +39,20 @@ namespace SnapRegisters
 	class ItemAndDiscountOutputObject
 	{
 		public delegate void UpdateTotals();
-		public ItemAndDiscountOutputObject(Item newItem, Transaction transaction, double heightOfEachBox, StackPanel itemOutputPanel, StackPanel couponOutputPanel, UpdateTotals updateFunction)
+		public ItemAndDiscountOutputObject(Item newItem, Transaction transaction, double heightOfEachBox, StackPanel itemOutputPanel, StackPanel couponOutputPanel, UpdateTotals updateFunction, Employee currentUser)
 		{
 			m_item = newItem;
 			m_transaction = transaction;
 			boxHeight = heightOfEachBox;
 			m_itemOutputPanel = itemOutputPanel;
 			m_discountOutputPanel = couponOutputPanel;
+            m_currentUser = currentUser;
 
 			m_stackOfDiscounts = new StackPanel();
 
 			m_updateFunction = updateFunction;
 
-			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item, m_transaction, RemoveItem, UpdateItemDetails, AddDiscount);
+			ItemDisplayBox itemDisplayBox = new ItemDisplayBox(m_item, m_transaction, RemoveItem, UpdateItemDetails, AddDiscount, m_currentUser);
 			itemDisplayBox.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 			itemDisplayBox.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
 			itemDisplayBox.Height = boxHeight;
@@ -70,7 +72,7 @@ namespace SnapRegisters
 				m_noDiscounts = false;
 				foreach (IDiscount discount in m_item.Discounts)
 				{
-					DiscountDisplayBox autoAppliedDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
+					DiscountDisplayBox autoAppliedDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails, m_currentUser);
 					autoAppliedDiscount.Height = boxHeight;
 					m_stackOfDiscounts.Children.Add(autoAppliedDiscount);
 				}
@@ -85,7 +87,7 @@ namespace SnapRegisters
 				m_stackOfDiscounts.Children.Clear();
 
 				m_noDiscounts = false;
-				DiscountDisplayBox newDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails);
+				DiscountDisplayBox newDiscount = new DiscountDisplayBox(discount, m_item, m_transaction, RemoveDiscount, UpdateItemDetails, m_currentUser);
 				newDiscount.Height = boxHeight;
 				m_stackOfDiscounts.Children.Add(newDiscount);
 				UpdateHeight();
@@ -158,5 +160,6 @@ namespace SnapRegisters
 		private Item m_item;
 
 		private UpdateTotals m_updateFunction;
+        private Employee m_currentUser;
 	}
 }

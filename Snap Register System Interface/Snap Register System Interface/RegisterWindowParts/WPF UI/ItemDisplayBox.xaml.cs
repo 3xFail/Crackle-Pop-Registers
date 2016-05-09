@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PointOfSales.Users;
 
 namespace SnapRegisters
 {
@@ -44,7 +45,7 @@ namespace SnapRegisters
 		public delegate void UpdateItemDisplay();
 		public delegate void AddDiscountToDisplay(IDiscount discount);
 		// Construct with an item.
-		public ItemDisplayBox(Item itemInTransaction, Transaction transaction, RemoveItemFromDisplay removeFunction, UpdateItemDisplay updateFunction, AddDiscountToDisplay addDiscountFunction)
+		public ItemDisplayBox(Item itemInTransaction, Transaction transaction, RemoveItemFromDisplay removeFunction, UpdateItemDisplay updateFunction, AddDiscountToDisplay addDiscountFunction, Employee currentUser)
 		{
 			InitializeComponent();
 
@@ -53,6 +54,7 @@ namespace SnapRegisters
 			m_removeFunction = removeFunction;
 			m_updateFunction = updateFunction;
 			m_addDiscountFunction = addDiscountFunction;
+            m_currentUser = currentUser;
 			NameField.Text = itemInTransaction.ItemName.Substring(0, Math.Min(itemInTransaction.ItemName.Length, 40));
 
 			AmountField.Text = SourceItem.OriginalPrice.ToString( "C" );
@@ -63,7 +65,7 @@ namespace SnapRegisters
 		private void DisplayItemClickedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			EditMenu = new Popup();
-			EditMenu.Child = new ItemEditMenu(this, m_transaction, CloseEditMenu);
+			EditMenu.Child = new ItemEditMenu(this, m_transaction, CloseEditMenu, m_currentUser);
 			EditMenu.IsOpen = true;
 		}
 
@@ -104,5 +106,6 @@ namespace SnapRegisters
 		private RemoveItemFromDisplay m_removeFunction;
 		private UpdateItemDisplay m_updateFunction;
 		private AddDiscountToDisplay m_addDiscountFunction;
+        private Employee m_currentUser;
 	}
 }
