@@ -49,10 +49,10 @@
       <HintPath>..\..\SharedResources\CSharpClient.dll</HintPath>
     </Reference>
     <Reference Include="CurrencyTextBoxControl">
-      <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Release\CurrencyTextBoxControl.dll</HintPath>
+      <HintPath>..\..\..\JP Folder\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
     <Reference Include="NumberTextBox">
-      <HintPath>..\..\NumberTextBox\NumberTextBox\bin\Release\NumberTextBox.dll</HintPath>
+      <HintPath>..\..\..\JP Folder\NumberTextBox\NumberTextBox\bin\Debug\NumberTextBox.dll</HintPath>
     </Reference>
     <Reference Include="Scale">
       <HintPath>..\..\SharedResources\Scale.dll</HintPath>

@@ -33,7 +33,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
                 client.Credentials = new NetworkCredential( sender_email, "snap_admin" );
                 client.Host = "smtp.gmail.com";
                 client.EnableSsl = true;
-                string form = " {0,-15} {1, -12} {2,-12}";
+                
 
                 MailMessage msg = new MailMessage();
 
@@ -42,11 +42,12 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
 
                 msg.Body = "Hi " + win.m_customer.fname.ToString() + ",\n"; 
                 msg.Body += "Thank you for using Snap's Crackle Pop registers!\nHere is your reciept for your transaction.\n\n";
-                msg.Body += '\t' +string.Format( form, "Name" , "Original Price" , "Final Price") + '\n';
+                msg.Body += '\t' + "Name".PadRight(20, ' ') + "Original Price   " + "Final Price" + '\n';
 
-                foreach(Item item in win.m_transaction.m_Items)
+                foreach (Item item in win.m_transaction.m_Items)
                 {
-                    msg.Body += '\t' + string.Format(form, item.ItemName.ToString() , item.OriginalPrice.ToString( "C" ), item.Price.ToString( "C" )) + '\n';
+                    //this line is so ugly but so good
+                    msg.Body += '\t' + item.ItemName.Substring(0, Math.Min(20, item.ItemName.Length)).PadRight(24, ' ') + item.OriginalPrice.ToString("C").PadRight(12, ' ') + "   " + item.Price.ToString("C") + '\n';
                 }
 
                 msg.Body += "\t\t\nTotal before discounts:  " + win.m_costTotal.ToString("C")
