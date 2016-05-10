@@ -42,12 +42,13 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
 
                 msg.Body = "Hi " + win.m_customer.fname.ToString() + ",\n"; 
                 msg.Body += "Thank you for using Snap's Crackle Pop registers!\nHere is your reciept for your transaction.\n\n";
-                msg.Body += '\t' + "Name".PadRight(20, ' ') + "Original Price   " + "Final Price" + '\n';
+                msg.Body += '\t' + "Name".PadRight(36, ' ') + "Original Price     " + "Final Price" + '\n';
 
                 foreach (Item item in win.m_transaction.m_Items)
                 {
-                    //this line is so ugly but so good
-                    msg.Body += '\t' + item.ItemName.Substring(0, Math.Min(20, item.ItemName.Length)).PadRight(24, ' ') + item.OriginalPrice.ToString("C").PadRight(12, ' ') + "   " + item.Price.ToString("C") + '\n';
+                    //this line is so ugly but as good as i can get it
+                    msg.Body += '\t' + item.ItemName.Substring(0, Math.Min(15, item.ItemName.Length)).PadRight(30, ' ') + item.OriginalPrice.ToString("C").PadRight(12, ' ') + "   " + item.Price.ToString("C") + '\n';
+
                 }
 
                 msg.Body += "\t\t\nTotal before discounts:  " + win.m_costTotal.ToString("C")

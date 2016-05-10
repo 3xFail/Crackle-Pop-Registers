@@ -62,10 +62,13 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
 
                 foreach(XmlNode node in m_win.m_connection.Response)
                 {
-                    data.Add(new Item()
+                    if (node.Get("Active") == "1")
                     {
-                        Barcode = node.Get("Barcode"), Name = node.Get("Name")
-                    });
+                        data.Add(new Item()
+                        {
+                            Barcode = node.Get("Barcode"), Name = node.Get("Name")
+                        });
+                    }
                 }
                 LoadList();
             }
