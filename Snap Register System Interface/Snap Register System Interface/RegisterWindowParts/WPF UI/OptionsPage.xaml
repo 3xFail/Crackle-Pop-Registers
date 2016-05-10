@@ -11,19 +11,23 @@
     <Border BorderBrush="Black" BorderThickness="4">
         <Grid Background= "{StaticResource Background}">
 
-            <StackPanel Margin="10,10,576,10">
-                <Button x:Name="Catalog_Button" Height="92" Content="Catalog" Click="Catalog_Button_Click"/>
-                <Button x:Name="Remove_Item_Button" Height="92" Content="Remove Item" Click="Remove_Item_Button_Click"/>
-                <Button x:Name="Remove_Discount_Button" Height="92" Content="Remove Discount" Click="Remove_Discount_Button_Click"/>
-                <Button x:Name="Payment_Button" Content="Pay" Height="92" Click="Payment_Button_Click"/>
-                <Button x:Name="Close_Button" Content="Close" Height="92" Click="Close_Button_Click"/>
+            <StackPanel Margin="10,45,576,10" ><!--Old margin values for 5 buttons 10,10,576,10-->
+                <Button x:Name="Catalog_Button" Height="100" Content="Catalog" Click="Catalog_Button_Click"/>
+                <Separator Opacity="0" Height="20"/>
+                <!--<Button x:Name="Remove_Item_Button" Height="92" Content="Remove Item" Click="Remove_Item_Button_Click"/> -->
+                <!--<Button x:Name="Remove_Discount_Button" Height="92" Content="Remove Discount" Click="Remove_Discount_Button_Click"/>-->
+                <Button x:Name="Payment_Button" Content="Pay" Height="100" Click="Payment_Button_Click"/>
+                <Separator Opacity="0" Height="20"/>
+                <Button x:Name="Close_Button" Content="Close" Height="100" Click="Close_Button_Click"/>
             </StackPanel>
-            <StackPanel Margin="321,10,255,10" >
-                <Button x:Name="Override_Button" Height="92" Content="Override" Click="Override_Button_Click"/>
-                <Button x:Name="Remove_Coupon_Button" Height="92" Content="Remove Coupon" Click="Remove_Coupon_Button_Click"/>
-                <Button x:Name="Add_Discount_Button" Height="92" Content="Add Discount" Click="Add_Discount_Button_Click"/>
-                <Button x:Name="Add_Cust_Button" Height="92" Content="Add Customer" Click="Add_Cust_Button_Click_1" />
-                <Button x:Name="Logout_Button" Content="Logout" Height="92" Click="Logout_Button_Click"/>
+            <StackPanel Margin="321,45,255,10" >
+                <Button x:Name="Override_Button" Height="100" Content="Override" Click="Override_Button_Click"/>
+                <Separator Opacity="0" Height="20"/>
+                <!--<Button x:Name="Remove_Coupon_Button" Height="92" Content="Remove Coupon" Click="Remove_Coupon_Button_Click"/>-->
+                <!--<Button x:Name="Add_Discount_Button" Height="92" Content="Add Discount" Click="Add_Discount_Button_Click"/>-->
+                <Button x:Name="Add_Cust_Button" Height="100" Content="Add Customer" Click="Add_Cust_Button_Click_1" />
+                <Separator Opacity="0" Height="20"/>
+                <Button x:Name="Logout_Button" Content="Logout" Height="100" Click="Logout_Button_Click"/>
             </StackPanel>
             <TextBlock x:Name="statsBlock" FontSize="16" HorizontalAlignment="Left" Height="462" Margin="642,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240"/>
         </Grid>
