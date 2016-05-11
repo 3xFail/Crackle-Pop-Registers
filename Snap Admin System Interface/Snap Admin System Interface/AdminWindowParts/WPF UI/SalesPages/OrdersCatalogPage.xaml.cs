@@ -44,7 +44,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.SalesPages
                 {
                     order_id = node.Get("OrderID")
                     ,
-                    order_date = node.Get("OrderDate")
+                    order_date = node.Get("OrderTime")
                     ,
                     cashier_name = node.Get("Username")
                     ,

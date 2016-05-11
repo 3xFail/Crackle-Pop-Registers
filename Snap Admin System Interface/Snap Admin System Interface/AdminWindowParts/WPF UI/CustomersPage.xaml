@@ -18,14 +18,14 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="CustRemoveBtn" Content="Remove" Height="50">
+            <!--<Button x:Name="CustRemoveBtn" Content="Remove" Height="50">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>
                         <GradientStop Color="White" Offset="0.433"/>
                     </LinearGradientBrush>
                 </Button.Background>
-            </Button>
+            </Button>-->
             <Button x:Name="CustCatalogBtn" Content="Catalog" Height="50" Click="CustCatalogBtn_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
