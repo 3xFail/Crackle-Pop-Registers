@@ -43,7 +43,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             data.Clear();
 
-            DBInterface.GetAllEmployees();
+            DBInterface.GetAllPermissions();
 
             List<string> groups = new List<string>();
             foreach( XmlNode node in DBInterface.Response )
