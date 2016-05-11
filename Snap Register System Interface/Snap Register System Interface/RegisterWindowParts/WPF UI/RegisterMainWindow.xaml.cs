@@ -196,7 +196,8 @@ namespace SnapRegisters
         {
 
             foreach (ItemAndDiscountOutputObject output in m_listOfOutputObjects)
-                output.AddDiscount(couponToAdd);
+				if(couponToAdd.AppliesTo(output.Item))
+					output.AddDiscount(couponToAdd);
 
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();

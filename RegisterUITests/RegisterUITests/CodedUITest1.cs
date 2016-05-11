@@ -94,8 +94,6 @@ namespace RegisterUITests
 			this.UIMap.addItemWithSale();
 			this.UIMap.addCouponTo3ds();
 			this.UIMap.RemoveCouponFrom3DS();
-			this.UIMap.RemoveSale();
-			this.UIMap.checkTotalsRemoveSaleFrom3DS();
 		}
 		#region Additional test attributes
 

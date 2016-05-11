@@ -149,7 +149,7 @@ namespace SnapRegisters
 		}
 
 		public double boxHeight { get; set; }
-
+		public Item Item { get; }
 		private StackPanel m_itemOutputPanel;
 		private StackPanel m_discountOutputPanel;
 		private Transaction m_transaction;
