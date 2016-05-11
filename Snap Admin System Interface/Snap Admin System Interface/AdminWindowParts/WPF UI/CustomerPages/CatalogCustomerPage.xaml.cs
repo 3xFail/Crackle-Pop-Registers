@@ -170,11 +170,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             Customer cust = ( (FrameworkElement)sender ).DataContext as Customer;
             CustomerGrid.CommitEdit();
             
-            DBInterface.ModifyCustomer(data[data.IndexOf(cust)].FirstName, data[data.IndexOf(cust)].LastName, 
-                data[data.IndexOf(cust)].Address1, data[data.IndexOf(cust)].Address2, data[data.IndexOf(cust)].City, 
-                data[data.IndexOf(cust)].State, data[data.IndexOf(cust)].Country, data[data.IndexOf(cust)].Zip, 
-                Convert.ToString(data[data.IndexOf(cust)].PhoneNumber), data[data.IndexOf(cust)].Email, Convert.ToDateTime(data[data.IndexOf(cust)].DateOfBirth), 
-                data[data.IndexOf(cust)].Active);
+            DBInterface.ModifyCustomer(cust.FirstName, cust.LastName, 
+                cust.Address1, cust.Address2, cust.City, 
+                cust.State, cust.Country, cust.Zip, 
+                Convert.ToString(cust.PhoneNumber), cust.Email, Convert.ToDateTime(cust.DateOfBirth), 
+                cust.Active);
         }
 
         Customer edit_copy;

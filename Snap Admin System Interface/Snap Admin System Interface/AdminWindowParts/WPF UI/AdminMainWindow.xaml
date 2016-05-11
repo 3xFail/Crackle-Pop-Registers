@@ -30,7 +30,7 @@
         
         <!--<Image x:Name="Logo" Source="/SharedResources/Images/Emblem.png" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" />-->
         <!--panel of main navigational buttons-->
-        <Viewbox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+        <Viewbox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="50" Height="50">
             <WindowsFormsHost HorizontalAlignment="Center" x:Name="windowsFormsHost2" Grid.RowSpan="2" />
         </Viewbox>
         <!--panel of main navigational buttons-->
