@@ -38,18 +38,18 @@ namespace SnapRegisters
     //				Adds an item to the current transaction. Displays this item to the outputs.
     //			public void RemoveItem(Item item)
     //				Removes the first item that matches the item passed in, This does not use the barcode
-	//				as several copies of an item with different data could exist (e.g. coupons).
+    //				as several copies of an item with different data could exist (e.g. coupons).
     //			public void OverrideCost(Item item, double newPrice, string reason = "No description")
     //				Overrides the cost of the item specified with the new price specified with "newPrice".
     //				"reason" is the reason the employee chose to override the price.
     //			public void ApplyCoupon(string couponID)
     //				Applies a coupon to the sale.
-	//			public void AddCustomCoupon(Item itemToApplyTo, decimal amount);
-	//				Applies a custom flat coupon to the item specified.
-	//			public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
-	//				Removes the given discount from the given item.
-	//			public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal newAmount)
-	//				Changes the value of a discount to the given amount.
+    //			public void AddCustomCoupon(Item itemToApplyTo, decimal amount);
+    //				Applies a custom flat coupon to the item specified.
+    //			public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
+    //				Removes the given discount from the given item.
+    //			public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal newAmount)
+    //				Changes the value of a discount to the given amount.
     //			public void Checkout()
     //				Finishes the transaction and begins processing payment.
     //			public List<Item> GetItems()
@@ -63,10 +63,10 @@ namespace SnapRegisters
     //              Contacts the database and constructs an coupon from a given coupon_id
     //*************************************************************************************************************
     public class Transaction
-	{
+    {
 
-		// Delegates for output function
-		public delegate void ItemOutputDelegate(Item itemToAdd);
+        // Delegates for output function
+        public delegate void ItemOutputDelegate(Item itemToAdd);
         public delegate void CouponOutputDelegate(Coupon couponToAdd);
 
         public ItemOutputDelegate m_OutputDelegate { get; set; }
@@ -79,128 +79,128 @@ namespace SnapRegisters
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
         public Transaction(Employee employee, Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer cust, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
-		{
-			if (employee == null)
-				throw new InvalidOperationException("Invalid Employee Credentials.");
-			if ( !employee.HasPermisison( Permissions.RegisterLogIn ) )
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+        {
+            if (employee == null)
+                throw new InvalidOperationException("Invalid Employee Credentials.");
+            if (!employee.HasPermisison(Permissions.RegisterLogIn))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
             m_connection = session;
-			m_Employee = employee;
+            m_Employee = employee;
             m_customer = cust;
-			m_OutputDelegate = itemToAdd;
+            m_OutputDelegate = itemToAdd;
             m_CouponOutputDelegate = couponToAdd;
-            
-		}
+
+        }
 
         public void AddItem(string itemID, decimal? weight)
-		{
-			if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+        {
+            if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Checks to make sure the item was valid before adding it to the list.
-			try
-			{
-				// Construct a new item from the given itemID and add it to the list.
-				Item item = ConstructItem(itemID);
-                item.Discounts = GetSales( item );
+            // Checks to make sure the item was valid before adding it to the list.
+            try
+            {
+                // Construct a new item from the given itemID and add it to the list.
+                Item item = ConstructItem(itemID, weight);
+                item.Discounts = GetSales(item);
 
-                ApplyItemToExistingCoupons( ref item );
+                ApplyItemToExistingCoupons(ref item);
 
-				// Fire whatever Output method has been assigned for this item.
-				m_Items.Add(item);
-				m_OutputDelegate(item);
-			}
-			catch (InvalidOperationException e)
-			{
-				throw e;
-			}
-		}
+                // Fire whatever Output method has been assigned for this item.
+                m_Items.Add(item);
+                m_OutputDelegate(item);
+            }
+            catch (InvalidOperationException e)
+            {
+                throw e;
+            }
+        }
 
         //Modifies the item price given by the sales that are assigned to the item in the database
         public DiscountList GetSales(Item new_item)
         {
-            m_connection.Write( "GetSale_ProdID @0", new_item.ID );
+            m_connection.Write("GetSale_ProdID @0", new_item.ID);
 
             DiscountList Discounts = new DiscountList();
             foreach (XmlNode sale in m_connection.Response)
             {
-                string name = sale.Get( "Name" );
-                bool flat = sale.Get( "Flat" )[0] == '1';
-                decimal amount = decimal.Parse( sale.Get( "Discount" ) );
-                Discounts.Add( new Sale( flat, name, amount ) );
+                string name = sale.Get("Name");
+                bool flat = sale.Get("Flat")[0] == '1';
+                decimal amount = decimal.Parse(sale.Get("Discount"));
+                Discounts.Add(new Sale(flat, name, amount));
             }
             return Discounts;
         }
 
-		public void RemoveItem(Item item)
-		{
+        public void RemoveItem(Item item)
+        {
             //if (m_Employee.HasPermisison(Permissions.CanVoidItem))
-                //throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidItem)); //("User does not have sufficient permissions to use this machine.");
+            //throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanVoidItem)); //("User does not have sufficient permissions to use this machine.");
 
-			// Checks to make sure the item was valid before removing it from the list.
-			//try
-			//{
-                if (m_Employee.HasPermisison(Permissions.CanVoidItem))
-                    m_Items.Remove(item);
-                else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
-            //}
-			//catch (InvalidOperationException e)
+            // Checks to make sure the item was valid before removing it from the list.
+            //try
             //{
-				//throw e;
+            if (m_Employee.HasPermisison(Permissions.CanVoidItem))
+                m_Items.Remove(item);
+            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
+            //}
+            //catch (InvalidOperationException e)
+            //{
+            //throw e;
             //}
             //else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanVoidItem));
 
-		}
+        }
 
-        public void ApplyItemToExistingCoupons( ref Item item )
+        public void ApplyItemToExistingCoupons(ref Item item)
         {
-            foreach( Coupon coupon in m_Coupons )
-                if( coupon.AppliesTo( item ) )
-                    item.AddDiscount( coupon );
+            foreach (Coupon coupon in m_Coupons)
+                if (coupon.AppliesTo(item))
+                    item.AddDiscount(coupon);
 
             StringBuilder coupon_list = new StringBuilder();
 
-            foreach( Coupon coupon in m_Coupons )
-                if( !coupon.AppliesTo( item ) )
-                    coupon_list.Append( coupon.Barcode + ',' );
+            foreach (Coupon coupon in m_Coupons)
+                if (!coupon.AppliesTo(item))
+                    coupon_list.Append(coupon.Barcode + ',');
 
-            if( coupon_list.Length != 0 )
+            if (coupon_list.Length != 0)
             {
                 coupon_list.Length--;
-                m_connection.Write("CheckItem_list @0, @1", coupon_list.ToString(), item.ID );
+                m_connection.Write("CheckItem_list @0, @1", coupon_list.ToString(), item.ID);
 
-                foreach( XmlNode node in m_connection.Response )
+                foreach (XmlNode node in m_connection.Response)
                 {
-                    foreach( Coupon coupon in m_Coupons )
+                    foreach (Coupon coupon in m_Coupons)
                     {
-                        if( coupon.Barcode == node.Get( "CouponID" ) )
+                        if (coupon.Barcode == node.Get("CouponID"))
                         {
-                            item.AddDiscount( coupon );
-                            coupon.AddRelatedID( item.ID );
+                            item.AddDiscount(coupon);
+                            coupon.AddRelatedID(item.ID);
                         }
                     }
                 }
             }
-                    
+
         }
 
-		// Deprecated.
-		public void OverrideCost(Item item, decimal newPrice)
-		{
-			// Find the item to change the price of in the list assign changedItem these values.
-			Item changedItem = m_Items.Find(x => x == item);
+        // Deprecated.
+        public void OverrideCost(Item item, decimal newPrice)
+        {
+            // Find the item to change the price of in the list assign changedItem these values.
+            Item changedItem = m_Items.Find(x => x == item);
 
-			if (changedItem == null)
-				throw new InvalidOperationException("Item specified is not in sale.");
+            if (changedItem == null)
+                throw new InvalidOperationException("Item specified is not in sale.");
 
-			if (!m_Employee.HasPermisison( Permissions.CanDiscountItems ) )
-				throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
-			else
-				changedItem.Price = newPrice;
-		}
-		public void AddCustomCoupon(Item item, decimal amount)
-		{
+            if (!m_Employee.HasPermisison(Permissions.CanDiscountItems))
+                throw new InvalidOperationException("User does not have sufficient permissions to perform this action.");
+            else
+                changedItem.Price = newPrice;
+        }
+        public void AddCustomCoupon(Item item, decimal amount)
+        {
             try
             {
                 // Find the item to change the price of in the list assign changedItem these values.
@@ -218,161 +218,196 @@ namespace SnapRegisters
             {
                 MessageBox.Show(e.Message);
             }
-		}
-		public void AddCoupon(string couponID)
-		{
-            if (!m_Employee.HasPermisison( Permissions.RegisterLogIn ) )
+        }
+        public void AddCoupon(string couponID)
+        {
+            if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-            if( m_Coupons.Any( x => x.Barcode == couponID ) )
-                throw new ArgumentException( "Cannot scan the same coupon twice" );
+            if (m_Coupons.Any(x => x.Barcode == couponID))
+                throw new ArgumentException("Cannot scan the same coupon twice");
 
             try
             {
-                Coupon coupon = ConstructCoupon( couponID );
+                Coupon coupon = ConstructCoupon(couponID);
 
-                foreach( Item item in m_Items )
-                    if( coupon.AppliesTo( item ) )
-                        item.AddDiscount( coupon );
+                foreach (Item item in m_Items)
+                    if (coupon.AppliesTo(item))
+                        item.AddDiscount(coupon);
 
-				m_Coupons.Add(coupon);
+                m_Coupons.Add(coupon);
 
-				m_CouponOutputDelegate(coupon);
+                m_CouponOutputDelegate(coupon);
 
-                
+
             }
-            catch( InvalidOperationException e)
+            catch (InvalidOperationException e)
             {
                 throw e;
             }
-            catch( Exception )
+            catch (ArgumentException e)
             {
-                throw new ArgumentException( "Item or coupon with ID \"" + couponID + "\" not found" );
+                throw e;
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Item or coupon with ID \"" + couponID + "\" not found");
             }
 
         }
 
-		public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
-		{
-			if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+        public void RemoveDiscount(Item itemToRemoveFrom, IDiscount discountToRemove)
+        {
+            if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Checks to make sure the item was valid before removing it from the list.
-			try
-			{
-				Item containingItem = m_Items.Find(x => x == itemToRemoveFrom);
+            // Checks to make sure the item was valid before removing it from the list.
+            try
+            {
+                Item containingItem = m_Items.Find(x => x == itemToRemoveFrom);
 
-				containingItem.Discounts.Remove(discountToRemove);
-				containingItem.Price += discountToRemove.Discount();
-			}
-			catch (InvalidOperationException e)
-			{
-				throw e;
-			}
-		}
+                containingItem.Discounts.Remove(discountToRemove);
+                containingItem.Price += discountToRemove.Discount();
+            }
+            catch (InvalidOperationException e)
+            {
+                throw e;
+            }
+        }
 
-		public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal amount)
-		{
-			if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
-				throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
+        public void OverrideDiscount(Item itemToChange, IDiscount discountToChange, decimal amount)
+        {
+            if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
+                throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
 
-			// Checks to make sure the item was valid before removing it from the list.
-			try
-			{
-				Item containingItem = m_Items.Find(x => x == itemToChange);
+            // Checks to make sure the item was valid before removing it from the list.
+            try
+            {
+                Item containingItem = m_Items.Find(x => x == itemToChange);
 
-				IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
+                IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
 
-				// This function does not appear to do what it's name implies.
-				//discount.ChangeAmountTo(amount);
+                // This function does not appear to do what it's name implies.
+                //discount.ChangeAmountTo(amount);
 
-				itemToChange.Price += discount.Amount - amount;
-				discount.Amount = amount;
+                itemToChange.Price += discount.Amount - amount;
+                discount.Amount = amount;
 
 
-			}
-			catch (InvalidOperationException e)
-			{
-				throw e;
-			}
-		}
+            }
+            catch (InvalidOperationException e)
+            {
+                throw e;
+            }
+        }
         public void Checkout()
-		{
+        {
             object id;
 
-            if( m_customer == null )
+            if (m_customer == null)
                 id = DBNull.Value;
             else
                 id = m_customer.cust_id;
-            
-            m_connection.Write( "CreateOrder @0, @1", id, m_Employee.ID );
-            int OrderID = int.Parse( m_connection.Response[0].Get( "OrderID" ) );
 
-            foreach( Item item in m_Items )
-                m_connection.WriteNoResponse( "AddOrderItem_ProductID @0, @1, @2", item.ID, OrderID, item.Price );
-		}
+            m_connection.Write("CreateOrder @0, @1", id, m_Employee.ID);
+            int OrderID = int.Parse(m_connection.Response[0].Get("OrderID"));
 
-		private Item ConstructItem(string itemID)
-		{
-            m_connection.Write( "GetItem @0", itemID );
+            foreach (Item item in m_Items)
+                m_connection.WriteNoResponse("AddOrderItem_ProductID @0, @1, @2", item.ID, OrderID, item.Price);
+        }
+
+        private Item ConstructItem(string itemID, decimal? weight)
+        {
+            m_connection.Write("GetItem @0", itemID);
 
             try
             {
                 XmlNode it = m_connection.Response[0];
-                string name = it.Get( "Name" );
+                string name = it.Get("Name");
 
-                if( it.Get("Active" )[0] == '0' )
-                    throw new InvalidOperationException( "Cannot sell inactive item \"" + name + "\"" );
+                if (it.Get("Active")[0] == '0')
+                    throw new InvalidOperationException("Cannot sell inactive item \"" + name + "\"");
 
-                decimal price = decimal.Parse( it.Get( "Price" ) );
-                int product_id = int.Parse( it.Get( "ProductID" ) );
-                
-                return new Item( name, price, itemID, product_id );
+                decimal price = 0;
+
+
+
+                //If the item is sold by weight
+                if (it.Get("Weighable")[0] == '1')
+                {
+                    if (weight == 0)
+                        throw new InvalidOperationException("Please place items on the scale before continuing.");
+                    if (weight == null)
+                        throw new InvalidOperationException("Scale not found. Please check your connection.");
+                    if (weight == -1)
+                        throw new InvalidOperationException("Please remove items and recalibrate the scale before continuing.");
+
+                    price = decimal.Parse(it.Get("Price")) * Convert.ToDecimal(weight);
+
+                    //Display how heavy 
+                    name += " " + Math.Round((decimal)weight, 2) + " Lb " + "@ $" + Math.Round(decimal.Parse(it.Get("Price")), 2)+ "/Lb";
+                }
+                else    //Regular item
+                {
+                    price = decimal.Parse(it.Get("Price"));
+                }
+
+                int product_id = int.Parse(it.Get("ProductID"));
+
+                if (price == 0)
+                    throw new ArgumentException("Oops. Something went wrong. (Price calculated to zero)");
+
+
+                return new Item(name, price, itemID, product_id);
             }
-            catch( NullReferenceException )
+            catch (NullReferenceException)
             {
                 //check to see if a coupon
                 //if scan is not a item or a coupon then throw error
-                throw new ArgumentException( "Item with barcode \"" + itemID + "\" not found." );
+                throw new ArgumentException("Item with barcode \"" + itemID + "\" not found.");
             }
-		}
+        }
 
         private Coupon ConstructCoupon(string coupon_id)
         {
-            m_connection.Write( "GetCoupon_ID @0", coupon_id);
+            m_connection.Write("GetCoupon_ID @0", coupon_id);
 
             try
             {
                 XmlNode it = m_connection.Response[0];
 
-                if( it.Get( "Active" )[0] == '0' )
+                if (it.Get("Active")[0] == '0')
                     throw new InvalidOperationException("Cannot use inactive coupon");
 
-                decimal discount = decimal.Parse( it.Get( "Discount" ) );
+                decimal discount = decimal.Parse(it.Get("Discount"));
                 string name = it.Get("Name");
-                bool flat = it.Get( "Flat" )[0] == '1';
+                bool flat = it.Get("Flat")[0] == '1';
 
-                Coupon coupon = new Coupon( coupon_id, flat, name, discount );
+                Coupon coupon = new Coupon(coupon_id, flat, name, discount);
 
                 StringBuilder item_list = new StringBuilder();
-                m_Items.ForEach( i => item_list.Append( i.ID.ToString() + ',' ) );
+                m_Items.ForEach(i => item_list.Append(i.ID.ToString() + ','));
 
-                if( item_list.Length != 0 )
+                if (item_list.Length != 0)
                 {
                     item_list.Length--;
-                    m_connection.Write( "CheckCoupons_list @0, @1", item_list.ToString(), coupon_id ); //product ID
+                    m_connection.Write("CheckCoupons_list @0, @1", item_list.ToString(), coupon_id); //product ID
 
-                    foreach( XmlNode node in m_connection.Response )
-                        coupon.AddRelatedID( int.Parse( node.Get( "ProductID" ) ) );
+                    foreach (XmlNode node in m_connection.Response)
+                        coupon.AddRelatedID(int.Parse(node.Get("ProductID")));
                 }
 
                 return coupon;
             }
+            catch (ArgumentException e)
+            {
+                throw e;
+            }
             catch (NullReferenceException)
             {
-                throw new ArgumentException( "Coupon with barcode \"" + coupon_id + "\" not found." );
+                throw new ArgumentException("Coupon with barcode \"" + coupon_id + "\" not found.");
             }
 
         }
-	}
+    }
 }

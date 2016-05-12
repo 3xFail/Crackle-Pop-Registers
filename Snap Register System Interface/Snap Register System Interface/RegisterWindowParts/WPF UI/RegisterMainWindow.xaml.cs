@@ -286,7 +286,7 @@ namespace SnapRegisters
                 {
                     MessageBox.Show(ex.Message);
                 }
-                catch (Exception) //if that fails
+                catch (Exception e) //if that fails
                 {
                     try { m_transaction.AddCoupon(UPCField.Text); } //try constructing a coupon
                     catch (Exception _ex) { MessageBox.Show(_ex.Message); } //if both of those fail show the error message
