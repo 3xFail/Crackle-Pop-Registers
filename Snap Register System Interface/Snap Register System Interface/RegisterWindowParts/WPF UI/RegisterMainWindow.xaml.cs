@@ -107,7 +107,8 @@ namespace SnapRegisters
         private ScaleUpdater m_scaleUpdater;
         private Thread m_scaleWorkerThread;
 
-        //Needed to change weight from a different thread
+        //Invoker needed to change weight from a different thread.
+        //Also handles the warning messages on screen.
         internal string m_weightOnScreen
         {
             get { return weightText.Text; }
