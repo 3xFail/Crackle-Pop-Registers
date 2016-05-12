@@ -10,11 +10,11 @@
       Background="{StaticResource Base}"
     Title="CatalogInventoryPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:DesignWidth="754" d:DesignHeight="575">
 
-    <Grid VerticalAlignment="Top">
+    <Grid>
         <DataGrid x:Name="Catalog" VerticalAlignment="Top" RowBackground="White" SelectionMode="Single" 
                   AutoGenerateColumns="False" CanUserSortColumns="True" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   ItemsSource="{Binding}"
-                 BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow" Margin="296,0,113,0">
+                 BeginningEdit="Catalog_BeginningEdit" CellEditEnding="Catalog_CellEditEnding" LoadingRow="Catalog_LoadingRow" Margin="296,6,10,0">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Commit">
                     <DataGridTemplateColumn.CellTemplate>
@@ -32,6 +32,8 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
+                <DataGridTextColumn Header="Weight" Binding="{Binding Path=Weight, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
+                <DataGridCheckBoxColumn Header="$/Lb" Binding="{Binding Path=Weighable, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode, UpdateSourceTrigger=PropertyChanged}" CanUserResize="False"/>
                 <DataGridCheckBoxColumn Header="Active" CanUserResize="False" Binding="{Binding Path=Active, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTemplateColumn Header="Remove" CanUserResize="False">
@@ -96,15 +98,15 @@
         <Label x:Name="AddQuantityLabel" Content="Quantity" HorizontalAlignment="Left" Margin="12,460,0,-357" VerticalAlignment="Top"/>
         <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="12,550,0,-441" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
             <Button.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                <GradientStop Color="White" Offset="0.4333"/>
-            </LinearGradientBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.4333"/>
+                </LinearGradientBrush>
             </Button.Background>
         </Button>
         <Label x:Name="WeightLabel" Content="Weight" HorizontalAlignment="Left" Margin="12,489,0,-386" VerticalAlignment="Top"/>
         <Label x:Name="LbLabel" Content="Lb" HorizontalAlignment="Left" Margin="90,489,0,-386" VerticalAlignment="Top"/>
-        <CheckBox Name="PriceIsPerLb" Margin="142,496,596,-360" Checked="PriceIsPerLb_Checked" Unchecked="PriceIsPerLb_Unchecked"/>
+        <CheckBox Name="PriceIsPerLb" Checked="PriceIsPerLb_Checked" Unchecked="PriceIsPerLb_Unchecked" Margin="139,496,0,0" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="17"/>
         <Label x:Name="label" Content="Price is per Lb" HorizontalAlignment="Left" Margin="156,489,0,-360" VerticalAlignment="Top"/>
 
     </Grid>

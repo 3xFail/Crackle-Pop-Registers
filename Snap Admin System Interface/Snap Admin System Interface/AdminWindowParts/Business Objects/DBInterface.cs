@@ -77,14 +77,19 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ModifyPermissions));
         }
 
-        internal static void RemoveCouponRelation(int iD, int itemid)
+        public static void RemoveCouponRelation(string coupon_name, string item_name, string barcode, int itemid)
         {
-            throw new NotImplementedException();
+            m_connection.WriteNoResponse( "RemoveCouponRef_ProductID @0, @1", barcode, itemid );
+            Log( $"Set coupon \"{coupon_name}\" to no longer apply to \"{item_name}\"." );
         }
 
-        internal static void AddCouponRelation(string coupon_name, string item_name, int ID, int itemid)
+        public static void AddCouponRelation(string coupon_name, string item_name, string barcode, int itemid)
         {
-            m_connection.Write("AddCouponRef_ProductID @0, @1", ID, itemid);
+            m_connection.Write("AddCouponRef_ProductID @0, @1", barcode, itemid);
+
+            if( Response[0].Get( "Return") == "-1" )
+                throw new InvalidOperationException( $"The coupon \"{coupon_name}\" already applies to \"{item_name}\"." );
+
             Log($"Set coupon \"{coupon_name}\" to apply to \"{item_name}\".");
         }
 
@@ -140,7 +145,7 @@ namespace SnapRegisters
             if (m_employee.HasPermisison(Permissions.ResetEmployeePassword))
             {
                 m_connection.WriteNoResponse("UpdatePassword_Username @0, @1", ID, PasswordHash.HashPassword(newpass));
-                Log($"Changed the password of UserID=\"{ID }\" to \"{new string('*', newpass.Length)}\".");
+                Log($"Changed the password of UserID=\"{ID}\" to \"{new string('*', newpass.Length)}\".");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ResetEmployeePassword));
         }
@@ -210,18 +215,18 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
         }
 
-        public static void AddItem(string name, decimal price, string barcode, int quantity)
+        public static void AddItem(string name, decimal price, string barcode, int quantity, decimal weight, bool weighable)
         {
-            if (m_employee.HasPermisison(Permissions.ChangeItemCatalog))
+            if (m_employee.HasPermisison(Permissions.CanAddNewItem))
             {
-                m_connection.Write("AddItem @0, @1, @2, @3, @4", name, price, barcode, "1", quantity);
+                m_connection.Write("AddItem @0, @1, @2, @3, @4, @5, @6", name, price, barcode, "1", quantity, weight, weighable);
 
                 if (Response[0].Get("ProductID") == "-1")
                     throw new InvalidOperationException($"Item with barcode \"{barcode}\" already exists.");
                 else
                     Log($"Added item \"{name}\" for {price.ToString("C2")}.");
             }
-            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeItemCatalog));
+            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.CanAddNewItem));
         }
 
         public static void AddCust(string firstName, string lastName, string address_1,
@@ -252,45 +257,54 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ViewItemCatalog));
         }
 
-        public static void ModifyItem(int ID, string name, string barcode, decimal price, bool active, int quantity)
+        public static void ModifyItem(int ID, string name, string barcode, decimal price, bool active, int quantity, decimal weight, bool weighable)
         {
             m_connection.Write("GetItem_ID @0", ID);
 
             if (Response.Count != 1)
-                throw new ArgumentException($"Item with ID= {ID} does not exist");
+                throw new ArgumentException($"Item with ID={ID} does not exist");
 
             string old_name = Response[0].Get("Name");
             string old_barcode = Response[0].Get("Barcode");
             decimal old_price = decimal.Parse(Response[0].Get("Price"));
             bool old_active = Response[0].Get("Active")[0] == '1';
             int old_quantity = int.Parse(Response[0].Get("Quantity"));
+            decimal old_weight = decimal.Parse( Response[0].Get( "Weight" ) );
+            bool old_weighable = Response[0].Get( "Weighable" )[0] == '1';
 
             if (quantity != old_quantity && !m_employee.HasPermisison(Permissions.ChangeItemQuantity))
                 throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeItemQuantity));
 
-            if (old_active != active || old_barcode != barcode || old_price != price || old_name != name)
+            if (old_active != active || old_barcode != barcode || old_price != price || old_name != name || old_weight != weight || old_weighable != weighable )
                 if (!m_employee.HasPermisison(Permissions.ChangeItemCatalog))
                     throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeItemCatalog));
 
-            m_connection.Write("Modify_Item @0, @1, @2, @3, @4, @5", ID, name, barcode, price, active, quantity);
+            m_connection.Write("Modify_Item @0, @1, @2, @3, @4, @5, @6, @7", ID, name, barcode, price, active, quantity, weight, weighable);
 
             if (Response[0].Get("ProductID") == "-1")
                 throw new InvalidOperationException($"Item ({m_connection.Response[0].Get("Name")}) with barcode \"{barcode}\" already exists.");
 
             if (old_name != name)
-                Log($"Modified item ID=\"{ID}\"s name from \"{old_name}\" to \"{name}\"");
+                Log($"Modified {old_name}'s name from \"{old_name}\" to \"{name}\"");
 
             if (old_price != price)
-                Log($"Modified item ID=\"{ID}\"s price from {old_price.ToString("C")} to {price.ToString("C")}");
+                Log($"Modified {name}'s price from {old_price.ToString("C")} to {price.ToString("C")}");
 
             if (old_barcode != barcode)
-                Log($"Modified item ID=\"{ID}\"s barcode from \"{old_barcode}\" to \"{barcode}\"");
+                Log($"Modified {name}'s barcode from \"{old_barcode}\" to \"{barcode}\"");
 
             if (old_active != active)
-                Log($"Modified item ID=\"{ID}\"s active state from {(old_active ? "Active" : "Inactive")} to {(active ? "Active" : "Inactive")}");
+                Log($"Modified {name}'s active state from {(old_active ? "Active" : "Inactive")} to {(active ? "Active" : "Inactive")}");
 
             if (old_quantity != quantity)
-                Log($"Modified item ID=\"{ID}\"s quantity from {old_quantity} to {quantity}");
+                Log($"Modified {name}'s quantity from {old_quantity} to {quantity}");
+
+            if( old_weight != weight )
+                Log($"Modified {name}'s weight from {old_weight} to {weight}");
+
+            if( old_weighable != weighable )
+                Log( $"Modified {name}'s weighable state from {( old_weighable.ToString() )} to {weighable.ToString()}" );
+
         }
 
         public static void RemoveItem(int ID)
