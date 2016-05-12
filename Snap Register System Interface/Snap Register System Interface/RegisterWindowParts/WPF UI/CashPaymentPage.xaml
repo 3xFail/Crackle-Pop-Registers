@@ -23,7 +23,14 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Amount paid:" HorizontalAlignment="Center" FontSize="40" VerticalAlignment="Center" />
-                    <Button Grid.Column="0" Grid.Row="2" Name="AcceptButton" Content="Accept" Click="AcceptButton_Click" VerticalAlignment="Bottom" Height="40" Width="100"/>
+                    <Button Grid.Column="0" Grid.Row="2" Name="AcceptButton" Content="Accept" Click="AcceptButton_Click" VerticalAlignment="Bottom" Height="40" Width="100">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                                <GradientStop Color="White" Offset="0.433"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </Grid>
             </StackPanel>
             <!--<Label x:Name="Amount_to_pay_label" Content="Amount to pay:" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Height="25" Width="100"/>

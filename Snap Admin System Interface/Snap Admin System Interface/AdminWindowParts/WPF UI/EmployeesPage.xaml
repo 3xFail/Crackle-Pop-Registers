@@ -9,8 +9,8 @@
       Title="EmployeesPage">
 
     <Grid>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" >
-            <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50">
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50" Width="125" Margin="0,0,20,0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>
@@ -18,7 +18,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="EmpUsageBtn" Content="Register Usage" Click="EmpUsageBtn_Click" Height="50">
+            <Button x:Name="EmpUsageBtn" Content="Register Usage" Click="EmpUsageBtn_Click" Height="50" Width="125" Margin="0,0,20,0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>
@@ -26,7 +26,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="EmpLogBtn" Content="Admin Logs" Click="EmpLogBtn_Click" Height="50">
+            <Button x:Name="EmpLogBtn" Content="Admin Logs" Click="EmpLogBtn_Click" Height="50" Width="125" Margin="0,0,20,0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>
@@ -34,7 +34,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="EmpPermissions" Content="Permissions" Click="EmpPermissions_Click" Height="50">
+            <Button x:Name="EmpPermissions" Content="Permissions" Click="EmpPermissions_Click" Height="50" Width="125" Margin="0,0,20,0">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>
@@ -42,7 +42,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50">
+            <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50" Width="125">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFAAAAAA" Offset="1"/>

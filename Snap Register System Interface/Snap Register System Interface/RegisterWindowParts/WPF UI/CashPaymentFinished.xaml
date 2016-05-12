@@ -56,7 +56,14 @@
             <TextBlock Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Name="nickels" Text=".05"/>
             <TextBlock Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center" Name="pennies" Text=".01s"/>
         </Grid>
-        <Button Grid.Row="3" Content="Reset Register" Name="ResetRegisterButton" Click="ResetRegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40"/>
-    </Grid>
+            <Button Grid.Row="3" Content="Reset Register" Name="ResetRegisterButton" Click="ResetRegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
     </Border>
 </Page>
