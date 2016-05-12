@@ -38,7 +38,9 @@ namespace PointOfSales.Permissions
         public static readonly string ViewCouponCatalog = "View Coupon Catalog";
         public static readonly string ChangeCouponCatalog = "Change Coupon Catalog";
         public static readonly string CanAccessManagerFunctions = "Can Access Manager Functions";
-        public static readonly string CanAddNewItem = "Can Add New Item";
+        public static readonly string CanAddNewItem = "Add New Item";
+        public static readonly string ViewSaleCatalog = "View Sale Catalog";
+        public static readonly string ModifyCoupon = "Modify Coupons";
 
         public static readonly List<string> _Permissions = new List<string>()
         {
@@ -70,7 +72,9 @@ namespace PointOfSales.Permissions
             ViewCouponCatalog,
             ChangeCouponCatalog,
             CanAccessManagerFunctions,
-            CanAddNewItem
+            CanAddNewItem,
+            ViewSaleCatalog,
+            ModifyCoupon,
 
         };
 
@@ -104,7 +108,9 @@ namespace PointOfSales.Permissions
             { ViewCouponCatalog, "You do not have permission to view the coupon catalog" },
             { ChangeCouponCatalog, "You do not have permission to change the coupon catalog" },
             { CanAccessManagerFunctions, "You do not have permission to access the manager functions" },
-            { CanAddNewItem, "You do not have permission to add a new item to the catalog" }
+            { CanAddNewItem, "You do not have permission to add a new item to the catalog" },
+            { ViewSaleCatalog, "You do not have permission to view the sale catalog" },
+            { ModifyCoupon, "You do not have permission to add remove or change a coupon" },
         };
 
         public static string ErrorMessage( string permission )

@@ -81,11 +81,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
                 User user = ( (FrameworkElement)sender ).DataContext as User;
 
-                string resp = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
+                string response = PromptDialog.Prompt( "New password:", "Set " + user.Username + "'s password." );
 
-                if( !string.IsNullOrEmpty( resp ) )
+                if( !string.IsNullOrEmpty( response ) )
                 {
-                    DBInterface.SetUserPassword( user.UserID, resp );
+                    DBInterface.SetUserPassword( user.UserID, response, user.Username );
                     MessageBox.Show( "Password for \"" + user.Username + "\" has been updated." );
                 }
             }
@@ -130,7 +130,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
 
                 User user = ( (FrameworkElement)sender ).DataContext as User;
-                DBInterface.SetUserActivity( user.UserID, user.Active );
+                DBInterface.SetUserActivity( user.UserID, user.Active, user.Username );
             }
             catch (InvalidOperationException ex)
             {

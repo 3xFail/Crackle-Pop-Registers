@@ -33,11 +33,11 @@ namespace SnapRegisters
 
         public static void GetAllSales()
         {
-            //if( m_employee.HasPermisison( Permissions.ViewSaleCatalog ) )
+            if( m_employee.HasPermisison( Permissions.ViewSaleCatalog ) )
             {
                 m_connection.Write("GetAllSales");
             }
-            //else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewSaleCatalog ) );
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewSaleCatalog ) );
         }
 
         public static void GetAllCoupons()
@@ -111,6 +111,8 @@ namespace SnapRegisters
             m_connection.Write("GetAllAppliedCoupons");
         }
 
+        //the 'value' arg is the entire new bitfield to set for that permissions group.
+        //The permission name and new_value are for logging purposes only
         public static void ModifyPermissionValue(string permission_group, long value, string permission_name, bool new_value)
         {
             if (m_employee.HasPermisison(Permissions.ModifyPermissions))
@@ -140,22 +142,37 @@ namespace SnapRegisters
             return Response.Count != 0;
         }
 
-        public static void SetUserPassword(int ID, string newpass)
+        public static void SetUserPassword(int ID, string newpass, string username)
         {
             if (m_employee.HasPermisison(Permissions.ResetEmployeePassword))
             {
                 m_connection.WriteNoResponse("UpdatePassword_Username @0, @1", ID, PasswordHash.HashPassword(newpass));
-                Log($"Changed the password of UserID=\"{ID}\" to \"{new string('*', newpass.Length)}\".");
+                Log($"Changed the password of {username} to \"{new string('*', newpass.Length)}\".");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ResetEmployeePassword));
         }
 
-        public static void SetUserActivity(int ID, bool active)
+        public static void AddCoupon( string barcode, string name, bool flat, decimal amount )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifyCoupon ) )
+            {
+                m_connection.Write( "AddCoupon @0, @1, @2, @3", barcode, name, flat, amount );
+                if( m_connection.Response[0].Get( "Return" ) == "-1" )
+                    throw new InvalidOperationException( $"A coupon with the barcode {barcode} already exists." );
+                else if( m_connection.Response[0].Get( "Return" ) == "-2" )
+                    throw new InvalidOperationException( $"An item with the barcode {barcode} already exists" );
+                else
+                    Log( $"Added coupon {name} with barcode {barcode}" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyCoupon ) );
+        }
+
+        public static void SetUserActivity(int ID, bool active, string username)
         {
             if (m_employee.HasPermisison(Permissions.ChangeEmployeeCatalog))
             {
                 m_connection.WriteNoResponse("SetUserActivity @0, @1", ID, active ? '1' : '0');
-                Log($"Set the account of UserID=\"{ID}\" to \"{(active ? "Active" : "Inactive")}\".");
+                Log($"Set the account of {username} to \"{(active ? "Active" : "Inactive")}\".");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
         }
@@ -172,13 +189,23 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeCustomerCatalog));
         }
 
+        public static void RemoveCoupon( string barcode, string name )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifyCoupon ) )
+            {
+                m_connection.WriteNoResponse( "RemoveCoupon @0", barcode );
+                Log( $"Removed coupon {name}" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyCoupon ) );
+        }
+
         public static void GetAllCustomers()
         {
             if (m_employee.HasPermisison(Permissions.ViewCustomerCatalog))
             {
                 m_connection.Write("GetAllCustomers");
             }
-            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ViewCustomerCatalog ));  //("You do not have permission to view the customer catalog");
+            else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ViewCustomerCatalog ));
         }
 
         public static void ChangePermissions(string name, int id, string permission)
@@ -243,7 +270,7 @@ namespace SnapRegisters
                 if (Response[0].Get("CustID") == "-1")
                     throw new InvalidOperationException($"User with phone number {phoneNumber} already exists.");
                 else
-                    Log($"Added customer \"{firstName}  {lastName}\" with phone number \"{phoneNumber}\".");
+                    Log($"Added customer \"{firstName} {lastName}\" with phone number \"{phoneNumber}\".");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeCustomerCatalog));
         }
@@ -288,34 +315,34 @@ namespace SnapRegisters
                 Log($"Modified {old_name}'s name from \"{old_name}\" to \"{name}\"");
 
             if (old_price != price)
-                Log($"Modified {name}'s price from {old_price.ToString("C")} to {price.ToString("C")}");
+                Log($"Modified item {name}'s price from {old_price.ToString("C")} to {price.ToString("C")}");
 
             if (old_barcode != barcode)
-                Log($"Modified {name}'s barcode from \"{old_barcode}\" to \"{barcode}\"");
+                Log($"Modified item {name}'s barcode from \"{old_barcode}\" to \"{barcode}\"");
 
             if (old_active != active)
-                Log($"Modified {name}'s active state from {(old_active ? "Active" : "Inactive")} to {(active ? "Active" : "Inactive")}");
+                Log($"Modified item {name}'s active state from {(old_active ? "Active" : "Inactive")} to {(active ? "Active" : "Inactive")}");
 
             if (old_quantity != quantity)
-                Log($"Modified {name}'s quantity from {old_quantity} to {quantity}");
+                Log($"Modified item {name}'s quantity from {old_quantity} to {quantity}");
 
             if( old_weight != weight )
-                Log($"Modified {name}'s weight from {old_weight} to {weight}");
+                Log($"Modified item {name}'s weight from {old_weight} to {weight}");
 
             if( old_weighable != weighable )
-                Log( $"Modified {name}'s weighable state from {( old_weighable.ToString() )} to {weighable.ToString()}" );
+                Log( $"Modified item {name}'s weighable state from {old_weighable.ToString()} to {weighable.ToString()}" );
 
         }
 
-        public static void RemoveItem(int ID)
+        public static void RemoveItem(int ID, string name)
         {
             m_connection.Write("RemoveItem_ProductID @0", ID);
             if (Response[0].Get("Return") == "-1")
-                throw new InvalidOperationException($"Item with ID {ID} does not exist.");
+                throw new InvalidOperationException($"{name} does not exist.");
             if (Response[0].Get("Return") == "-2")
-                throw new InvalidOperationException($"Item with ID {ID} has been sold and cannot be removed. Set it inactive instead.");
+                throw new InvalidOperationException($"{name} has been sold and cannot be removed. Set it inactive instead.");
             else
-                Log($"Removed item with ID=\"{ID}\".");
+                Log($"Removed item with ID=\"{ID}\"({name}).");
         }
         public static void GetItemID(string barcode)
         {

@@ -120,14 +120,20 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             DBInterface.GetAllCoupons();
             foreach( XmlNode node in DBInterface.Response )
             {
+                string id = node.Get( "CouponID" );
+
+                //if the coupon doesn't relate to any items it won't have been added in the previous loop
+                if( !rel.ContainsKey( id ) )
+                    rel[id] = new List<int>();
+
                 Coupon coupon = new Coupon()
                 {
                     Name = node.Get( "Name" ),
                     IsFlat = node.Get( "Flat" )[0] == '1',
                     Active = node.Get( "Active" )[0] == '1',
                     Amount = decimal.Parse( node.Get( "Discount" ) ),
-                    Barcode = node.Get( "CouponID" ),
-                    _ItemIDList = rel[node.Get( "CouponID" )]
+                    Barcode = id,
+                    _ItemIDList = rel[id]
                 };
                 data.Add( coupon );
             }
@@ -176,6 +182,90 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 }
             }
             catch { }
+        }
+
+        private void AddCouponButton_Click( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                decimal amount;
+                bool flat = FlatDiscountCheckBox.IsChecked == true;
+
+                if( flat )
+                    amount = FlatDiscountCurrencyBox.Number;
+                else
+                    amount = decimal.Parse( PercentDiscountDigitBox.Text ) / 100;
+
+                DBInterface.AddCoupon( BarcodeTextBox.Text, CouponNameTextBox.Text, flat, amount);
+                RefreshButton_Click( null, null );
+            }
+            catch( InvalidOperationException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
+        }
+
+        private void FlatDiscountCheckBox_Checked( object sender, RoutedEventArgs e )
+        {
+            try
+            {
+                PercentDiscountCheckBox.IsChecked = false;
+                PercentDiscountDigitBox.IsEnabled = false;
+
+                FlatDiscountCurrencyBox.IsEnabled = true;
+            }
+            catch { }
+        }
+
+        private void PercentDiscountCheckBox_Checked( object sender, RoutedEventArgs e )
+        {
+            FlatDiscountCheckBox.IsChecked = false;
+            FlatDiscountCurrencyBox.IsEnabled = false;
+
+            PercentDiscountDigitBox.IsEnabled = true;
+        }
+
+        private void CouponGrid_PreviewKeyDown( object sender, KeyEventArgs e )
+        {
+            if( Key.Delete == e.Key )
+            {
+                try
+                {
+                    foreach( var row in CouponGrid.SelectedItems )
+                    {
+                        Coupon coupon = row as Coupon;
+                        if( coupon.Name != string.Empty )
+                        {
+                            try
+                            {
+                                DBInterface.RemoveCoupon( coupon.Barcode, coupon.Name );
+                                data.Remove( coupon );
+                            }
+                            catch( UnauthorizedAccessException ex )
+                            {
+                                System.Windows.Forms.MessageBox.Show( ex.Message );
+                                e.Handled = true;
+                            }
+                        }
+                    }
+                }
+                catch( ArgumentException ex )
+                {
+                    System.Windows.Forms.MessageBox.Show( ex.Message );
+                    e.Handled = true;
+                }
+                catch { }
+            }
+        }
+
+        private void RefreshButton_Click( object sender, RoutedEventArgs e )
+        {
+            data.Clear();
+            PopulateList();
         }
     }
 }

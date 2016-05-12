@@ -295,7 +295,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             Item item = ( ( FrameworkElement )sender ).DataContext as Item;
             try
             {
-                DBInterface.RemoveItem( item.ProductID );
+                DBInterface.RemoveItem( item.ProductID, item.Name );
                 data.Remove( item );
             }
             catch( Exception ex)
