@@ -34,8 +34,8 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
                 else
                     _mainWindow.m_weightOnScreen = Math.Round(Convert.ToDouble(_scale.GetWeightAsDecimal()), 2).ToString() + " Lb";
 
-
-                _mainWindow.m_scaleStatusTextBox = _scale.Status().ToString();
+                //For debugging status
+                //_mainWindow.m_scaleStatusTextBox = _scale.Status().ToString();
 
                 Thread.Sleep(375);
 
