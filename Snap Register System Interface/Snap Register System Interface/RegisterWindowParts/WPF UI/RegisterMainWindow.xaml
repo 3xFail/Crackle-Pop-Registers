@@ -127,10 +127,17 @@
                 <!--Bar code Box-->
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height=".5*"/>
-                        <RowDefinition Height=".5*"/>
+                        <RowDefinition Height=".20*"/>
+                        <RowDefinition Height=".40*"/>
+                        <RowDefinition Height=".40*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Viewbox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock x:Name="scale_not_found_text" Text="Scale Not Found" Foreground="Red" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <TextBlock x:Name="scale_negative_text" Text="Scale Reading Negative Value. Please Recalibrate." Foreground="Red" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                    </Viewbox>
+                    <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".5*"/>
                             <ColumnDefinition Width=".5*"/>
@@ -142,7 +149,7 @@
                             <TextBlock TextAlignment="Center" Text="N/A"  Name="weightText" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Viewbox>
                     </Grid>
-                    <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
+                    <Viewbox Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5,0,5,0">
                         <TextBox x:Name="UPCField" Height="20" Width="100" KeyDown="ShortcutKeyPressed"/>
                     </Viewbox>
                 </Grid>

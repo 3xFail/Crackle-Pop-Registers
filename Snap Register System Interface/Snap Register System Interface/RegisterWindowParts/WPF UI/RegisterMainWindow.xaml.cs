@@ -113,7 +113,26 @@ namespace SnapRegisters
             get { return weightText.Text; }
             set
             {
-                Dispatcher.Invoke(new Action(() => { weightText.Text = value; }));
+                Dispatcher.Invoke(new Action(() =>
+                {
+                    weightText.Text = value;
+                    if (value == "null")
+                    {
+                        scale_not_found_text.Visibility = Visibility.Visible;
+                        weightText.Text = "0 Lb";
+                    }
+                    else
+                        scale_not_found_text.Visibility = Visibility.Hidden;
+
+                    if (value == "neg")
+                    {
+                        scale_negative_text.Visibility = Visibility.Visible;
+                        weightText.Text = "0 Lb";
+                    }
+                    else
+                        scale_negative_text.Visibility = Visibility.Hidden;
+
+                }));
             }
         }
 
