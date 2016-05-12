@@ -10,7 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-
+using System.Threading;
+//using System.Windows.Controls;
 namespace SnapRegisters
 {
     //*************************************************************************************************************
@@ -103,6 +104,18 @@ namespace SnapRegisters
         public static KeyboardHook kh;
         public Email m_email_reciept;
         public Scale.Scale m_scale;
+        private ScaleUpdater m_scaleUpdater;
+        private Thread m_scaleWorkerThread;
+
+        //Needed to change weight from a different thread
+        internal string m_weightOnScreen
+        {
+            get { return weightText.Text; }
+            set
+            {
+                Dispatcher.Invoke(new Action(() => { weightText.Text = value; }));
+            }
+        }
 
         //private PaymentWindow m_pay_window;
 
@@ -116,26 +129,6 @@ namespace SnapRegisters
                                                         delegate { this.dateText.Text = DateTime.Now.ToString("hh:mm tt"); },
                                                         this.Dispatcher);
 
-            m_scale = new Scale.Scale();
-
-            //Updates the weight constantly
-            DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 300),
-                                            DispatcherPriority.Normal,
-                                            delegate
-                                            {
-
-                                                string theWeight = m_scale.GetWeightAsString();
-                                                if (theWeight == "null")
-                                                    this.weightText.Text = theWeight;
-                                                else if (theWeight == "neg")
-                                                    this.weightText.Text = theWeight;
-                                                else
-                                                    this.weightText.Text = Math.Round(Convert.ToDouble(m_scale.GetWeightAsDecimal()), 2).ToString() + " Lb";
-
-
-                                            },
-                                            this.Dispatcher);
-
 
 
             //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second).
@@ -147,8 +140,24 @@ namespace SnapRegisters
             //Initialize window after the clock is ticked
             InitializeComponent();
 
-            //m_pay_window = new PaymentWindow();
-            //m_pay_window.Hide();
+
+
+
+            //Updating Scale Data in a separate thread
+            m_scale = new Scale.Scale();
+            m_scaleUpdater = new ScaleUpdater(this, m_scale);
+            m_scaleWorkerThread = new Thread(m_scaleUpdater.StartUpdating);
+
+            //Starts the scale thread
+            m_scaleWorkerThread.Start();
+
+
+            //Wait for the thread to start
+            while (!m_scaleWorkerThread.IsAlive) ;
+            Thread.Sleep(1);
+
+
+
 
             m_employee = currentEmployee;
             m_connection = session;
@@ -182,6 +191,7 @@ namespace SnapRegisters
             //This code is supposed to lock the keyboard to this application
             //kh = new KeyboardHook(KeyboardHook.Parameters.AllowWindowsKey);
         }
+
         private void AddItemToOutputPanels(Item item)
         {
             // Update the documentation once you have this finished.
@@ -196,8 +206,8 @@ namespace SnapRegisters
         {
 
             foreach (ItemAndDiscountOutputObject output in m_listOfOutputObjects)
-				if(couponToAdd.AppliesTo(output.Item))
-					output.AddDiscount(couponToAdd);
+                if (couponToAdd.AppliesTo(output.Item))
+                    output.AddDiscount(couponToAdd);
 
             ItemScroll.ScrollToBottom();
             CouponScroll.ScrollToBottom();
@@ -415,7 +425,19 @@ namespace SnapRegisters
             Regex regex = new Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+
+        //OnClosed needed to make sure the scale thread exits properly
+        protected override void OnClosed(EventArgs e)
+        {
+            m_scaleUpdater.RequestStop();
+            //TODO: Is a join call required? 
+            //m_scaleWorkerThread.Join();
+            Console.WriteLine("Worker thread terminated safely");
+            base.OnClosed(e);
+        }
     }
+
 
 }
 
