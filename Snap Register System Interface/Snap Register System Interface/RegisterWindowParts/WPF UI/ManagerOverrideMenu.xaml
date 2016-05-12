@@ -24,6 +24,12 @@
 				Margin="10"
                 Click="Override_Click"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.433"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <Button.Content>
                 <Viewbox>
 					<TextBlock Name="OverrideText"

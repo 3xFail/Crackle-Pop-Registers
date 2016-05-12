@@ -27,8 +27,15 @@
                     <ImageBrush ImageSource="/SharedResources/Images/giftcardimage.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Cancel_Button" Content="Cancel" FontWeight="Bold" HorizontalAlignment="Center" Height="75" Width="225" VerticalAlignment="Top" Margin="0,10,0,0" Click="Cancel_Button_Click"/>
-        </StackPanel>
+                <Button x:Name="Cancel_Button" Content="Cancel" FontWeight="Bold" HorizontalAlignment="Center" Height="75" Width="225" VerticalAlignment="Top" Margin="0,10,0,0" Click="Cancel_Button_Click">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.433"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
     </Grid>
     </Border>
 </Page>

@@ -25,13 +25,27 @@
 				 VerticalAlignment="Bottom">
                 <Button x:Name="RemoveDiscountButton" Content="Remove Discount" 
 					Height="70" Width="280"
-					Margin="8" Click="RemoveDiscountButtonClicked"/>
+					Margin="8" Click="RemoveDiscountButtonClicked">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.433"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </Viewbox>
             <Viewbox Grid.Column="1"
 				 VerticalAlignment="Bottom">
                 <Button x:Name="ChangeDisocuntButton" Content="Change Discount" 
 					Height="70" Width="280"
-					Margin="8" Click="ChangeDiscountButtonClicked"/>
+					Margin="8" Click="ChangeDiscountButtonClicked">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.433"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </Viewbox>
 
         </Grid>

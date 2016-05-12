@@ -77,8 +77,22 @@
             <TextBox Grid.Column="0" Grid.Row="3"  MaxLines="1" MaxLength="5" Width="50" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top"/>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="CVV" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="5, 0, 0, 0" MaxLines="1" MaxLength="3" Width="30" HorizontalAlignment="Left" Height="16" VerticalAlignment="Top"/>
-            <Button Grid.Column="0" Grid.Row="4" Name="CC_Manual_Entry_Next" Content="Next" Height="40" Width="100" Click="CC_Manual_Entry_Next_Click"/>
-            <Button Grid.Column="1" Grid.Row="4" Name="CC_Manual_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="CC_Manual_Entry_Cancel_Click"/>
+            <Button Grid.Column="0" Grid.Row="4" Name="CC_Manual_Entry_Next" Content="Next" Height="40" Width="100" Click="CC_Manual_Entry_Next_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Grid.Column="1" Grid.Row="4" Name="CC_Manual_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="CC_Manual_Entry_Cancel_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                        <GradientStop Color="White" Offset="0.433"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
     </Border>
 </Page>
