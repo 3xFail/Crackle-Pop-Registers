@@ -46,9 +46,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="294" Margin="7,26,0,-191" VerticalAlignment="Top" Width="284"/>
-        <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="65,33,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="215"/>
+        <TextBox x:Name="NameSearchBox" HorizontalAlignment="Left" Height="23" Margin="65,33,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="215" KeyDown="Search_KeyDown"/>
         <Label x:Name="SearchItemNameLabel" Content="Name: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,30,0,-4"/>
-        <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="209"/>
+        <TextBox x:Name="BarcodeSearchBox" HorizontalAlignment="Left" Height="23" Margin="71,64,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="209" KeyDown="Search_KeyDown"/>
         <Label x:Name="SearchItemBarcodeLabel" Content="Barcode: " HorizontalAlignment="Left" Margin="12,61,0,-35" VerticalAlignment="Top"/>
         <ComboBox x:Name="ActiveComboBox" HorizontalAlignment="Left" Margin="17,92,0,-62" VerticalAlignment="Top" Width="138" SelectedIndex="0">
             <ComboBoxItem Name="ShowBoth">Active and Inactive</ComboBoxItem>
@@ -66,10 +66,10 @@
         </Button>
         <Slider x:Name="MinPriceSlider" ValueChanged="MinPriceSlider_ValueChanged" HorizontalAlignment="Left" Margin="26,140,0,-62" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="MinPriceLabel" Content="Minimum Price" HorizontalAlignment="Left" Margin="12,114,0,-44" VerticalAlignment="Top"/>
-        <currency:CurrencyTextBox x:Name="MinPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,139,0,-62" VerticalAlignment="Top" Width="60" TextChanged="MinPriceTextBox_TextChanged"/>
+        <currency:CurrencyTextBox x:Name="MinPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,139,0,-62" VerticalAlignment="Top" Width="60" TextChanged="MinPriceTextBox_TextChanged" KeyDown="Search_KeyDown"/>
         <Slider x:Name="MaxPriceSlider" ValueChanged="MaxPriceSlider_ValueChanged"  HorizontalAlignment="Left" Margin="26,181,0,-70" VerticalAlignment="Top" Width="189"/>
         <Label x:Name="MaxPriceLabel" Content="Maximum Price" HorizontalAlignment="Left" Margin="12,155,0,-52" VerticalAlignment="Top"/>
-        <currency:CurrencyTextBox x:Name="MaxPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,180,0,-70" VerticalAlignment="Top" Width="60" TextChanged="MaxPriceTextBox_TextChanged"/>
+        <currency:CurrencyTextBox x:Name="MaxPriceTextBox" HorizontalAlignment="Left" Height="19" Margin="220,180,0,-70" VerticalAlignment="Top" Width="60" TextChanged="MaxPriceTextBox_TextChanged" KeyDown="Search_KeyDown"/>
         <Border BorderBrush="Black" Background="{StaticResource Background}" BorderThickness="1" HorizontalAlignment="Left" Height="141" Margin="7,379,0,0" VerticalAlignment="Top" Width="279">
             <TextBlock x:Name="ItemWeight" Text="N/A" Margin="0,114,187,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="38"/>
         </Border>
@@ -93,8 +93,8 @@
         <Label x:Name="MinQuantityLabel" Content="Minimum Quantity" HorizontalAlignment="Left" Margin="12,224,0,-121" VerticalAlignment="Top"/>
         <Slider x:Name="MaxQuantitySlider" ValueChanged="MaxQuantitySlider_ValueChanged" HorizontalAlignment="Left" Margin="26,291,0,-180" VerticalAlignment="Top" Width="189" SmallChange="1"/>
         <Label x:Name="MaxQuantityLabel" Content="Maximum Quantity" HorizontalAlignment="Left" Margin="12,265,0,-162" VerticalAlignment="Top"/>
-        <digit:DigitBox x:Name="MinQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,245,0,-139" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
-        <digit:DigitBox x:Name="MaxQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,286,0,-180" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" />
+        <digit:DigitBox x:Name="MinQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,245,0,-139" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" KeyDown="Search_KeyDown"/>
+        <digit:DigitBox x:Name="MaxQuantityTextBox" HorizontalAlignment="Left" Height="23" Margin="220,286,0,-180" TextWrapping="NoWrap" VerticalAlignment="Top" Width="60" KeyDown="Search_KeyDown"/>
         <Label x:Name="AddQuantityLabel" Content="Quantity" HorizontalAlignment="Left" Margin="10,459,0,0" VerticalAlignment="Top"/>
         <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="7,550,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
             <Button.Background>

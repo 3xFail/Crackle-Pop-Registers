@@ -425,5 +425,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             LbLabel.Visibility = Visibility.Visible;
             ItemWeight.Visibility = Visibility.Visible;
         }
+
+        private void Search_KeyDown( object sender, KeyEventArgs e )
+        {
+            if( e.Key == Key.Enter )
+                SearchButton_Click( null, null );
+        }
     }
 }
