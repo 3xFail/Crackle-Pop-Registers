@@ -339,10 +339,12 @@ namespace SnapRegisters
 
 
                 //If the item is sold by weight
+                //Can't disable to bypass this, because how can you construct
+                //items that sell by their weight, if you don't have their weight?
                 if (it.Get("Weighable")[0] == '1')
                 {
                    
-
+                    //Quickchecks, don't need to stabilize to check for these error conditions.
                     if (theScale.GetWeightAsDecimal() == 0)
                         throw new InvalidOperationException("Please place items on the scale before continuing.");
                     if (theScale.GetWeightAsDecimal() == null)
@@ -351,12 +353,15 @@ namespace SnapRegisters
                         throw new InvalidOperationException("Please remove items and recalibrate the scale before continuing.");
 
 
-                    while (!theScale._isStable) ;
+                    //while (!theScale._isStable) ;
 
-                    price = decimal.Parse(it.Get("Price")) * Convert.ToDecimal(theScale.GetWeightAsDecimal());
+                    //After all quick checks pass, get stabilized weight. To use in all calculations.
+                    decimal? realWeightOfItem = theScale.getStabilizedWeight();
+
+                    price = decimal.Parse(it.Get("Price")) * Convert.ToDecimal(realWeightOfItem);
 
                     //Display how heavy 
-                    name += " " + Math.Round((decimal)theScale.GetWeightAsDecimal(), 2) + " Lb " + "@ $" + Math.Round(decimal.Parse(it.Get("Price")), 2) + "/Lb";
+                    name += " " + Math.Round((decimal)realWeightOfItem, 2) + " Lb " + "@ $" + Math.Round(decimal.Parse(it.Get("Price")), 2) + "/Lb";
                 }
                 else    //Regular item - CHECK FOR CORRECT WEIGHT HERE
                 {
@@ -371,20 +376,24 @@ namespace SnapRegisters
                         }
                         else
                         {
+                            //Quickchecks
                             if (theScale.GetWeightAsDecimal() == null)
                                 throw new InvalidOperationException("Scale not found. Please check your connection.");
                             if (theScale.GetWeightAsDecimal() == -1)
                                 throw new InvalidOperationException("Please remove items and recalibrate the scale before continuing.");
 
 
-                            while (!theScale._isStable || theScale.Status() == 0x2) { theScale.GetWeightAsDecimal(); Thread.Sleep(50); }
+                            //while (!theScale._isStable || theScale.Status() == 0x2) { theScale.GetWeightAsDecimal(); Thread.Sleep(50); }
 
-                            decimal? realWeight = theScale.GetWeightAsDecimal();
+                            decimal? realWeightofItem = theScale.getStabilizedWeight();
+                            if (realWeightofItem == null)
+                                throw new NullReferenceException("Scale disconnected during stabilized weight retrieval.");
 
                             decimal dbItemWeight = decimal.Parse(it.Get("Weight"));
+
                             if (
-                                ( realWeight > (dbItemWeight * (1 + errorMargin)))
-                                || (realWeight < (dbItemWeight * (1 - errorMargin))))
+                                (realWeightofItem > (dbItemWeight * (1 + errorMargin)))
+                                || (realWeightofItem < (dbItemWeight * (1 - errorMargin))))
                             {
                                 throw new InvalidOperationException("Weight is incorrect. Please try again.");
                             }
@@ -452,7 +461,7 @@ namespace SnapRegisters
             {
                 throw e;
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException e)
             {
                 throw new ArgumentException("Coupon with barcode \"" + coupon_id + "\" not found.");
             }

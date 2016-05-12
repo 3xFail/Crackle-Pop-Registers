@@ -37,7 +37,8 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
                 //For debugging status
                 //_mainWindow.m_scaleStatusTextBox = _scale.Status().ToString();
 
-                Thread.Sleep(375);
+                //Thread.Sleep(375);
+                Thread.Sleep(250);
 
             }
         }

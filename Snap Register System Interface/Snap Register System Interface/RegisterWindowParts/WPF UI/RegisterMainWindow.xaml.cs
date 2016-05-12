@@ -155,7 +155,7 @@ namespace SnapRegisters
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
-            
+
 
             //Updates the clock constantly
             DispatcherTimer clockUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 1),
@@ -300,6 +300,12 @@ namespace SnapRegisters
                 catch (InvalidOperationException ex)
                 {
                     MessageBox.Show(ex.Message);
+                    UPCField.Clear();
+                }
+                catch (TimeoutException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    UPCField.Clear();
                 }
                 catch (Exception e) //if that fails
                 {

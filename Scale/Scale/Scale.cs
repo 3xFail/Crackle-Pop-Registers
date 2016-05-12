@@ -18,8 +18,18 @@ namespace Scale
     public class Scale
     {
 
+
+        public class VolatileDecimal
+        {
+            public decimal? _internalWeight = null;
+        }
+
+
+
+
         private int _VENDOR_ID = 0x0922;
         private int _PRODUCT_ID = 0x8003;
+        private readonly int TIMEOUT_TRIES = 20;
 
         public bool _Grams_Mode { private get; set; } = false;
 
@@ -27,9 +37,9 @@ namespace Scale
         private HidDeviceData _data;
 
 
-        private decimal? _weight;
-        private decimal? _lastWeight = 0;
-        public volatile bool _isStable;
+        private volatile VolatileDecimal _volatileWeight = new VolatileDecimal();
+        private decimal? _weight = null;
+        public volatile bool _isStable = false;
 
 
         public bool IsConnected
@@ -53,12 +63,12 @@ namespace Scale
 
             if (IsConnected)
             {
-                GetWeightFromScale(false);
+                GetWeightFromScale();
                 if (Status() == 5)
                 {
                     return "neg";
                 }
-                return _weight.ToString();
+                return _volatileWeight._internalWeight.ToString();
             }
             else
                 return "null";
@@ -75,12 +85,12 @@ namespace Scale
 
             if (IsConnected)
             {
-                GetWeightFromScale(true);
+                GetWeightFromScale();
                 if (Status() == 5)
                 {
                     return -1;
                 }
-                return _weight;
+                return _volatileWeight._internalWeight;
             }
             else
                 return null;
@@ -136,10 +146,53 @@ namespace Scale
         }
 
 
-        private void GetWeightFromScale(bool updateStableStatus)
+        public decimal? getStabilizedWeight()
         {
 
-            _weight = null;
+            decimal? weight_previous = null;
+            decimal? weight_current = null;
+
+
+            if (IsConnected)
+            {
+                weight_previous = GetWeightAsDecimal();
+
+                int tries = 0;
+
+                while ((weight_current != weight_previous) || weight_current == null || weight_current == -1 || weight_current == 0)
+                {
+                    weight_current = weight_previous;
+
+                    Thread.Sleep(750);
+
+                    weight_previous = GetWeightAsDecimal();
+
+
+
+                    //Timeout condition
+                    tries++;
+                    if (tries >= TIMEOUT_TRIES)
+                        throw new TimeoutException("Stabilized weight retrieval timed out after " + TIMEOUT_TRIES + " tries.");
+
+
+
+                }
+
+
+                return weight_current;
+
+            }
+            else throw new NullReferenceException("Attempted to retrieve stabilized weight without being connected to scale.");
+
+
+
+
+        }
+
+        private void GetWeightFromScale()
+        {
+
+            _volatileWeight._internalWeight = null;
 
             _isStable = false;
 
@@ -148,7 +201,7 @@ namespace Scale
 
 
 
-            _weight = (Convert.ToDecimal(_data.Data[4]) +
+            _volatileWeight._internalWeight = (Convert.ToDecimal(_data.Data[4]) +
                 Convert.ToDecimal(_data.Data[5]) *
                 (Convert.ToDecimal(_data.Data[3]) + 1)); //Educated guess, could be wrong
 
@@ -159,16 +212,16 @@ namespace Scale
 
                 case 2:     //Scale reading in grams
                     if (!_Grams_Mode)
-                        _weight *= (53M / 3600M);
+                        _volatileWeight._internalWeight *= (53M / 3600M);
                     else
-                        _weight *= 6M + (2M / 3M);
+                        _volatileWeight._internalWeight *= 6M + (2M / 3M);
                     break;
                 case 11:    //Scale reading in ounces
-                    _weight /= 10M;
+                    _volatileWeight._internalWeight /= 10M;
                     if (!_Grams_Mode)
-                        _weight *= 0.0625M;
+                        _volatileWeight._internalWeight *= 0.0625M;
                     else
-                        _weight *= 28.349523125M;
+                        _volatileWeight._internalWeight *= 28.349523125M;
 
                     break;
                 case 12:    //Scale reading in pounds
@@ -177,13 +230,8 @@ namespace Scale
             }
 
 
-            _isStable = _lastWeight == _weight;
-            if (updateStableStatus)
-                _lastWeight = _weight ?? 0M;
+            _isStable = _data.Data[1] == 0x4;
 
-
-
-            //Thread.Sleep(300);
         }
 
 
@@ -197,7 +245,7 @@ namespace Scale
         //          6 == Over Weight
         //          7 == Requires Calibration
         //          8 == Requires Re-Zeroing
-        public decimal Status()
+        private decimal Status()
         {
             if (IsConnected)
                 return _data.Data[1];
