@@ -29,7 +29,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
     public class Coupon
     {  
-        public int ID { get; set; }
+        public string Barcode { get; set; }
         public string Name { get; set; }
         public decimal Amount { get; set; }
         public bool IsFlat { get; set; }
@@ -81,9 +81,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     bool state = cb.IsChecked == true; //convert a 'bool?' to 'bool'
 
                     if( state )
-                        DBInterface.AddCouponRelation( _coupon.Name, item, _coupon.ID, itemid );
+                        DBInterface.AddCouponRelation( _coupon.Name, item, _coupon.Barcode, itemid );
                     else
-                        DBInterface.RemoveCouponRelation( _coupon.ID, itemid );
+                        DBInterface.RemoveCouponRelation( _coupon.Name, item, _coupon.Barcode, itemid );
 
                 }
                 catch( UnauthorizedAccessException ex ) //if the user doesn't have permission we need to undo the check and display error message
@@ -103,12 +103,12 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void PopulateList()
         {
-            Dictionary<int, List<int>> rel = new Dictionary<int, List<int>>();
+            Dictionary<string, List<int>> rel = new Dictionary<string, List<int>>();
 
             DBInterface.GetAppliedCoupons();
             foreach( XmlNode node in DBInterface.Response )
             {
-                int couponid = int.Parse( node.Get( "CouponID" ) );
+                string couponid = node.Get( "CouponID" );
                 int itemid = int.Parse( node.Get( "ProductID" ) );
 
                 if( !rel.ContainsKey( couponid ) )
@@ -126,8 +126,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     IsFlat = node.Get( "Flat" )[0] == '1',
                     Active = node.Get( "Active" )[0] == '1',
                     Amount = decimal.Parse( node.Get( "Discount" ) ),
-                    ID = int.Parse( node.Get( "CouponID" ) ),
-                    _ItemIDList = rel[int.Parse( node.Get( "CouponID" ) )]
+                    Barcode = node.Get( "CouponID" ),
+                    _ItemIDList = rel[node.Get( "CouponID" )]
                 };
                 data.Add( coupon );
             }

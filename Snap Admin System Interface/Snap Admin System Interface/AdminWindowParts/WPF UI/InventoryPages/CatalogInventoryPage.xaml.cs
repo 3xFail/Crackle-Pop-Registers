@@ -37,13 +37,26 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private int quantity;
         private string barcode;
         private bool active;
-
+        private decimal weight;
+        private bool weighable;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged( string propertyName )
         {
             if( PropertyChanged != null )
                 PropertyChanged( this, new PropertyChangedEventArgs( propertyName ) );
+        }
+
+        public decimal Weight
+        {
+            get { return weight; }
+            set { weight = value; OnPropertyChanged( "Weight" ); }
+        }
+
+        public bool Weighable
+        {
+            get { return weighable; }
+            set { weighable = value;  OnPropertyChanged( "PricePerWeight" ); }
         }
 
         public int ProductID
@@ -92,22 +105,16 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
             Scale.Scale theScale = new Scale.Scale();
 
-
             //Update the weight constantly
             DispatcherTimer weightUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 0, 0, 100),
                                 DispatcherPriority.Normal,
                                 delegate
                                 {
-
                                     string theWeight = theScale.GetWeightAsString();
-                                    if (theWeight == "null")
-                                        this.ItemWeight.Text = theWeight;
-                                    else if (theWeight == "neg")
+                                    if (theWeight == "null" || theWeight == "neg" )
                                         this.ItemWeight.Text = theWeight;
                                     else
                                         this.ItemWeight.Text = Math.Round(Convert.ToDouble(theScale.GetWeightAsDecimal()), 2).ToString();
-
-
                                 },
                                 this.Dispatcher);
         }
@@ -118,8 +125,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             DBInterface.GetAllProducts();
 
             decimal maxprice = 0;
-            int maxquantity = 0;
-            int minquantity = 0;
+            int maxquantity = int.MinValue;
+            int minquantity = int.MaxValue;
 
             //loop though the list adding each row to the list
             foreach( XmlNode node in DBInterface.Response )
@@ -129,6 +136,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
                 maxprice = Math.Max( price, maxprice );
                 maxquantity = Math.Max( quantity, maxquantity );
+                minquantity = Math.Min( quantity, minquantity );
 
                 data.Add( new Item()
                 {
@@ -138,20 +146,31 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                     , Barcode = node.Get( "Barcode" )
                     , Quantity = quantity
                     , Active = node.Get( "Active" )[0] == '1'
+                    , Weight = decimal.Parse( node.Get( "Weight") )
+                    , Weighable = node.Get( "Weighable" )[0] == '1'
                 } );
             }
+
+            //Price sliders
+            MaxPriceSlider.Maximum = (double)maxprice;
+            MinPriceSlider.Maximum = (double)maxprice;
+
+            MaxPriceSlider.Value = (double)maxprice;
+            MinPriceSlider.Value = 0;
+            ////////////////////////////////////
+
+            //Quantity sliders
+            MaxQuantitySlider.Maximum = maxquantity;
+            MinQuantitySlider.Maximum = maxquantity;
+
+            MinQuantitySlider.Minimum = minquantity;
+            MaxQuantitySlider.Minimum = minquantity;
+
+            MaxQuantitySlider.Value = maxquantity;
+            MinQuantitySlider.Value = minquantity;
+            ////////////////////////////////////
+
             LoadItems();
-
-
-            MaxPriceSlider.Maximum = (int)maxprice + 1;
-            MinPriceSlider.Maximum = (int)maxprice + 1;
-            MaxPriceTextBox.Text = MinPriceTextBox.Text = "$0.00";
-
-            MaxQuantitySlider.Maximum = maxquantity + 1;
-            MinQuantitySlider.Maximum = maxquantity + 1;
-            MinQuantitySlider.Minimum = minquantity - 1;
-            MaxQuantitySlider.Minimum = minquantity - 1;
-            MaxQuantityTextBox.Text = MinQuantityTextBox.Text = "0";
         }
 
         public bool ItemFilter( object o )
@@ -171,11 +190,11 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 return false;
             if( item.Price < (decimal)MinPriceSlider.Value ) //If price is greater than the minimum
                 return false;
-            if( MaxPriceSlider.Value > 0.01D && item.Price > (decimal)MaxPriceSlider.Value ) //If price is less than the max
+            if( item.Price > (decimal)MaxPriceSlider.Value ) //If price is less than the max
                 return false;
             if( item.Quantity < MinQuantitySlider.Value )
                 return false;
-            if( (int)MaxQuantitySlider.Value != 0 && item.Quantity > MaxQuantitySlider.Value )
+            if( item.Quantity > MaxQuantitySlider.Value )
                 return false;
 
             return true;
@@ -197,27 +216,41 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void Commit_ButtonClick( object sender, RoutedEventArgs e )
         {
-            
             Item item = ( ( FrameworkElement )sender ).DataContext as Item;
             item.Changed = false;
             item.WasChanged = true;
 
             Catalog.CommitEdit();
-
             LoadItems();
 
             try
             {
-                if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ChangeItemCatalog))
-                    throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ChangeItemCatalog));
-
-                DBInterface.ModifyItem( item.ProductID, item.Name, item.Barcode, item.Price, item.Active, item.Quantity );
+                DBInterface.ModifyItem( item.ProductID, item.Name, item.Barcode, item.Price, item.Active, item.Quantity, item.Weight, item.Weighable );
             }
             catch( InvalidOperationException ex )
             {
                 MessageBox.Show( ex.Message );
             }
 
+            UpdateSliders();
+        }
+
+       private void UpdateSliders()
+        {
+            int newmaxquantity = int.MinValue;
+            int newminquantity = int.MaxValue;
+            double newmaxprice = double.MinValue;
+
+            foreach( Item _item in data )
+            {
+                newmaxquantity = Math.Max( _item.Quantity, newmaxquantity );
+                newminquantity = Math.Min( _item.Quantity, newminquantity );
+                newmaxprice = Math.Max( (double)_item.Price, newmaxprice );
+            }
+
+            MaxPriceSlider.Maximum = MinPriceSlider.Maximum = newmaxprice;
+            MaxQuantitySlider.Maximum = MinQuantitySlider.Maximum = newmaxquantity;
+            MaxQuantitySlider.Minimum = MinQuantitySlider.Minimum = newminquantity;
         }
 
         Item _EditItem = new Item();
@@ -231,33 +264,18 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             _EditItem.Price = item.Price;
             _EditItem.Active = item.Active;
             _EditItem.Quantity = item.Quantity;
+            _EditItem.Weighable = item.Weighable;
+            _EditItem.Weight = item.Weight;
         }
 
         private void Catalog_CellEditEnding( object sender, DataGridCellEditEndingEventArgs e )
         {
             Item item = e.Row.Item as Item; //Known bug: Can't get cell to highlight when price changes since it doesn't count as a cell edit event.
-            if( item.Price != _EditItem.Price || item.Name != _EditItem.Name || item.Barcode != _EditItem.Barcode || item.Active != _EditItem.Active || item.Quantity != _EditItem.Quantity )
+            if( item.Price != _EditItem.Price || item.Name != _EditItem.Name || item.Barcode != _EditItem.Barcode || item.Active != _EditItem.Active || item.Quantity != _EditItem.Quantity || item.Weight != _EditItem.Weight || item.Weighable != _EditItem.Weighable )
             {
                 e.Row.Background = new SolidColorBrush( Color.FromArgb( 128, 255, 0, 0 ) );
                 item.Changed = true;
-
-                //Update Maximums if the item changed changed the new max for either price or quantity
-                int newmax = (int)Math.Max( MaxPriceSlider.Maximum, (double)item.Price ) + 1;
-
-                MaxPriceSlider.Maximum = MinPriceSlider.Maximum = newmax;
-                MaxPriceSlider.Value = Math.Min( MaxPriceSlider.Value, MaxPriceSlider.Maximum );
-                MinPriceSlider.Value = Math.Min( MinPriceSlider.Value, MinPriceSlider.Maximum );
-
-                MaxPriceTextBox.Number = (decimal)MaxPriceSlider.Value;
-                MinPriceTextBox.Number = (decimal)MinPriceSlider.Value;
-
-                newmax = (int)Math.Max( MaxQuantitySlider.Maximum, item.Quantity ) + 1;
-                MaxQuantitySlider.Maximum = MinQuantitySlider.Maximum = newmax;
-                MaxQuantitySlider.Value = Math.Min( MaxQuantitySlider.Value, MaxQuantitySlider.Maximum );
-                MinQuantitySlider.Value = Math.Min( MinQuantitySlider.Value, MinQuantitySlider.Maximum );
-
-                MaxQuantityTextBox.Text = ( (int)MaxQuantitySlider.Value ).ToString();
-                MinQuantityTextBox.Text = ( (int)MinQuantitySlider.Value ).ToString();
+                UpdateSliders();
             }
         }
 
@@ -337,7 +355,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
         private void AddItemButton_Click( object sender, RoutedEventArgs e )
         {
             int quantity;
-            decimal weightOfItem;
+            decimal weightOfItem = 0;
 
             //TODO: Change the database access call to accomodate, 
             //once the database is changed to be compatible
@@ -350,8 +368,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                 weightOfItem = Convert.ToDecimal(ItemWeight.Text);
             }
 
-           
-            
             if( BarcodeAddBox.Text == string.Empty )
                 BarcodeAddBox.Focus();
             else if( NameAddBox.Text == string.Empty )
@@ -362,10 +378,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             {
                 try
                 {
-                    if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.CanAddNewItem))
-                        throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.CanAddNewItem));
-
-                    DBInterface.AddItem( NameAddBox.Text, PriceAddBox.Number, BarcodeAddBox.Text, 1 );
+                    DBInterface.AddItem( NameAddBox.Text, PriceAddBox.Number, BarcodeAddBox.Text, quantity, weightOfItem, PriceIsPerLb.IsChecked == true );
                     MessageBox.Show( "\"" + NameAddBox.Text + "\" has been added!" );
 
                     //Get item info ID from database
@@ -402,18 +415,6 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
 
         private void RefreshButton_Click( object sender, RoutedEventArgs e )
         {
-            /*
-            BarcodeSearchBox.Clear();
-            NameSearchBox.Clear();
-            ActiveComboBox.SelectedIndex = -1;
-
-            MaxPriceSlider.Value = 0;
-            MinPriceSlider.Value = 0;
-
-            MaxQuantitySlider.Value = 0;
-            MinQuantitySlider.Value = 0;
-            */
-
             data.Clear();
             PopulateList();
         }

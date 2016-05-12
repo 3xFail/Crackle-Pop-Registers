@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -15,16 +16,17 @@ namespace System.Windows.Controls
         {
             TextChanged += new TextChangedEventHandler( OnTextChanged );
             KeyDown += new KeyEventHandler( OnKeyDown );
+            PreviewTextInput += new TextCompositionEventHandler( OnPreviewTextInput );
         }
         #endregion
 
         #region Properties
-        new public String Text
+        new public string Text
         {
             get { return base.Text; }
             set
             {
-                base.Text = LeaveOnlyNumbers( value );
+                base.Text = value;
             }
         }
 
@@ -33,6 +35,9 @@ namespace System.Windows.Controls
         #region Functions
         private bool IsNumberKey( Key inKey )
         {
+            if( inKey == Key.OemMinus )
+                return true;
+
             if( inKey < Key.D0 || inKey > Key.D9 )
             {
                 if( inKey < Key.NumPad0 || inKey > Key.NumPad9 )
@@ -48,17 +53,16 @@ namespace System.Windows.Controls
             return inKey == Key.Delete || inKey == Key.Back || inKey == Key.Tab || inKey == Key.Return || Keyboard.Modifiers.HasFlag( ModifierKeys.Alt );
         }
 
-        private string LeaveOnlyNumbers( String inString )
+        private string LeaveOnlyNumbers( string str )
         {
-            String tmp = inString;
-            foreach( char c in inString.ToCharArray() )
+            for( int i = 0; i < str.Length; ++i )
             {
-                if( !IsDigit( c ) )
+                if( !IsDigit( str[i] ) ) //|| ( str[i] == '-' && i != 0 && str.Contains( "-" ) ) )
                 {
-                    tmp = tmp.Replace( c.ToString(), "" );
+                    str = str.Replace( str[i].ToString(), "" );
                 }
             }
-            return tmp;
+            return str;
         }
 
         public bool IsDigit( char c )
@@ -75,7 +79,13 @@ namespace System.Windows.Controls
 
         protected void OnTextChanged( object sender, TextChangedEventArgs e )
         {
-            base.Text = LeaveOnlyNumbers( Text );
+            //base.Text = LeaveOnlyNumbers( Text );
+        }
+
+        Regex regex = new Regex( "[^0-9.-]+" );
+        protected void OnPreviewTextInput( object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = regex.IsMatch( e.Text );
         }
         #endregion
     }
