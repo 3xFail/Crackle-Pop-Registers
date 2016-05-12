@@ -9,6 +9,7 @@ using System.Device;
 using CSharpClient;
 using System.Xml;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace SnapRegisters
 {
@@ -76,6 +77,7 @@ namespace SnapRegisters
         private Employee m_Employee { get; set; }
         public Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer m_customer { get; set; } = null;
         private ConnectionSession m_connection { get; set; }
+        private static readonly decimal errorMargin = .05M;
 
         // TODO: Make it so that multiple of the same item can be added without breaking functions.
         public Transaction(Employee employee, Snap_Register_System_Interface.RegisterWindowParts.Business_Objects.Customer cust, ItemOutputDelegate itemToAdd, CouponOutputDelegate couponToAdd, ConnectionSession session)
@@ -93,7 +95,7 @@ namespace SnapRegisters
 
         }
 
-        public void AddItem(string itemID, decimal? weight)
+        public void AddItem(string itemID, Scale.Scale theScale)
         {
             if (!m_Employee.HasPermisison(Permissions.RegisterLogIn))
                 throw new InvalidOperationException("User does not have sufficient permissions to use this machine.");
@@ -102,7 +104,10 @@ namespace SnapRegisters
             try
             {
                 // Construct a new item from the given itemID and add it to the list.
-                Item item = ConstructItem(itemID, weight);
+                Item item = ConstructItem(itemID, theScale);
+
+                
+
                 item.Discounts = GetSales(item);
 
                 ApplyItemToExistingCoupons(ref item);
@@ -316,8 +321,9 @@ namespace SnapRegisters
                 m_connection.WriteNoResponse("AddOrderItem_ProductID @0, @1, @2", item.ID, OrderID, item.Price);
         }
 
-        private Item ConstructItem(string itemID, decimal? weight)
+        private Item ConstructItem(string itemID, Scale.Scale theScale)
         {
+            
             m_connection.Write("GetItem @0", itemID);
 
             try
@@ -335,20 +341,63 @@ namespace SnapRegisters
                 //If the item is sold by weight
                 if (it.Get("Weighable")[0] == '1')
                 {
-                    if (weight == 0)
+                   
+
+                    if (theScale.GetWeightAsDecimal() == 0)
                         throw new InvalidOperationException("Please place items on the scale before continuing.");
-                    if (weight == null)
+                    if (theScale.GetWeightAsDecimal() == null)
                         throw new InvalidOperationException("Scale not found. Please check your connection.");
-                    if (weight == -1)
+                    if (theScale.GetWeightAsDecimal() == -1)
                         throw new InvalidOperationException("Please remove items and recalibrate the scale before continuing.");
 
-                    price = decimal.Parse(it.Get("Price")) * Convert.ToDecimal(weight);
+
+                    while (!theScale._isStable) ;
+
+                    price = decimal.Parse(it.Get("Price")) * Convert.ToDecimal(theScale.GetWeightAsDecimal());
 
                     //Display how heavy 
-                    name += " " + Math.Round((decimal)weight, 2) + " Lb " + "@ $" + Math.Round(decimal.Parse(it.Get("Price")), 2)+ "/Lb";
+                    name += " " + Math.Round((decimal)theScale.GetWeightAsDecimal(), 2) + " Lb " + "@ $" + Math.Round(decimal.Parse(it.Get("Price")), 2) + "/Lb";
                 }
-                else    //Regular item
+                else    //Regular item - CHECK FOR CORRECT WEIGHT HERE
                 {
+#if DEBUG //Change this tag if you want to disable weight checking for fixed-weight items
+                    if (theScale.IsConnected) //If a scale is connected, check for correct weight
+                    {
+
+                        if (it.Get("Weight") == "0.00" )   //If the weight is 0, it is assumed that this item doesn't need to be weighed (e.g. a 5 pack of bananas)
+                        {
+                            
+
+                        }
+                        else
+                        {
+                            if (theScale.GetWeightAsDecimal() == null)
+                                throw new InvalidOperationException("Scale not found. Please check your connection.");
+                            if (theScale.GetWeightAsDecimal() == -1)
+                                throw new InvalidOperationException("Please remove items and recalibrate the scale before continuing.");
+
+
+                            while (!theScale._isStable || theScale.Status() == 0x2) { theScale.GetWeightAsDecimal(); Thread.Sleep(50); }
+
+                            decimal? realWeight = theScale.GetWeightAsDecimal();
+
+                            decimal dbItemWeight = decimal.Parse(it.Get("Weight"));
+                            if (
+                                ( realWeight > (dbItemWeight * (1 + errorMargin)))
+                                || (realWeight < (dbItemWeight * (1 - errorMargin))))
+                            {
+                                throw new InvalidOperationException("Weight is incorrect. Please try again.");
+                            }
+
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+#endif
+
                     price = decimal.Parse(it.Get("Price"));
                 }
 

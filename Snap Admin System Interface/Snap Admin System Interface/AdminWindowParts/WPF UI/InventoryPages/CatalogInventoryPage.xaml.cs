@@ -357,16 +357,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
             int quantity;
             decimal weightOfItem = 0;
 
-            //TODO: Change the database access call to accomodate, 
-            //once the database is changed to be compatible
-            if (PriceIsPerLb.IsChecked == true)
-            {
-                //Change the upcoming query to add the item as a
-                //"price per weight" item.
-
-                //TODO: Item needs to be entered in the database as a weight-based item.
-                weightOfItem = Convert.ToDecimal(ItemWeight.Text);
-            }
+            decimal.TryParse(ItemWeight.Text, out weightOfItem);
 
             if( BarcodeAddBox.Text == string.Empty )
                 BarcodeAddBox.Focus();
@@ -394,6 +385,8 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI.InventoryPages
                         , Barcode = BarcodeAddBox.Text
                         , Quantity = quantity
                         , Active = true
+                        , Weight = weightOfItem
+                        , Weighable = PriceIsPerLb.IsChecked == true
                     } );
                     LoadItems();
 

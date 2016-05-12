@@ -238,6 +238,7 @@
                 </StackPanel>
 
             </Popup>
+            <!--<TextBlock x:Name="scaleStatusTextBlock" TextWrapping="Wrap" Text="status" Margin="303,0,151,0"/>-->
 
         </StackPanel>
         <Frame x:Name="Main_Frame" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden"/>

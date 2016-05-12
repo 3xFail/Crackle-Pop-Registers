@@ -54,8 +54,9 @@
     <Reference Include="NumberTextBox">
       <HintPath>..\..\..\JP Folder\NumberTextBox\NumberTextBox\bin\Debug\NumberTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="Scale">
-      <HintPath>..\..\SharedResources\Scale.dll</HintPath>
+    <Reference Include="Scale, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Scale\Scale\bin\Debug\Scale.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

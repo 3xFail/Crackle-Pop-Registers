@@ -113,7 +113,20 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.WPF_UI
             DataGridRow row = sender as DataGridRow;
             Item item = ( sender as DataGridRow ).Item as Item;
 
-            m_win.m_transaction.AddItem(item.Barcode, m_win.m_scale.GetWeightAsDecimal());
+            try
+            {
+                m_win.m_transaction.AddItem(item.Barcode, m_win.m_scale);
+            }
+            catch( InvalidOperationException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
+        }
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Search_Button_Click(null, null);
         }
     }
 

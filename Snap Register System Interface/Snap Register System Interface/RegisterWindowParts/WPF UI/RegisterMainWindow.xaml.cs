@@ -137,11 +137,25 @@ namespace SnapRegisters
             }
         }
 
+        //internal string m_scaleStatusTextBox
+        //{
+        //    get { return scaleStatusTextBlock.Text; }
+        //    set
+        //    {
+        //        Dispatcher.Invoke(new Action(() =>
+        //        {
+        //            scaleStatusTextBlock.Text = value;
+        //        }));
+        //    }
+
+        //}
+
         //private PaymentWindow m_pay_window;
 
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
+            
 
             //Updates the clock constantly
             DispatcherTimer clockUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 1),
@@ -278,7 +292,8 @@ namespace SnapRegisters
 
                     if (UPCField.Text != string.Empty)
                     {
-                        m_transaction.AddItem(UPCField.Text, weight); //try constructing an item
+                        m_transaction.AddItem(UPCField.Text, m_scale); //try constructing an item
+
                         UPCField.Clear();
                     }
                 }

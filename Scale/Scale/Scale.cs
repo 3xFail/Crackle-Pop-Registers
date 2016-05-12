@@ -28,8 +28,8 @@ namespace Scale
 
 
         private decimal? _weight;
-
-        public bool _isStable;
+        private decimal? _lastWeight = 0;
+        public volatile bool _isStable;
 
 
         public bool IsConnected
@@ -53,7 +53,7 @@ namespace Scale
 
             if (IsConnected)
             {
-                GetWeightFromScale();
+                GetWeightFromScale(false);
                 if (Status() == 5)
                 {
                     return "neg";
@@ -75,7 +75,7 @@ namespace Scale
 
             if (IsConnected)
             {
-                GetWeightFromScale();
+                GetWeightFromScale(true);
                 if (Status() == 5)
                 {
                     return -1;
@@ -136,11 +136,13 @@ namespace Scale
         }
 
 
-        private void GetWeightFromScale()
+        private void GetWeightFromScale(bool updateStableStatus)
         {
 
             _weight = null;
+
             _isStable = false;
+
 
             _data = _scale.Read(250);
 
@@ -173,7 +175,15 @@ namespace Scale
                             //Already in pounds, don't need to do anything
                     break;
             }
-            _isStable = _data.Data[1] == 0x4;
+
+
+            _isStable = _lastWeight == _weight;
+            if (updateStableStatus)
+                _lastWeight = _weight ?? 0M;
+
+
+
+            //Thread.Sleep(300);
         }
 
 
@@ -187,9 +197,12 @@ namespace Scale
         //          6 == Over Weight
         //          7 == Requires Calibration
         //          8 == Requires Re-Zeroing
-        private decimal Status()
+        public decimal Status()
         {
-            return _data.Data[1];
+            if (IsConnected)
+                return _data.Data[1];
+            else
+                return 9999;
         }
 
 
