@@ -82,9 +82,9 @@ namespace SnapRegisters
 
 
             System.Windows.Forms.PictureBox lePictureBox = new System.Windows.Forms.PictureBox();
-            lePictureBox.Width = 200;
-            lePictureBox.Image = leEmblem;
 
+            lePictureBox.Image = leEmblem;
+            lePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 
 
             windowsFormsHost1.Child = lePictureBox;

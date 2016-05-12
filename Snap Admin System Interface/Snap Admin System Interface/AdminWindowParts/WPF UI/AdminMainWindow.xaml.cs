@@ -52,13 +52,22 @@ namespace SnapRegisters
 
 
             //dynamically draw the emblem 
-            System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
-            
-            System.Windows.Forms.PictureBox lePictureBox = new System.Windows.Forms.PictureBox();
-            //lePictureBox.Width = 200;
-            lePictureBox.Image = leEmblem;
+            //System.Drawing.Image leEmblem = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png");
+
+            System.Windows.Forms.PictureBox lePictureBox = new System.Windows.Forms.PictureBox
+            {   Name = "logoPictureBox",
+                Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\SharedResources\\Images\\Emblem.png"),
+                SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+            };
+
+            lePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 
             windowsFormsHost2.Child = lePictureBox;
+                
+            //lePictureBox.Width = 200;
+            //lePictureBox.Image = leEmblem;
+
+            //windowsFormsHost2.Child = lePictureBox;
 
 
             //Do not use until all permissions groups have settings pages.

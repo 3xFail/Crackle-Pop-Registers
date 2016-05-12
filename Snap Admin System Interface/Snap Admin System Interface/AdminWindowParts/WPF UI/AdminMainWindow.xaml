@@ -9,7 +9,7 @@
         Title="Snap Admininstrator Program" Icon="/SharedResources/Images/Emblem.png"
         
         WindowState="Maximized" WindowStyle="None"  Height="840" Width="1293.6" Closing="Window_Closing">
-    
+
     <!--Height="350" Width="525">-->
     <!--WindowState="Maximized"  WindowStyle="SingleBorderWindow" d:DesignHeight="843.9" Width="1170.8">-->
 
@@ -27,12 +27,13 @@
         </Grid.ColumnDefinitions>
 
 
-        
+
         <!--<Image x:Name="Logo" Source="/SharedResources/Images/Emblem.png" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center" />-->
         <!--panel of main navigational buttons-->
-        <Viewbox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Width="50" Height="50">
-            <WindowsFormsHost HorizontalAlignment="Center" x:Name="windowsFormsHost2" Grid.RowSpan="2" />
-        </Viewbox>
+        <!--panel of main navigational buttons-->
+        <Canvas Background="{StaticResource Background}" Grid.Column="0" Grid.Row="0" >
+            <WindowsFormsHost Background="{StaticResource Background}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="windowsFormsHost2" Width="175" Height="175" Canvas.Left="5" Canvas.Top="5"/>
+        </Canvas>
         <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >
             <StackPanel VerticalAlignment="Bottom">
