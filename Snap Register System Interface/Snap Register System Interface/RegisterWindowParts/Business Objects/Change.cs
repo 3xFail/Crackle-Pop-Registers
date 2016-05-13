@@ -63,8 +63,7 @@ namespace Snap_Register_System_Interface.RegisterWindowParts.Business_Objects
 
             if( cents == 0 ) return;
 
-            pennies = cents / 1;
-            cents -= pennies * 1;
+            pennies = cents;
         }
 
     }

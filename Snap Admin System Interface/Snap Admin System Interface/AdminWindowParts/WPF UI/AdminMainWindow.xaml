@@ -32,7 +32,7 @@
         <!--panel of main navigational buttons-->
         <!--panel of main navigational buttons-->
         <Canvas Background="{StaticResource Background}" Grid.Column="0" Grid.Row="0" >
-            <WindowsFormsHost Background="{StaticResource Background}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="windowsFormsHost2" Width="175" Height="175" Canvas.Left="5" Canvas.Top="5"/>
+            <WindowsFormsHost Background="{StaticResource Background}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="windowsFormsHost2" Width="116" Height="101" Canvas.Left="5" Canvas.Top="5"/>
         </Canvas>
         <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >

@@ -155,27 +155,14 @@ namespace SnapRegisters
         public RegisterMainWindow(Employee currentEmployee, ConnectionSession session)
         {
 
+            InitializeComponent();
 
-
+            dateText.Text = DateTime.Now.ToString( "hh:mm tt" );
             //Updates the clock constantly
             DispatcherTimer clockUpdateTimer = new DispatcherTimer(new TimeSpan(0, 0, 1),
                                                         DispatcherPriority.Normal,
                                                         delegate { this.dateText.Text = DateTime.Now.ToString("hh:mm tt"); },
                                                         this.Dispatcher);
-
-
-
-            //Delays showing the window until the clock is guaranteed to have already ticked once (ticks once per second).
-            //Doesn't delay the in debug mode for quicker development
-#if !DEBUG
-			System.Threading.Thread.Sleep(1100);
-#endif
-
-            //Initialize window after the clock is ticked
-            InitializeComponent();
-
-
-
 
             //Updating Scale Data in a separate thread
             m_scale = new Scale.Scale();
@@ -185,13 +172,9 @@ namespace SnapRegisters
             //Starts the scale thread
             m_scaleWorkerThread.Start();
 
-
             //Wait for the thread to start
             while (!m_scaleWorkerThread.IsAlive) ;
             Thread.Sleep(1);
-
-
-
 
             m_employee = currentEmployee;
             m_connection = session;
@@ -202,7 +185,6 @@ namespace SnapRegisters
 
             //Sets the username to the employee that logged in
             LoggedInAs.Text = currentEmployee.name;
-
 
             //dynamically draw the emblem
             //Image leEmblem = new Image();

@@ -241,10 +241,7 @@ namespace SnapRegisters
                         item.AddDiscount(coupon);
 
                 m_Coupons.Add(coupon);
-
                 m_CouponOutputDelegate(coupon);
-
-
             }
             catch (InvalidOperationException e)
             {
@@ -288,17 +285,15 @@ namespace SnapRegisters
             // Checks to make sure the item was valid before removing it from the list.
             try
             {
-                Item containingItem = m_Items.Find(x => x == itemToChange);
+                //Item containingItem = m_Items.Find(x => x == itemToChange);
 
-                IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
+                //IDiscount discount = containingItem.Discounts.Find(x => x == discountToChange);
 
                 // This function does not appear to do what it's name implies.
                 //discount.ChangeAmountTo(amount);
 
-                itemToChange.Price += discount.Amount - amount;
-                discount.Amount = amount;
-
-
+                itemToChange.Price += discountToChange.Amount - amount;
+                discountToChange.Amount = amount;
             }
             catch (InvalidOperationException e)
             {
@@ -307,12 +302,7 @@ namespace SnapRegisters
         }
         public void Checkout()
         {
-            object id;
-
-            if (m_customer == null)
-                id = DBNull.Value;
-            else
-                id = m_customer.cust_id;
+            object id = m_customer?.cust_id ?? (object)DBNull.Value; //cust_id or DBNull if m_cust is null
 
             m_connection.Write("CreateOrder @0, @1", id, m_Employee.ID);
             int OrderID = int.Parse(m_connection.Response[0].Get("OrderID"));
@@ -335,8 +325,6 @@ namespace SnapRegisters
                     throw new InvalidOperationException("Cannot sell inactive item \"" + name + "\"");
 
                 decimal price = 0;
-
-
 
                 //If the item is sold by weight
                 //Can't disable to bypass this, because how can you construct
