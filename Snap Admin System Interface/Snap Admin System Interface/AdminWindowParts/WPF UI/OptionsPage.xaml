@@ -10,30 +10,9 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="MngBtn" Content="Manage Registers" Height="50" Width="125" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="LogoBtn" Content="Change Logo" Height="50" Width="125" Click="LogoBtn_Click" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="ColorBtn" Content="Change Color Scheme" Height="50" Width="125">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="MngBtn" Content="Manage Registers" Background="{StaticResource ButtonColor}" Height="50" Width="125" Margin="0,0,20,0"/>
+            <Button x:Name="LogoBtn" Content="Change Logo" Background="{StaticResource ButtonColor}" Height="50" Width="125" Click="LogoBtn_Click" Margin="0,0,20,0"/>
+            <Button x:Name="ColorBtn" Content="Change Color Scheme" Background="{StaticResource ButtonColor}" Height="50" Width="125"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -28,26 +28,12 @@
         <Label x:Name="CouponNameLabel" Content="Coupon Name:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="BarcodeTextBox" HorizontalAlignment="Left" Height="23" Margin="66,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162"/>
         <TextBox x:Name="CouponNameTextBox" HorizontalAlignment="Left" Height="23" Margin="100,67,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="128"/>
-        <Button x:Name="AddCouponButton" Content="Add Coupon" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="75" Click="AddCouponButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.4333"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="AddCouponButton" Content="Add Coupon" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="75" Click="AddCouponButton_Click"/>
         <CheckBox x:Name="FlatDiscountCheckBox" Content="Flat Discount" HorizontalAlignment="Left" Margin="16,105,0,0" VerticalAlignment="Top" IsChecked="True" Checked="FlatDiscountCheckBox_Checked"/>
         <CheckBox x:Name="PercentDiscountCheckBox" Content="Percent Discount" HorizontalAlignment="Left" Margin="119,105,0,0" VerticalAlignment="Top" Checked="PercentDiscountCheckBox_Checked"/>
         <currency:CurrencyTextBox x:Name="FlatDiscountCurrencyBox" Margin="16,127,738,0" Height="21" VerticalAlignment="Top" />
         <digit:DigitBox x:Name="PercentDiscountDigitBox" IsEnabled="False" Margin="119,127,635,0" Height="21" VerticalAlignment="Top" />
         <Label x:Name="PercentLabel" Content="%" HorizontalAlignment="Left" Margin="169,122,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.4333"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="RefreshButton" Content="Refresh" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
     </Grid>
 </Page>

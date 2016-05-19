@@ -30,24 +30,10 @@
         <DatePicker x:Name="StartDatePicker" HorizontalAlignment="Left" Margin="94,80,0,0" VerticalAlignment="Top"/>
         <Label x:Name="EndDateSearchLabel" Content="and" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="EndDatePicker" HorizontalAlignment="Left" Margin="40,110,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Click="SearchButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="SearchButton" Content="Search" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Click="SearchButton_Click"/>
         <Label x:Name="DurationLabel" Content="Duration longer than " HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
         <digit:DigitBox x:Name="DurationTextBox" Margin="128,146,-61,-143" VerticalAlignment="Top" HorizontalAlignment="Left" Width="41" />
         <Label x:Name="MinutesLabel" Content="minutes." HorizontalAlignment="Left" Height="24" Margin="169,140,-161,-143" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Height="21" Margin="10,295,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="RefreshButton" Content="Refresh" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Height="21" Margin="10,295,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
     </Grid>
 </Page>

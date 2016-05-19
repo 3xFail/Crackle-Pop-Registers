@@ -13,22 +13,8 @@
         <TextBox Name="txtResponse" Margin="0,5"/>
         <PasswordBox Name="txtPasswordResponse" />
         <StackPanel Orientation="Horizontal" Margin="0,5,5,5" HorizontalAlignment="Right" Width="100">
-            <Button Content="_Ok" IsDefault="True" Margin="5" x:Name="btnOk" Click="btnOk_Click" Width="40">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="_Cancel" IsCancel="True" Margin="5" x:Name="btnCancel" Click="btnCancel_Click" Width="40">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button Content="_Ok" Background="{StaticResource ButtonColor}" IsDefault="True" Margin="5" x:Name="btnOk" Click="btnOk_Click" Width="40"/>
+            <Button Content="_Cancel" Background="{StaticResource ButtonColor}" IsCancel="True" Margin="5" x:Name="btnCancel" Click="btnCancel_Click" Width="40"/>
         </StackPanel>
     </StackPanel>
 </Window>

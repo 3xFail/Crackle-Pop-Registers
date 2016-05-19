@@ -56,8 +56,20 @@
 			Used as the border color.
 	-->
 	<SolidColorBrush x:Key="DefaultColor" Color="Black"/>
-	
-	<!--
+
+    <!--
+	Name:
+		Button color
+	Location Used:
+		Register and Admin Interface
+			Used as the button color unless otherwise specified.
+	-->
+    <LinearGradientBrush x:Key="ButtonColor" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFAAAAAA" Offset="1"/>
+        <GradientStop Color="White" Offset="0.433"/>
+    </LinearGradientBrush>
+
+    <!--
 	Name:
 		FontSizeMedium
 	Location Used:
