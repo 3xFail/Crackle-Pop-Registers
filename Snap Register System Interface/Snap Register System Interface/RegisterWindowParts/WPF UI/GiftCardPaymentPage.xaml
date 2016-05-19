@@ -21,22 +21,8 @@
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width=".5*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.Row="4" Name="Gift_Card_Entry_Next" Content="Next" Height="40" Width="100" Click="Gift_Card_Entry_Next_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button Grid.Column="1" Grid.Row="4" Name="Gift_Card_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="Gift_Card_Entry_Cancel_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                <Button Background="{StaticResource ButtonColor}" Grid.Column="0" Grid.Row="4" Name="Gift_Card_Entry_Next" Content="Next" Height="40" Width="100" Click="Gift_Card_Entry_Next_Click"/>
+                <Button Background="{StaticResource ButtonColor}" Grid.Column="1" Grid.Row="4" Name="Gift_Card_Entry_Cancel" Content="Cancel" Height="40" Width="100" Click="Gift_Card_Entry_Cancel_Click"/>
 
             </Grid>
         </Grid>

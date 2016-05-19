@@ -20,22 +20,8 @@
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width=".5*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Name="Manual_Entry_CC_Button" Width="100" Height="40" Content="Manual" Click="Manual_Entry_CC_Button_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button Grid.Column="1" Name="Swipe_Entry_CC_Button" Width="100" Height="40" Content="Swipe" Click="Swipe_Entry_CC_Button_Click">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                <Button Grid.Column="0" Name="Manual_Entry_CC_Button" Background="{StaticResource ButtonColor}" Width="100" Height="40" Content="Manual" Click="Manual_Entry_CC_Button_Click"/>
+                <Button Grid.Column="1" Name="Swipe_Entry_CC_Button" Background="{StaticResource ButtonColor}" Width="100" Height="40" Content="Swipe" Click="Swipe_Entry_CC_Button_Click"/>
             </Grid>
 
         </Grid>

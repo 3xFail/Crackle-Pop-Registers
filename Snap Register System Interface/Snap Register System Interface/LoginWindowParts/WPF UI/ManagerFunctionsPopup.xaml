@@ -8,38 +8,10 @@
         >
     <Grid VerticalAlignment="Center">
         <StackPanel HorizontalAlignment="Center">
-            <Button Content="Exit to Desktop" Width="120" Height="40" Margin="10">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="Restart Station" Width="120" Height="40" Margin="10">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="Shut Down Station" Width="120" Height="40" Margin="10">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button Content="Cancel" Width="120" Height="40" Margin="10" Click="Button_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button Content="Exit to Desktop" Background="{StaticResource ButtonColor}" Width="120" Height="40" Margin="10"/>
+            <Button Content="Restart Station" Background="{StaticResource ButtonColor}" Width="120" Height="40" Margin="10"/>
+            <Button Content="Shut Down Station" Background="{StaticResource ButtonColor}" Width="120" Height="40" Margin="10"/>
+            <Button Content="Cancel" Background="{StaticResource ButtonColor}" Width="120" Height="40" Margin="10" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Popup>

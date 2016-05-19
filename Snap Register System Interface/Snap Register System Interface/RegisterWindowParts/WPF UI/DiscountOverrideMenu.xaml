@@ -36,28 +36,16 @@
                 <Viewbox Grid.Column="0"
 					 VerticalAlignment="Bottom">
                     <Button x:Name="ChangeDiscountButton" Content="Change Discount" 
-						Height="100" Width="160"
-						Margin="8" Click="ChangeDiscountButtonClick">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                <GradientStop Color="White" Offset="0.433"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
+						Background="{StaticResource ButtonColor}"
+                        Height="100" Width="160"
+						Margin="8" Click="ChangeDiscountButtonClick"/>
                 </Viewbox>
                 <Viewbox Grid.Column="1"
 					 VerticalAlignment="Bottom">
                     <Button x:Name="CancelButton" Content="Cancel" 
-						Height="100" Width="160"
-						Margin="8" Click="CancelButtonClick">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                <GradientStop Color="White" Offset="0.433"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
+						Background="{StaticResource ButtonColor}"
+                        Height="100" Width="160"
+						Margin="8" Click="CancelButtonClick"/>
                 </Viewbox>
             </Grid>
         </Grid>
