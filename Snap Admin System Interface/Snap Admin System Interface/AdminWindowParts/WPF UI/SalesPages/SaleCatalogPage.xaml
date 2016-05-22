@@ -8,15 +8,14 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="CouponCatalog">
 
-    <Grid>
-        <DataGrid x:Name="SaleGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="10,10,0,0" VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
-                <DataGridCheckBoxColumn Header="Flat/Percent" Binding="{Binding Path=IsFlat}"/>
-                <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-    </Grid>
+	<Grid>
+		<DataGrid x:Name="SaleGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="10,10,0,0" VerticalAlignment="Top">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
+				<DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+				<DataGridCheckBoxColumn Header="Flat/Percent" Binding="{Binding Path=IsFlat}"/>
+				<DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </Page>

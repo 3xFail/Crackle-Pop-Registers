@@ -16,17 +16,46 @@ namespace RegisterUI_TestSolution
 	/// Summary description for CodedUITest1
 	/// </summary>
 	[CodedUITest]
-	public class CodedUITest1
+	public class RegisterUITests
 	{
-		public CodedUITest1()
+		public RegisterUITests()
 		{
 		}
 
 		[TestMethod]
-		public void CodedUITestMethod1()
+		public void Login()
 		{
-			// To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
+
+			this.UIMap.Login();
 		}
+
+		[TestMethod]
+		public void Logout()
+		{
+			this.UIMap.Login();
+			this.UIMap.Logout();
+		}
+
+		[TestMethod]
+		public void AddSingleItem()
+		{
+			this.UIMap.Login();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Assert_Single_Plain_Item();
+			this.UIMap.Logout();
+		}
+
+		[TestMethod]
+		public void AddMultiplePlainItems()
+		{
+			this.UIMap.Login();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Assert_Multiple_Plain_Items();
+			this.UIMap.Logout();
+		}
+
 
 		#region Additional test attributes
 
@@ -64,5 +93,20 @@ namespace RegisterUI_TestSolution
 			}
 		}
 		private TestContext testContextInstance;
+
+		public UIMap UIMap
+		{
+			get
+			{
+				if ((this.map == null))
+				{
+					this.map = new UIMap();
+				}
+
+				return this.map;
+			}
+		}
+
+		private UIMap map;
 	}
 }

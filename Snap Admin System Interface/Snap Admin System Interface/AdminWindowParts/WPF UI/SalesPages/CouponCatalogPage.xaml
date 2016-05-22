@@ -11,17 +11,17 @@
       Background="{StaticResource Base}"
       Title="CouponCatalog">
 
-    <Grid Margin="0,0,-504,0" HorizontalAlignment="Left" Width="804">
-        <DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="251,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged" PreviewKeyDown="CouponGrid_PreviewKeyDown" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}"/>
-                <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
-                <DataGridCheckBoxColumn Header="Flat/Percent" Binding="{Binding Path=IsFlat}"/>
-                <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="622,14,0,0" VerticalAlignment="Top"/>
+	<Grid Margin="0,0,-504,0" HorizontalAlignment="Left" Width="804">
+		<DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="251,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged" PreviewKeyDown="CouponGrid_PreviewKeyDown" >
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
+				<DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}"/>
+				<DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
+				<DataGridCheckBoxColumn Header="Flat/Percent" Binding="{Binding Path=IsFlat}"/>
+				<DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="622,14,0,0" VerticalAlignment="Top"/>
         <Border Background="{StaticResource Background}" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="126" Margin="10,33,0,0" VerticalAlignment="Top" Width="226"/>
         <Label x:Name="AddCouponLabel" Content="Add Coupon:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="17"/>
         <Label x:Name="BarcodeLabel" Content="Barcode:" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
