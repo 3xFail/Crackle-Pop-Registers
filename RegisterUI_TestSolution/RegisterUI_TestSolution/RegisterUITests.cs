@@ -56,6 +56,27 @@ namespace RegisterUI_TestSolution
 			this.UIMap.Logout();
 		}
 
+		[TestMethod]
+		public void RemoveTopItem()
+		{
+			this.UIMap.Login();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Remove_Top_Item();
+			this.UIMap.Assert_Empty_Transaction();
+			this.UIMap.Logout();
+		}
+		[TestMethod]
+		public void RemoveMiddleItem()
+		{
+			this.UIMap.Login();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Remove_2nd_Item();
+			this.UIMap.Assert_Removed_Middle_Item();
+			this.UIMap.Logout();
+		}
+
 
 		#region Additional test attributes
 

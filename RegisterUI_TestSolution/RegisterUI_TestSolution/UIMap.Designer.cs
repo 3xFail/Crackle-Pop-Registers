@@ -159,6 +159,96 @@ namespace RegisterUI_TestSolution
             Assert.AreEqual(this.Assert_Multiple_Plain_ItemsExpectedValues.UIItem1000Text1DisplayText, uIItem1000Text11.DisplayText);
         }
         
+        /// <summary>
+        /// Removes the item from the top of the transaction
+        /// </summary>
+        public void Remove_Top_Item()
+        {
+            #region Variable Declarations
+            WpfText uITestItemPlainText = this.UIMainWindowWindow.UIItemScrollPane.UITestItemPlainText;
+            WpfButton uIRemoveItemButton = this.UIWpfWindow.UIItemCustom.UIRemoveItemButton;
+            #endregion
+
+            // Click 'Test Item: Plain' label
+            Mouse.Click(uITestItemPlainText, new Point(69, 17));
+
+            // Click 'Remove Item' button
+            Mouse.Click(uIRemoveItemButton, new Point(140, 35));
+        }
+        
+        /// <summary>
+        /// Checks to make sure the totals are 0.
+        /// </summary>
+        public void Assert_Empty_Transaction()
+        {
+            #region Variable Declarations
+            WpfText uIItem1000Text = this.UIMainWindowWindow.UIItem1000Text;
+            WpfText uIItem000Text = this.UIMainWindowWindow.UIItem000Text;
+            WpfText uIItem1000Text1 = this.UIMainWindowWindow.UIItem1000Text1;
+            #endregion
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$0.00'
+            Assert.AreEqual(this.Assert_Empty_TransactionExpectedValues.UIItem1000TextDisplayText, uIItem1000Text.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+            Assert.AreEqual(this.Assert_Empty_TransactionExpectedValues.UIItem000TextDisplayText, uIItem000Text.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$0.00'
+            Assert.AreEqual(this.Assert_Empty_TransactionExpectedValues.UIItem1000Text1DisplayText, uIItem1000Text1.DisplayText);
+        }
+        
+        /// <summary>
+        /// Removes the second item from the transaction.
+        /// </summary>
+        public void Remove_2nd_Item()
+        {
+            #region Variable Declarations
+            WpfText uITestItemPlainText = this.UIMainWindowWindow.UIItemScrollPane.UITestItemPlainText;
+            WpfButton uIRemoveItemButton = this.UIWpfWindow.UIItemCustom.UIRemoveItemButton;
+            #endregion
+
+            // Click 'Test Item: Plain' label
+            Mouse.Click(uITestItemPlainText, new Point(84, 16));
+
+            // Click 'Remove Item' button
+            Mouse.Click(uIRemoveItemButton, new Point(130, 22));
+        }
+        
+        /// <summary>
+        /// Asserts that the totals are correct for a scenario where there are 3 items with no coupons and then the middle item is removed.
+        /// </summary>
+        public void Assert_Removed_Middle_Item()
+        {
+            #region Variable Declarations
+            WpfText uITestItemPlainText = this.UIMainWindowWindow.UIItemScrollPane.UITestItemPlainText;
+            WpfText uIItem1000Text = this.UIMainWindowWindow.UIItemScrollPane.UIItem1000Text;
+            WpfText uIItem1000Text1 = this.UIMainWindowWindow.UIItem1000Text;
+            WpfText uIItem000Text = this.UIMainWindowWindow.UIItem000Text;
+            WpfText uIItem1000Text11 = this.UIMainWindowWindow.UIItem1000Text1;
+            #endregion
+
+            // Verify that the 'DisplayText' property of 'Test Item: Plain' label equals 'Test Item: Plain'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UITestItemPlainTextDisplayText, uITestItemPlainText.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$10.00'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UIItem1000TextDisplayText, uIItem1000Text.DisplayText);
+
+            // Verify that the 'DisplayText' property of 'Test Item: Plain' label equals 'Test Item: Plain'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UITestItemPlainTextDisplayText1, uITestItemPlainText.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$10.00'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UIItem1000TextDisplayText1, uIItem1000Text.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$20.00'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UIItem1000TextDisplayText2, uIItem1000Text1.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UIItem000TextDisplayText, uIItem000Text.DisplayText);
+
+            // Verify that the 'DisplayText' property of '$10.00' label equals '$20.00'
+            Assert.AreEqual(this.Assert_Removed_Middle_ItemExpectedValues.UIItem1000Text1DisplayText, uIItem1000Text11.DisplayText);
+        }
+        
         #region Properties
         public virtual Add_Item_PlainParams Add_Item_PlainParams
         {
@@ -208,6 +298,30 @@ namespace RegisterUI_TestSolution
             }
         }
         
+        public virtual Assert_Empty_TransactionExpectedValues Assert_Empty_TransactionExpectedValues
+        {
+            get
+            {
+                if ((this.mAssert_Empty_TransactionExpectedValues == null))
+                {
+                    this.mAssert_Empty_TransactionExpectedValues = new Assert_Empty_TransactionExpectedValues();
+                }
+                return this.mAssert_Empty_TransactionExpectedValues;
+            }
+        }
+        
+        public virtual Assert_Removed_Middle_ItemExpectedValues Assert_Removed_Middle_ItemExpectedValues
+        {
+            get
+            {
+                if ((this.mAssert_Removed_Middle_ItemExpectedValues == null))
+                {
+                    this.mAssert_Removed_Middle_ItemExpectedValues = new Assert_Removed_Middle_ItemExpectedValues();
+                }
+                return this.mAssert_Removed_Middle_ItemExpectedValues;
+            }
+        }
+        
         public UIMainWindowWindow UIMainWindowWindow
         {
             get
@@ -217,6 +331,18 @@ namespace RegisterUI_TestSolution
                     this.mUIMainWindowWindow = new UIMainWindowWindow();
                 }
                 return this.mUIMainWindowWindow;
+            }
+        }
+        
+        public UIWpfWindow UIWpfWindow
+        {
+            get
+            {
+                if ((this.mUIWpfWindow == null))
+                {
+                    this.mUIWpfWindow = new UIWpfWindow();
+                }
+                return this.mUIWpfWindow;
             }
         }
         #endregion
@@ -230,7 +356,13 @@ namespace RegisterUI_TestSolution
         
         private Assert_Multiple_Plain_ItemsExpectedValues mAssert_Multiple_Plain_ItemsExpectedValues;
         
+        private Assert_Empty_TransactionExpectedValues mAssert_Empty_TransactionExpectedValues;
+        
+        private Assert_Removed_Middle_ItemExpectedValues mAssert_Removed_Middle_ItemExpectedValues;
+        
         private UIMainWindowWindow mUIMainWindowWindow;
+        
+        private UIWpfWindow mUIWpfWindow;
         #endregion
     }
     
@@ -380,6 +512,76 @@ namespace RegisterUI_TestSolution
         /// Verify that the 'DisplayText' property of '$10.00' label equals '$30.00'
         /// </summary>
         public string UIItem1000Text1DisplayText = "$30.00";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'Assert_Empty_Transaction'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class Assert_Empty_TransactionExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$0.00'
+        /// </summary>
+        public string UIItem1000TextDisplayText = "$0.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+        /// </summary>
+        public string UIItem000TextDisplayText = "$0.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$0.00'
+        /// </summary>
+        public string UIItem1000Text1DisplayText = "$0.00";
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'Assert_Removed_Middle_Item'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class Assert_Removed_Middle_ItemExpectedValues
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Verify that the 'DisplayText' property of 'Test Item: Plain' label equals 'Test Item: Plain'
+        /// </summary>
+        public string UITestItemPlainTextDisplayText = "Test Item: Plain";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$10.00'
+        /// </summary>
+        public string UIItem1000TextDisplayText = "$10.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of 'Test Item: Plain' label equals 'Test Item: Plain'
+        /// </summary>
+        public string UITestItemPlainTextDisplayText1 = "Test Item: Plain";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$10.00'
+        /// </summary>
+        public string UIItem1000TextDisplayText1 = "$10.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$20.00'
+        /// </summary>
+        public string UIItem1000TextDisplayText2 = "$20.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$0.00' label equals '$0.00'
+        /// </summary>
+        public string UIItem000TextDisplayText = "$0.00";
+        
+        /// <summary>
+        /// Verify that the 'DisplayText' property of '$10.00' label equals '$20.00'
+        /// </summary>
+        public string UIItem1000Text1DisplayText = "$20.00";
         #endregion
     }
     
@@ -662,6 +864,70 @@ namespace RegisterUI_TestSolution
         private WpfText mUITestItemPlainText;
         
         private WpfText mUIItem1000Text;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIWpfWindow : WpfWindow
+    {
+        
+        public UIWpfWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties.Add(new PropertyExpression(WpfWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemCustom UIItemCustom
+        {
+            get
+            {
+                if ((this.mUIItemCustom == null))
+                {
+                    this.mUIItemCustom = new UIItemCustom(this);
+                }
+                return this.mUIItemCustom;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemCustom mUIItemCustom;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIItemCustom : WpfCustom
+    {
+        
+        public UIItemCustom(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.ItemEditMenu";
+            #endregion
+        }
+        
+        #region Properties
+        public WpfButton UIRemoveItemButton
+        {
+            get
+            {
+                if ((this.mUIRemoveItemButton == null))
+                {
+                    this.mUIRemoveItemButton = new WpfButton(this);
+                    #region Search Criteria
+                    this.mUIRemoveItemButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "RemoveItemButton";
+                    #endregion
+                }
+                return this.mUIRemoveItemButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WpfButton mUIRemoveItemButton;
         #endregion
     }
 }
