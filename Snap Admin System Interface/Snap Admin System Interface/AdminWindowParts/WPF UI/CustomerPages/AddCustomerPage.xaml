@@ -56,6 +56,7 @@
 
             <Button Content="Submit" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click"/>
             <Button Content="Reset" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click"/>
+            <Button Content="Back" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,159.6,10" Name="BackButton" VerticalAlignment="Bottom" Width="70" Click="BackButton_Click" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Page>

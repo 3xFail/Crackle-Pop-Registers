@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      Background="{StaticResource Background}"
       Title="CouponCatalog">
 
 	<Grid>
@@ -17,5 +18,6 @@
 				<DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
 			</DataGrid.Columns>
 		</DataGrid>
+        <Button Content="Back" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,10" Name="BackButton" VerticalAlignment="Bottom" Width="70" Click="BackButton_Click"/>
 	</Grid>
 </Page>

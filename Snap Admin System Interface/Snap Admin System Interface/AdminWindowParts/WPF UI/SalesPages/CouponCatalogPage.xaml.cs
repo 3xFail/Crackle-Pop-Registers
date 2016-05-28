@@ -267,5 +267,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             data.Clear();
             PopulateList();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

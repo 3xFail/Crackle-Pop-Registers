@@ -79,5 +79,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             Coupon coupon = (Coupon)o;
             return true;
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

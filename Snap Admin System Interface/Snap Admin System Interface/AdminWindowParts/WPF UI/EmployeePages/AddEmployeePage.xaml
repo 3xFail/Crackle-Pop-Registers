@@ -65,8 +65,9 @@
             <TextBlock x:Name="EmailAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="123,80,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
             <TextBlock x:Name="PhoneAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="103,200,0,0" Text="*" VerticalAlignment="Top" Width="5"/>
 
-            <Button Content="Submit" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click" Grid.Column="1"/>
+            <Button Content="Submit" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,9.6,10" Name="SubmitButton" VerticalAlignment="Bottom" Width="70" Click="SubmitButton_Click" Grid.Column="2"/>
             <Button Content="Reset" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,84.6,10" Name="ResetButton" VerticalAlignment="Bottom" Width="70" Click="ResetButton_Click" Grid.ColumnSpan="2"/>
+            <Button Content="Back" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,159.6,10" Name="BackButton" VerticalAlignment="Bottom" Width="70" Click="BackButton_Click" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="PasswordAstrisk" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="120,138,0,0" Text="*" VerticalAlignment="Top" Width="7"/>
         </Grid>
         <TextBlock x:Name="EmailAstrisk_Copy" Foreground="{StaticResource RequiredAsteriskColor}" HorizontalAlignment="Left" Height="17" Margin="141,441,0,0" Text="*" VerticalAlignment="Top" Width="5"/>

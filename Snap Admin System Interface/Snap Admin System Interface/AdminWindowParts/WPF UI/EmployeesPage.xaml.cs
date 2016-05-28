@@ -34,7 +34,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                EmpFrame.Navigate( new AddEmployeePage() );
+                //EmpFrame.Navigate( new AddEmployeePage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new AddEmployeePage());
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -49,7 +51,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                 if (!Permissions.CheckPermissions(DBInterface.m_employee, Permissions.ViewEmployeeCatalog))
                     throw new InvalidOperationException(Permissions.ErrorMessage(Permissions.ViewEmployeeCatalog));
 
-                EmpFrame.Navigate( new CatalogEmployeePage() );
+                //EmpFrame.Navigate( new CatalogEmployeePage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new CatalogEmployeePage());
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -61,7 +65,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                EmpFrame.Navigate( new UsageEmployeePage() );
+                //EmpFrame.Navigate( new UsageEmployeePage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new UsageEmployeePage());
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -73,7 +79,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                EmpFrame.Navigate( new LogEmployeePage() );
+                //EmpFrame.Navigate( new LogEmployeePage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new LogEmployeePage());
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -85,7 +93,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                EmpFrame.Navigate( new PermissionsPage() );
+                //EmpFrame.Navigate( new PermissionsPage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new PermissionsPage());
             }
             catch( UnauthorizedAccessException ex )
             {
