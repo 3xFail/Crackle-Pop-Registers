@@ -38,7 +38,7 @@
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >
             <StackPanel VerticalAlignment="Bottom">
                 <Button x:Name="Inventory_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Inv" Height="80" Content="Inventory"/>
-                <Button x:Name="Analysis_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80" Content="Analysis"/>
+                <!--<Button x:Name="Analysis_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80" Content="Analysis"/>-->
                 <Button x:Name="Employees_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Emp" Height="80" Content="Employees"/>
                 <Button x:Name="Customers_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80" Content="Customers"/>
                 <Button x:Name="Sales_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80" Content="Sales"/>
