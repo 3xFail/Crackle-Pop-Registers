@@ -41,6 +41,7 @@ namespace PointOfSales.Permissions
         public static readonly string CanAddNewItem = "Add New Item";
         public static readonly string ViewSaleCatalog = "View Sale Catalog";
         public static readonly string ModifyCoupon = "Modify Coupons";
+        public static readonly string ModifySale = "Modify Sale";
 
         public static readonly List<string> _Permissions = new List<string>()
         {
@@ -75,7 +76,7 @@ namespace PointOfSales.Permissions
             CanAddNewItem,
             ViewSaleCatalog,
             ModifyCoupon,
-
+            ModifySale,
         };
 
         private static readonly Dictionary<string, string> _ErrorStrings = new Dictionary<string, string>()
@@ -111,6 +112,7 @@ namespace PointOfSales.Permissions
             { CanAddNewItem, "You do not have permission to add a new item to the catalog" },
             { ViewSaleCatalog, "You do not have permission to view the sale catalog" },
             { ModifyCoupon, "You do not have permission to add remove or change a coupon" },
+            { ModifySale, "You do not have permission to add remove or change a sale" }
         };
 
         public static string ErrorMessage( string permission )

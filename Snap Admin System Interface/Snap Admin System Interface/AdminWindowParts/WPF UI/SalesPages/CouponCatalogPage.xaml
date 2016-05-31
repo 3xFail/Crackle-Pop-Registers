@@ -11,9 +11,19 @@
       Background="{StaticResource Base}"
       Title="CouponCatalog">
 
-    <Grid Margin="0,0,-504,0" HorizontalAlignment="Left" Width="804">
-        <DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserAddRows="False" Margin="251,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged" PreviewKeyDown="CouponGrid_PreviewKeyDown" >
+    <Grid Margin="0,0,-724,0" HorizontalAlignment="Left" Width="1024">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="CouponGrid" HorizontalAlignment="Left" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" CanUserAddRows="False" Margin="251,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged" PreviewKeyDown="CouponGrid_PreviewKeyDown" Width="403" >
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Commit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="CommitButton_Click" Width="50" Content="Commit"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding Path=Barcode}"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
@@ -21,13 +31,12 @@
                 <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="CheckBoxSP" HorizontalAlignment="Left" Margin="622,14,0,0" VerticalAlignment="Top"/>
         <Border Background="{StaticResource Background}" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="126" Margin="10,33,0,0" VerticalAlignment="Top" Width="226"/>
         <Label x:Name="AddCouponLabel" Content="Add Coupon:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="17"/>
-        <Label x:Name="BarcodeLabel" Content="Barcode:" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="CouponNameLabel" Content="Coupon Name:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="BarcodeTextBox" HorizontalAlignment="Left" Height="23" Margin="66,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162"/>
-        <TextBox x:Name="CouponNameTextBox" HorizontalAlignment="Left" Height="23" Margin="100,67,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="128"/>
+        <Label x:Name="BarcodeLabel" Content="Barcode:" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="CouponNameLabel" Content="Coupon Name:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="BarcodeTextBox" HorizontalAlignment="Left" Height="23" Margin="66,69,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162"/>
+        <TextBox x:Name="CouponNameTextBox" HorizontalAlignment="Left" Height="23" Margin="100,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="128"/>
         <Button x:Name="AddCouponButton" Content="Add Coupon" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="75" Click="AddCouponButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -38,10 +47,10 @@
         </Button>
         <CheckBox x:Name="FlatDiscountCheckBox" Content="Flat Discount" HorizontalAlignment="Left" Margin="16,105,0,0" VerticalAlignment="Top" IsChecked="True" Checked="FlatDiscountCheckBox_Checked"/>
         <CheckBox x:Name="PercentDiscountCheckBox" Content="Percent Discount" HorizontalAlignment="Left" Margin="119,105,0,0" VerticalAlignment="Top" Checked="PercentDiscountCheckBox_Checked"/>
-        <currency:CurrencyTextBox x:Name="FlatDiscountCurrencyBox" Margin="16,127,738,0" Height="21" VerticalAlignment="Top" />
-        <digit:DigitBox x:Name="PercentDiscountDigitBox" IsEnabled="False" Margin="119,127,635,0" Height="21" VerticalAlignment="Top" />
+        <currency:CurrencyTextBox x:Name="FlatDiscountCurrencyBox" Margin="16,127,939,0" Height="21" VerticalAlignment="Top" />
+        <digit:DigitBox x:Name="PercentDiscountDigitBox" IsEnabled="False" Margin="119,127,855,0" Height="21" VerticalAlignment="Top" />
         <Label x:Name="PercentLabel" Content="%" HorizontalAlignment="Left" Margin="169,122,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="161,164,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFAAAAAA" Offset="1"/>
@@ -49,5 +58,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <ScrollViewer HorizontalAlignment="Left" Margin="764,10,0,0" VerticalAlignment="Top" Width="250">
+            <StackPanel x:Name="CheckBoxSP"/>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -4,19 +4,59 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
+      xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
+      xmlns:digit="clr-namespace:System.Windows.Controls;assembly=NumberTextBox"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      Background="{StaticResource Base}"
       Title="CouponCatalog">
 
-    <Grid>
-        <DataGrid x:Name="SaleGrid" HorizontalAlignment="Left" AutoGenerateColumns="False" Margin="10,10,0,0" VerticalAlignment="Top">
+    <Grid Margin="0,0,-724,0" HorizontalAlignment="Left" Width="1024">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="SaleGrid" HorizontalAlignment="Left" CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" CanUserAddRows="False" Margin="251,10,0,0" VerticalAlignment="Top" SelectionChanged="CouponGrid_SelectionChanged" PreviewKeyDown="CouponGrid_PreviewKeyDown" Width="403" >
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Commit">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="CommitButton_Click" Width="50" Content="Commit"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Coupon Name" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Amount" Binding="{Binding Path=Amount}"/>
                 <DataGridCheckBoxColumn Header="Flat/Percent" Binding="{Binding Path=IsFlat}"/>
                 <DataGridCheckBoxColumn Header="Active" Binding="{Binding Path=Active}"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Border Background="{StaticResource Background}" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="10,33,0,0" VerticalAlignment="Top" Width="226"/>
+        <Label x:Name="AddSaleLabel" Content="Add Sale:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontSize="17"/>
+        <Label x:Name="SaleNameLabel" Content="Coupon Name:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SaleNameTextbox" HorizontalAlignment="Left" Height="23" Margin="100,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="128"/>
+        <Button x:Name="AddSaleButton" Content="Add Sale" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" Width="75" Click="AddCouponButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.4333"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <CheckBox x:Name="FlatDiscountCheckBox" Content="Flat Discount" HorizontalAlignment="Left" Margin="16,72,0,0" VerticalAlignment="Top" IsChecked="True" Checked="FlatDiscountCheckBox_Checked"/>
+        <CheckBox x:Name="PercentDiscountCheckBox" Content="Percent Discount" HorizontalAlignment="Left" Margin="119,72,0,0" VerticalAlignment="Top" Checked="PercentDiscountCheckBox_Checked"/>
+        <currency:CurrencyTextBox x:Name="FlatDiscountCurrencyBox" Margin="16,92,939,0" Height="21" VerticalAlignment="Top" />
+        <digit:DigitBox x:Name="PercentDiscountDigitBox" IsEnabled="False" Margin="119,92,855,0" Height="21" VerticalAlignment="Top" />
+        <Label x:Name="PercentLabel" Content="%" HorizontalAlignment="Left" Margin="169,87,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="161,135,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.4333"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ScrollViewer HorizontalAlignment="Left" Margin="764,10,0,0" VerticalAlignment="Top" Width="250">
+            <StackPanel x:Name="CheckBoxSP"/>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -29,6 +29,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
     public class Coupon
     {  
+        public int ID { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }
         public decimal Amount { get; set; }
@@ -81,9 +82,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                     bool state = cb.IsChecked == true; //convert a 'bool?' to 'bool'
 
                     if( state )
-                        DBInterface.AddCouponRelation( _coupon.Name, item, _coupon.Barcode, itemid );
+                        DBInterface.AddCouponRelation( _coupon.Name, item, _coupon.ID, itemid );
                     else
-                        DBInterface.RemoveCouponRelation( _coupon.Name, item, _coupon.Barcode, itemid );
+                        DBInterface.RemoveCouponRelation( _coupon.Name, item, _coupon.ID, itemid );
 
                 }
                 catch( UnauthorizedAccessException ex ) //if the user doesn't have permission we need to undo the check and display error message
@@ -103,12 +104,12 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
         private void PopulateList()
         {
-            Dictionary<string, List<int>> rel = new Dictionary<string, List<int>>();
+            Dictionary<int, List<int>> rel = new Dictionary<int, List<int>>();
 
             DBInterface.GetAppliedCoupons();
             foreach( XmlNode node in DBInterface.Response )
             {
-                string couponid = node.Get( "CouponID" );
+                int couponid = int.Parse( node.Get( "CouponID" ) );
                 int itemid = int.Parse( node.Get( "ProductID" ) );
 
                 if( !rel.ContainsKey( couponid ) )
@@ -120,7 +121,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             DBInterface.GetAllCoupons();
             foreach( XmlNode node in DBInterface.Response )
             {
-                string id = node.Get( "CouponID" );
+                int id = int.Parse( node.Get( "CouponID" ) );
 
                 //if the coupon doesn't relate to any items it won't have been added in the previous loop
                 if( !rel.ContainsKey( id ) )
@@ -128,11 +129,12 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
 
                 Coupon coupon = new Coupon()
                 {
+                    ID = id,
                     Name = node.Get( "Name" ),
                     IsFlat = node.Get( "Flat" )[0] == '1',
                     Active = node.Get( "Active" )[0] == '1',
                     Amount = decimal.Parse( node.Get( "Discount" ) ),
-                    Barcode = id,
+                    Barcode = node.Get( "Barcode" ),
                     _ItemIDList = rel[id]
                 };
                 data.Add( coupon );
@@ -242,7 +244,7 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
                         {
                             try
                             {
-                                DBInterface.RemoveCoupon( coupon.Barcode, coupon.Name );
+                                DBInterface.RemoveCoupon( coupon.ID, coupon.Name );
                                 data.Remove( coupon );
                             }
                             catch( UnauthorizedAccessException ex )
@@ -266,6 +268,27 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             data.Clear();
             PopulateList();
+        }
+
+        private void CommitButton_Click( object sender, RoutedEventArgs e )
+        {
+            Coupon coupon = ( (FrameworkElement)sender ).DataContext as Coupon;
+
+            CouponGrid.CommitEdit();
+            LoadItems();
+
+            try
+            {
+                DBInterface.ModifyCoupon( coupon.ID, coupon.Barcode, coupon.Amount, coupon.Name, coupon.IsFlat, coupon.Active );
+            }
+            catch( UnauthorizedAccessException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
+            catch( InvalidOperationException ex )
+            {
+                System.Windows.Forms.MessageBox.Show( ex.Message );
+            }
         }
     }
 }

@@ -77,17 +77,44 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ModifyPermissions));
         }
 
-        public static void RemoveCouponRelation(string coupon_name, string item_name, string barcode, int itemid)
+        internal static void RemoveCouponRelation( string coupon_name, string item_name, int coupon_id, int item_id )
         {
-            m_connection.WriteNoResponse( "RemoveCouponRef_ProductID @0, @1", barcode, itemid );
+            m_connection.WriteNoResponse( "RemoveCouponRef_CouponID @0, @1", coupon_id, item_id );
             Log( $"Set coupon \"{coupon_name}\" to no longer apply to \"{item_name}\"." );
         }
 
-        public static void AddCouponRelation(string coupon_name, string item_name, string barcode, int itemid)
+        internal static void AddSaleRelation( string sale_name, string item_name, int sale_id, int item_id )
         {
-            m_connection.Write("AddCouponRef_ProductID @0, @1", barcode, itemid);
+            if( m_employee.HasPermisison( Permissions.ModifySale ) )
+            {
+                m_connection.WriteNoResponse( "AddSaleRef_SaleID @0, @1", sale_id, item_id );
+                if( Response[0].Get( "Return" ) == "-1" )
+                    throw new InvalidOperationException( $"The coupon \"{sale_name}\" already applies to \"{item_name}\"." );
+                Log( $"Set sale \"{sale_name}\" to apply to \"{item_name}\"." );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifySale ) );
+        }
 
-            if( Response[0].Get( "Return") == "-1" )
+        internal static void GetAppliedSales()
+        {
+            if( m_employee.HasPermisison( Permissions.ViewSaleCatalog ) )
+            {
+                m_connection.Write( "GetAllAppliedSales" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewSaleCatalog ) );
+        }
+
+        public static void RemoveSaleRelation(string sale_name, string item_name, int sale_id, int item_id)
+        {
+            m_connection.WriteNoResponse( "RemoveSaleRef_SaleID @0, @1", sale_id, item_id );
+            Log( $"Set sale \"{sale_name}\" to no longer apply to \"{item_name}\"." );
+        }
+
+        public static void AddCouponRelation(string coupon_name, string item_name, int coupon_id, int item_id)
+        {
+            m_connection.Write("AddCouponRef_CouponID @0, @1", coupon_id, item_id);
+
+            if( Response[0].Get( "Return" ) == "-1" )
                 throw new InvalidOperationException( $"The coupon \"{coupon_name}\" already applies to \"{item_name}\"." );
 
             Log($"Set coupon \"{coupon_name}\" to apply to \"{item_name}\".");
@@ -106,9 +133,13 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ModifyPermissions));
         }
 
-        internal static void GetAppliedCoupons()
+        public static void GetAppliedCoupons()
         {
-            m_connection.Write("GetAllAppliedCoupons");
+            if( m_employee.HasPermisison( Permissions.ViewCouponCatalog ) )
+            {
+                m_connection.Write( "GetAllAppliedCoupons" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ViewCouponCatalog ) );
         }
 
         //the 'value' arg is the entire new bitfield to set for that permissions group.
@@ -167,6 +198,25 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyCoupon ) );
         }
 
+        internal static void RemoveSale( int id, string name )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifySale ) )
+            {
+                m_connection.WriteNoResponse( "RemoveSale_SaleID @0", id );
+                Log( $"Removed coupon {name}" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifySale ) );
+        }
+
+        public static void AddSale( string name, bool flat, decimal amount )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifySale ) )
+            {
+                m_connection.WriteNoResponse( "AddSale @0, @1, @2", amount, name, flat );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifySale ) );
+        }
+
         public static void SetUserActivity(int ID, bool active, string username)
         {
             if (m_employee.HasPermisison(Permissions.ChangeEmployeeCatalog))
@@ -175,6 +225,15 @@ namespace SnapRegisters
                 Log($"Set the account of {username} to \"{(active ? "Active" : "Inactive")}\".");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeEmployeeCatalog));
+        }
+
+        internal static void ModifySale( int iD, decimal amount, string name, bool isFlat, bool active )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifySale ) )
+            {
+                throw new NotImplementedException();
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifySale ) );
         }
 
         public static void ModifyCustomer(string firstName, string lastName, string address_1,
@@ -189,11 +248,11 @@ namespace SnapRegisters
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ChangeCustomerCatalog));
         }
 
-        public static void RemoveCoupon( string barcode, string name )
+        public static void RemoveCoupon( int id, string name )
         {
             if( m_employee.HasPermisison( Permissions.ModifyCoupon ) )
             {
-                m_connection.WriteNoResponse( "RemoveCoupon @0", barcode );
+                m_connection.WriteNoResponse( "RemoveCoupon_CouponID @0", id );
                 Log( $"Removed coupon {name}" );
             }
             else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyCoupon ) );
@@ -206,6 +265,38 @@ namespace SnapRegisters
                 m_connection.Write("GetAllCustomers");
             }
             else throw new UnauthorizedAccessException(Permissions.ErrorMessage(Permissions.ViewCustomerCatalog ));
+        }
+
+        public static void ModifyCoupon( int id, string barcode, decimal amount, string name, bool isFlat, bool active )
+        {
+            if( m_employee.HasPermisison( Permissions.ModifyCoupon ) )
+            {
+                m_connection.Write( "GetCoupon_ID @0", id );
+                XmlNode it = Response[0];
+
+                decimal old_amount = decimal.Parse( it.Get( "Discount" ) );
+                string old_barcode = it.Get( "Barcode" );
+                string old_name = it.Get( "Name" );
+                bool old_isFlat = it.Get( "Flat" )[0] == '1';
+                bool old_active = it.Get( "Active" )[0] == '1';
+
+                m_connection.Write( "GetCoupon_Barcode @0", barcode );
+                if( Response.Count != 0 && int.Parse( Response[0].Get( "CouponID" ) ) != id )
+                    throw new InvalidOperationException( $"A coupon with the barcode {barcode} already exists" );
+
+                m_connection.WriteNoResponse( "ModifyCoupon_ID @0, @1, @2, @3, @4, @5", id, barcode, amount, name, isFlat, active );
+                if( name != old_name )
+                    Log( $"Changed coupon \"{old_name}\"'s name from \"{old_name}\" to \"{name}\"" );
+                if( amount != old_amount )
+                    Log( $"Changed coupon \"{name}\"'s amount from {old_amount} to {amount}" );
+                if( barcode != old_barcode )
+                    Log( $"Changed coupon \"{name}\"'s barcode from \"{old_barcode}\" to \"{barcode}\"" );
+                if( isFlat != old_isFlat )
+                    Log( $"Changed coupon \"{name}\"'s Flat from {old_isFlat} to {isFlat}" );
+                if( active != old_active )
+                    Log( $"Changed coupon \"{name}\"'s Activity from {old_active} to {active}" );
+            }
+            else throw new UnauthorizedAccessException( Permissions.ErrorMessage( Permissions.ModifyCoupon ) );
         }
 
         public static void ChangePermissions(string name, int id, string permission)
@@ -330,7 +421,7 @@ namespace SnapRegisters
                 Log($"Modified item {name}'s weight from {old_weight} to {weight}");
 
             if( old_weighable != weighable )
-                Log( $"Modified item {name}'s weighable state from {old_weighable.ToString()} to {weighable.ToString()}" );
+                Log( $"Modified item {name}'s weighable state from {old_weighable} to {weighable}" );
 
         }
 
