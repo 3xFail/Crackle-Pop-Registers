@@ -38,23 +38,8 @@
             </Grid>
             <Grid>
 
-                <Button Command="ApplicationCommands.New" Content="Log In" Width="90" Height="40" HorizontalAlignment="Left" Margin="20" Focusable="False">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-
-                <Button Content="Manager" Name="btnShowPopup" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" Focusable="False">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                <Button Command="ApplicationCommands.New" Content="Log In" Background="{StaticResource ButtonColor}" Width="90" Height="40" HorizontalAlignment="Left" Margin="20" Focusable="False"/>
+                <Button Content="Manager" Name="btnShowPopup" Background="{StaticResource ButtonColor}" Width="90" Height="40" Command="local:CustomCommands.ManagerFunctions" HorizontalAlignment="Right" Margin="20" Focusable="False"/>
                 <!--<Button Command="local:CustomCommands.Exit" Content="Exit" Width="90" Height="40" VerticalAlignment="Top" Margin="20"/>-->
                 <StackPanel>
                     <Popup AllowsTransparency="True" Height="400" Name="myPopup" 
@@ -64,45 +49,21 @@
                         <StackPanel Background="{StaticResource Background}">
 
                             <Button Command="local:CustomCommands.Exit" Content="Exit to Desktop" 
+                                Background="{StaticResource ButtonColor}" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Width="150" Height="40" Margin="15">
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                        <GradientStop Color="White" Offset="0.433"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
+                                Width="150" Height="40" Margin="15"/>
                             <Button Content="Restart Workstation" 
+                                Background="{StaticResource ButtonColor}" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Width="150" Height="40" Margin="15" Click="Restart_Button_Click">
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                        <GradientStop Color="White" Offset="0.433"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
+                                Width="150" Height="40" Margin="15" Click="Restart_Button_Click"/>
                             <Button Content="Shut Down Workstation" 
+                                Background="{StaticResource ButtonColor}" 
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Width="150" Height="40" Margin="15" Click="Shutdown_Button_Click">
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                        <GradientStop Color="White" Offset="0.433"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
+                                Width="150" Height="40" Margin="15" Click="Shutdown_Button_Click"/>
                             <Button Click="btnClosePopup_Click" Content="Back" 
+                                Background="{StaticResource ButtonColor}"
                                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Width="150" Height="40" Margin="15">
-                                <Button.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                        <GradientStop Color="White" Offset="0.433"/>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
+                                Width="150" Height="40" Margin="15"/>
                         </StackPanel>
                        
                     </Popup>

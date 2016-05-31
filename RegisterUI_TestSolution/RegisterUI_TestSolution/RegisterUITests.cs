@@ -10,7 +10,7 @@ using Microsoft.VisualStudio.TestTools.UITest.Extension;
 using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
 
 
-namespace RegisterUITests
+namespace RegisterUI_TestSolution
 {
 	/// <summary>
 	/// Summary description for CodedUITest1
@@ -25,76 +25,59 @@ namespace RegisterUITests
 		[TestMethod]
 		public void Login()
 		{
+
 			this.UIMap.Login();
-			this.UIMap.CheckLoggedInUsername();
 		}
 
 		[TestMethod]
-		public void AddItemByTypingBarcode()
+		public void Logout()
 		{
 			this.UIMap.Login();
-			this.UIMap.addItemWithUPCField();
-			this.UIMap.SingleItemTotalsCheck();
+			this.UIMap.Logout();
 		}
 
 		[TestMethod]
-		public void AddMultipleItemsByTypeingBarcode()
+		public void AddSingleItem()
 		{
 			this.UIMap.Login();
-			this.UIMap.addTomatoToSale();
-			this.UIMap.addItemWithUPCField();
-			this.UIMap.addTomatoToSale();
-			this.UIMap.checkTotalsForMultipleItems();
-
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Assert_Single_Plain_Item();
+			this.UIMap.Logout();
 		}
 
 		[TestMethod]
-		public void AddItemWithSale()
+		public void AddMultiplePlainItems()
 		{
 			this.UIMap.Login();
-			this.UIMap.addItemWithSale();
-			this.UIMap.CheckSaleTotalsAmount();
-
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Assert_Multiple_Plain_Items();
+			this.UIMap.Logout();
 		}
 
 		[TestMethod]
-		public void AddCoupon()
+		public void RemoveTopItem()
 		{
 			this.UIMap.Login();
-			this.UIMap.addItemWithSale();
-			this.UIMap.addCouponTo3ds();
-			this.UIMap.checkTotalsForSingle3DSWithCoupon();
-
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Remove_Top_Item();
+			this.UIMap.Assert_Empty_Transaction();
+			this.UIMap.Logout();
 		}
-
 		[TestMethod]
-		public void RemoveSale()
+		public void RemoveMiddleItem()
 		{
 			this.UIMap.Login();
-			this.UIMap.addItemWithSale();
-			this.UIMap.RemoveSale();
-			this.UIMap.checkTotalsRemoveSaleFrom3DS();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Add_Item_Plain();
+			this.UIMap.Remove_2nd_Item();
+			this.UIMap.Assert_Removed_Middle_Item();
+			this.UIMap.Logout();
 		}
 
-		[TestMethod]
-		public void RemoveCoupon()
-		{
-			this.UIMap.Login();
-			this.UIMap.addItemWithSale();
-			this.UIMap.addCouponTo3ds();
-			this.UIMap.RemoveCouponFrom3DS();
-			this.UIMap.checkTotalsAfterRemovingCouponFrom3DSWithSale();
 
-		}
-
-		[TestMethod]
-		public void RemoveCouponAndSale()
-		{
-			this.UIMap.Login();
-			this.UIMap.addItemWithSale();
-			this.UIMap.addCouponTo3ds();
-			this.UIMap.RemoveCouponFrom3DS();
-		}
 		#region Additional test attributes
 
 		// You can use the following additional attributes as you write your tests:

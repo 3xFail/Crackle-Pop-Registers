@@ -33,7 +33,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             try
             {
                 // navigate to the add employee page
-                CustFrame.Navigate( new AddCustomerPage() );
+                //CustFrame.Navigate( new AddCustomerPage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new AddCustomerPage());
             }
             catch( UnauthorizedAccessException ex )
             {
@@ -45,7 +47,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                CustFrame.Navigate( new CatalogCustomerPage() );
+                //CustFrame.Navigate( new CatalogCustomerPage() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new CatalogCustomerPage());
             }
             catch( UnauthorizedAccessException ex )
             {

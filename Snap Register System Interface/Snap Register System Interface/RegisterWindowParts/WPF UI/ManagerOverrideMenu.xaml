@@ -22,14 +22,8 @@
 		<TextBox Name="UPCField" Width="0" Height="0"/>
         <Button Name="Override" Grid.Row="1"
 				Margin="10"
-                Click="Override_Click"
+                Click="Override_Click" Background="{StaticResource ButtonColor}"
 				HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                    <GradientStop Color="White" Offset="0.433"/>
-                </LinearGradientBrush>
-            </Button.Background>
             <Button.Content>
                 <Viewbox>
 					<TextBlock Name="OverrideText"

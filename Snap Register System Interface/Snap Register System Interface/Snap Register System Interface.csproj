@@ -49,13 +49,12 @@
       <HintPath>..\..\SharedResources\CSharpClient.dll</HintPath>
     </Reference>
     <Reference Include="CurrencyTextBoxControl">
-      <HintPath>..\..\..\JP Folder\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
+      <HintPath>..\..\CurrencyTextBox\CurrencyTextBoxControl\bin\Debug\CurrencyTextBoxControl.dll</HintPath>
     </Reference>
     <Reference Include="NumberTextBox">
       <HintPath>..\..\..\JP Folder\NumberTextBox\NumberTextBox\bin\Debug\NumberTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="Scale, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Scale">
       <HintPath>..\..\Scale\Scale\bin\Debug\Scale.dll</HintPath>
     </Reference>
     <Reference Include="System" />

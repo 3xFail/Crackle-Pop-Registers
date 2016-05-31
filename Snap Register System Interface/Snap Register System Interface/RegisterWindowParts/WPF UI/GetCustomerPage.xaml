@@ -12,22 +12,8 @@
         <Grid Background="{StaticResource Background}">
             <Label x:Name="Prompt" Content="Please enter your phone number bellow" HorizontalAlignment="Left" Height="27" Margin="10,10,0,0" VerticalAlignment="Top" Width="270"/>
             <TextBox x:Name="Phone_Number_Box" HorizontalAlignment="Left" Margin="10,42,0,51" TextWrapping="Wrap" Width="270" Background="White"/>
-            <Button x:Name="cancel_button" Content="Cancel" HorizontalAlignment="Left" Margin="197,77,0,0" VerticalAlignment="Top" Width="83" Height="36" Click="cancel_button_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="submit_button" Content="Submit" HorizontalAlignment="Left" Margin="109,77,0,0" VerticalAlignment="Top" Width="83" Height="36" Click="submit_button_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="cancel_button" Content="Cancel" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Margin="197,77,0,0" VerticalAlignment="Top" Width="83" Height="36" Click="cancel_button_Click"/>
+            <Button x:Name="submit_button" Content="Submit" Background="{StaticResource ButtonColor}" HorizontalAlignment="Left" Margin="109,77,0,0" VerticalAlignment="Top" Width="83" Height="36" Click="submit_button_Click"/>
 
         </Grid>
     </Border>

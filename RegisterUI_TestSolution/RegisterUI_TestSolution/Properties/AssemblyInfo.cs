@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RegisterUITests")]
+[assembly: AssemblyTitle("RegisterUI_TestSolution")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RegisterUITests")]
+[assembly: AssemblyProduct("RegisterUI_TestSolution")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4f987042-25f9-42a1-b5da-4b0731abdb97")]
+[assembly: Guid("413cd68e-70d0-42a7-9f68-2a60627e5729")]
 
 // Version information for an assembly consists of the following four values:
 //

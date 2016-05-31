@@ -31,7 +31,9 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
         {
             try
             {
-                SalesFrame.Navigate( new CouponCatalog() );
+                //SalesFrame.Navigate( new CouponCatalog() );
+                NavigationService nav = NavigationService.GetNavigationService(this);
+                nav.Navigate(new CouponCatalog());
             }
             catch( UnauthorizedAccessException ex )
             {

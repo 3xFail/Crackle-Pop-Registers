@@ -10,46 +10,11 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="EmpAddBtn" Content="Add" Click="btn_AddEmp" Height="50" Width="125" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="EmpUsageBtn" Content="Register Usage" Click="EmpUsageBtn_Click" Height="50" Width="125" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="EmpLogBtn" Content="Admin Logs" Click="EmpLogBtn_Click" Height="50" Width="125" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="EmpPermissions" Content="Permissions" Click="EmpPermissions_Click" Height="50" Width="125" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="EmpCatalog" Content="Catalog" Click="EmpCatalog_Click" Height="50" Width="125">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="EmpAddBtn" Content="Add" Background="{StaticResource ButtonColor}" Click="btn_AddEmp" Height="50" Width="125" Margin="0,0,20,0"/>
+            <Button x:Name="EmpUsageBtn" Content="Register Usage" Background="{StaticResource ButtonColor}" Click="EmpUsageBtn_Click" Height="50" Width="125" Margin="0,0,20,0"/>
+            <Button x:Name="EmpLogBtn" Content="Admin Logs" Background="{StaticResource ButtonColor}" Click="EmpLogBtn_Click" Height="50" Width="125" Margin="0,0,20,0"/>
+            <Button x:Name="EmpPermissions" Content="Permissions" Background="{StaticResource ButtonColor}" Click="EmpPermissions_Click" Height="50" Width="125" Margin="0,0,20,0"/>
+            <Button x:Name="EmpCatalog" Content="Catalog" Background="{StaticResource ButtonColor}" Click="EmpCatalog_Click" Height="50" Width="125"/>
         </StackPanel>
     </Grid>
     

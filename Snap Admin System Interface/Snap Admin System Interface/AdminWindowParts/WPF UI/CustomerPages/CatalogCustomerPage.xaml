@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Snap_Admin_System_Interface.AdminWindowParts.WPF_UI"
       mc:Ignorable="d" 
       d:DesignHeight="920" d:DesignWidth="1072"
+      Background="{StaticResource Background}"
       Title="CatalogCustomerPage">
 
     <Grid>
@@ -70,6 +71,6 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-
+        <Button Content="Back" Background="{StaticResource ButtonColor}" Height="23" HorizontalAlignment="Right" Margin="0,0,10,10" Name="BackButton" VerticalAlignment="Bottom" Width="70" Click="BackButton_Click"/>
     </Grid>
 </Page>

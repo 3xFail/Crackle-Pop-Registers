@@ -10,30 +10,9 @@
 
     <Grid>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="SalesBtn" Content="Sales Catalog" Height="50" Width="125" Click="SalesBtn_Click" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="CouponsBtn" Content="Coupons Catalog" Height="50" Width="125" Click="CouponsBtn_Click" Margin="0,0,20,0">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="OrderCatalog" Content="Order Catalog" Height="50" Width="125" Click="OrderCatalog_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        <GradientStop Color="White" Offset="0.433"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="SalesBtn" Content="Sales Catalog" Background="{StaticResource ButtonColor}" Height="50" Width="125" Click="SalesBtn_Click" Margin="0,0,20,0"/>
+            <Button x:Name="CouponsBtn" Content="Coupons Catalog" Background="{StaticResource ButtonColor}" Height="50" Width="125" Click="CouponsBtn_Click" Margin="0,0,20,0"/>
+            <Button x:Name="OrderCatalog" Content="Order Catalog" Background="{StaticResource ButtonColor}" Height="50" Width="125" Click="OrderCatalog_Click"/>
         </StackPanel>
     </Grid>
 </Page>

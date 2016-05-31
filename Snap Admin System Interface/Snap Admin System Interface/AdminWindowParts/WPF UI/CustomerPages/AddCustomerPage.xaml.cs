@@ -135,5 +135,10 @@ namespace Snap_Admin_System_Interface.AdminWindowParts.WPF_UI
             textBoxZip.Clear();
             textBoxCountry.SelectedIndex = -1;
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.GoBack();
+        }
     }
 }

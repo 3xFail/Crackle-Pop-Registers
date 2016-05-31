@@ -1,4 +1,4 @@
-﻿namespace RegisterUITests
+﻿namespace RegisterUI_TestSolution
 {
     using System;
     using System.Collections.Generic;

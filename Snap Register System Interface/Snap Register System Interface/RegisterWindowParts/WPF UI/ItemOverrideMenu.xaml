@@ -36,29 +36,17 @@
                 </Grid.ColumnDefinitions>
 				<Viewbox Grid.Column="0"
 					 VerticalAlignment="Bottom">
-					<Button x:Name="ChangePriceButton" Content="Change Price" 
-						Height="100" Width="160"
-						Margin="8" Click="ChangePriceButtonClicked">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                <GradientStop Color="White" Offset="0.433"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
+                    <Button x:Name="ChangePriceButton" Content="Change Price" 
+						Background="{StaticResource ButtonColor}"
+                        Height="100" Width="160"
+						Margin="8" Click="ChangePriceButtonClicked"/>
                 </Viewbox>
                 <Viewbox Grid.Column="1"
 					 VerticalAlignment="Bottom">
                     <Button x:Name="CancelButton" Content="Cancel" 
-						Height="100" Width="160"
-						Margin="8" Click="CancelButtonClick">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                                <GradientStop Color="White" Offset="0.433"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
+						Background="{StaticResource ButtonColor}"
+                        Height="100" Width="160"
+						Margin="8" Click="CancelButtonClick"/>
                 </Viewbox>
             </Grid>
         </Grid>

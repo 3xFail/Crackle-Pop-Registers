@@ -37,62 +37,13 @@
         <!--panel of main navigational buttons-->
         <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"  Margin="0,34.8,0,24.4" Grid.RowSpan="3" >
             <StackPanel VerticalAlignment="Bottom">
-                <Button x:Name="Inventory_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Inv" Height="80" Content="Inventory">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Analysis_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80" Content="Analysis">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.433"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Employees_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Emp" Height="80" Content="Employees">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.4333"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Customers_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80" Content="Customers">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="White" Offset="0.4333"/>
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Sales_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80" Content="Sales">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.4333"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Options_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Opt" Height="80" Content="Options">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.4333"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Logout_btn" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Logout" Height="80" Content="Logout">
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFAAAAAA" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.4333"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
+                <Button x:Name="Inventory_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Inv" Height="80" Content="Inventory"/>
+                <!--<Button x:Name="Analysis_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Anal" Height="80" Content="Analysis"/>-->
+                <Button x:Name="Employees_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Emp" Height="80" Content="Employees"/>
+                <Button x:Name="Customers_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Cust" Height="80" Content="Customers"/>
+                <Button x:Name="Sales_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Sales" Height="80" Content="Sales"/>
+                <Button x:Name="Options_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Opt" Height="80" Content="Options"/>
+                <Button x:Name="Logout_btn" Background="{StaticResource ButtonColor}" FontSize="20" BorderBrush="Black" Margin="10,20,10,0" Click="btn_Logout" Height="80" Content="Logout"/>
                 <!--logout button-->
             </StackPanel>
         </DockPanel>
